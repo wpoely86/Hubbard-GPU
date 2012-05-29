@@ -28,7 +28,7 @@ typedef unsigned int myint;
 
 int CountBits(myint bytes);
 string print_bin(myint num,int bitcount);
-myint CalcDim(int Ns,int N);
+int CalcDim(int Ns,int N);
 double hopping(myint a, myint b,myint Nb,int jumpsign);
 
 extern "C" {
@@ -221,14 +221,17 @@ string print_bin(myint num,int bitcount)
     return output;
 }
 
-myint CalcDim(int Ns,int N)
+int CalcDim(int Ns,int N)
 {
-    double result = 1;
+    int result = 1;
 
-    for(int i=Ns;i>N;i--)
-	result *= i*1.0/(i-N);
+    for(int i=1;i<=N;i++)
+    {
+	result *= Ns--;
+	result /= i;
+    }
 
-    return (myint)result;
+    return result;
 }
 
 double hopping(myint a, myint b,myint Nb,int jumpsign)

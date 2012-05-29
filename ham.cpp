@@ -45,19 +45,24 @@ Hamiltonian::~Hamiltonian()
 
 /**
  * Calculates the dimension for the up or down electron space.
- * Basically, it calculates the N-combination out of Ns
+ * Basically, it calculates the N-combination out of Ns. This algorithm
+ * is not perfect, overflow can occur but should be no problem for our
+ * small problems.
  * @param Ns number of lattice sites
  * @param N number of up or down electrons
  * @return the dimension of the up or down electron space
  */
 int Hamiltonian::CalcDim(int Ns, int N) const
 {
-    double result = 1;
+    int result = 1;
 
-    for(int i=Ns;i>N;i--)
-	result *= i*1.0/(i-N);
+    for(int i=1;i<=N;i++)
+    {
+	result *= Ns--;
+	result /= i;
+    }
 
-    return (myint)result;
+    return result;
 }
 
 /**
