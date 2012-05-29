@@ -50,7 +50,7 @@ class Hamiltonian
 
 	void Print() const;
 
-    private:
+    protected:
 	int hopping(myint a, myint b, int jumpsign) const;
 
 	//! Number of sites
