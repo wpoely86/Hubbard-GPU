@@ -152,7 +152,7 @@ void Hamiltonian::BuildFullHam()
 	    int i = a * NumDown + b;
 
 	    for(unsigned int c=a;c<baseUp.size();c++)
-		for(unsigned int d=b;d<baseDown.size();d++)
+		for(unsigned int d=0;d<baseDown.size();d++)
 		{
 		    int j = c * NumDown + d;
 
@@ -168,7 +168,7 @@ void Hamiltonian::BuildFullHam()
 		}
 
 	    // count number of double occupied states
-	    ham[i+dim*i] += U * CountBits(baseUp[a] & baseDown[b]);
+	    ham[i+dim*i] = U * CountBits(baseUp[a] & baseDown[b]);
 	}
 }
 
@@ -387,6 +387,8 @@ double Hamiltonian::LanczosDiagonalizeFull(int m)
     int i;
 
     b[0] = 0;
+    // does nothing, just to disable valgrind warnings
+    a[m-1] = 0;
 
     srand(time(0));
 
