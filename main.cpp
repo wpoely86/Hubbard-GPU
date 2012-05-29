@@ -8,6 +8,7 @@
 
 #include <iostream>
 #include "ham.h"
+#include "hamsparse.h"
 
 using namespace std;
 
@@ -26,10 +27,20 @@ int main(int argc, char **argv)
     ham.BuildBase();
     ham.BuildFullHam();
 
+    cout << "Dim: " << ham.getDim() << endl;
     ham.Print();
 
     cout << "E = " << ham.LanczosDiagonalizeFull(10) << endl;
     cout << "E = " << ham.ExactDiagonalizeFull() << endl;
+
+    SparseHamiltonian sham(Ns,Nu,Nd,J,U);
+
+    sham.BuildBase();
+    sham.BuildSparseHam();
+
+    sham.PrintSparse();
+    cout << endl << endl;
+    sham.PrintRawELL();
 
     return 0;
 }
