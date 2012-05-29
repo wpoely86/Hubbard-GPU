@@ -1,0 +1,10 @@
+*~
+*.o
+*.bak
+*.txt
+tags
+.gdb_history
+*.swp
+*.swo
+main
+docs
