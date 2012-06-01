@@ -21,7 +21,7 @@ class SparseHamiltonian: public Hamiltonian
 
         void mvprod(double *, double *, double) const;
 
-        double LanczosDiagonalizeFull(int m=0);
+        double LanczosDiagonalize(int m=0);
 
     protected:
 

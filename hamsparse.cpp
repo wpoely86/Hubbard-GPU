@@ -252,8 +252,11 @@ void SparseHamiltonian::mvprod(double *x, double *y, double alpha) const
  * @param m an optional estimate for the lanczos space size
  * @return the lowest eigenvalue
  */
-double SparseHamiltonian::LanczosDiagonalizeFull(int m)
+double SparseHamiltonian::LanczosDiagonalize(int m)
 {
+    if(!m)
+        m = dim/1000 > 10 ? dim/1000 : 10;
+
     std::vector<double> a(m,0);
     std::vector<double> b(m,0);
 
@@ -263,9 +266,6 @@ double SparseHamiltonian::LanczosDiagonalizeFull(int m)
     double E = 1;
 
     int i;
-
-    if(!m)
-        m = dim/1000 > 10 ? dim/1000 : 10;
 
     srand(time(0));
 

@@ -378,6 +378,9 @@ double Hamiltonian::ExactDiagonalizeFull() const
  */
 double Hamiltonian::LanczosDiagonalizeFull(int m)
 {
+    if(!m)
+        m = dim/1000 > 10 ? dim/1000 : 10;
+
     std::vector<double> a(m,0);
     std::vector<double> b(m,0);
 
@@ -387,9 +390,6 @@ double Hamiltonian::LanczosDiagonalizeFull(int m)
     double E = 1;
 
     int i;
-
-    if(!m)
-        m = dim/1000 > 10 ? dim/1000 : 10;
 
     srand(time(0));
 
