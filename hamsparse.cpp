@@ -1,4 +1,6 @@
 #include <iostream>
+#include <cstdlib>
+#include <cmath>
 #include "hamsparse.h"
 
 /**
@@ -68,8 +70,6 @@ void SparseHamiltonian::BuildSparseHam()
 
     size_Up = ((Ns-Nu)>Nu) ? 2*Nu : 2*(Ns-Nu);
     size_Down = ((Ns-Nd)>Nd) ? 2*Nd : 2*(Ns-Nd);
-
-//    std::cout << "Sizes: " << NumUp << "x" << size_Up << "\t" << NumDown << "x" << size_Down << std::endl;
 
     Up_data = new double [NumUp*size_Up];
     Up_ind = new unsigned int [NumUp*size_Up];
@@ -213,6 +213,124 @@ void SparseHamiltonian::PrintRawELL() const
 
 	std::cout << std::endl;
     }
+}
+
+/**
+ * Matrix vector product with (sparse) hamiltonian: y = ham*x + alpha*y
+ * @param x the x vector
+ * @param y the y vector
+ * @param alpha the scaling value
+ */
+void SparseHamiltonian::mvprod(double *x, double *y, double alpha) const
+{
+    int NumUp = baseUp.size();
+    int NumDown = baseDown.size();
+
+    int incx = 1;
+
+    for(int i=0;i<NumUp;i++)
+    {
+        for(int k=0;k<NumDown;k++)
+        {
+            // the interaction part
+            y[i*NumDown+k] = alpha*y[i*NumDown+k] + U * CountBits(baseUp[i] & baseDown[k]) * x[i*NumDown+k];
+
+            // the Hop_down part
+            for(int l=0;l<size_Down;l++)
+                y[i*NumDown+k] += Down_data[k+l*NumDown] * x[i*NumDown + Down_ind[k+l*NumDown]];
+        }
+
+        // the Hop_Up part
+        for(int l=0;l<size_Up;l++)
+            daxpy_(&NumDown,&Up_data[i+l*NumUp],&x[Up_ind[i+l*NumUp]*NumDown],&incx,&y[i*NumDown],&incx);
+    }
+}
+
+/**
+ * Calculates the lowest eigenvalue of the hamiltonian matrix using
+ * the lanczos algorithm. Needs lapack.
+ * @param m the lanczos space size
+ * @return the lowest eigenvalue
+ */
+double SparseHamiltonian::LanczosDiagonalizeFull(int m)
+{
+    double *a = new double[m];
+    double *b = new double[m];
+
+    double *qa = new double [dim];
+    double *qb = new double [dim];
+
+    int i;
+
+    b[0] = 0;
+    // does nothing, just to disable valgrind warnings
+    a[m-1] = 0;
+
+    srand(time(0));
+
+    for(i=0;i<dim;i++)
+    {
+	qa[i] = 0;
+	qb[i] = rand()*1.0/RAND_MAX;
+    }
+
+    int incx = 1;
+
+    double norm = 1.0/sqrt(ddot_(&dim,qb,&incx,qb,&incx));
+
+    dscal_(&dim,&norm,qb,&incx);
+
+    norm = 1;
+
+    double *f1 = qa;
+    double *f2 = qb;
+    double *tmp;
+
+    double alpha;
+
+    for(i=1;i<m;i++)
+    {
+	alpha = -b[i-1];
+	dscal_(&dim,&alpha,f1,&incx);
+
+        mvprod(f2,f1,norm);
+
+	a[i-1] = ddot_(&dim,f1,&incx,f2,&incx);
+
+	alpha = -a[i-1];
+	daxpy_(&dim,&alpha,f2,&incx,f1,&incx);
+
+	b[i] = sqrt(ddot_(&dim,f1,&incx,f1,&incx));
+
+	if( fabs(b[i]) < 1e-10 )
+	    break;
+
+	alpha = 1.0/b[i];
+
+	dscal_(&dim,&alpha,f1,&incx);
+
+	tmp = f2;
+	f2 = f1;
+	f1 = tmp;
+    }
+
+    char jobz = 'N';
+    int info;
+
+    dstev_(&jobz,&m,a,&b[1],&alpha,&m,&alpha,&info);
+
+    if(info != 0)
+	std::cerr << "Error in Lanczos" << std::endl;
+
+    alpha = a[0];
+
+    delete [] a;
+    delete [] b;
+
+    delete [] qa;
+    delete [] qb;
+
+    return alpha;
 }
 
 /* vim: set ts=8 sw=4 tw=0 expandtab :*/

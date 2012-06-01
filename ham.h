@@ -27,7 +27,7 @@ class Hamiltonian
 
 	int CalcDim(int Ns, int N) const;
 
-	inline int CountBits(myint bits) const;
+	int CountBits(myint bits) const;
 
 	std::string print_bin(myint num,int bitcount) const;
 

@@ -19,6 +19,10 @@ class SparseHamiltonian: public Hamiltonian
 
 	void PrintRawELL() const;
 
+        void mvprod(double *, double *, double) const;
+
+        double LanczosDiagonalizeFull(int);
+
     protected:
 
 	//! The array to hold the data (ELL format) for the up hamiltonian
