@@ -18,8 +18,10 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <cmath>
 #include <cstring>
 #include <stdio.h>
+#include <stdlib.h>
 #include <stdint.h>
 
 using namespace std;
@@ -29,19 +31,32 @@ typedef unsigned int myint;
 int CountBits(myint bytes);
 string print_bin(myint num,int bitcount);
 int CalcDim(int Ns,int N);
-double hopping(myint a, myint b,myint Nb,int jumpsign);
+int hopping(myint a, myint b,myint Nb,int jumpsign);
 
 extern "C" {
    void dsyev_(char *jobz,char *uplo,int *n,double *A,int *lda,double *W,double *work,int *lwork,int *info);
+   double ddot_(int *n,double *x,int *incx,double *y,int *incy);
+   void dscal_(int *n,double *alpha,double *x,int *incx);
+   void dsymv_(char *uplo, const int *n, const double *alpha, const double *a, const int *lda, const double *x, const int *incx, const double *beta, double *y, const int *incy);
+   void daxpy_(int *n,double *alpha,double *x,int *incx,double *y,int *incy);
 }
 
-int main(void)
+int main(int argc, char **argv)
 {
     int Ns = 4; // number of sites
     int Nu = 2; // number of up electrons
     int Nd = 3; // number of down electrons
     double J = 1.0; // hopping term
     double U = 0.0; // on-site interaction strength
+
+    if(argc == 4)
+    {
+	Ns = atoi(argv[1]);
+	Nu = atoi(argv[2]);
+	Nd = atoi(argv[3]);
+    }
+
+    cout << "Ns= " << Ns << "\tNu= " << Nu << "\tNd= " << Nd << endl;
 
     cout.precision(10);
 
@@ -103,13 +118,20 @@ int main(void)
     else
 	downjumpsign = 1;
 
+    int nonzeroUp = 0;
+    int nonzeroDown = 0;
+
+    cout << "Building..." << endl;
+
     for(unsigned int a=0;a<baseUp.size();a++)
 	for(unsigned int b=0;b<baseDown.size();b++)
 	{
 	    int i = a * NumDown + b;
+	    int tel1 = 0;
+	    int tel2 = 0;
 
-	    for(unsigned int c=a;c<baseUp.size();c++)
-		for(unsigned int d=b;d<baseDown.size();d++)
+	    for(unsigned int c=0;c<baseUp.size();c++)
+		for(unsigned int d=0;d<baseDown.size();d++)
 		{
 		    int j = c * NumDown + d;
 //		    cout << i << "\t" << print_bin(baseUp[a],Ns) << "\t" << print_bin(baseDown[b],Ns) << "\t";
@@ -120,11 +142,23 @@ int main(void)
 		    if(b == d)
 			ham[j+dim*i] += J * hopping(baseUp[a], baseUp[c],Nb,upjumpsign);
 
+		    if(b == d && hopping(baseUp[a], baseUp[c],Nb,upjumpsign) != 0)
+			tel1++;
+
 		    if(a == c)
 			ham[j+dim*i] += J * hopping(baseDown[b], baseDown[d],Nb,downjumpsign);
 
+		    if(a == c && hopping(baseDown[b], baseDown[d],Nb,downjumpsign) != 0)
+			tel2++;
+
 		    ham[i+dim*j] = ham[j+dim*i];
 		}
+
+	    if(tel1 > nonzeroUp)
+		nonzeroUp = tel1;
+
+	    if(tel2 > nonzeroDown)
+		nonzeroDown = tel2;
 
 	    // count number of double occupied states
 	    ham[i+dim*i] += U * CountBits(baseUp[a] & baseDown[b]);
@@ -166,10 +200,48 @@ int main(void)
 	std::cout << std::endl;
     }
 
+
+    std::cout << "Non-zero Up: " << nonzeroUp << "\t" << (((Ns-Nu)>Nu) ? 2*Nu : 2*(Ns-Nu)) << std::endl;
+    std::cout << "Non-zero Down: " << nonzeroDown  << "\t" << (((Ns-Nd)>Nd) ? 2*Nd : 2*(Ns-Nd)) << std::endl;
+
+    srand(15);
+
+    double vecin[dim];
+    double vecout[dim];
+    double vecout2[dim];
+
+    for(int i=0;i<dim;i++)
+    {
+        vecin[i] = rint(rand()*10.0/RAND_MAX);
+        vecout[i] = 100;
+        vecout2[i] = 0;
+    }
+
+    char uplo = 'U';
+    double norm = 1;
+    double beta = 0;
+    int incx = 1;
+
+    dsymv_(&uplo,&dim,&norm,ham,&dim,&vecin[0],&incx,&beta,&vecout[0],&incx);
+
+
+    for(int i=0;i<NumUp;i++)
+    {
+        dsymv_(&uplo,&NumDown,&norm,hamdown,&NumDown,&vecin[i*NumDown],&incx,&norm,&vecout2[i*NumDown],&incx);
+
+        for(int j=0;j<NumUp;j++)
+            daxpy_(&NumDown,&hamup[j+NumUp*i],&vecin[j*NumDown],&incx,&vecout2[i*NumDown],&incx);
+    }
+
+    for(int i=0;i<dim;i++)
+        cout << vecin[i] << "\t" << vecout[i] << "\t" << vecout2[i] << endl;
+
+    cout << endl;
+
     double *eigenvalues = new double [dim];
 
     char jobz = 'N';
-    char uplo = 'U';
+//    char uplo = 'U';
 
     int lwork = 3*dim - 1;
 
@@ -234,9 +306,9 @@ int CalcDim(int Ns,int N)
     return result;
 }
 
-double hopping(myint a, myint b,myint Nb,int jumpsign)
+int hopping(myint a, myint b,myint Nb,int jumpsign)
 {
-    double result = 0;
+    int result = 0;
     int sign;
     myint cur = a;
     // move all electrons one site to the right
