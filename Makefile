@@ -30,6 +30,9 @@ all: $(OBJ)
 main2: main2.o
 	$(CXX) $(LDFLAGS) -o main2 main2.o $(LIBS)
 
+doc: $(CPPSRC) doc-config
+	doxygen doc-config
+
 .PHONY: clean
 clean:
 	rm -f $(OBJ) main2.o
