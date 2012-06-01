@@ -373,22 +373,23 @@ double Hamiltonian::ExactDiagonalizeFull() const
 /**
  * Calculates the lowest eigenvalue of the hamiltonian matrix using
  * the lanczos algorithm. Needs lapack.
- * @param m the lanczos space size
+ * @param m an optional estimate for the lanczos space size
  * @return the lowest eigenvalue
  */
 double Hamiltonian::LanczosDiagonalizeFull(int m)
 {
-    double *a = new double[m];
-    double *b = new double[m];
+    std::vector<double> a(m,0);
+    std::vector<double> b(m,0);
 
     double *qa = new double [dim];
     double *qb = new double [dim];
 
+    double E = 1;
+
     int i;
 
-    b[0] = 0;
-    // does nothing, just to disable valgrind warnings
-    a[m-1] = 0;
+    if(!m)
+        m = dim/1000 > 10 ? dim/1000 : 10;
 
     srand(time(0));
 
@@ -413,49 +414,61 @@ double Hamiltonian::LanczosDiagonalizeFull(int m)
     char uplo = 'U';
     double alpha;
 
-    for(i=1;i<m;i++)
+    std::vector<double> acopy(a);
+    std::vector<double> bcopy(b);
+
+    i = 1;
+
+    while(fabs(E-acopy[0]) > 1e-4)
     {
-	alpha = -b[i-1];
-	dscal_(&dim,&alpha,f1,&incx);
+        E = acopy[0];
 
-	dsymv_(&uplo,&dim,&norm,ham,&dim,f2,&incx,&norm,f1,&incx);
+        for(;i<m;i++)
+        {
+            alpha = -b[i-1];
+            dscal_(&dim,&alpha,f1,&incx);
 
-	a[i-1] = ddot_(&dim,f1,&incx,f2,&incx);
+            dsymv_(&uplo,&dim,&norm,ham,&dim,f2,&incx,&norm,f1,&incx);
 
-	alpha = -a[i-1];
-	daxpy_(&dim,&alpha,f2,&incx,f1,&incx);
+            a[i-1] = ddot_(&dim,f1,&incx,f2,&incx);
 
-	b[i] = sqrt(ddot_(&dim,f1,&incx,f1,&incx));
+            alpha = -a[i-1];
+            daxpy_(&dim,&alpha,f2,&incx,f1,&incx);
 
-	if( fabs(b[i]) < 1e-10 )
-	    break;
+            b[i] = sqrt(ddot_(&dim,f1,&incx,f1,&incx));
 
-	alpha = 1.0/b[i];
+            if( fabs(b[i]) < 1e-10 )
+                break;
 
-	dscal_(&dim,&alpha,f1,&incx);
+            alpha = 1.0/b[i];
 
-	tmp = f2;
-	f2 = f1;
-	f1 = tmp;
+            dscal_(&dim,&alpha,f1,&incx);
+
+            tmp = f2;
+            f2 = f1;
+            f1 = tmp;
+        }
+
+        acopy = a;
+        bcopy = b;
+
+        char jobz = 'N';
+        int info;
+
+        dstev_(&jobz,&m,acopy.data(),&bcopy.data()[1],&alpha,&m,&alpha,&info);
+
+        if(info != 0)
+            std::cerr << "Error in Lanczos" << std::endl;
+
+        m += 10;
+        a.resize(m);
+        b.resize(m);
     }
-
-    char jobz = 'N';
-    int info;
-
-    dstev_(&jobz,&m,a,&b[1],&alpha,&m,&alpha,&info);
-
-    if(info != 0)
-	std::cerr << "Error in Lanczos" << std::endl;
-
-    alpha = a[0];
-
-    delete [] a;
-    delete [] b;
 
     delete [] qa;
     delete [] qb;
 
-    return alpha;
+    return acopy[0];
 }
 
 /**

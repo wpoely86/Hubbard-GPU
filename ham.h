@@ -46,7 +46,7 @@ class Hamiltonian
 	myint getBaseDown(unsigned int i) const;
 
 	double ExactDiagonalizeFull() const;
-	double LanczosDiagonalizeFull(int m);
+	double LanczosDiagonalizeFull(int m=0);
 
 	void Print() const;
 
