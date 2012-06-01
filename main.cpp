@@ -7,6 +7,8 @@
  */
 
 #include <iostream>
+#include <boost/timer.hpp>
+#include <getopt.h>
 #include "ham.h"
 #include "hamsparse.h"
 
@@ -20,27 +22,101 @@ int main(int argc, char **argv)
     double J = 1.0; // hopping term
     double U = 1.0; // on-site interaction strength
 
+    bool exact = false;
+    bool lanczos = false;
+
+    struct option long_options[] =
+    {
+        {"up",  required_argument, 0, 'u'},
+        {"down",  required_argument, 0, 'd'},
+        {"sites",  required_argument, 0, 's'},
+        {"interaction",  required_argument, 0, 'U'},
+        {"hopping",  required_argument, 0, 'J'},
+        {"exact",  no_argument, 0, 'e'},
+        {"lanczos",  no_argument, 0, 'l'},
+        {"help",  no_argument, 0, 'h'},
+        {0, 0, 0, 0}
+    };
+
+    int i,j;
+    while( (j = getopt_long (argc, argv, "hu:d:s:U:J:el", long_options, &i)) != -1)
+        switch(j)
+        {
+            case 'h':
+            case '?':
+                cout << "Usage: " << argv[0] << " [OPTIONS]\n"
+                    "\n"
+                    "    -s  --sites=Ns               The number of sites\n"
+                    "    -u  --up=Nu                  The number of up electrons\n"
+                    "    -d  --down=Nd                The number of down electrons\n"
+                    "    -U  --interaction=U          The onsite interaction strength\n"
+                    "    -J  --hopping=J              The hopping strength\n"
+                    "    -e  --exact                  Solve with exact diagonalisation\n"
+                    "    -l  --lanczos                Solve with Lanczos algorithm\n"
+                    "    -h, --help                   Display this help\n"
+                    "\n";
+                return 0;
+                break;
+            case 'u':
+                Nu = atoi(optarg);
+                break;
+            case 'd':
+                Nd = atoi(optarg);
+                break;
+            case 's':
+                Ns = atoi(optarg);
+                break;
+            case 'U':
+                U = atof(optarg);
+                break;
+            case 'J':
+                J = atof(optarg);
+                break;
+            case 'l':
+                lanczos = true;
+                break;
+            case 'e':
+                exact = true;
+                break;
+        }
+
+    cout << "Ns = " << Ns << "; Nu = " << Nu << "; Nd = " << Nd << "; J = " << J << "; U = " << U << ";" << endl;
+
     cout.precision(10);
 
-    Hamiltonian ham(Ns,Nu,Nd,J,U);
+    boost::timer tijd;
 
-    ham.BuildBase();
-    ham.BuildFullHam();
+    if(exact)
+    {
+        tijd.restart();
 
-    cout << "Dim: " << ham.getDim() << endl;
-    ham.Print();
+        Hamiltonian ham(Ns,Nu,Nd,J,U);
 
-    cout << "E = " << ham.LanczosDiagonalizeFull(10) << endl;
-    cout << "E = " << ham.ExactDiagonalizeFull() << endl;
+        ham.BuildBase();
+        ham.BuildFullHam();
 
-    SparseHamiltonian sham(Ns,Nu,Nd,J,U);
+        cout << "Dim: " << ham.getDim() << endl;
 
-    sham.BuildBase();
-    sham.BuildSparseHam();
+        cout << "E = " << ham.ExactDiagonalizeFull() << endl;
 
-    sham.PrintSparse();
-    cout << endl << endl;
-    sham.PrintRawELL();
+        cout << "Time: " << tijd.elapsed() << " s" << endl;
+    }
+
+    if(lanczos)
+    {
+        tijd.restart();
+
+        SparseHamiltonian sham(Ns,Nu,Nd,J,U);
+
+        sham.BuildBase();
+        sham.BuildSparseHam();
+
+        cout << "Dim: " << sham.getDim() << endl;
+
+        cout << "E = " << sham.LanczosDiagonalize() << endl;
+
+        cout << "Time: " << tijd.elapsed() << " s" << endl;
+    }
 
     return 0;
 }
