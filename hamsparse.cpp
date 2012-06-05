@@ -346,4 +346,24 @@ double SparseHamiltonian::LanczosDiagonalize(int m)
     return acopy[0];
 }
 
+/**
+ * Builds the interaction diagonal
+ * @return pointer to interaction vector. You have to free this yourself
+ */
+double* SparseHamiltonian::Umatrix() const
+{
+    double *Umat = new double[getDim()];
+
+    int NumDown = baseDown.size();
+
+    for(int i=0;i<getDim();i++)
+    {
+	int a = i / NumDown;
+	int b = i % NumDown;
+	Umat[i] = U * CountBits(baseUp[a] & baseDown[b]);
+    }
+
+    return Umat;
+}
+
 /* vim: set ts=8 sw=4 tw=0 expandtab :*/

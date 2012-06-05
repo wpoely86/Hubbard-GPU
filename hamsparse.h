@@ -23,6 +23,8 @@ class SparseHamiltonian: public Hamiltonian
 
         double LanczosDiagonalize(int m=0);
 
+        double* Umatrix() const;
+
     protected:
 
 	//! The array to hold the data (ELL format) for the up hamiltonian
