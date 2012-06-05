@@ -4,7 +4,9 @@ CPPSRC=ham.cpp\
        hamsparse.cpp\
        main.cpp\
 
-OBJ=$(CPPSRC:.cpp=.o)
+CUDASRC=hamgpu.cu
+
+OBJ=$(CPPSRC:.cpp=.o) $(CUDASRC:.cu=.o)
 
 EXE=main
 
@@ -14,15 +16,22 @@ CXX=g++
 CFLAGS=-g -Wall -O2 -march=native
 CPPFLAGS=$(CFLAGS)
 LDFLAGS=-g -O2 -Wall -march=native
+NVFLAGS=-g -O2
 
-INCLUDE=
-LIBS=-lblas -llapack
+INCLUDE=-I/opt/cuda/include
+LIBS=-lblas -llapack -lcudart -lcublas
 
 %.o:    %.c
 	$(CC) -c $(CFLAGS) $(INCLUDE) $(@:.o=.c) -o $@
 
 %.o:    %.cpp
 	$(CXX) -c $(CPPFLAGS) $(INCLUDE) $(@:.o=.cpp) -o $@
+
+%.o:    %.cu
+	nvcc -c -arch=sm_13 $(NVFLAGS) $(INCLUDE) $(@:.o=.cu) -o $@
+#	nvcc -cuda $(NVFLAGS) $(INCLUDE) $(@:.o=.cu) -o $(@:.o=.cu.ii)
+#	$(CXX) -c $(CPPFLAGS) $(INCLUDE) $(@:.o=.cu.ii) -o $@
+
 
 all: $(OBJ)
 	$(CXX) $(LDFLAGS) -o $(EXE) $(OBJ) $(LIBS)
