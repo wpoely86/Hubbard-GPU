@@ -484,4 +484,11 @@ void Hamiltonian::Print() const
     }
 }
 
+void Hamiltonian::PrintBase() const
+{
+    for(unsigned int a=0;a<baseUp.size();a++)
+        for(unsigned int b=0;b<baseDown.size();b++)
+            std::cout << a*baseDown.size()+b << "\t" << print_bin(baseUp[a],4) << "\t" << print_bin(baseDown[b],4) << std::endl;
+}
+
 /* vim: set ts=8 sw=4 tw=0 expandtab :*/

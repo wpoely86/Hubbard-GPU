@@ -50,6 +50,8 @@ class Hamiltonian
 
 	void Print() const;
 
+        void PrintBase() const;
+
     protected:
 	int hopping(myint a, myint b, int jumpsign) const;
 
