@@ -16,7 +16,7 @@ CXX=g++
 CFLAGS=-g -Wall -O2 -march=native
 CPPFLAGS=$(CFLAGS)
 LDFLAGS=-g -O2 -Wall -march=native
-NVFLAGS=-g -O2
+NVFLAGS=-g -O2 --ptxas-options=-v -arch=sm_13
 
 INCLUDE=-I/opt/cuda/include
 LIBS=-lblas -llapack -lcudart -lcublas
@@ -28,7 +28,7 @@ LIBS=-lblas -llapack -lcudart -lcublas
 	$(CXX) -c $(CPPFLAGS) $(INCLUDE) $(@:.o=.cpp) -o $@
 
 %.o:    %.cu
-	nvcc -c -arch=sm_13 $(NVFLAGS) $(INCLUDE) $(@:.o=.cu) -o $@
+	nvcc -c $(NVFLAGS) $(INCLUDE) $(@:.o=.cu) -o $@
 #	nvcc -cuda $(NVFLAGS) $(INCLUDE) $(@:.o=.cu) -o $(@:.o=.cu.ii)
 #	$(CXX) -c $(CPPFLAGS) $(INCLUDE) $(@:.o=.cu.ii) -o $@
 
