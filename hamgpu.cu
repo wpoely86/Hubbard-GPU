@@ -25,18 +25,34 @@ GPUHamiltonian::~GPUHamiltonian()
 {
 }
 
-__global__ void gpu_mvprod(double *x, double *y, double alpha, int NumUp, int NumDown, int dim, double *Umat, double *Down_data,unsigned int *Down_ind, int size_Down, double *Up_data, unsigned int *Up_ind, int size_Up)
+__global__ void gpu_mvprod(double *x, double *y, double alpha, int NumUp, int NumDown, int dim, double *Umat, double *Down_data,unsigned int *Down_ind, int size_Down, double *Up_data, unsigned int *Up_ind, int size_Up, int rows_shared)
 {
-    y[threadIdx.x] = alpha * y[threadIdx.x] + Umat[threadIdx.x] * x[threadIdx.x];
+    int index = threadIdx.x + blockDim.x * blockIdx.x;
 
-    int sv = threadIdx.x / NumDown;
-    int id = threadIdx.x % NumDown;
+    if(index < dim)
+    {
+	double result = Umat[index] * x[index];
 
-    for(int i=0;i<size_Down;i++)
-	y[threadIdx.x] += Down_data[id+i*NumDown] * x[sv*NumDown + Down_ind[id+i*NumDown]];
+	int sv = index / NumDown; //__fdividef(index,NumDown);
+	int id = index % NumDown; // index - sv*NumDown;
 
-    for(int i=0;i<size_Up;i++)
-	y[threadIdx.x] += Up_data[sv+i*NumUp] * x[id + NumDown*Up_ind[sv+i*NumUp]];
+	extern __shared__ double shared[];
+
+	if(threadIdx.x <= rows_shared)
+	    for(int i=0;i<size_Up;i++)
+		shared[threadIdx.x*size_Up+i] = Up_data[(blockDim.x * blockIdx.x)/NumDown + threadIdx.x + i*NumUp];
+
+	__syncthreads();
+
+	for(int i=0;i<size_Up;i++)
+//	    result += Up_data[sv+i*NumUp] * x[id + NumDown*Up_ind[sv+i*NumUp]];
+	    result += shared[(sv-(blockDim.x * blockIdx.x)/NumDown)*size_Up+i] * x[id + NumDown*Up_ind[sv+i*NumUp]];
+
+	for(int i=0;i<size_Down;i++)
+	    result += Down_data[id+i*NumDown] * x[sv*NumDown + Down_ind[id+i*NumDown]];
+
+	y[index] = alpha * y[index] + result;
+    }
 }
 
 void GPUHamiltonian::mvprod(double *x, double *y, double alpha)
@@ -45,9 +61,11 @@ void GPUHamiltonian::mvprod(double *x, double *y, double alpha)
     int NumDown = baseDown.size();
     int dim = NumUp*NumDown;
     int numblocks = ceil(dim*1.0/NUMTHREADS);
+    int rows_shared = ceil(NUMTHREADS*1.0/NumDown);
+    size_t sharedmem = size_Up * (rows_shared+1) * sizeof(double);
 
     cudaGetLastError();
-    gpu_mvprod<<<numblocks,NUMTHREADS>>>(x,y,alpha,NumUp,NumDown,dim,Umat_gpu,Down_data_gpu,Down_ind_gpu,size_Down,Up_data_gpu,Up_ind_gpu,size_Up);
+    gpu_mvprod<<<numblocks,NUMTHREADS,sharedmem>>>(x,y,alpha,NumUp,NumDown,dim,Umat_gpu,Down_data_gpu,Down_ind_gpu,size_Down,Up_data_gpu,Up_ind_gpu,size_Up,rows_shared);
     CUDA_SAFE_CALL(cudaGetLastError());
 }
 
@@ -76,6 +94,12 @@ double GPUHamiltonian::LanczosDiagonalize(int m)
     if( ceil(dim*1.0/NUMTHREADS) > prop.maxGridSize[0] )
     {
 	std::cerr << "Houston, we have a grid size problem!" << std::endl;
+	return 0;
+    }
+
+    if( (ceil(NUMTHREADS/NumDown) + 1) * size_Up * sizeof(double) > prop.sharedMemPerBlock )
+    {
+	std::cerr << "Houston, we have a shared memory size problem!" << std::endl;
 	return 0;
     }
 
