@@ -93,8 +93,8 @@ double GPUHamiltonian::LanczosDiagonalize(int m)
     CUDA_SAFE_CALL(cudaMemcpy(Up_data_gpu,Up_data,NumUp*size_Up*sizeof(double),cudaMemcpyHostToDevice));
     CUDA_SAFE_CALL(cudaMemcpy(Up_ind_gpu,Up_ind,NumUp*size_Up*sizeof(double),cudaMemcpyHostToDevice));
 
-    CUDA_SAFE_CALL(cudaMalloc(&Down_data_gpu,NumDown*size_Up*sizeof(double)));
-    CUDA_SAFE_CALL(cudaMalloc(&Down_ind_gpu,NumDown*size_Up*sizeof(double)));
+    CUDA_SAFE_CALL(cudaMalloc(&Down_data_gpu,NumDown*size_Down*sizeof(double)));
+    CUDA_SAFE_CALL(cudaMalloc(&Down_ind_gpu,NumDown*size_Down*sizeof(double)));
 
     CUDA_SAFE_CALL(cudaMemcpy(Down_data_gpu,Down_data,NumDown*size_Down*sizeof(double),cudaMemcpyHostToDevice));
     CUDA_SAFE_CALL(cudaMemcpy(Down_ind_gpu,Down_ind,NumDown*size_Down*sizeof(double),cudaMemcpyHostToDevice));
