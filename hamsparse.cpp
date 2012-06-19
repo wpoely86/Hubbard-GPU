@@ -230,6 +230,7 @@ void SparseHamiltonian::mvprod(double *x, double *y, double alpha) const
 
     for(int i=0;i<NumUp;i++)
     {
+#pragma omp parallel for
         for(int k=0;k<NumDown;k++)
         {
             // the interaction part
@@ -339,6 +340,8 @@ double SparseHamiltonian::LanczosDiagonalize(int m)
         a.resize(m);
         b.resize(m);
     }
+
+    std::cout << "Done in " << m << " Iterations" << std::endl;
 
     delete [] qa;
     delete [] qb;

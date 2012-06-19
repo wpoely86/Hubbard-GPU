@@ -13,9 +13,9 @@ EXE=main
 CC=gcc
 CXX=g++
 
-CFLAGS=-g -Wall -O2 -march=native
+CFLAGS=-g -Wall -O2 -march=native -fopenmp
 CPPFLAGS=$(CFLAGS)
-LDFLAGS=-g -O2 -Wall -march=native
+LDFLAGS=-g -O2 -Wall -march=native -fopenmp
 NVFLAGS=-g -O2 --ptxas-options=-v -arch=sm_13
 
 INCLUDE=-I/opt/cuda/include
