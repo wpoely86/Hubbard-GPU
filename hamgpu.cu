@@ -139,8 +139,8 @@ double GPUHamiltonian::LanczosDiagonalize(int m)
     CUDA_SAFE_CALL(cudaMemcpy(Down_data_gpu,Down_data,NumDown*size_Down*sizeof(double),cudaMemcpyHostToDevice));
     CUDA_SAFE_CALL(cudaMemcpy(Down_ind_gpu,Down_ind,NumDown*size_Down*sizeof(unsigned int),cudaMemcpyHostToDevice));
 
-    double *a = new double[m];
-    double *b = new double[m];
+    std::vector<double> a(m,0);
+    std::vector<double> b(m,0);
 
     double *qa = new double [dim];
     double *qb = new double [dim];
@@ -150,18 +150,12 @@ double GPUHamiltonian::LanczosDiagonalize(int m)
     CUDA_SAFE_CALL(cudaMalloc(&qa_gpu,dim*sizeof(double)));
     CUDA_SAFE_CALL(cudaMalloc(&qb_gpu,dim*sizeof(double)));
 
-    int i;
-
-    b[0] = 0;
-    // does nothing, just to disable valgrind warnings
-    a[m-1] = 0;
-
     srand(time(0));
 
-    for(i=0;i<dim;i++)
+    for(int i=0;i<dim;i++)
     {
         qa[i] = 0;
-        qb[i] = rand()*10.0/RAND_MAX;
+        qb[i] = (rand()*10.0/RAND_MAX);
     }
 
     int incx = 1;
@@ -187,47 +181,83 @@ double GPUHamiltonian::LanczosDiagonalize(int m)
     cublasHandle_t handle;
     cublasCreate(&handle);
 
-    for(i=1;i<m;i++)
+//    cublasPointerMode_t mode = CUBLAS_POINTER_MODE_DEVICE;
+//    cublasSetPointerMode(handle,mode);
+
+    int i=1;
+
+    std::vector<double> acopy(a);
+    std::vector<double> bcopy(b);
+
+    double E = 1;
+
+    cudaEvent_t start, stop;
+    float exeTime;
+    cudaEventCreate( &start );
+    cudaEventCreate( &stop );
+
+    cudaEventRecord(start, 0);
+
+    while(fabs(E-acopy[0]) > 1e-4)
     {
-        alpha = -b[i-1];
-	cublasDscal(handle,dim,&alpha,f1,1);
+	E = acopy[0];
 
-	mvprod(f2,f1,norm);
+	for(;i<m;i++)
+	{
+	    alpha = -b[i-1];
+	    cublasDscal(handle,dim,&alpha,f1,1);
 
-	cublasDdot(handle,dim,f1,1,f2,1,&a[i-1]);
+	    mvprod(f2,f1,norm);
 
-        alpha = -a[i-1];
-	cublasDaxpy(handle,dim,&alpha,f2,1,f1,1);
+	    cublasDdot(handle,dim,f1,1,f2,1,&a[i-1]);
 
-	cublasDdot(handle,dim,f1,1,f1,1,&b[i]);
-	b[i] = sqrt(b[i]);
+	    alpha = -a[i-1];
+	    cublasDaxpy(handle,dim,&alpha,f2,1,f1,1);
 
-        if( fabs(b[i]) < 1e-10 )
-            break;
+	    cublasDdot(handle,dim,f1,1,f1,1,&b[i]);
+	    b[i] = sqrt(b[i]);
 
-        alpha = 1.0/b[i];
+	    if( fabs(b[i]) < 1e-10 )
+		break;
 
-	cublasDscal(handle,dim,&alpha,f1,1);
+	    alpha = 1.0/b[i];
 
-        tmp = f2;
-        f2 = f1;
-        f1 = tmp;
+	    cublasDscal(handle,dim,&alpha,f1,1);
+
+	    tmp = f2;
+	    f2 = f1;
+	    f1 = tmp;
+	}
+
+	acopy = a;
+	bcopy = b;
+
+	char jobz = 'N';
+	int info;
+
+	dstev_(&jobz,&m,acopy.data(),&bcopy.data()[1],&alpha,&m,&alpha,&info);
+
+	if(info != 0)
+	    std::cerr << "Error in Lanczos" << std::endl;
+
+	m += 10;
+	a.resize(m);
+	b.resize(m);
     }
+
+    cudaEventRecord(stop, 0);
+    cudaEventSynchronize(stop);
+    cudaEventElapsedTime( &exeTime, start, stop );
+
+    std::cout << "Done in " << m-10 << " Iterations" << std::endl;
+    std::cout << "Cuda time: " << exeTime/1000 << std::endl;
+
+    cudaEventDestroy(start);
+    cudaEventDestroy(stop);
 
     cublasDestroy(handle);
 
-    char jobz = 'N';
-    int info;
-
-    dstev_(&jobz,&m,a,&b[1],&alpha,&m,&alpha,&info);
-
-    if(info != 0)
-        std::cerr << "Error in Lanczos" << std::endl;
-
-    alpha = a[0];
-
-    delete [] a;
-    delete [] b;
+    alpha = acopy[0];
 
     CUDA_SAFE_CALL(cudaFree(qa_gpu));
     CUDA_SAFE_CALL(cudaFree(qb_gpu));
@@ -239,7 +269,9 @@ double GPUHamiltonian::LanczosDiagonalize(int m)
 
     CUDA_SAFE_CALL(cudaFree(Umat_gpu));
 
+    CUDA_SAFE_CALL(cudaDeviceReset());
+
     return alpha;
 }
 
-
+/* vim: set ts=8 sw=4 tw=0 expandtab :*/
