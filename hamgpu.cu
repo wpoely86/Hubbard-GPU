@@ -5,7 +5,7 @@
 #include "hamgpu.h"
 
 // number of threads in a block (must be multiple of 32)
-#define NUMTHREADS 512
+#define NUMTHREADS 128
 
 #define GRIDSIZE 65535
 
@@ -40,21 +40,23 @@ __global__ void gpu_mvprod(double *x, double *y, double alpha, int NumUp, int Nu
 
 	extern __shared__ double shared[];
 
-	unsigned int *shared_ind = (unsigned int *) &shared[size_Up * (rows_shared+1)];
+	unsigned int *shared_ind = (unsigned int *) &shared[size_Up * rows_shared];
 
-	if(threadIdx.x <= rows_shared)
+	int s_sv = (blockDim.x * blockIdx.x + blockIdx.y * blockDim.x * gridDim.x)/NumDown;
+
+	if(threadIdx.x < rows_shared && (s_sv + threadIdx.x) < NumUp)
 	    for(int i=0;i<size_Up;i++)
 	    {
-		shared[threadIdx.x*size_Up+i] = Up_data[(blockDim.x * blockIdx.x + blockIdx.y * blockDim.x * gridDim.x)/NumDown + threadIdx.x + i*NumUp];
+		shared[i*rows_shared+threadIdx.x] = Up_data[s_sv + threadIdx.x + i*NumUp];
 
-		shared_ind[threadIdx.x*size_Up+i] = Up_ind[(blockDim.x * blockIdx.x + blockIdx.y * blockDim.x * gridDim.x)/NumDown + threadIdx.x + i*NumUp];
+		shared_ind[i*rows_shared+threadIdx.x] = Up_ind[s_sv + threadIdx.x + i*NumUp];
 	    }
 
 	__syncthreads();
 
 	for(int i=0;i<size_Up;i++)
-//	    result += Up_data[sv+i*NumUp] * x[id + NumDown*Up_ind[sv+i*NumUp]];
-	    result += shared[(sv-(blockDim.x * blockIdx.x + blockIdx.y * blockDim.x * gridDim.x)/NumDown)*size_Up+i] * x[id + NumDown*shared_ind[(sv-(blockDim.x * blockIdx.x + blockIdx.y * blockDim.x * gridDim.x)/NumDown)*size_Up+i]];
+	    // result += Up_data[sv+i*NumUp] * x[id + NumDown*Up_ind[sv+i*NumUp]];
+	    result += shared[sv-s_sv+i*rows_shared] * x[id + NumDown*shared_ind[sv-s_sv+i*rows_shared]];
 
 	for(int i=0;i<size_Down;i++)
 	    result += Down_data[id+i*NumDown] * x[sv*NumDown + Down_ind[id+i*NumDown]];
@@ -69,8 +71,8 @@ void GPUHamiltonian::mvprod(double *x, double *y, double alpha)
     int NumDown = baseDown.size();
     int dim = NumUp*NumDown;
     dim3 numblocks(ceil(dim*1.0/NUMTHREADS));
-    int rows_shared = ceil(NUMTHREADS*1.0/NumDown);
-    size_t sharedmem = size_Up * (rows_shared+1) * (sizeof(double) + sizeof(unsigned int));
+    int rows_shared = ceil(NUMTHREADS*1.0/NumDown) + 1;
+    size_t sharedmem = size_Up * rows_shared * (sizeof(double) + sizeof(unsigned int));
 
     if(numblocks.x > GRIDSIZE)
     {
@@ -95,8 +97,8 @@ double GPUHamiltonian::LanczosDiagonalize(int m)
     int NumDown = baseDown.size();
 
     size_t neededmem = getDim()*sizeof(double) +
-	2*NumUp*size_Up*sizeof(double) +
-	2*NumDown*size_Down*sizeof(double) +
+	NumUp*size_Up*(sizeof(double)+sizeof(unsigned int)) +
+	NumDown*size_Down*(sizeof(double)+sizeof(unsigned int)) +
 	2*dim*sizeof(double);
 
     if(neededmem > prop.totalGlobalMem)
@@ -111,7 +113,7 @@ double GPUHamiltonian::LanczosDiagonalize(int m)
 	return 0;
     }
 
-    if( (ceil(NUMTHREADS/NumDown) + 1) * size_Up * sizeof(double) > prop.sharedMemPerBlock )
+    if( size_Up * (ceil(NUMTHREADS*1.0/NumDown)+1) * (sizeof(double) + sizeof(unsigned int)) > prop.sharedMemPerBlock )
     {
 	std::cerr << "Houston, we have a shared memory size problem!" << std::endl;
 	return 0;
@@ -119,23 +121,23 @@ double GPUHamiltonian::LanczosDiagonalize(int m)
 
     // alloc Umat and copy to gpu
     double *Umat = Umatrix();
-    CUDA_SAFE_CALL(cudaMalloc(&Umat_gpu, getDim()*sizeof(double)));
-    CUDA_SAFE_CALL(cudaMemcpy(Umat_gpu,Umat,getDim()*sizeof(double),cudaMemcpyHostToDevice));
+    CUDA_SAFE_CALL(cudaMalloc(&Umat_gpu, dim*sizeof(double)));
+    CUDA_SAFE_CALL(cudaMemcpy(Umat_gpu,Umat,dim*sizeof(double),cudaMemcpyHostToDevice));
 
     delete [] Umat;
 
 
     CUDA_SAFE_CALL(cudaMalloc(&Up_data_gpu,NumUp*size_Up*sizeof(double)));
-    CUDA_SAFE_CALL(cudaMalloc(&Up_ind_gpu,NumUp*size_Up*sizeof(double)));
+    CUDA_SAFE_CALL(cudaMalloc(&Up_ind_gpu,NumUp*size_Up*sizeof(unsigned int)));
 
     CUDA_SAFE_CALL(cudaMemcpy(Up_data_gpu,Up_data,NumUp*size_Up*sizeof(double),cudaMemcpyHostToDevice));
-    CUDA_SAFE_CALL(cudaMemcpy(Up_ind_gpu,Up_ind,NumUp*size_Up*sizeof(double),cudaMemcpyHostToDevice));
+    CUDA_SAFE_CALL(cudaMemcpy(Up_ind_gpu,Up_ind,NumUp*size_Up*sizeof(unsigned int),cudaMemcpyHostToDevice));
 
     CUDA_SAFE_CALL(cudaMalloc(&Down_data_gpu,NumDown*size_Down*sizeof(double)));
-    CUDA_SAFE_CALL(cudaMalloc(&Down_ind_gpu,NumDown*size_Down*sizeof(double)));
+    CUDA_SAFE_CALL(cudaMalloc(&Down_ind_gpu,NumDown*size_Down*sizeof(unsigned int)));
 
     CUDA_SAFE_CALL(cudaMemcpy(Down_data_gpu,Down_data,NumDown*size_Down*sizeof(double),cudaMemcpyHostToDevice));
-    CUDA_SAFE_CALL(cudaMemcpy(Down_ind_gpu,Down_ind,NumDown*size_Down*sizeof(double),cudaMemcpyHostToDevice));
+    CUDA_SAFE_CALL(cudaMemcpy(Down_ind_gpu,Down_ind,NumDown*size_Down*sizeof(unsigned int),cudaMemcpyHostToDevice));
 
     double *a = new double[m];
     double *b = new double[m];
