@@ -1,6 +1,7 @@
 # makefile
 
 CPPSRC=ham.cpp\
+       ham2D.cpp\
        hamsparse.cpp\
        main.cpp\
 

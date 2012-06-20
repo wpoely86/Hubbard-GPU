@@ -1,0 +1,171 @@
+#include <iostream>
+#include "ham2D.h"
+
+/**
+ * Constructor of the HubHam2D class
+ * @param L The Length of the 2D grid
+ * @param D The depth of the 2D grid
+ * @param Nu Number of Up Electrons
+ * @param Nd Number of Down Electrons
+ * @param J The hopping strengh
+ * @param U The onsite interaction strength
+ */
+HubHam2D::HubHam2D(int L, int D, int Nu, int Nd, double J, double U)
+    : Hamiltonian(L*D,Nu,Nd,J,U)
+{
+    this->L = L;
+    this->D = D;
+}
+
+/**
+ * Destructor of the HubHam2D class
+ */
+HubHam2D::~HubHam2D()
+{
+}
+
+/**
+  * private method used to see if a hopping between state a and b is
+  * possible and with which sign: this is for 2D hubbard.
+  * @param a the bra to use
+  * @param b the ket to use
+  * @returns matrix element of the hopping term between the ket and the bra. You still
+  * have to multiply this with the hopping strength J
+  */
+int HubHam2D::hopping(myint a, myint b) const
+{
+    int result(0), sign;
+
+    for(int i=0;i<Ns;i++)
+        if( a & 1<<i ) // is the i'th bit set?
+        {
+	    int j;
+
+	    // jump up
+	    j = (i + L) % Ns;
+	    if( (~a & 1<<j) && ((a ^ ((1<<i)+(1<<j)) ) == b ) )
+	    {
+		if(j>i)
+		    sign = CalcSign(i,j,a);
+		else
+		    sign = CalcSign(j,i,a);
+
+		result = sign;
+		break;
+	    }
+
+	    // jump down
+	    j = (i - L + Ns) % Ns;
+	    if( (~a & 1<<j) && ((a ^ ((1<<i)+(1<<j)) ) == b ) )
+	    {
+		if(j>i)
+		    sign = CalcSign(i,j,a);
+		else
+		    sign = CalcSign(j,i,a);
+
+		result = sign;
+		break;
+	    }
+
+	    // jump right
+	    j = L * (i/L) + (i + 1) % L;
+	    if( (~a & 1<<j) && ((a ^ ((1<<i)+(1<<j)) ) == b ) )
+	    {
+		if(j>i)
+		    sign = CalcSign(i,j,a);
+		else
+		    sign = CalcSign(j,i,a);
+
+		result = sign;
+		break;
+	    }
+
+	    // jump left
+	    j = L * (i/L) + (i - 1 + L) % L;
+	    if( (~a & 1<<j) && ((a ^ ((1<<i)+(1<<j)) ) == b ) )
+	    {
+		if(j>i)
+		    sign = CalcSign(i,j,a);
+		else
+		    sign = CalcSign(j,i,a);
+
+		result = sign;
+		break;
+	    }
+        }
+
+    return result;
+}
+
+/**
+ * Calculates the sign of the hop between site i and site j on ket a. Make sure
+ * that i < j!
+ * @param i the first site
+ * @param j the second site
+ * @param a the ket to use
+ * @return the sign of the hop
+ */
+int HubHam2D::CalcSign(int i,int j,myint a) const
+{
+    int sign;
+
+    // count the number of set bits between i and j in a
+    sign = CountBits(( ((1<<j) - 1) ^ ((1<<i) | ((1<<i) - 1)) ) & a);
+
+    if( sign & 0x1 ) // uneven: -1
+	return -1;
+    else // even: +1
+	return +1;
+}
+
+/**
+  * Builds the full 2D Hubbard Hamiltonian matrix
+  */
+void HubHam2D::BuildFullHam()
+{
+    if( !baseUp.size() || !baseDown.size() )
+    {
+	std::cerr << "Build base before building Hamiltonian" << std::endl;
+	return;
+    }
+
+    ham = new double[dim*dim];
+
+    int NumDown = CalcDim(Ns,Nd);
+
+    for(unsigned int a=0;a<baseUp.size();a++)
+	for(unsigned int b=0;b<baseDown.size();b++)
+	{
+	    int i = a * NumDown + b;
+
+	    for(unsigned int c=a;c<baseUp.size();c++)
+		for(unsigned int d=0;d<baseDown.size();d++)
+		{
+		    int j = c * NumDown + d;
+
+		    ham[j+dim*i] = 0;
+
+		    if(b == d)
+			ham[j+dim*i] += J * hopping(baseUp[a], baseUp[c]);
+
+		    if(a == c)
+			ham[j+dim*i] += J * hopping(baseDown[b], baseDown[d]);
+
+		    ham[i+dim*j] = ham[j+dim*i];
+		}
+
+	    // count number of double occupied states
+	    ham[i+dim*i] = U * CountBits(baseUp[a] & baseDown[b]);
+	}
+}
+
+void HubHam2D::mvprod(double *x, double *y, double alpha) const
+{
+    double beta = 1;
+    int incx = 1;
+    char uplo = 'U';
+
+    dsymv_(&uplo,&dim,&beta,ham,&dim,x,&incx,&alpha,y,&incx);
+}
+
+/* vim: set ts=8 sw=4 tw=0 expandtab :*/
