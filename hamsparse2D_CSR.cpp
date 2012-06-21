@@ -5,7 +5,8 @@
 
 /**
  * Constructor of the SparseHamiltonian2D_CSR class
- * @param Ns Number of lattice sites
+ * @param L The Length of the 2D grid
+ * @param D The depth of the 2D grid
  * @param Nu Number of Up Electrons
  * @param Nd Number of Down Electrons
  * @param J The hopping strengh
@@ -37,6 +38,7 @@ void SparseHamiltonian2D_CSR::BuildSparseHam()
     unsigned int NumUp = baseUp.size();
     unsigned int NumDown = baseDown.size();
 
+    // by convention the last element of the row array is nnz
     Up_row.reserve(NumUp+1);
     Down_row.reserve(NumDown+1);
     Up_row.push_back(0);
@@ -59,7 +61,6 @@ void SparseHamiltonian2D_CSR::BuildSparseHam()
         Up_row.push_back(count);
     }
 
-    Up_row.push_back(count+1);
 
     count = 0;
 
@@ -79,7 +80,6 @@ void SparseHamiltonian2D_CSR::BuildSparseHam()
         Down_row.push_back(count);
     }
 
-    Down_row.push_back(count+1);
 }
 
 /**
@@ -92,12 +92,12 @@ void SparseHamiltonian2D_CSR::PrintSparse() const
 
     std::cout << "Up:" << std::endl;
 
-    int count = 0;
+    unsigned int count = 0;
 
     for(unsigned int i=0;i<NumUp;i++)
     {
 	for(unsigned int j=0;j<NumUp;j++)
-            if( Up_col[count] == j )
+            if( count < Up_data.size() && Up_col[count] == j )
                 std::cout << Up_data[count++] << "\t";
             else
 		std::cout << "0\t";
@@ -112,7 +112,7 @@ void SparseHamiltonian2D_CSR::PrintSparse() const
     for(unsigned int i=0;i<NumDown;i++)
     {
 	for(unsigned int j=0;j<NumDown;j++)
-            if( Down_col[count] == j )
+            if( count < Down_data.size() && Down_col[count] == j )
                 std::cout << Down_data[count++] << "\t";
             else
 		std::cout << "0\t";
@@ -125,7 +125,7 @@ void SparseHamiltonian2D_CSR::PrintRawCSR() const
 {
     std::cout << "Up:" << std::endl;
 
-    std::cout << "Data:" << std::endl;
+    std::cout << "Data(" << Up_data.size() << "):" << std::endl;
     for(unsigned int i=0;i<Up_data.size();i++)
         std::cout << Up_data[i] << " ";
     std::cout << std::endl;
@@ -142,7 +142,7 @@ void SparseHamiltonian2D_CSR::PrintRawCSR() const
 
     std::cout << "Down:" << std::endl;
 
-    std::cout << "Data:" << std::endl;
+    std::cout << "Data(" << Down_data.size() << "):" << std::endl;
     for(unsigned int i=0;i<Down_data.size();i++)
         std::cout << Down_data[i] << " ";
     std::cout << std::endl;

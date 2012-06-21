@@ -11,7 +11,7 @@ extern "C" {
     double ddot_(int *n,double *x,int *incx,double *y,int *incy);
     void dscal_(int *n,double *alpha,double *x,int *incx);
     void dsymv_(char *uplo, const int *n, const double *alpha, const double *a, const int *lda, const double *x, const int *incx, const double *beta, double *y, const int *incy);
-    void daxpy_(int *n,double *alpha,double *x,int *incx,double *y,int *incy);
+    void daxpy_(int *n,const double *alpha,double *x,int *incx,double *y,int *incy);
     void dstev_( const char* jobz, const int* n, double* d, double* e, double* z, const int* ldz, double* work, int* info );
 }
 
