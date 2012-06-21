@@ -109,13 +109,15 @@ int HubHam2D::CalcSign(int i,int j,myint a) const
 {
     int sign;
 
-    // count the number of set bits between i and j in a
+    // count the number of set bits between i and j in ket a
     sign = CountBits(( ((1<<j) - 1) ^ ((1<<i) | ((1<<i) - 1)) ) & a);
 
-    if( sign & 0x1 ) // uneven: -1
-	return -1;
-    else // even: +1
+    // when uneven, we get an minus sign but as we already have
+    // a minus sign in the hamiltonian ( -J *), the result is +.
+    if( sign & 0x1 )
 	return +1;
+    else
+	return -1;
 }
 
 /**

@@ -4,6 +4,7 @@ CPPSRC=ham.cpp\
        ham2D.cpp\
        hamsparse.cpp\
        hamsparse2D_CSR.cpp\
+       hamsparse2D.cpp\
        main.cpp\
 
 CUDASRC=hamgpu.cu
