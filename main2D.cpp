@@ -1,7 +1,4 @@
 /**
- * @mainpage
- * This is an implementation of http://arxiv.org/abs/1204.3425
- * "Exact diagonalization of the Hubbard model on graphics processing units"
  * This program is for 2D Hubbard.
  * @author Ward Poelmans <wpoely86@gmail.com>
  * @date 20-06-2012

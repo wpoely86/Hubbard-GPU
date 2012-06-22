@@ -1,7 +1,20 @@
 /**
  * @mainpage
  * This is an implementation of http://arxiv.org/abs/1204.3425
- * "Exact diagonalization of the Hubbard model on graphics processing units"
+ * "Exact diagonalization of the Hubbard model on graphics processing units" by Siro and Harju\n\n\n
+ * There are 2 programs: main and main2D. The former is for 1D Hubbard, the latter is for
+ * 2D Hubbard. Everything is split up in several classes to make reusing code easy:\n
+ * The Hamiltonian and HubHam2D classes build the full (dense) Hamiltonian Matrix. SparseHamiltonian
+ * stores the Hubbard Hamiltonian in parts: an spin up and a spin down part. The matrix themselves are
+ * storred in the ELL format.\n
+ * The SparseHamiltonian2D does the same but for 2D Hubbard. However, here we make a detour: we first store
+ * the matrices in the CRS format (the SparseHamiltonian2D_CSR class) and then convert it in the ELL format.
+ * The reason is that for ELL, we need to know the maximum number of non-zero elements (nnz) of a row.\n\n
+ *
+ * There are several branches in the git repo: the master contains only the CPU version. The branch 'GPU'
+ * constains the GPU version and the branch 'PRIMME' used the PRIMME library to find the eigenvalues and
+ * eigenvectors. You can find PRIMME at http://www.cs.wm.edu/~andreas/software/
+ *
  * @author Ward Poelmans <wpoely86@gmail.com>
  * @date 29-05-2012
  */

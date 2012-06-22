@@ -9,8 +9,10 @@
 // number of threads in a block (must be multiple of 32)
 #define NUMTHREADS 128
 
+// the maximum size of the grid
 #define GRIDSIZE 65535
 
+// Helper macro to check CUDA return values
 #define CUDA_SAFE_CALL( call) {                                    \
     cudaError err = call;                                                    \
     if( cudaSuccess != err) {                                                \
@@ -20,12 +22,18 @@
     } }
 
 
+/**
+  * The constructor for the SparseHamiltonian Class
+  */
 template<>
 GPUHamiltonian<SparseHamiltonian>::GPUHamiltonian(int Ns, int Nu, int Nd, double J, double U)
     : SparseHamiltonian(Ns,Nu,Nd,J,U)
 {
 }
 
+/**
+  * The constructor for the SparseHamiltonian2D Class
+  */
 template<>
 GPUHamiltonian<SparseHamiltonian2D>::GPUHamiltonian(int L, int D, int Nu, int Nd, double J, double U)
     : SparseHamiltonian2D(L,D,Nu,Nd,J,U)
@@ -37,6 +45,9 @@ GPUHamiltonian<T>::~GPUHamiltonian()
 {
 }
 
+/**
+  * The actual Cuda kernel to calculate the matrix vector product with the hamiltonian
+  */
 __global__ void gpu_mvprod(double *x, double *y, double alpha, int NumUp, int NumDown, int dim, double *Umat, double *Down_data,unsigned int *Down_ind, int size_Down, double *Up_data, unsigned int *Up_ind, int size_Up, int rows_shared)
 {
     int index = threadIdx.x + blockDim.x * blockIdx.x + blockIdx.y * blockDim.x * gridDim.x;
@@ -75,6 +86,12 @@ __global__ void gpu_mvprod(double *x, double *y, double alpha, int NumUp, int Nu
     }
 }
 
+/**
+ * The matrix vector product. The method should calculate y = A*x + alpha * y
+ * @param x the input vector
+ * @param y the output vector
+ * @param alpha the multiplicative constant
+ */
 template<class T>
 void GPUHamiltonian<T>::mvprod(double *x, double *y, double alpha) const
 {
@@ -96,6 +113,12 @@ void GPUHamiltonian<T>::mvprod(double *x, double *y, double alpha) const
     CUDA_SAFE_CALL(cudaGetLastError());
 }
 
+/**
+ * Calculates the lowest eigenvalue of the hamiltonian matrix using
+ * the lanczos algorithm. Needs lapack.
+ * @param m an optional estimate for the lanczos space size
+ * @return the lowest eigenvalue
+ */
 template<class T>
 double GPUHamiltonian<T>::LanczosDiagonalize(int m)
 {

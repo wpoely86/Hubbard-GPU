@@ -4,6 +4,7 @@
 #include <vector>
 #include <string>
 
+//! type to store the basis set vectors in
 typedef unsigned int myint;
 
 extern "C" {
@@ -16,7 +17,8 @@ extern "C" {
 }
 
 /**
- * This is the main class where all the magic happens
+ * This is the main (base) class. It calculates the full Hamiltonian matrix for 1D Hubbard. It can both exact diagonlize
+ * or use a Lanczos algorithm to calculate the groundstate energy.
  * @author Ward Poelmans <wpoely86@gmail.com>
  */
 class Hamiltonian
