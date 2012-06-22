@@ -58,7 +58,6 @@ int main(int argc, char **argv)
                     "    -J  --hopping=J              The hopping strength\n"
                     "    -e  --exact                  Solve with exact diagonalisation\n"
                     "    -l  --lanczos                Solve with Lanczos algorithm\n"
-                    "    -g  --gpu                    Solve with Lanczos algorithm on the GPU\n"
                     "    -h, --help                   Display this help\n"
                     "\n";
                 return 0;
