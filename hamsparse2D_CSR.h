@@ -5,7 +5,7 @@
 #include <vector>
 
 /**
- * Store the Hamiltonian in the CSR format
+ * Store the Hamiltonian for 2D Hubbard in the CSR format
  * @author Ward Poelmans <wpoely86@gmail.com>
  */
 class SparseHamiltonian2D_CSR: public HubHam2D

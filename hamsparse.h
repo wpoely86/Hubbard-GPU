@@ -4,7 +4,7 @@
 #include "ham.h"
 
 /**
- * Store the Hamiltonian in the ELL format
+ * Store the Hamiltonian for 1D Hubbard in the (sparse) ELL format
  * @author Ward Poelmans <wpoely86@gmail.com>
  */
 class SparseHamiltonian: public Hamiltonian

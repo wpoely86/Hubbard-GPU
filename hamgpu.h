@@ -1,10 +1,9 @@
 #ifndef HAMGPU_H
 #define HAMGPU_H
 
-#include "hamsparse.h"
-
 /**
- * Use the GPU (Cuda) for the Lanczos calculation
+ * This template class is used to do the Lanczos calculation
+ * on the GPU.
  * @author Ward Poelmans <wpoely86@gmail.com>
  */
 template<class T>
