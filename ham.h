@@ -7,6 +7,8 @@
 typedef unsigned int myint;
 
 extern "C" {
+#include <primme.h>
+
     void dsyevd_( char* jobz, char* uplo, int* n, double* a, int* lda, double* w, double* work, int* lwork, int* iwork, int* liwork, int* info);
     double ddot_(int *n,double *x,int *incx,double *y,int *incy);
     void dscal_(int *n,double *alpha,double *x,int *incx);
@@ -47,6 +49,7 @@ class Hamiltonian
 
 	double ExactDiagonalizeFull() const;
 	double LanczosDiagonalize(int m=0);
+        double PRIMMEDiagonlize();
 
 	void Print() const;
 
@@ -56,6 +59,8 @@ class Hamiltonian
 
     protected:
 	int hopping(myint a, myint b, int jumpsign) const;
+
+        static void MatrixVec(void *x, void *y, int *blockSize, struct primme_params *primme);
 
 	//! Number of sites
 	int Ns;

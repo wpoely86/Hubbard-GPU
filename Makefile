@@ -20,8 +20,8 @@ CPPFLAGS=$(CFLAGS)
 LDFLAGS=-g -O2 -Wall -march=native -fopenmp
 NVFLAGS=-g -O2 --ptxas-options=-v -arch=sm_13
 
-INCLUDE=
-LIBS=-lblas -llapack
+INCLUDE=-I/home/ward/tmp/PRIMME/PRIMMESRC/COMMONSRC
+LIBS=-lblas -llapack libprimme.a
 
 %.o:    %.c
 	$(CC) -c $(CFLAGS) $(INCLUDE) $(@:.o=.c) -o $@

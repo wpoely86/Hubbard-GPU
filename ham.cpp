@@ -471,6 +471,48 @@ double Hamiltonian::LanczosDiagonalize(int m)
 }
 
 /**
+ * Calculate the lowest eigenvalue and eigenvector of the
+ * hamiltonian. This needs a lot of more memory and uses
+ * the PRIMME library.
+ * @returns the lowest eigenvalue
+ */
+double Hamiltonian::PRIMMEDiagonlize()
+{
+    int ret; // for error codes
+    primme_params primme;
+    primme_preset_method method = DYNAMIC;
+
+    primme_initialize(&primme);
+    ret = primme_set_method(method, &primme);
+
+    if(ret)
+        std::cerr << "Error in setting PRIMME method: code " << ret << std::endl;
+
+    primme.n = dim;
+    primme.matrixMatvec = &Hamiltonian::MatrixVec;
+    primme.numEvals = 1; // number of eigs to find
+    primme.printLevel = 5; // prints lots of stuff
+    primme.maxBasisSize = dim;
+    primme.minRestartSize = 10;
+    primme.matrix = this;
+
+    double evals;
+    double *evecs = new double [primme.n*primme.numEvals];
+    double rnorms;
+
+    ret = dprimme(&evals, evecs, &rnorms, &primme);
+
+    if(ret)
+        std::cerr << "Error in dprimme: code " << ret << std::endl;
+
+    delete [] evecs;
+
+    primme_Free(&primme);
+
+    return evals;
+}
+
+/**
   * Prints the full hamiltonian matrix to stdout
   */
 void Hamiltonian::Print() const
@@ -497,6 +539,22 @@ void Hamiltonian::mvprod(double *x, double *y, double alpha) const
     char uplo = 'U';
 
     dsymv_(&uplo,&dim,&beta,ham,&dim,x,&incx,&alpha,y,&incx);
+}
+
+/**
+ * Internal helper method for PRIMME. It must be a static method because PRIMME needs a function
+ * pointer to this method. As it is static and we need the mvprod method, we use the void matrix
+ * pointer of PRIMME. This method should calculate the matrix vector product: y = A*x.
+ */
+void Hamiltonian::MatrixVec(void *x, void *y, int *blockSize, struct primme_params *primme)
+{
+    // make double out of void pointers
+    double *xd = static_cast<double *> (x);
+    double *yd = static_cast<double *> (y);
+
+    Hamiltonian *object = static_cast<Hamiltonian *> (primme->matrix);
+
+    object->mvprod(xd,yd,0);
 }
 
 /* vim: set ts=8 sw=4 tw=0 expandtab :*/
