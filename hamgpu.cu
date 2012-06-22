@@ -76,7 +76,7 @@ __global__ void gpu_mvprod(double *x, double *y, double alpha, int NumUp, int Nu
 }
 
 template<class T>
-void GPUHamiltonian<T>::mvprod(double *x, double *y, double alpha)
+void GPUHamiltonian<T>::mvprod(double *x, double *y, double alpha) const
 {
     int NumUp = T::baseUp.size();
     int NumDown = T::baseDown.size();
@@ -99,6 +99,9 @@ void GPUHamiltonian<T>::mvprod(double *x, double *y, double alpha)
 template<class T>
 double GPUHamiltonian<T>::LanczosDiagonalize(int m)
 {
+    if(!m)
+        m = 10;
+
     int device;
     cudaGetDevice( &device );
 

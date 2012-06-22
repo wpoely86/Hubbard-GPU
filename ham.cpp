@@ -376,10 +376,10 @@ double Hamiltonian::ExactDiagonalizeFull() const
  * @param m an optional estimate for the lanczos space size
  * @return the lowest eigenvalue
  */
-double Hamiltonian::LanczosDiagonalizeFull(int m)
+double Hamiltonian::LanczosDiagonalize(int m)
 {
     if(!m)
-        m = dim/1000 > 10 ? dim/1000 : 10;
+        m = 10;
 
     std::vector<double> a(m,0);
     std::vector<double> b(m,0);
@@ -411,7 +411,6 @@ double Hamiltonian::LanczosDiagonalizeFull(int m)
     double *f2 = qb;
     double *tmp;
 
-    char uplo = 'U';
     double alpha;
 
     std::vector<double> acopy(a);
@@ -428,7 +427,7 @@ double Hamiltonian::LanczosDiagonalizeFull(int m)
             alpha = -b[i-1];
             dscal_(&dim,&alpha,f1,&incx);
 
-            dsymv_(&uplo,&dim,&norm,ham,&dim,f2,&incx,&norm,f1,&incx);
+            mvprod(f2,f1,norm);
 
             a[i-1] = ddot_(&dim,f1,&incx,f2,&incx);
 
@@ -489,6 +488,15 @@ void Hamiltonian::PrintBase() const
     for(unsigned int a=0;a<baseUp.size();a++)
         for(unsigned int b=0;b<baseDown.size();b++)
             std::cout << a*baseDown.size()+b << "\t" << print_bin(baseUp[a],Ns) << "\t" << print_bin(baseDown[b],Ns) << std::endl;
+}
+
+void Hamiltonian::mvprod(double *x, double *y, double alpha) const
+{
+    double beta = 1;
+    int incx = 1;
+    char uplo = 'U';
+
+    dsymv_(&uplo,&dim,&beta,ham,&dim,x,&incx,&alpha,y,&incx);
 }
 
 /* vim: set ts=8 sw=4 tw=0 expandtab :*/

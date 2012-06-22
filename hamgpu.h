@@ -15,7 +15,7 @@ class GPUHamiltonian: public T
 	GPUHamiltonian(int L, int D, int Nu, int Nd, double J, double U);
 	virtual ~GPUHamiltonian();
 
-        void mvprod(double *x, double *y, double alpha);
+        virtual void mvprod(double *x, double *y, double alpha) const;
 
         double LanczosDiagonalize(int m=0);
 

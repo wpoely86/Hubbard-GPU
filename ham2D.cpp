@@ -161,13 +161,4 @@ void HubHam2D::BuildFullHam()
 	}
 }
 
-void HubHam2D::mvprod(double *x, double *y, double alpha) const
-{
-    double beta = 1;
-    int incx = 1;
-    char uplo = 'U';
-
-    dsymv_(&uplo,&dim,&beta,ham,&dim,x,&incx,&alpha,y,&incx);
-}
-
 /* vim: set ts=8 sw=4 tw=0 expandtab :*/

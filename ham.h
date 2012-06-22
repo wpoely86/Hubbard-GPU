@@ -46,11 +46,13 @@ class Hamiltonian
 	myint getBaseDown(unsigned int i) const;
 
 	double ExactDiagonalizeFull() const;
-	double LanczosDiagonalizeFull(int m=0);
+	double LanczosDiagonalize(int m=0);
 
 	void Print() const;
 
         void PrintBase() const;
+
+        virtual void mvprod(double *x, double *y, double alpha) const;
 
     protected:
 	int hopping(myint a, myint b, int jumpsign) const;

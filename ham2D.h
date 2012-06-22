@@ -21,8 +21,6 @@ class HubHam2D : public Hamiltonian
 
 	void BuildFullHam();
 
-        void mvprod(double *x, double *y, double alpha) const;
-
     protected:
 	int hopping(myint a, myint b) const;
         int CalcSign(int i,int j,myint a) const;
