@@ -41,7 +41,7 @@ main2D: $(OBJ) main2D.o
 	$(CXX) $(LDFLAGS) -o main2D $(OBJ) main2D.o $(LIBS)
 
 main: $(OBJ) main.o
-	$(CXX) $(LDFLAGS) -o main2D $(OBJ) main.o $(LIBS)
+	$(CXX) $(LDFLAGS) -o main $(OBJ) main.o $(LIBS)
 
 doc: $(CPPSRC) doc-config
 	doxygen doc-config
