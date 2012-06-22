@@ -3,6 +3,8 @@
 #include <cstdlib>
 #include <cublas_v2.h>
 #include "hamgpu.h"
+#include "hamsparse.h"
+#include "hamsparse2D.h"
 
 // number of threads in a block (must be multiple of 32)
 #define NUMTHREADS 128
@@ -18,12 +20,20 @@
     } }
 
 
-GPUHamiltonian::GPUHamiltonian(int Ns, int Nu, int Nd, double J, double U)
+template<>
+GPUHamiltonian<SparseHamiltonian>::GPUHamiltonian(int Ns, int Nu, int Nd, double J, double U)
     : SparseHamiltonian(Ns,Nu,Nd,J,U)
 {
 }
 
-GPUHamiltonian::~GPUHamiltonian()
+template<>
+GPUHamiltonian<SparseHamiltonian2D>::GPUHamiltonian(int L, int D, int Nu, int Nd, double J, double U)
+    : SparseHamiltonian2D(L,D,Nu,Nd,J,U)
+{
+}
+
+template<class T>
+GPUHamiltonian<T>::~GPUHamiltonian()
 {
 }
 
@@ -65,14 +75,15 @@ __global__ void gpu_mvprod(double *x, double *y, double alpha, int NumUp, int Nu
     }
 }
 
-void GPUHamiltonian::mvprod(double *x, double *y, double alpha)
+template<class T>
+void GPUHamiltonian<T>::mvprod(double *x, double *y, double alpha)
 {
-    int NumUp = baseUp.size();
-    int NumDown = baseDown.size();
+    int NumUp = T::baseUp.size();
+    int NumDown = T::baseDown.size();
     int dim = NumUp*NumDown;
     dim3 numblocks(ceil(dim*1.0/NUMTHREADS));
     int rows_shared = ceil(NUMTHREADS*1.0/NumDown) + 1;
-    size_t sharedmem = size_Up * rows_shared * (sizeof(double) + sizeof(unsigned int));
+    size_t sharedmem = T::size_Up * rows_shared * (sizeof(double) + sizeof(unsigned int));
 
     if(numblocks.x > GRIDSIZE)
     {
@@ -81,11 +92,12 @@ void GPUHamiltonian::mvprod(double *x, double *y, double alpha)
     }
 
     cudaGetLastError();
-    gpu_mvprod<<<numblocks,NUMTHREADS,sharedmem>>>(x,y,alpha,NumUp,NumDown,dim,Umat_gpu,Down_data_gpu,Down_ind_gpu,size_Down,Up_data_gpu,Up_ind_gpu,size_Up,rows_shared);
+    gpu_mvprod<<<numblocks,NUMTHREADS,sharedmem>>>(x,y,alpha,NumUp,NumDown,dim,Umat_gpu,Down_data_gpu,Down_ind_gpu,T::size_Down,Up_data_gpu,Up_ind_gpu,T::size_Up,rows_shared);
     CUDA_SAFE_CALL(cudaGetLastError());
 }
 
-double GPUHamiltonian::LanczosDiagonalize(int m)
+template<class T>
+double GPUHamiltonian<T>::LanczosDiagonalize(int m)
 {
     int device;
     cudaGetDevice( &device );
@@ -93,13 +105,13 @@ double GPUHamiltonian::LanczosDiagonalize(int m)
     cudaDeviceProp prop;
     cudaGetDeviceProperties( &prop, device );
 
-    int NumUp = baseUp.size();
-    int NumDown = baseDown.size();
+    int NumUp = T::baseUp.size();
+    int NumDown = T::baseDown.size();
 
-    size_t neededmem = getDim()*sizeof(double) +
-	NumUp*size_Up*(sizeof(double)+sizeof(unsigned int)) +
-	NumDown*size_Down*(sizeof(double)+sizeof(unsigned int)) +
-	2*dim*sizeof(double);
+    size_t neededmem = T::getDim()*sizeof(double) +
+	NumUp*T::size_Up*(sizeof(double)+sizeof(unsigned int)) +
+	NumDown*T::size_Down*(sizeof(double)+sizeof(unsigned int)) +
+	2*T::dim*sizeof(double);
 
     if(neededmem > prop.totalGlobalMem)
     {
@@ -107,65 +119,66 @@ double GPUHamiltonian::LanczosDiagonalize(int m)
 	return 0;
     }
 
-    if( ceil(dim*1.0/NUMTHREADS) > (1.0*prop.maxGridSize[0]*prop.maxGridSize[1]) ) // convert all to doubles to avoid int overflow
+    if( ceil(T::dim*1.0/NUMTHREADS) > (1.0*prop.maxGridSize[0]*prop.maxGridSize[1]) ) // convert all to doubles to avoid int overflow
     {
 	std::cerr << "Houston, we have a grid size problem!" << std::endl;
 	return 0;
     }
 
-    if( size_Up * (ceil(NUMTHREADS*1.0/NumDown)+1) * (sizeof(double) + sizeof(unsigned int)) > prop.sharedMemPerBlock )
+    if( T::size_Up * (ceil(NUMTHREADS*1.0/NumDown)+1) * (sizeof(double) + sizeof(unsigned int)) > prop.sharedMemPerBlock )
     {
 	std::cerr << "Houston, we have a shared memory size problem!" << std::endl;
 	return 0;
     }
 
     // alloc Umat and copy to gpu
-    double *Umat = Umatrix();
-    CUDA_SAFE_CALL(cudaMalloc(&Umat_gpu, dim*sizeof(double)));
-    CUDA_SAFE_CALL(cudaMemcpy(Umat_gpu,Umat,dim*sizeof(double),cudaMemcpyHostToDevice));
+    double *Umat = T::Umatrix();
+    CUDA_SAFE_CALL(cudaMalloc(&Umat_gpu, T::dim*sizeof(double)));
+    CUDA_SAFE_CALL(cudaMemcpy(Umat_gpu,Umat,T::dim*sizeof(double),cudaMemcpyHostToDevice));
 
     delete [] Umat;
 
 
-    CUDA_SAFE_CALL(cudaMalloc(&Up_data_gpu,NumUp*size_Up*sizeof(double)));
-    CUDA_SAFE_CALL(cudaMalloc(&Up_ind_gpu,NumUp*size_Up*sizeof(unsigned int)));
+    CUDA_SAFE_CALL(cudaMalloc(&Up_data_gpu,NumUp*T::size_Up*sizeof(double)));
+    CUDA_SAFE_CALL(cudaMalloc(&Up_ind_gpu,NumUp*T::size_Up*sizeof(unsigned int)));
 
-    CUDA_SAFE_CALL(cudaMemcpy(Up_data_gpu,Up_data,NumUp*size_Up*sizeof(double),cudaMemcpyHostToDevice));
-    CUDA_SAFE_CALL(cudaMemcpy(Up_ind_gpu,Up_ind,NumUp*size_Up*sizeof(unsigned int),cudaMemcpyHostToDevice));
+    CUDA_SAFE_CALL(cudaMemcpy(Up_data_gpu,T::Up_data,NumUp*T::size_Up*sizeof(double),cudaMemcpyHostToDevice));
+    CUDA_SAFE_CALL(cudaMemcpy(Up_ind_gpu,T::Up_ind,NumUp*T::size_Up*sizeof(unsigned int),cudaMemcpyHostToDevice));
 
-    CUDA_SAFE_CALL(cudaMalloc(&Down_data_gpu,NumDown*size_Down*sizeof(double)));
-    CUDA_SAFE_CALL(cudaMalloc(&Down_ind_gpu,NumDown*size_Down*sizeof(unsigned int)));
+    CUDA_SAFE_CALL(cudaMalloc(&Down_data_gpu,NumDown*T::size_Down*sizeof(double)));
+    CUDA_SAFE_CALL(cudaMalloc(&Down_ind_gpu,NumDown*T::size_Down*sizeof(unsigned int)));
 
-    CUDA_SAFE_CALL(cudaMemcpy(Down_data_gpu,Down_data,NumDown*size_Down*sizeof(double),cudaMemcpyHostToDevice));
-    CUDA_SAFE_CALL(cudaMemcpy(Down_ind_gpu,Down_ind,NumDown*size_Down*sizeof(unsigned int),cudaMemcpyHostToDevice));
+    CUDA_SAFE_CALL(cudaMemcpy(Down_data_gpu,T::Down_data,NumDown*T::size_Down*sizeof(double),cudaMemcpyHostToDevice));
+    CUDA_SAFE_CALL(cudaMemcpy(Down_ind_gpu,T::Down_ind,NumDown*T::size_Down*sizeof(unsigned int),cudaMemcpyHostToDevice));
 
     std::vector<double> a(m,0);
     std::vector<double> b(m,0);
 
-    double *qa = new double [dim];
-    double *qb = new double [dim];
+    double *qa = new double [T::dim];
+    double *qb = new double [T::dim];
 
     double *qa_gpu;
     double *qb_gpu;
-    CUDA_SAFE_CALL(cudaMalloc(&qa_gpu,dim*sizeof(double)));
-    CUDA_SAFE_CALL(cudaMalloc(&qb_gpu,dim*sizeof(double)));
+    CUDA_SAFE_CALL(cudaMalloc(&qa_gpu,T::dim*sizeof(double)));
+    CUDA_SAFE_CALL(cudaMalloc(&qb_gpu,T::dim*sizeof(double)));
 
     srand(time(0));
 
-    for(int i=0;i<dim;i++)
+    for(int i=0;i<T::dim;i++)
     {
         qa[i] = 0;
         qb[i] = (rand()*10.0/RAND_MAX);
     }
 
     int incx = 1;
+    int dim = T::dim;
 
     double norm = 1.0/sqrt(ddot_(&dim,qb,&incx,qb,&incx));
 
     dscal_(&dim,&norm,qb,&incx);
 
-    CUDA_SAFE_CALL(cudaMemcpy(qa_gpu,qa,dim*sizeof(double),cudaMemcpyHostToDevice));
-    CUDA_SAFE_CALL(cudaMemcpy(qb_gpu,qb,dim*sizeof(double),cudaMemcpyHostToDevice));
+    CUDA_SAFE_CALL(cudaMemcpy(qa_gpu,qa,T::dim*sizeof(double),cudaMemcpyHostToDevice));
+    CUDA_SAFE_CALL(cudaMemcpy(qb_gpu,qb,T::dim*sizeof(double),cudaMemcpyHostToDevice));
 
     delete [] qa;
     delete [] qb;
@@ -205,16 +218,16 @@ double GPUHamiltonian::LanczosDiagonalize(int m)
 	for(;i<m;i++)
 	{
 	    alpha = -b[i-1];
-	    cublasDscal(handle,dim,&alpha,f1,1);
+	    cublasDscal(handle,T::dim,&alpha,f1,1);
 
 	    mvprod(f2,f1,norm);
 
-	    cublasDdot(handle,dim,f1,1,f2,1,&a[i-1]);
+	    cublasDdot(handle,T::dim,f1,1,f2,1,&a[i-1]);
 
 	    alpha = -a[i-1];
-	    cublasDaxpy(handle,dim,&alpha,f2,1,f1,1);
+	    cublasDaxpy(handle,T::dim,&alpha,f2,1,f1,1);
 
-	    cublasDdot(handle,dim,f1,1,f1,1,&b[i]);
+	    cublasDdot(handle,T::dim,f1,1,f1,1,&b[i]);
 	    b[i] = sqrt(b[i]);
 
 	    if( fabs(b[i]) < 1e-10 )
@@ -222,7 +235,7 @@ double GPUHamiltonian::LanczosDiagonalize(int m)
 
 	    alpha = 1.0/b[i];
 
-	    cublasDscal(handle,dim,&alpha,f1,1);
+	    cublasDscal(handle,T::dim,&alpha,f1,1);
 
 	    tmp = f2;
 	    f2 = f1;
@@ -250,7 +263,7 @@ double GPUHamiltonian::LanczosDiagonalize(int m)
     cudaEventElapsedTime( &exeTime, start, stop );
 
     std::cout << "Done in " << m-10 << " Iterations" << std::endl;
-    std::cout << "Cuda time: " << exeTime/1000 << std::endl;
+    std::cout << "Cuda time: " << exeTime << " ms" << std::endl;
 
     cudaEventDestroy(start);
     cudaEventDestroy(stop);
@@ -273,5 +286,9 @@ double GPUHamiltonian::LanczosDiagonalize(int m)
 
     return alpha;
 }
+
+// Expliciet specify the template class with the possible template parameters
+template class GPUHamiltonian<SparseHamiltonian>;
+template class GPUHamiltonian<SparseHamiltonian2D>;
 
 /* vim: set ts=8 sw=4 tw=0 expandtab :*/

@@ -7,15 +7,17 @@
  * Use the GPU (Cuda) for the Lanczos calculation
  * @author Ward Poelmans <wpoely86@gmail.com>
  */
-class GPUHamiltonian: public SparseHamiltonian
+template<class T>
+class GPUHamiltonian: public T
 {
     public:
 	GPUHamiltonian(int Ns, int Nu, int Nd, double J, double U);
+	GPUHamiltonian(int L, int D, int Nu, int Nd, double J, double U);
 	virtual ~GPUHamiltonian();
 
         void mvprod(double *x, double *y, double alpha);
 
-        double LanczosDiagonalize(int m = 0);
+        double LanczosDiagonalize(int m=0);
 
     protected:
 
