@@ -43,12 +43,9 @@ main2D: $(OBJ) main2D.o
 main: $(OBJ) main.o
 	$(CXX) $(LDFLAGS) -o main2D $(OBJ) main.o $(LIBS)
 
-main2: main2.o
-	$(CXX) $(LDFLAGS) -o main2 main2.o $(LIBS)
-
 doc: $(CPPSRC) doc-config
 	doxygen doc-config
 
 .PHONY: clean
 clean:
-	rm -f $(OBJ) main.o main2D.o main2.o
+	rm -f $(OBJ) main.o main2D.o
