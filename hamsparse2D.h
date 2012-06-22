@@ -19,7 +19,7 @@ class SparseHamiltonian2D: public SparseHamiltonian2D_CSR
 
 	void PrintRawELL() const;
 
-        void mvprod(double *, double *, double) const;
+        virtual void mvprod(double *, double *, double) const;
 
     protected:
 
