@@ -5,7 +5,6 @@ CPPSRC=ham.cpp\
        hamsparse.cpp\
        hamsparse2D_CSR.cpp\
        hamsparse2D.cpp\
-       main.cpp\
 
 CUDASRC=hamgpu.cu
 
@@ -36,8 +35,13 @@ LIBS=-lblas -llapack -lcudart -lcublas
 #	$(CXX) -c $(CPPFLAGS) $(INCLUDE) $(@:.o=.cu.ii) -o $@
 
 
-all: $(OBJ)
-	$(CXX) $(LDFLAGS) -o $(EXE) $(OBJ) $(LIBS)
+all: main main2D
+
+main2D: $(OBJ) main2D.o
+	$(CXX) $(LDFLAGS) -o main2D $(OBJ) main2D.o $(LIBS)
+
+main: $(OBJ) main.o
+	$(CXX) $(LDFLAGS) -o main2D $(OBJ) main.o $(LIBS)
 
 main2: main2.o
 	$(CXX) $(LDFLAGS) -o main2 main2.o $(LIBS)
@@ -47,4 +51,4 @@ doc: $(CPPSRC) doc-config
 
 .PHONY: clean
 clean:
-	rm -f $(OBJ) main2.o
+	rm -f $(OBJ) main.o main2D.o main2.o
