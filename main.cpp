@@ -11,7 +11,6 @@
 #include <getopt.h>
 #include "ham.h"
 #include "hamsparse.h"
-#include "hamgpu.h"
 
 using namespace std;
 
@@ -25,7 +24,6 @@ int main(int argc, char **argv)
 
     bool exact = false;
     bool lanczos = false;
-    bool gpu = false;
 
     struct option long_options[] =
     {
@@ -36,13 +34,12 @@ int main(int argc, char **argv)
         {"hopping",  required_argument, 0, 'J'},
         {"exact",  no_argument, 0, 'e'},
         {"lanczos",  no_argument, 0, 'l'},
-        {"gpu",  no_argument, 0, 'g'},
         {"help",  no_argument, 0, 'h'},
         {0, 0, 0, 0}
     };
 
     int i,j;
-    while( (j = getopt_long (argc, argv, "hu:d:s:U:J:elg", long_options, &i)) != -1)
+    while( (j = getopt_long (argc, argv, "hu:d:s:U:J:el", long_options, &i)) != -1)
         switch(j)
         {
             case 'h':
@@ -56,7 +53,6 @@ int main(int argc, char **argv)
                     "    -J  --hopping=J              The hopping strength\n"
                     "    -e  --exact                  Solve with exact diagonalisation\n"
                     "    -l  --lanczos                Solve with Lanczos algorithm\n"
-                    "    -g  --gpu                    Solve with Lanczos algorithm on the GPU\n"
                     "    -h, --help                   Display this help\n"
                     "\n";
                 return 0;
@@ -81,9 +77,6 @@ int main(int argc, char **argv)
                 break;
             case 'e':
                 exact = true;
-                break;
-            case 'g':
-                gpu = true;
                 break;
         }
 
@@ -122,23 +115,6 @@ int main(int argc, char **argv)
         cout << "Dim: " << sham.getDim() << endl;
 
         double E = sham.LanczosDiagonalize();
-        cout << "E = " << E << endl;
-
-        cout << "Time: " << tijd.elapsed() << " s" << endl;
-    }
-
-    if(gpu)
-    {
-        tijd.restart();
-
-        GPUHamiltonian<SparseHamiltonian> gpuham(Ns,Nu,Nd,J,U);
-
-        gpuham.BuildBase();
-        gpuham.BuildSparseHam();
-
-        cout << "Dim: " << gpuham.getDim() << endl;
-
-        double E = gpuham.LanczosDiagonalize();
         cout << "E = " << E << endl;
 
         cout << "Time: " << tijd.elapsed() << " s" << endl;

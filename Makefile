@@ -6,7 +6,7 @@ CPPSRC=ham.cpp\
        hamsparse2D_CSR.cpp\
        hamsparse2D.cpp\
 
-CUDASRC=hamgpu.cu
+CUDASRC=
 
 OBJ=$(CPPSRC:.cpp=.o) $(CUDASRC:.cu=.o)
 
@@ -20,8 +20,8 @@ CPPFLAGS=$(CFLAGS)
 LDFLAGS=-g -O2 -Wall -march=native -fopenmp
 NVFLAGS=-g -O2 --ptxas-options=-v -arch=sm_13
 
-INCLUDE=-I/opt/cuda/include
-LIBS=-lblas -llapack -lcudart -lcublas
+INCLUDE=
+LIBS=-lblas -llapack
 
 %.o:    %.c
 	$(CC) -c $(CFLAGS) $(INCLUDE) $(@:.o=.c) -o $@
