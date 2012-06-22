@@ -20,9 +20,7 @@ class SparseHamiltonian2D_CSR: public HubHam2D
 
 	void PrintRawCSR() const;
 
-        void mvprod(double *, double *, double) const;
-
-        double LanczosDiagonalize(int m=0);
+        virtual void mvprod(double *, double *, double) const;
 
         double* Umatrix() const;
 
