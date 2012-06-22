@@ -29,9 +29,9 @@ class SparseHamiltonian2D_CSR: public HubHam2D
     protected:
 
 	//! The array to hold the data (CSR format) for the up hamiltonian
-        std::vector<double> Up_data;
+        std::vector<double> Up_data_CSR;
 	//! The array to hold the data (CSR format) for the down hamiltonian
-	std::vector<double> Down_data;
+	std::vector<double> Down_data_CSR;
 
 	//! The array to hold the column indices for the up hamiltonian
 	std::vector<unsigned int> Up_col;

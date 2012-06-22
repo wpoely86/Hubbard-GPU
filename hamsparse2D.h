@@ -24,9 +24,9 @@ class SparseHamiltonian2D: public SparseHamiltonian2D_CSR
     protected:
 
 	//! The array to hold the data (ELL format) for the up hamiltonian
-	double *Up_datas;
+	double *Up_data;
 	//! The array to hold the data (ELL format) for the down hamiltonian
-	double *Down_datas;
+	double *Down_data;
 
 	//! The array to hold the indices for the up hamiltonian
 	unsigned int *Up_ind;

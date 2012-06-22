@@ -15,8 +15,8 @@
 SparseHamiltonian2D::SparseHamiltonian2D(int L,int D, int Nu, int Nd, double J, double U)
     : SparseHamiltonian2D_CSR(L,D,Nu,Nd,J,U)
 {
-    Up_datas = 0;
-    Down_datas = 0;
+    Up_data = 0;
+    Down_data = 0;
 
     Up_ind = 0;
     Down_ind = 0;
@@ -30,11 +30,11 @@ SparseHamiltonian2D::SparseHamiltonian2D(int L,int D, int Nu, int Nd, double J, 
  */
 SparseHamiltonian2D::~SparseHamiltonian2D()
 {
-    if(Up_datas)
-	delete [] Up_datas;
+    if(Up_data)
+	delete [] Up_data;
 
-    if(Down_datas)
-	delete [] Down_datas;
+    if(Down_data)
+	delete [] Down_data;
 
     if(Up_ind)
 	delete [] Up_ind;
@@ -67,10 +67,10 @@ void SparseHamiltonian2D::BuildSparseHam()
 
     size_Down = max;
 
-    Up_datas = new double [NumUp*size_Up];
+    Up_data = new double [NumUp*size_Up];
     Up_ind = new unsigned int [NumUp*size_Up];
 
-    Down_datas = new double [NumDown*size_Down];
+    Down_data = new double [NumDown*size_Down];
     Down_ind = new unsigned int [NumDown*size_Down];
 
     std::cout << "Sizes: " << size_Up << "\t" << size_Down << std::endl;
@@ -81,7 +81,7 @@ void SparseHamiltonian2D::BuildSparseHam()
 
 	for(unsigned int b=Up_row[a];b<Up_row[a+1];b++)
 	{
-            Up_datas[a+count*NumUp] = Up_data[b];
+            Up_data[a+count*NumUp] = Up_data_CSR[b];
             Up_ind[a+count*NumUp] = Up_col[b];
             count++;
 	}
@@ -89,7 +89,7 @@ void SparseHamiltonian2D::BuildSparseHam()
 	if(count < size_Up)
 	    for(int i=count;i<size_Up;i++)
 	    {
-		Up_datas[a+i*NumUp] = 0;
+		Up_data[a+i*NumUp] = 0;
 		Up_ind[a+i*NumUp] = 0;
 	    }
 	else if(count > size_Up)
@@ -102,7 +102,7 @@ void SparseHamiltonian2D::BuildSparseHam()
 
 	for(unsigned int b=Down_row[a];b<Down_row[a+1];b++)
 	{
-            Down_datas[a+count*NumDown] = Down_data[b];
+            Down_data[a+count*NumDown] = Down_data_CSR[b];
             Down_ind[a+count*NumDown] = Down_col[b];
             count++;
 	}
@@ -110,7 +110,7 @@ void SparseHamiltonian2D::BuildSparseHam()
 	if(count < size_Down)
 	    for(int i=count;i<size_Down;i++)
 	    {
-		Down_datas[a+i*NumDown] = 0;
+		Down_data[a+i*NumDown] = 0;
 		Down_ind[a+i*NumDown] = 0;
 	    }
 	else if(count > size_Down)
@@ -134,7 +134,7 @@ void SparseHamiltonian2D::PrintSparse() const
 
 	for(unsigned int j=0;j<NumUp;j++)
 	    if(count < size_Up && Up_ind[i+count*NumUp] == j)
-		std::cout << Up_datas[i + NumUp*count++] << "\t";
+		std::cout << Up_data[i + NumUp*count++] << "\t";
 	    else
 		std::cout << "0\t";
 
@@ -149,7 +149,7 @@ void SparseHamiltonian2D::PrintSparse() const
 
 	for(unsigned int j=0;j<NumDown;j++)
 	    if(count < size_Down && Down_ind[i + count*NumDown] == j)
-		std::cout << Down_datas[i + NumDown*count++] << "\t";
+		std::cout << Down_data[i + NumDown*count++] << "\t";
 	    else
 		std::cout << "0\t";
 
@@ -168,7 +168,7 @@ void SparseHamiltonian2D::PrintRawELL() const
     for(unsigned int i=0;i<NumUp;i++)
     {
 	for(int j=0;j<size_Up;j++)
-	    std::cout << Up_datas[i+j*NumUp] << "\t";
+	    std::cout << Up_data[i+j*NumUp] << "\t";
 
 	std::cout << std::endl;
     }
@@ -188,7 +188,7 @@ void SparseHamiltonian2D::PrintRawELL() const
     for(unsigned int i=0;i<NumDown;i++)
     {
 	for(int j=0;j<size_Down;j++)
-	    std::cout << Down_datas[i+j*NumDown] << "\t";
+	    std::cout << Down_data[i+j*NumDown] << "\t";
 
 	std::cout << std::endl;
     }
@@ -226,12 +226,12 @@ void SparseHamiltonian2D::mvprod(double *x, double *y, double alpha) const
 
             // the Hop_down part
             for(int l=0;l<size_Down;l++)
-                y[i*NumDown+k] += Down_datas[k+l*NumDown] * x[i*NumDown + Down_ind[k+l*NumDown]];
+                y[i*NumDown+k] += Down_data[k+l*NumDown] * x[i*NumDown + Down_ind[k+l*NumDown]];
         }
 
         // the Hop_Up part
         for(int l=0;l<size_Up;l++)
-            daxpy_(&NumDown,&Up_datas[i+l*NumUp],&x[Up_ind[i+l*NumUp]*NumDown],&incx,&y[i*NumDown],&incx);
+            daxpy_(&NumDown,&Up_data[i+l*NumUp],&x[Up_ind[i+l*NumUp]*NumDown],&incx,&y[i*NumDown],&incx);
     }
 }
 
