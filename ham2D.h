@@ -4,11 +4,11 @@
 #include "ham.h"
 
 /**
- * This is the main class where all the magic happens:
- * this class is for 2D Hubbard. It makes a grid of length L
- * and depth D. For example a grid of L=4 and D=2 is:
- * x  x  x  x
- * x  x  x  x
+ * This is the main class for 2D Hubbard:
+ * It makes a grid of length L
+ * and depth D. For example a grid of L=4 and D=2 is: \n
+ * x  x  x  x \n
+ * x  x  x  x \n
  * The periodic boundary condition is used.
  *
  * @author Ward Poelmans <wpoely86@gmail.com>

@@ -174,7 +174,7 @@ void Hamiltonian::BuildFullHam()
 
 /**
   * private method used to see if a hopping between state a and b is
-  * possible and with which sign
+  * possible and with which sign. Only for 1D Hubbard.
   * @param a the bra to use
   * @param b the ket to use
   * @param jumpsign the sign to use when a jump over the periodic boundary occurs
@@ -525,6 +525,9 @@ void Hamiltonian::Print() const
     }
 }
 
+/**
+ * Print the basis set used.
+ */
 void Hamiltonian::PrintBase() const
 {
     for(unsigned int a=0;a<baseUp.size();a++)
@@ -532,6 +535,12 @@ void Hamiltonian::PrintBase() const
             std::cout << a*baseDown.size()+b << "\t" << print_bin(baseUp[a],Ns) << "\t" << print_bin(baseDown[b],Ns) << std::endl;
 }
 
+/**
+ * Matrix vector product with hamiltonian: y = ham*x + alpha*y
+ * @param x the input vector
+ * @param y the output vector
+ * @param alpha the scaling value
+ */
 void Hamiltonian::mvprod(double *x, double *y, double alpha) const
 {
     double beta = 1;

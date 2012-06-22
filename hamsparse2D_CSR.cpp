@@ -121,6 +121,9 @@ void SparseHamiltonian2D_CSR::PrintSparse() const
     }
 }
 
+/**
+ * Print the raw CSR array's
+ */
 void SparseHamiltonian2D_CSR::PrintRawCSR() const
 {
     std::cout << "Up:" << std::endl;

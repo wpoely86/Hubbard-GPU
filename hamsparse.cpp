@@ -169,6 +169,9 @@ void SparseHamiltonian::PrintSparse() const
     }
 }
 
+/**
+ * Prints the Raw ELL array's.
+ */
 void SparseHamiltonian::PrintRawELL() const
 {
     unsigned int NumUp = baseUp.size();
@@ -217,8 +220,8 @@ void SparseHamiltonian::PrintRawELL() const
 
 /**
  * Matrix vector product with (sparse) hamiltonian: y = ham*x + alpha*y
- * @param x the x vector
- * @param y the y vector
+ * @param x the input vector
+ * @param y the output vector
  * @param alpha the scaling value
  */
 void SparseHamiltonian::mvprod(double *x, double *y, double alpha) const
