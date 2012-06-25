@@ -16,5 +16,5 @@ There are several branches in the git repo: the master contains only the CPU ver
 constains the GPU version and the branch 'PRIMME' used the PRIMME library to find the eigenvalues and
 eigenvectors. You can find PRIMME at [http://www.cs.wm.edu/~andreas/software/](http://www.cs.wm.edu/~andreas/software/)
 
-All code is under GLPv2 (but I still have to add it to all files).
+All code is under the GPL.
 
