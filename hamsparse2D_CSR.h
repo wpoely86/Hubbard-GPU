@@ -1,3 +1,21 @@
+/* Copyright (C) 2012  Ward Poelmans
+
+This file is part of Hubbard-GPU.
+
+Hubbard-GPU is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+Hubbard-GPU is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with Hubbard-GPU.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
 #ifndef HAMSPARSE2D_CSR_H
 #define HAMSPARSE2D_CSR_H
 
