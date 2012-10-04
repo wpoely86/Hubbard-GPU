@@ -21,7 +21,7 @@ LDFLAGS=-g -O2 -Wall -march=native -fopenmp
 NVFLAGS=-g -O2 --ptxas-options=-v -arch=sm_13
 
 INCLUDE=-I/opt/cuda/include
-LIBS=-lblas -llapack -lcudart -lcublas
+LIBS=-lblas -llapack -lcudart -lcublas -larpack
 
 %.o:    %.c
 	$(CC) -c $(CFLAGS) $(INCLUDE) $(@:.o=.c) -o $@
