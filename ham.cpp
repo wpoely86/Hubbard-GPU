@@ -21,6 +21,22 @@ along with Hubbard-GPU.  If not, see <http://www.gnu.org/licenses/>.
 #include <cmath>
 #include "ham.h"
 
+// arpack
+extern "C"
+{
+    void dsaupd_(int *ido, char *bmat, int *n, char *which,
+            int *nev, double *tol, double *resid, int *ncv,
+            double *v, int *ldv, int *iparam, int *ipntr,
+            double *workd, double *workl, int *lworkl, int *info);
+
+    void dseupd_(int *rvec, char *All, int *select, double *d,
+            double *z, int *ldz, double *sigma,
+            char *bmat, int *n, char *which, int *nev,
+            double *tol, double *resid, int *ncv, double *v,
+            int *ldv, int *iparam, int *ipntr, double *workd,
+            double *workl, int *lworkl, int *info);
+}
+
 /**
  * Constructor of the Hamiltonian class
  * @param Ns Number of lattice sites
@@ -524,6 +540,128 @@ void Hamiltonian::mvprod(double *x, double *y, double alpha) const
     char uplo = 'U';
 
     dsymv_(&uplo,&dim,&beta,ham,&dim,x,&incx,&alpha,y,&incx);
+}
+
+double Hamiltonian::arpackDiagonalize()
+{
+    // dimension of the matrix
+    int n = CalcDim(Ns,Nu) * CalcDim(Ns,Nd);
+
+    // number of eigenvalues to calculate
+    int nev = 1;
+
+    // reverse communication parameter, must be zero on first iteration
+    int ido = 0;
+    // standard eigenvalue problem A*x=lambda*x
+    char bmat = 'I';
+    // calculate the smallest algebraic eigenvalue
+    char which[] = {'S','A'};
+    // calculate until machine precision
+    double tol = 0;
+
+    // the residual vector
+    double *resid = new double[n];
+
+    // the number of columns in v: the number of lanczos vector
+    // generated at each iteration, ncv <= n
+    // We use the answer to life, the universe and everything, if possible
+    int ncv = 5;
+
+    if( n < ncv )
+        ncv = n;
+
+    // v containts the lanczos basis vectors
+    int ldv = n;
+    double *v = new double[ldv*ncv];
+
+    int *iparam = new int[11];
+    iparam[0] = 1;   // Specifies the shift strategy (1->exact)
+    iparam[2] = 3*n; // Maximum number of iterations
+    iparam[6] = 1;   /* Sets the mode of dsaupd.
+                        1 is exact shifting,
+                        2 is user-supplied shifts,
+                        3 is shift-invert mode,
+                        4 is buckling mode,
+                        5 is Cayley mode. */
+
+    int *ipntr = new int[11]; /* Indicates the locations in the work array workd
+                                 where the input and output vectors in the
+                                 callback routine are located. */
+
+    // array used for reverse communication
+    double *workd = new double[3*n];
+
+    int lworkl = ncv*(ncv+8); /* Length of the workl array */
+    double *workl = new double[lworkl];
+
+    // info = 0: random start vector is used
+    int info = 0; /* Passes convergence information out of the iteration
+                     routine. */
+
+    // rvec == 0 : calculate only eigenvalue
+    // rvec > 0 : calculate eigenvalue and eigenvector
+    int rvec = 0;
+
+    // how many eigenvectors to calculate: 'A' => nev eigenvectors
+    char howmny = 'A';
+
+    int *select;
+    // when howmny == 'A', this is used as workspace to reorder the eigenvectors
+    if( howmny == 'A' )
+        select = new int[ncv];
+
+    // This vector will return the eigenvalues from the second routine, dseupd.
+    double *d = new double[nev];
+
+    double *z;
+
+    if( !rvec )
+        z = new double[n*nev];
+
+    // not used if iparam[6] == 1
+    double sigma;
+
+    // first iteration
+    dsaupd_(&ido, &bmat, &n, &which[0], &nev, &tol, resid, &ncv, v, &ldv, iparam, ipntr, workd, workl, &lworkl, &info);
+
+    while( ido != 99 )
+    {
+        // matrix-vector multiplication
+        mvprod(workd+ipntr[0]-1, workd+ipntr[1]-1,0);
+
+        dsaupd_(&ido, &bmat, &n, &which[0], &nev, &tol, resid, &ncv, v, &ldv, iparam, ipntr, workd, workl, &lworkl, &info);
+    }
+
+    if( info < 0 )
+        std::cerr << "Error with dsaupd, info = " << info << std::endl;
+    else if ( info == 1 )
+        std::cerr << "Maximum number of Lanczos iterations reached." << std::endl;
+    else if ( info == 3 )
+        std::cerr << "No shifts could be applied during implicit Arnoldi update, try increasing NCV." << std::endl;
+
+    dseupd_(&rvec, &howmny, select, d, z, &ldv, &sigma, &bmat, &n, which, &nev, &tol, resid, &ncv, v, &ldv, iparam, ipntr, workd, workl, &lworkl, &info);
+
+    if ( info != 0 )
+        std::cerr << "Error with dseupd, info = " << info << std::endl;
+
+    // use something to store the result before deleting...
+    sigma = d[0];
+
+    delete [] resid;
+    delete [] v;
+    delete [] iparam;
+    delete [] ipntr;
+    delete [] workd;
+    delete [] workl;
+    delete [] d;
+
+    if( !rvec )
+        delete [] z;
+
+    if( howmny == 'A' )
+        delete [] select;
+
+    return sigma;
 }
 
 /* vim: set ts=8 sw=4 tw=0 expandtab :*/

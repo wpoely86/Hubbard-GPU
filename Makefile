@@ -21,7 +21,7 @@ LDFLAGS=-g -O2 -Wall -march=native -fopenmp
 NVFLAGS=-g -O2 --ptxas-options=-v -arch=sm_13
 
 INCLUDE=
-LIBS=-lblas -llapack
+LIBS=-lblas -llapack -larpack
 
 %.o:    %.c
 	$(CC) -c $(CFLAGS) $(INCLUDE) $(@:.o=.c) -o $@

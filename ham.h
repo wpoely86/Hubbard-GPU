@@ -67,6 +67,7 @@ class Hamiltonian
 
 	double ExactDiagonalizeFull() const;
 	double LanczosDiagonalize(int m=0);
+	double arpackDiagonalize();
 
 	void Print() const;
 
