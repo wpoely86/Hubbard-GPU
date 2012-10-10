@@ -137,6 +137,8 @@ int main(int argc, char **argv)
 
         Hamiltonian ham(Ns,Nu,Nd,J,U);
 
+        cout << "Memory needed: " << ham.MemoryNeededFull()*1.0/1024*1.0/1024 << " MB" << endl;
+
         ham.BuildBase();
         ham.BuildFullHam();
 
@@ -153,6 +155,8 @@ int main(int argc, char **argv)
         tijd.restart();
 
         SparseHamiltonian sham(Ns,Nu,Nd,J,U);
+
+        cout << "Memory needed: " << sham.MemoryNeededArpack()*1.0/1024*1.0/1024 << " MB" << endl;
 
         sham.BuildBase();
         sham.BuildSparseHam();

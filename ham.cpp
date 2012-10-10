@@ -664,4 +664,92 @@ double Hamiltonian::arpackDiagonalize()
     return sigma;
 }
 
+/**
+ * Calculates the amount of memory needed for the calculation
+ * of all eigenvalues using the exact method.
+ * It doesn't include the program code and stuff.
+ * @return the amount of memory needed in bytes
+ */
+double Hamiltonian::MemoryNeededFull() const
+{
+    unsigned int dim = CalcDim(Ns,Nu) * CalcDim(Ns,Nd);
+    double result;
+
+    // base kets
+    result = (CalcDim(Ns,Nu) + CalcDim(Ns,Nd)) * sizeof(myint);
+
+    // hamiltonian matrix
+    result += dim * dim * sizeof(double);
+
+    // eigenvalues of ham matrix
+    result += dim * sizeof(double);
+
+    // work array for dsyev
+    result += (2*dim+1) * sizeof(double);
+
+    return result;
+}
+
+/**
+ * Calculates the amount of memory needed for the calculation
+ * if we use the lanczos method.
+ * It doesn't include the program code and stuff.
+ * @return the amount of memory needed in bytes
+ */
+double Hamiltonian::MemoryNeededLanczos() const
+{
+    unsigned int dim = CalcDim(Ns,Nu) * CalcDim(Ns,Nd);
+    double result;
+
+    // base kets
+    result = (CalcDim(Ns,Nu) + CalcDim(Ns,Nd)) * sizeof(myint);
+
+    // hamup sparse matrix
+    result += CalcDim(Ns,Nu) * (((Ns-Nu)>Nu) ? 2*Nu : 2*(Ns-Nu)) * sizeof(double);
+
+    // hamdown sparse matrix
+    result += CalcDim(Ns,Nd) * (((Ns-Nd)>Nd) ? 2*Nd : 2*(Ns-Nd)) * sizeof(double);
+
+    // we store 2 vectors
+    result += 2 * dim * sizeof(double);
+
+    return result;
+}
+
+/**
+ * Calculates the amount of memory needed for the calculation
+ * if we use the arpack.
+ * It doesn't include the program code and stuff.
+ * @return the amount of memory needed in bytes
+ */
+double Hamiltonian::MemoryNeededArpack() const
+{
+    unsigned int dim = CalcDim(Ns,Nu) * CalcDim(Ns,Nd);
+    double result;
+
+    // base kets
+    result = (CalcDim(Ns,Nu) + CalcDim(Ns,Nu)) * sizeof(myint);
+
+    // hamup sparse matrix
+    result += CalcDim(Ns,Nu) * (((Ns-Nu)>Nu) ? 2*Nu : 2*(Ns-Nu)) * sizeof(double);
+
+    // hamdown sparse matrix
+    result += CalcDim(Ns,Nd) * (((Ns-Nd)>Nd) ? 2*Nd : 2*(Ns-Nd)) * sizeof(double);
+
+    // arpack stuff:
+    // resid
+    result += 1 * dim * sizeof(double);
+
+    // v
+    result += 5 * dim * sizeof(double);
+
+    // workd
+    result += 3 * dim * sizeof(double);
+
+    // lworkd
+    result += 5 * (5+8) * sizeof(double);
+
+    return result;
+}
+
 /* vim: set ts=8 sw=4 tw=0 expandtab :*/

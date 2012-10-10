@@ -75,6 +75,12 @@ class Hamiltonian
 
         virtual void mvprod(double *x, double *y, double alpha) const;
 
+        double MemoryNeededFull() const;
+
+        double MemoryNeededLanczos() const;
+
+        double MemoryNeededArpack() const;
+
     protected:
 	int hopping(myint a, myint b, int jumpsign) const;
 
