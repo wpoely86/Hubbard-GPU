@@ -545,7 +545,7 @@ void Hamiltonian::mvprod(double *x, double *y, double alpha) const
 double Hamiltonian::arpackDiagonalize()
 {
     // dimension of the matrix
-    int n = CalcDim(Ns,Nu) * CalcDim(Ns,Nd);
+    int n = dim;
 
     // number of eigenvalues to calculate
     int nev = 1;
@@ -613,9 +613,9 @@ double Hamiltonian::arpackDiagonalize()
     // This vector will return the eigenvalues from the second routine, dseupd.
     double *d = new double[nev];
 
-    double *z;
+    double *z = 0;
 
-    if( !rvec )
+    if( rvec )
         z = new double[n*nev];
 
     // not used if iparam[6] == 1
@@ -655,7 +655,7 @@ double Hamiltonian::arpackDiagonalize()
     delete [] workl;
     delete [] d;
 
-    if( !rvec )
+    if( rvec )
         delete [] z;
 
     if( howmny == 'A' )
