@@ -137,7 +137,7 @@ int main(int argc, char **argv)
 
         cout << "Dim: " << sham.getDim() << endl;
 
-        double E = sham.LanczosDiagonalize();
+        double E = sham.arpackDiagonalize();
         cout << "E = " << E << endl;
 
         cout << "Time: " << tijd.elapsed() << " s" << endl;
