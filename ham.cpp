@@ -421,8 +421,6 @@ double Hamiltonian::LanczosDiagonalize(int m)
     double *qa = new double [dim];
     double *qb = new double [dim];
 
-    double E = 1;
-
     int i;
 
     srand(time(0));
@@ -452,10 +450,10 @@ double Hamiltonian::LanczosDiagonalize(int m)
 
     i = 1;
 
-    while(fabs(E-acopy[0]) > 1e-4)
-    {
-        E = acopy[0];
+    double conv = 1;
 
+    while(conv > 1e-10)
+    {
         for(;i<m;i++)
         {
             alpha = -b[i-1];
@@ -485,13 +483,21 @@ double Hamiltonian::LanczosDiagonalize(int m)
         acopy = a;
         bcopy = b;
 
-        char jobz = 'N';
+        char jobz = 'V';
+        double *work = new double[2*m-2];
+        double *eigv = new double[m*m];
+
         int info;
 
-        dstev_(&jobz,&m,acopy.data(),&bcopy.data()[1],&alpha,&m,&alpha,&info);
+        dstev_(&jobz,&m,acopy.data(),&bcopy.data()[1],&eigv[0],&m,&work[0],&info);
 
         if(info != 0)
             std::cerr << "Error in Lanczos" << std::endl;
+
+        conv = fabs(b.back() * eigv[m-1]);
+
+        delete [] work;
+        delete [] eigv;
 
         m += 10;
         a.resize(m);
