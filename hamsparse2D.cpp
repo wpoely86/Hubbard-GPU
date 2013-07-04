@@ -71,7 +71,7 @@ void SparseHamiltonian2D::BuildSparseHam()
     unsigned int NumUp = baseUp.size();
     unsigned int NumDown = baseDown.size();
 
-    int max = 0;
+    unsigned int max = 0;
     for(unsigned int i=0;i<NumUp;i++)
         if( (Up_row[i+1]-Up_row[i]) > max )
             max = Up_row[i+1]-Up_row[i];
