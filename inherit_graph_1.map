@@ -1,0 +1,7 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node1" href="$classHamiltonian.html" title="Hamiltonian" alt="" coords="5,31,96,57"/>
+<area shape="rect" id="node2" href="$classHubHam2D.html" title="HubHam2D" alt="" coords="165,5,256,32"/>
+<area shape="rect" id="node5" href="$classSparseHamiltonian.html" title="SparseHamiltonian" alt="" coords="145,56,277,83"/>
+<area shape="rect" id="node3" href="$classSparseHamiltonian2D__CSR.html" title="SparseHamiltonian2D_CSR" alt="" coords="326,5,511,32"/>
+<area shape="rect" id="node4" href="$classSparseHamiltonian2D.html" title="SparseHamiltonian2D" alt="" coords="560,5,709,32"/>
+</map>

@@ -1,0 +1,20 @@
+var searchData=
+[
+  ['d',['D',['../classHubHam2D.html#a7220e5528edce22224acc37453657b32',1,'HubHam2D']]],
+  ['daxpy_5f',['daxpy_',['../ham_8h.html#abb7d6c365abc5d11a16c1c085bca91a4',1,'ham.h']]],
+  ['ddot_5f',['ddot_',['../ham_8h.html#a2247ca92b3cf0e88e9448ad05240921f',1,'ham.h']]],
+  ['dim',['dim',['../classHamiltonian.html#aad13677008db9a013ce7a9fc648fee82',1,'Hamiltonian']]],
+  ['down_5fcol',['Down_col',['../classSparseHamiltonian2D__CSR.html#a4faf7b9155bbd22f9db713c680fb292d',1,'SparseHamiltonian2D_CSR']]],
+  ['down_5fdata',['Down_data',['../classSparseHamiltonian.html#a9de29c5ce417cb15926609010c030442',1,'SparseHamiltonian::Down_data()'],['../classSparseHamiltonian2D.html#ac9aacf74e5771238bf6d503256a9ae2c',1,'SparseHamiltonian2D::Down_data()']]],
+  ['down_5fdata_5fcsr',['Down_data_CSR',['../classSparseHamiltonian2D__CSR.html#a51169fbda01a04544e6ccb59a209f87c',1,'SparseHamiltonian2D_CSR']]],
+  ['down_5fdata_5fgpu',['Down_data_gpu',['../classGPUHamiltonian.html#aef408a62711f45b502337ce2361013e3',1,'GPUHamiltonian']]],
+  ['down_5find',['Down_ind',['../classSparseHamiltonian.html#a5976f3acd763b30b2382b1c678e3d83e',1,'SparseHamiltonian::Down_ind()'],['../classSparseHamiltonian2D.html#ad635cfb409e5a5820ab22070d0db48fc',1,'SparseHamiltonian2D::Down_ind()']]],
+  ['down_5find_5fgpu',['Down_ind_gpu',['../classGPUHamiltonian.html#a1ad0bfe61a413002964406385e0a83c2',1,'GPUHamiltonian']]],
+  ['down_5frow',['Down_row',['../classSparseHamiltonian2D__CSR.html#adb2fd14d3735a4a3a583d11215937b44',1,'SparseHamiltonian2D_CSR']]],
+  ['dsaupd_5f',['dsaupd_',['../ham_8cpp.html#a3eabc0ee91c768347f7fc904d5048502',1,'ham.cpp']]],
+  ['dscal_5f',['dscal_',['../ham_8h.html#a9d4e5f6c81fb4bb87223f92b5347daf1',1,'ham.h']]],
+  ['dseupd_5f',['dseupd_',['../ham_8cpp.html#abbfc1658604845f75cda50de100e6f9e',1,'ham.cpp']]],
+  ['dstev_5f',['dstev_',['../ham_8h.html#adab72a2a47e9a4dda768424878b4330c',1,'ham.h']]],
+  ['dsyevd_5f',['dsyevd_',['../ham_8h.html#ad0cfc41b12c93c0f2aad995d39d5fe42',1,'ham.h']]],
+  ['dsymv_5f',['dsymv_',['../ham_8h.html#aad27beb06b23ce25ab9637d76286677f',1,'ham.h']]]
+];
