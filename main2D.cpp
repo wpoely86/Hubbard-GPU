@@ -120,8 +120,8 @@ int main(int argc, char **argv)
 
         cout << "Dim: " << ham.getDim() << endl;
 
-        double E = ham.ExactDiagonalizeFull();
-        cout << "E = " << E << endl;
+        auto E = ham.ExactDiagonalizeFull();
+        cout << "E = " << E[0] << endl;
 
         cout << "Time: " << tijd.elapsed() << " s" << endl;
     }
