@@ -371,29 +371,43 @@ myint Hamiltonian::getBaseDown(unsigned int i) const
  * Needs lapack.
  * @return the lowest eigenvalue
  */
-double Hamiltonian::ExactDiagonalizeFull() const
+std::vector<double> Hamiltonian::ExactDiagonalizeFull(bool calc_eigenvectors)
 {
     if(!ham)
-	return 0;
+        throw;
 
-    char jobz = 'N';
+    char jobz;
+
+    if(calc_eigenvectors)
+        jobz = 'V';
+    else
+        jobz = 'N';
+
     char uplo = 'U';
 
     int dim = CalcDim(Ns,Nu) * CalcDim(Ns,Nd);
 
-    double eigenvalues[dim];
+    std::vector<double> eigenvalues(dim);
 
-    int lwork = 2*dim+1;
+    int lwork, liwork;
+
+    if(calc_eigenvectors)
+    {
+        lwork = 6*dim+1+2*dim*dim;
+        liwork = 3+5*dim;
+    } else
+    {
+        lwork = 2*dim+1;
+        liwork = 1;
+    }
 
     double *work = new double[lwork];
-
-    int liwork = 1;
 
     int *iwork = new int[liwork];
 
     int info;
 
-    dsyevd_(&jobz, &uplo, &dim, ham, &dim, &eigenvalues[0], work, &lwork,iwork,&liwork,&info);
+    dsyevd_(&jobz, &uplo, &dim, ham, &dim, eigenvalues.data(), work, &lwork,iwork,&liwork,&info);
 
     if(info != 0)
 	std::cerr << "Calculating eigenvalues failed..." << std::endl;
@@ -401,7 +415,7 @@ double Hamiltonian::ExactDiagonalizeFull() const
     delete [] work;
     delete [] iwork;
 
-    return eigenvalues[0];
+    return eigenvalues;
 }
 
 /**
@@ -512,7 +526,7 @@ void Hamiltonian::Print() const
     for(int i=0;i<dim;i++)
     {
 	for(int j=0;j<dim;j++)
-	    std::cout << ham[j+i*dim] << "\t";
+	    std::cout << ham[i+j*dim] << "\t";
 	std::cout << std::endl;
     }
 }

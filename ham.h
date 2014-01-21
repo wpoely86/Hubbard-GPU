@@ -65,7 +65,7 @@ class Hamiltonian
 	myint getBaseUp(unsigned int i) const;
 	myint getBaseDown(unsigned int i) const;
 
-	double ExactDiagonalizeFull() const;
+        std::vector<double> ExactDiagonalizeFull(bool calc_eigenvectors=false);
 	double LanczosDiagonalize(int m=0);
 	double arpackDiagonalize();
 
