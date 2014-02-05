@@ -41,7 +41,6 @@ class HubHam2D : public Hamiltonian
 
     protected:
 	int hopping(myint a, myint b) const;
-        int CalcSign(int i,int j,myint a) const;
 
 	//! The length of the 2D grid
         int L;

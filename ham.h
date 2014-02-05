@@ -21,91 +21,29 @@ along with Hubbard-GPU.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <vector>
 #include <string>
-
-//! type to store the basis set vectors in
-typedef unsigned int myint;
-
-extern "C" {
-    void dsyevd_( char* jobz, char* uplo, int* n, double* a, int* lda, double* w, double* work, int* lwork, int* iwork, int* liwork, int* info);
-    double ddot_(int *n,double *x,int *incx,double *y,int *incy);
-    void dscal_(int *n,double *alpha,double *x,int *incx);
-    void dsymv_(char *uplo, const int *n, const double *alpha, const double *a, const int *lda, const double *x, const int *incx, const double *beta, double *y, const int *incy);
-    void daxpy_(int *n,const double *alpha,double *x,int *incx,double *y,int *incy);
-    void dstev_( const char* jobz, const int* n, double* d, double* e, double* z, const int* ldz, double* work, int* info );
-}
+#include "bare-ham.h"
 
 /**
  * This is the main (base) class. It calculates the full Hamiltonian matrix for 1D Hubbard. It can both exact diagonlize
  * or use a Lanczos algorithm to calculate the groundstate energy.
  * @author Ward Poelmans <wpoely86@gmail.com>
  */
-class Hamiltonian
+class Hamiltonian: public BareHamiltonian
 {
     public:
-	Hamiltonian(int Ns, int Nu, int Nd, double J, double U);
+	Hamiltonian(int L, int Nu, int Nd, double J, double U);
 	virtual ~Hamiltonian();
 
-	int CalcDim(int Ns, int N) const;
-
-	int CountBits(myint bits) const;
-
-	std::string print_bin(myint num,int bitcount) const;
-
-	void BuildBase();
 	void BuildFullHam();
-
-	int getNs() const;
-	int getNu() const;
-	int getNd() const;
-	int getDim() const;
-
-	double getJ() const;
-	double getU() const;
-
-	myint getBaseUp(unsigned int i) const;
-	myint getBaseDown(unsigned int i) const;
 
         std::vector<double> ExactDiagonalizeFull(bool calc_eigenvectors=false);
 	double LanczosDiagonalize(int m=0);
 	double arpackDiagonalize();
 
-	void Print() const;
-
-        void PrintBase() const;
-
         virtual void mvprod(double *x, double *y, double alpha) const;
-
-        double MemoryNeededFull() const;
-
-        double MemoryNeededLanczos() const;
-
-        double MemoryNeededArpack() const;
 
     protected:
 	int hopping(myint a, myint b, int jumpsign) const;
-
-	//! Number of sites
-	int Ns;
-	//! Number of up electrons
-	int Nu;
-	//! Number of down electrons
-	int Nd;
-	//! Hopping strength
-	double J;
-	//! On site interaction strength
-	double U;
-	//! Storage for the hamiltonian matrix
-	double *ham;
-	//! Dimension of the hamiltonian matrix
-	int dim;
-
-	//! Hightest bit used
-	myint Hb;
-
-	//! vector to hold all bases ket's for up electrons
-	std::vector<myint> baseUp;
-	//! vector to hold all bases ket's for down electrons
-	std::vector<myint> baseDown;
 };
 
 #endif /* HAM_H */

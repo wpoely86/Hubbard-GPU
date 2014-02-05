@@ -21,51 +21,17 @@ along with Hubbard-GPU.  If not, see <http://www.gnu.org/licenses/>.
 #include <cmath>
 #include "ham.h"
 
-// arpack
-extern "C"
-{
-    void dsaupd_(int *ido, char *bmat, int *n, char *which,
-            int *nev, double *tol, double *resid, int *ncv,
-            double *v, int *ldv, int *iparam, int *ipntr,
-            double *workd, double *workl, int *lworkl, int *info);
-
-    void dseupd_(int *rvec, char *All, int *select, double *d,
-            double *z, int *ldz, double *sigma,
-            char *bmat, int *n, char *which, int *nev,
-            double *tol, double *resid, int *ncv, double *v,
-            int *ldv, int *iparam, int *ipntr, double *workd,
-            double *workl, int *lworkl, int *info);
-}
 
 /**
  * Constructor of the Hamiltonian class
- * @param Ns Number of lattice sites
+ * @param L Number of lattice sites
  * @param Nu Number of Up Electrons
  * @param Nd Number of Down Electrons
  * @param J The hopping strengh
  * @param U The onsite interaction strength
  */
-Hamiltonian::Hamiltonian(int Ns, int Nu, int Nd, double J, double U)
+Hamiltonian::Hamiltonian(int L, int Nu, int Nd, double J, double U) : BareHamiltonian(L,Nu,Nd,J,U)
 {
-    this->Ns = Ns;
-    this->Nu = Nu;
-    this->Nd = Nd;
-    this->J = J;
-    this->U = U;
-
-    if(Ns > 30)
-	std::cerr << "We cannot do more then 30 sites" << std::endl;
-
-    if(Nu > Ns || Nd > Ns)
-	std::cerr << "Too many electrons for this lattice" << std::endl;
-
-    dim = CalcDim(Ns,Nu) * CalcDim(Ns,Nd);
-
-    ham = 0;
-
-    Hb = 1; // highest power of 2 used
-    for(int i=0;i<Ns;i++)
-	Hb <<= 1;
 }
 
 /**
@@ -73,84 +39,6 @@ Hamiltonian::Hamiltonian(int Ns, int Nu, int Nd, double J, double U)
  */
 Hamiltonian::~Hamiltonian()
 {
-    if(ham)
-	delete [] ham;
-}
-
-/**
- * Calculates the dimension for the up or down electron space.
- * Basically, it calculates the N-combination out of Ns. This algorithm
- * is not perfect, overflow can occur but should be no problem for our
- * small problems.
- * @param Ns number of lattice sites
- * @param N number of up or down electrons
- * @return the dimension of the up or down electron space
- */
-int Hamiltonian::CalcDim(int Ns, int N) const
-{
-    int result = 1;
-
-    for(int i=1;i<=N;i++)
-    {
-	result *= Ns--;
-	result /= i;
-    }
-
-    return result;
-}
-
-/**
- * Counts the number of bits set. It uses the builtin gcc function
- * __buildtin_popcount. You must compile with -march=native and it
- * will then generate a POPCNT instruction on platforms that support
- * it. Otherwise it will be slow. Consider using a different method
- * here if you don't have the POPCNT instruction: there are fast SSSE3
- * and SSE2 ways to do this(google is your friend).
- * @param bits the myint of which to count the number of bits set
- * @return the number of bits set
- */
-int Hamiltonian::CountBits(myint bits) const
-{
-    return __builtin_popcount(bits);
-}
-
-/**
- * Print a int in binary form to a string. It only prints the bitcount
- * least significant bits
- * @param num the myint to print in binary form
- * @param bitcount the number of bits to print (starting from the LSB)
- * @return a string with the binary representation of num
- */
-std::string Hamiltonian::print_bin(myint num,int bitcount) const
-{
-    std::string output = "";
-    output.reserve(bitcount);
-
-    for(int i=bitcount-1;i>=0;i--)
-	if( (num>>i) & 0x1 )
-	    output += "1";
-	else
-	    output += "0";
-
-    return output;
-}
-
-/**
- * Builds all the up and down base kets
- */
-void Hamiltonian::BuildBase()
-{
-    baseUp.reserve(CalcDim(Ns,Nu));
-    baseDown.reserve(CalcDim(Ns,Nd));
-
-    for(myint i=0;i<Hb;i++)
-    {
-	if(CountBits(i) == Nd)
-	    baseDown.push_back(i);
-
-	if(CountBits(i) == Nu)
-	    baseUp.push_back(i);
-    }
 }
 
 /**
@@ -166,7 +54,7 @@ void Hamiltonian::BuildFullHam()
 
     ham = new double[dim*dim];
 
-    int NumDown = CalcDim(Ns,Nd);
+    int NumDown = CalcDim(L,Nd);
 
     int upjumpsign, downjumpsign;
 
@@ -293,80 +181,6 @@ int Hamiltonian::hopping(myint a, myint b,int jumpsign) const
 }
 
 /**
- * Getter for the number of lattice sites
- * @return the number of lattice sites
- */
-int Hamiltonian::getNs() const
-{
-    return Ns;
-}
-
-/**
- * Getter for the number of up electrons
- * @return the number of up electrons
- */
-int Hamiltonian::getNu() const
-{
-    return Nu;
-}
-
-/**
- * Getter for the number of down electrons
- * @return the number of down electrons
- */
-int Hamiltonian::getNd() const
-{
-    return Nd;
-}
-
-/**
- * Getter for the dimension of the hamiltonian matrix
- * @return dimension of the hamiltonian matrix
- */
-int Hamiltonian::getDim() const
-{
-    return dim;
-}
-
-/**
- * Getter for the hopping strength
- * @return the hopping strength
- */
-double Hamiltonian::getJ() const
-{
-    return J;
-}
-
-/**
- * Getter for the onsite interaction strength
- * @return the onsite interaction strength
- */
-double Hamiltonian::getU() const
-{
-    return U;
-}
-
-/**
- * Getter for the i base up ket
- * @param i the number of the base ket
- * @return the base ket
- */
-myint Hamiltonian::getBaseUp(unsigned int i) const
-{
-    return baseUp[i];
-}
-
-/**
- * Getter for the i base down ket
- * @param i the number of the base ket
- * @returns the base ket
- */
-myint Hamiltonian::getBaseDown(unsigned int i) const
-{
-    return baseDown[i];
-}
-
-/**
  * Exactly calculates the eigenvalues of the hamiltonian matrix.
  * Needs lapack.
  * @return the lowest eigenvalue
@@ -385,7 +199,7 @@ std::vector<double> Hamiltonian::ExactDiagonalizeFull(bool calc_eigenvectors)
 
     char uplo = 'U';
 
-    int dim = CalcDim(Ns,Nu) * CalcDim(Ns,Nd);
+    int dim = CalcDim(L,Nu) * CalcDim(L,Nd);
 
     std::vector<double> eigenvalues(dim);
 
@@ -516,29 +330,6 @@ double Hamiltonian::LanczosDiagonalize(int m)
     delete [] qb;
 
     return acopy[0];
-}
-
-/**
-  * Prints the full hamiltonian matrix to stdout
-  */
-void Hamiltonian::Print() const
-{
-    for(int i=0;i<dim;i++)
-    {
-	for(int j=0;j<dim;j++)
-	    std::cout << ham[i+j*dim] << "\t";
-	std::cout << std::endl;
-    }
-}
-
-/**
- * Print the basis set used.
- */
-void Hamiltonian::PrintBase() const
-{
-    for(unsigned int a=0;a<baseUp.size();a++)
-        for(unsigned int b=0;b<baseDown.size();b++)
-            std::cout << a*baseDown.size()+b << "\t" << print_bin(baseUp[a],Ns) << "\t" << print_bin(baseDown[b],Ns) << std::endl;
 }
 
 /**
@@ -676,94 +467,6 @@ double Hamiltonian::arpackDiagonalize()
         delete [] select;
 
     return sigma;
-}
-
-/**
- * Calculates the amount of memory needed for the calculation
- * of all eigenvalues using the exact method.
- * It doesn't include the program code and stuff.
- * @return the amount of memory needed in bytes
- */
-double Hamiltonian::MemoryNeededFull() const
-{
-    unsigned int dim = CalcDim(Ns,Nu) * CalcDim(Ns,Nd);
-    double result;
-
-    // base kets
-    result = (CalcDim(Ns,Nu) + CalcDim(Ns,Nd)) * sizeof(myint);
-
-    // hamiltonian matrix
-    result += dim * dim * sizeof(double);
-
-    // eigenvalues of ham matrix
-    result += dim * sizeof(double);
-
-    // work array for dsyev
-    result += (2*dim+1) * sizeof(double);
-
-    return result;
-}
-
-/**
- * Calculates the amount of memory needed for the calculation
- * if we use the lanczos method.
- * It doesn't include the program code and stuff.
- * @return the amount of memory needed in bytes
- */
-double Hamiltonian::MemoryNeededLanczos() const
-{
-    unsigned int dim = CalcDim(Ns,Nu) * CalcDim(Ns,Nd);
-    double result;
-
-    // base kets
-    result = (CalcDim(Ns,Nu) + CalcDim(Ns,Nd)) * sizeof(myint);
-
-    // hamup sparse matrix
-    result += CalcDim(Ns,Nu) * (((Ns-Nu)>Nu) ? 2*Nu : 2*(Ns-Nu)) * sizeof(double);
-
-    // hamdown sparse matrix
-    result += CalcDim(Ns,Nd) * (((Ns-Nd)>Nd) ? 2*Nd : 2*(Ns-Nd)) * sizeof(double);
-
-    // we store 2 vectors
-    result += 2 * dim * sizeof(double);
-
-    return result;
-}
-
-/**
- * Calculates the amount of memory needed for the calculation
- * if we use the arpack.
- * It doesn't include the program code and stuff.
- * @return the amount of memory needed in bytes
- */
-double Hamiltonian::MemoryNeededArpack() const
-{
-    unsigned int dim = CalcDim(Ns,Nu) * CalcDim(Ns,Nd);
-    double result;
-
-    // base kets
-    result = (CalcDim(Ns,Nu) + CalcDim(Ns,Nu)) * sizeof(myint);
-
-    // hamup sparse matrix
-    result += CalcDim(Ns,Nu) * (((Ns-Nu)>Nu) ? 2*Nu : 2*(Ns-Nu)) * sizeof(double);
-
-    // hamdown sparse matrix
-    result += CalcDim(Ns,Nd) * (((Ns-Nd)>Nd) ? 2*Nd : 2*(Ns-Nd)) * sizeof(double);
-
-    // arpack stuff:
-    // resid
-    result += 1 * dim * sizeof(double);
-
-    // v
-    result += 5 * dim * sizeof(double);
-
-    // workd
-    result += 3 * dim * sizeof(double);
-
-    // lworkd
-    result += 5 * (5+8) * sizeof(double);
-
-    return result;
 }
 
 /* vim: set ts=8 sw=4 tw=0 expandtab :*/

@@ -5,6 +5,7 @@ CPPSRC=ham.cpp\
        hamsparse.cpp\
        hamsparse2D_CSR.cpp\
        hamsparse2D.cpp\
+       bare-ham.cpp\
 
 CUDASRC=
 
@@ -15,9 +16,9 @@ EXE=main
 CC=gcc
 CXX=g++
 
-CFLAGS=-g -Wall -O2 -march=native -fopenmp
+CFLAGS=-g -Wall -O2 -march=native -std=c++11
 CPPFLAGS=$(CFLAGS)
-LDFLAGS=-g -O2 -Wall -march=native -fopenmp
+LDFLAGS=-g -O2 -Wall -march=native
 NVFLAGS=-g -O2 --ptxas-options=-v -arch=sm_13
 
 INCLUDE=
