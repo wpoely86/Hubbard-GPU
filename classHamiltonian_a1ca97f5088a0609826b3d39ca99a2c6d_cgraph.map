@@ -1,5 +1,5 @@
 <map id="Hamiltonian::BuildFullHam" name="Hamiltonian::BuildFullHam">
-<area shape="rect" id="node2" href="$classHamiltonian.html#a25687bfbb047a3557f85310daede2442" title="Hamiltonian::CalcDim" alt="" coords="235,5,386,32"/>
-<area shape="rect" id="node3" href="$classHamiltonian.html#afa972f88c6d0a06f6537c9b667bd0f36" title="Hamiltonian::hopping" alt="" coords="239,56,383,83"/>
-<area shape="rect" id="node4" href="$classHamiltonian.html#a1a1c61f3baf8ea6d0efc66028c6674c4" title="Hamiltonian::CountBits" alt="" coords="232,107,389,133"/>
+<area shape="rect" id="node2" href="$classBareHamiltonian.html#acfb89409533465961fb5b1c53056bbaa" title="BareHamiltonian::CalcDim" alt="" coords="235,5,413,32"/>
+<area shape="rect" id="node3" href="$classHamiltonian.html#afa972f88c6d0a06f6537c9b667bd0f36" title="Hamiltonian::hopping" alt="" coords="252,56,396,83"/>
+<area shape="rect" id="node4" href="$classBareHamiltonian.html#a9393391804a06e0ee4970e21d0b729ff" title="BareHamiltonian::CountBits" alt="" coords="232,107,416,133"/>
 </map>

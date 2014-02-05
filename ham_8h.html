@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.3.1"/>
-<title>Hubbard GPU: ham.h File Reference</title>
+<title>HubbardGPU: ham.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -29,8 +29,9 @@
  <tbody>
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
-   <div id="projectname">Hubbard GPU
+   <div id="projectname">HubbardGPU
    </div>
+   <div id="projectbrief">Hubbard diagonalisation on the GPU (and CPU)</div>
   </td>
  </tr>
  </tbody>
@@ -101,26 +102,31 @@ $(document).ready(function(){initNavTree('ham_8h.html','');});
 
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Classes</a> &#124;
-<a href="#typedef-members">Typedefs</a> &#124;
-<a href="#func-members">Functions</a>  </div>
+<a href="#nested-classes">Classes</a>  </div>
   <div class="headertitle">
 <div class="title">ham.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &lt;vector&gt;</code><br/>
 <code>#include &lt;string&gt;</code><br/>
-</div><div class="textblock"><div class="dynheader">
-Include dependency graph for ham.h:</div>
-<div class="dyncontent">
-<div class="center"><img src="ham_8h__incl.png" border="0" usemap="#ham_8h" alt=""/></div>
+<code>#include &quot;<a class="el" href="bare-ham_8h_source.html">bare-ham.h</a>&quot;</code><br/>
+</div><div class="textblock"><div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Include dependency graph for ham.h:</div>
+<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
 </div>
-</div><div class="textblock"><div class="dynheader">
-This graph shows which files directly or indirectly include this file:</div>
-<div class="dyncontent">
+<div id="dynsection-0-content" class="dyncontent" style="display:none;">
+<div class="center"><img src="ham_8h__incl.png" border="0" usemap="#ham_8h" alt=""/></div>
+<map name="ham_8h" id="ham_8h">
+<area shape="rect" id="node4" href="bare-ham_8h.html" title="bare&#45;ham.h" alt="" coords="53,80,139,107"/></map>
+</div>
+</div><div class="textblock"><div id="dynsection-1" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-1-trigger" src="closed.png" alt="+"/> This graph shows which files directly or indirectly include this file:</div>
+<div id="dynsection-1-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-1-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="ham_8h__dep__incl.png" border="0" usemap="#ham_8hdep" alt=""/></div>
 <map name="ham_8hdep" id="ham_8hdep">
-<area shape="rect" id="node2" href="ham_8cpp.html" title="ham.cpp" alt="" coords="261,80,333,107"/><area shape="rect" id="node3" href="ham2D_8h.html" title="ham2D.h" alt="" coords="357,80,432,107"/><area shape="rect" id="node10" href="hamsparse_8h.html" title="hamsparse.h" alt="" coords="457,80,553,107"/><area shape="rect" id="node12" href="main_8cpp.html" title="main.cpp" alt="" coords="577,155,652,181"/><area shape="rect" id="node4" href="ham2D_8cpp.html" title="ham2D.cpp" alt="" coords="102,155,191,181"/><area shape="rect" id="node5" href="hamsparse2D__CSR_8h.html" title="hamsparse2D_CSR.h" alt="" coords="215,155,365,181"/><area shape="rect" id="node8" href="main2D_8cpp.html" title="main2D.cpp" alt="" coords="307,304,399,331"/><area shape="rect" id="node6" href="hamsparse2D_8h.html" title="hamsparse2D.h" alt="" coords="12,229,127,256"/><area shape="rect" id="node9" href="hamsparse2D__CSR_8cpp.html" title="hamsparse2D_CSR.cpp" alt="" coords="151,229,315,256"/><area shape="rect" id="node7" href="hamsparse2D_8cpp.html" title="hamsparse2D.cpp" alt="" coords="5,304,133,331"/><area shape="rect" id="node11" href="hamsparse_8cpp.html" title="hamsparse.cpp" alt="" coords="442,155,552,181"/></map>
+<area shape="rect" id="node2" href="ham_8cpp.html" title="ham.cpp" alt="" coords="169,80,241,107"/><area shape="rect" id="node3" href="ham2D_8h.html" title="ham2D.h" alt="" coords="265,80,340,107"/><area shape="rect" id="node11" href="hamsparse_8h.html" title="hamsparse.h" alt="" coords="543,80,640,107"/><area shape="rect" id="node13" href="main_8cpp.html" title="main.cpp" alt="" coords="735,155,809,181"/><area shape="rect" id="node4" href="ham2D_8cpp.html" title="ham2D.cpp" alt="" coords="5,155,93,181"/><area shape="rect" id="node5" href="hamsparse2D__CSR_8h.html" title="hamsparse2D_CSR.h" alt="" coords="227,155,377,181"/><area shape="rect" id="node9" href="main2D_8cpp.html" title="main2D.cpp" alt="" coords="137,304,228,331"/><area shape="rect" id="node6" href="hamsparse2D_8h.html" title="hamsparse2D.h" alt="" coords="409,229,524,256"/><area shape="rect" id="node10" href="hamsparse2D__CSR_8cpp.html" title="hamsparse2D_CSR.cpp" alt="" coords="221,229,384,256"/><area shape="rect" id="node7" href="hamgpu_8cu.html" title="hamgpu.cu" alt="" coords="518,304,604,331"/><area shape="rect" id="node8" href="hamsparse2D_8cpp.html" title="hamsparse2D.cpp" alt="" coords="365,304,493,331"/><area shape="rect" id="node12" href="hamsparse_8cpp.html" title="hamsparse.cpp" alt="" coords="599,155,709,181"/></map>
 </div>
 </div>
 <p><a href="ham_8h_source.html">Go to the source code of this file.</a></p>
@@ -129,455 +135,14 @@ This graph shows which files directly or indirectly include this file:</div>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHamiltonian.html">Hamiltonian</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
-Typedefs</h2></td></tr>
-<tr class="memitem:ad9e4dd13155f827d121a0b0559473480"><td class="memItemLeft" align="right" valign="top">typedef unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ham_8h.html#ad9e4dd13155f827d121a0b0559473480">myint</a></td></tr>
-<tr class="memdesc:ad9e4dd13155f827d121a0b0559473480"><td class="mdescLeft">&#160;</td><td class="mdescRight">type to store the basis set vectors in  <a href="#ad9e4dd13155f827d121a0b0559473480">More...</a><br/></td></tr>
-<tr class="separator:ad9e4dd13155f827d121a0b0559473480"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
-Functions</h2></td></tr>
-<tr class="memitem:ad0cfc41b12c93c0f2aad995d39d5fe42"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ham_8h.html#ad0cfc41b12c93c0f2aad995d39d5fe42">dsyevd_</a> (char *jobz, char *uplo, int *n, double *a, int *lda, double *w, double *work, int *lwork, int *iwork, int *liwork, int *info)</td></tr>
-<tr class="separator:ad0cfc41b12c93c0f2aad995d39d5fe42"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2247ca92b3cf0e88e9448ad05240921f"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ham_8h.html#a2247ca92b3cf0e88e9448ad05240921f">ddot_</a> (int *n, double *x, int *incx, double *y, int *incy)</td></tr>
-<tr class="separator:a2247ca92b3cf0e88e9448ad05240921f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9d4e5f6c81fb4bb87223f92b5347daf1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ham_8h.html#a9d4e5f6c81fb4bb87223f92b5347daf1">dscal_</a> (int *n, double *alpha, double *x, int *incx)</td></tr>
-<tr class="separator:a9d4e5f6c81fb4bb87223f92b5347daf1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aad27beb06b23ce25ab9637d76286677f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ham_8h.html#aad27beb06b23ce25ab9637d76286677f">dsymv_</a> (char *uplo, const int *n, const double *alpha, const double *a, const int *lda, const double *x, const int *incx, const double *beta, double *y, const int *incy)</td></tr>
-<tr class="separator:aad27beb06b23ce25ab9637d76286677f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abb7d6c365abc5d11a16c1c085bca91a4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ham_8h.html#abb7d6c365abc5d11a16c1c085bca91a4">daxpy_</a> (int *n, const double *alpha, double *x, int *incx, double *y, int *incy)</td></tr>
-<tr class="separator:abb7d6c365abc5d11a16c1c085bca91a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adab72a2a47e9a4dda768424878b4330c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ham_8h.html#adab72a2a47e9a4dda768424878b4330c">dstev_</a> (const char *jobz, const int *n, double *d, double *e, double *z, const int *ldz, double *work, int *info)</td></tr>
-<tr class="separator:adab72a2a47e9a4dda768424878b4330c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Typedef Documentation</h2>
-<a class="anchor" id="ad9e4dd13155f827d121a0b0559473480"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef unsigned int <a class="el" href="ham_8h.html#ad9e4dd13155f827d121a0b0559473480">myint</a></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>type to store the basis set vectors in </p>
-
-<p>Definition at line <a class="el" href="ham_8h_source.html#l00026">26</a> of file <a class="el" href="ham_8h_source.html">ham.h</a>.</p>
-
-</div>
-</div>
-<h2 class="groupheader">Function Documentation</h2>
-<a class="anchor" id="abb7d6c365abc5d11a16c1c085bca91a4"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void daxpy_ </td>
-          <td>(</td>
-          <td class="paramtype">int *&#160;</td>
-          <td class="paramname"><em>n</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const double *&#160;</td>
-          <td class="paramname"><em>alpha</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double *&#160;</td>
-          <td class="paramname"><em>x</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int *&#160;</td>
-          <td class="paramname"><em>incx</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double *&#160;</td>
-          <td class="paramname"><em>y</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int *&#160;</td>
-          <td class="paramname"><em>incy</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p><div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="ham_8h_abb7d6c365abc5d11a16c1c085bca91a4_icgraph.png" border="0" usemap="#ham_8h_abb7d6c365abc5d11a16c1c085bca91a4_icgraph" alt=""/></div>
-<map name="ham_8h_abb7d6c365abc5d11a16c1c085bca91a4_icgraph" id="ham_8h_abb7d6c365abc5d11a16c1c085bca91a4_icgraph">
-<area shape="rect" id="node2" href="classHamiltonian.html#a17ea220ad823c4ce67bbd7a46532f1da" title="Hamiltonian::LanczosDiagonalize" alt="" coords="117,5,333,32"/><area shape="rect" id="node3" href="classSparseHamiltonian.html#a20ae577e617040bdcc525711a87b46fb" title="SparseHamiltonian::\lmvprod" alt="" coords="155,57,295,98"/><area shape="rect" id="node4" href="classSparseHamiltonian2D.html#a0883f62aa65bd37b285585e565bf0a9d" title="SparseHamiltonian2D\l::mvprod" alt="" coords="151,122,300,163"/><area shape="rect" id="node5" href="classSparseHamiltonian2D__CSR.html#ad355ef212b019050598f547696548eb2" title="SparseHamiltonian2D\l_CSR::mvprod" alt="" coords="151,187,300,229"/></map>
-</div>
-</p>
-
-</div>
-</div>
-<a class="anchor" id="a2247ca92b3cf0e88e9448ad05240921f"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">double ddot_ </td>
-          <td>(</td>
-          <td class="paramtype">int *&#160;</td>
-          <td class="paramname"><em>n</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double *&#160;</td>
-          <td class="paramname"><em>x</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int *&#160;</td>
-          <td class="paramname"><em>incx</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double *&#160;</td>
-          <td class="paramname"><em>y</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int *&#160;</td>
-          <td class="paramname"><em>incy</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p><div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="ham_8h_a2247ca92b3cf0e88e9448ad05240921f_icgraph.png" border="0" usemap="#ham_8h_a2247ca92b3cf0e88e9448ad05240921f_icgraph" alt=""/></div>
-<map name="ham_8h_a2247ca92b3cf0e88e9448ad05240921f_icgraph" id="ham_8h_a2247ca92b3cf0e88e9448ad05240921f_icgraph">
-<area shape="rect" id="node2" href="classHamiltonian.html#a17ea220ad823c4ce67bbd7a46532f1da" title="Hamiltonian::LanczosDiagonalize" alt="" coords="109,5,325,32"/></map>
-</div>
-</p>
-
-</div>
-</div>
-<a class="anchor" id="a9d4e5f6c81fb4bb87223f92b5347daf1"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void dscal_ </td>
-          <td>(</td>
-          <td class="paramtype">int *&#160;</td>
-          <td class="paramname"><em>n</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double *&#160;</td>
-          <td class="paramname"><em>alpha</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double *&#160;</td>
-          <td class="paramname"><em>x</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int *&#160;</td>
-          <td class="paramname"><em>incx</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p><div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="ham_8h_a9d4e5f6c81fb4bb87223f92b5347daf1_icgraph.png" border="0" usemap="#ham_8h_a9d4e5f6c81fb4bb87223f92b5347daf1_icgraph" alt=""/></div>
-<map name="ham_8h_a9d4e5f6c81fb4bb87223f92b5347daf1_icgraph" id="ham_8h_a9d4e5f6c81fb4bb87223f92b5347daf1_icgraph">
-<area shape="rect" id="node2" href="classHamiltonian.html#a17ea220ad823c4ce67bbd7a46532f1da" title="Hamiltonian::LanczosDiagonalize" alt="" coords="115,5,331,32"/></map>
-</div>
-</p>
-
-</div>
-</div>
-<a class="anchor" id="adab72a2a47e9a4dda768424878b4330c"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void dstev_ </td>
-          <td>(</td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>jobz</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const int *&#160;</td>
-          <td class="paramname"><em>n</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double *&#160;</td>
-          <td class="paramname"><em>d</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double *&#160;</td>
-          <td class="paramname"><em>e</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double *&#160;</td>
-          <td class="paramname"><em>z</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const int *&#160;</td>
-          <td class="paramname"><em>ldz</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double *&#160;</td>
-          <td class="paramname"><em>work</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int *&#160;</td>
-          <td class="paramname"><em>info</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p><div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="ham_8h_adab72a2a47e9a4dda768424878b4330c_icgraph.png" border="0" usemap="#ham_8h_adab72a2a47e9a4dda768424878b4330c_icgraph" alt=""/></div>
-<map name="ham_8h_adab72a2a47e9a4dda768424878b4330c_icgraph" id="ham_8h_adab72a2a47e9a4dda768424878b4330c_icgraph">
-<area shape="rect" id="node2" href="classHamiltonian.html#a17ea220ad823c4ce67bbd7a46532f1da" title="Hamiltonian::LanczosDiagonalize" alt="" coords="115,5,331,32"/></map>
-</div>
-</p>
-
-</div>
-</div>
-<a class="anchor" id="ad0cfc41b12c93c0f2aad995d39d5fe42"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void dsyevd_ </td>
-          <td>(</td>
-          <td class="paramtype">char *&#160;</td>
-          <td class="paramname"><em>jobz</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">char *&#160;</td>
-          <td class="paramname"><em>uplo</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int *&#160;</td>
-          <td class="paramname"><em>n</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double *&#160;</td>
-          <td class="paramname"><em>a</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int *&#160;</td>
-          <td class="paramname"><em>lda</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double *&#160;</td>
-          <td class="paramname"><em>w</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double *&#160;</td>
-          <td class="paramname"><em>work</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int *&#160;</td>
-          <td class="paramname"><em>lwork</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int *&#160;</td>
-          <td class="paramname"><em>iwork</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int *&#160;</td>
-          <td class="paramname"><em>liwork</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int *&#160;</td>
-          <td class="paramname"><em>info</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p><div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="ham_8h_ad0cfc41b12c93c0f2aad995d39d5fe42_icgraph.png" border="0" usemap="#ham_8h_ad0cfc41b12c93c0f2aad995d39d5fe42_icgraph" alt=""/></div>
-<map name="ham_8h_ad0cfc41b12c93c0f2aad995d39d5fe42_icgraph" id="ham_8h_ad0cfc41b12c93c0f2aad995d39d5fe42_icgraph">
-<area shape="rect" id="node2" href="classHamiltonian.html#a8424adf18cdc023a31e4571f9fbc4032" title="Hamiltonian::ExactDiagonalizeFull" alt="" coords="126,5,349,32"/><area shape="rect" id="node3" href="main_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627" title="main" alt="" coords="397,5,448,32"/></map>
-</div>
-</p>
-
-</div>
-</div>
-<a class="anchor" id="aad27beb06b23ce25ab9637d76286677f"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void dsymv_ </td>
-          <td>(</td>
-          <td class="paramtype">char *&#160;</td>
-          <td class="paramname"><em>uplo</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const int *&#160;</td>
-          <td class="paramname"><em>n</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const double *&#160;</td>
-          <td class="paramname"><em>alpha</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const double *&#160;</td>
-          <td class="paramname"><em>a</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const int *&#160;</td>
-          <td class="paramname"><em>lda</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const double *&#160;</td>
-          <td class="paramname"><em>x</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const int *&#160;</td>
-          <td class="paramname"><em>incx</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const double *&#160;</td>
-          <td class="paramname"><em>beta</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double *&#160;</td>
-          <td class="paramname"><em>y</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const int *&#160;</td>
-          <td class="paramname"><em>incy</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p><div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="ham_8h_aad27beb06b23ce25ab9637d76286677f_icgraph.png" border="0" usemap="#ham_8h_aad27beb06b23ce25ab9637d76286677f_icgraph" alt=""/></div>
-<map name="ham_8h_aad27beb06b23ce25ab9637d76286677f_icgraph" id="ham_8h_aad27beb06b23ce25ab9637d76286677f_icgraph">
-<area shape="rect" id="node2" href="classHamiltonian.html#ae31ba4590d7a497aed8ef2cac36abd1c" title="Hamiltonian::mvprod" alt="" coords="123,31,266,57"/><area shape="rect" id="node3" href="classHamiltonian.html#a17ea220ad823c4ce67bbd7a46532f1da" title="Hamiltonian::LanczosDiagonalize" alt="" coords="315,5,531,32"/><area shape="rect" id="node4" href="classHamiltonian.html#a5fd02d9ba0eb128cc3435d950d858b60" title="Hamiltonian::arpackDiagonalize" alt="" coords="319,56,526,83"/><area shape="rect" id="node5" href="main_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627" title="main" alt="" coords="579,56,629,83"/></map>
-</div>
-</p>
-
-</div>
-</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="ham_8h.html">ham.h</a></li>
-    <li class="footer">Generated by
+    <li class="footer">Generated on Wed Feb 5 2014 17:02:52 for HubbardGPU by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
   </ul>

@@ -1,4 +1,4 @@
 <map id="SparseHamiltonian::Umatrix" name="SparseHamiltonian::Umatrix">
-<area shape="rect" id="node2" href="$classHamiltonian.html#aaad9ae2e01c49a12c3c50a7c2d463a95" title="Hamiltonian::getDim" alt="" coords="203,5,344,32"/>
-<area shape="rect" id="node3" href="$classHamiltonian.html#a1a1c61f3baf8ea6d0efc66028c6674c4" title="Hamiltonian::CountBits" alt="" coords="195,56,352,83"/>
+<area shape="rect" id="node2" href="$classBareHamiltonian.html#a79005e481ccd821d8672d2989242df1d" title="BareHamiltonian::getDim" alt="" coords="203,5,371,32"/>
+<area shape="rect" id="node3" href="$classBareHamiltonian.html#a9393391804a06e0ee4970e21d0b729ff" title="BareHamiltonian::CountBits" alt="" coords="195,56,379,83"/>
 </map>

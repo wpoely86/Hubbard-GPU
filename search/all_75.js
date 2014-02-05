@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['u',['U',['../classHamiltonian.html#ac717f0e298197474392806c804836e35',1,'Hamiltonian']]],
+  ['u',['U',['../classBareHamiltonian.html#aeee149d8a40deeaf1c2b18bd7542649d',1,'BareHamiltonian']]],
   ['umat_5fgpu',['Umat_gpu',['../classGPUHamiltonian.html#a641278471887e327f43fae93d8352a1a',1,'GPUHamiltonian']]],
   ['umatrix',['Umatrix',['../classSparseHamiltonian.html#aeb4fc3de07712402b7e3279a808e3e95',1,'SparseHamiltonian::Umatrix()'],['../classSparseHamiltonian2D__CSR.html#a1bc2f7a843679c623635fd49b5483dd6',1,'SparseHamiltonian2D_CSR::Umatrix()']]],
   ['up_5fcol',['Up_col',['../classSparseHamiltonian2D__CSR.html#a5adc59a81625770a08694ddd889f0395',1,'SparseHamiltonian2D_CSR']]],

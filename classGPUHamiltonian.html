@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.3.1"/>
-<title>Hubbard GPU: GPUHamiltonian&lt; T &gt; Class Template Reference</title>
+<title>HubbardGPU: GPUHamiltonian&lt; T &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -29,8 +29,9 @@
  <tbody>
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
-   <div id="projectname">Hubbard GPU
+   <div id="projectname">HubbardGPU
    </div>
+   <div id="projectbrief">Hubbard diagonalisation on the GPU (and CPU)</div>
   </td>
  </tr>
  </tbody>
@@ -112,15 +113,23 @@ $(document).ready(function(){initNavTree('classGPUHamiltonian.html','');});
 <div class="contents">
 
 <p><code>#include &lt;<a class="el" href="hamgpu_8h_source.html">hamgpu.h</a>&gt;</code></p>
-<div class="dynheader">
-Inheritance diagram for GPUHamiltonian&lt; T &gt;:</div>
-<div class="dyncontent">
+<div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Inheritance diagram for GPUHamiltonian&lt; T &gt;:</div>
+<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-0-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classGPUHamiltonian__inherit__graph.png" border="0" usemap="#GPUHamiltonian_3_01T_01_4_inherit__map" alt="Inheritance graph"/></div>
+<map name="GPUHamiltonian_3_01T_01_4_inherit__map" id="GPUHamiltonian_3_01T_01_4_inherit__map">
+</map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
-<div class="dynheader">
-Collaboration diagram for GPUHamiltonian&lt; T &gt;:</div>
-<div class="dyncontent">
+<div id="dynsection-1" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-1-trigger" src="closed.png" alt="+"/> Collaboration diagram for GPUHamiltonian&lt; T &gt;:</div>
+<div id="dynsection-1-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-1-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classGPUHamiltonian__coll__graph.png" border="0" usemap="#GPUHamiltonian_3_01T_01_4_coll__map" alt="Collaboration graph"/></div>
+<map name="GPUHamiltonian_3_01T_01_4_coll__map" id="GPUHamiltonian_3_01T_01_4_coll__map">
+</map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
@@ -129,12 +138,18 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a3db11b82a99c73409643dd5bbdd401fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4d9185f0b6481a3a540662f2de0d9887"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGPUHamiltonian.html#a4d9185f0b6481a3a540662f2de0d9887">GPUHamiltonian</a> (int L, int D, int Nu, int Nd, double J, double U)</td></tr>
 <tr class="separator:a4d9185f0b6481a3a540662f2de0d9887"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a68200d281388a1b77fa62639032ab099"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGPUHamiltonian.html#a68200d281388a1b77fa62639032ab099">~GPUHamiltonian</a> ()</td></tr>
-<tr class="separator:a68200d281388a1b77fa62639032ab099"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6adf6ac7c9b642ea4804097b0a2ee7bf"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGPUHamiltonian.html#a6adf6ac7c9b642ea4804097b0a2ee7bf">mvprod</a> (double *x, double *y, double alpha) const </td></tr>
-<tr class="separator:a6adf6ac7c9b642ea4804097b0a2ee7bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acc8d3b1e628ed6d8d3accff2e809e855"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGPUHamiltonian.html#acc8d3b1e628ed6d8d3accff2e809e855">~GPUHamiltonian</a> ()</td></tr>
+<tr class="separator:acc8d3b1e628ed6d8d3accff2e809e855"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a03e78ff5eefcd22272e472eacce57536"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGPUHamiltonian.html#a03e78ff5eefcd22272e472eacce57536">mvprod</a> (double *x, double *y, double alpha) const </td></tr>
+<tr class="separator:a03e78ff5eefcd22272e472eacce57536"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a92d4611f94589489534b361146f7f20b"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGPUHamiltonian.html#a92d4611f94589489534b361146f7f20b">LanczosDiagonalize</a> (int m=0)</td></tr>
 <tr class="separator:a92d4611f94589489534b361146f7f20b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0e8a15c1d69b54339c56537c335c8869"><td class="memTemplParams" colspan="2">template&lt;&gt; </td></tr>
+<tr class="memitem:a0e8a15c1d69b54339c56537c335c8869"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classGPUHamiltonian.html#a0e8a15c1d69b54339c56537c335c8869">GPUHamiltonian</a> (int Ns, int Nu, int Nd, double J, double U)</td></tr>
+<tr class="separator:a0e8a15c1d69b54339c56537c335c8869"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a13cb33c6abbf2710afe7a49ebbd0cc36"><td class="memTemplParams" colspan="2">template&lt;&gt; </td></tr>
+<tr class="memitem:a13cb33c6abbf2710afe7a49ebbd0cc36"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classGPUHamiltonian.html#a13cb33c6abbf2710afe7a49ebbd0cc36">GPUHamiltonian</a> (int L, int D, int Nu, int Nd, double J, double U)</td></tr>
+<tr class="separator:a13cb33c6abbf2710afe7a49ebbd0cc36"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -167,7 +182,7 @@ class GPUHamiltonian&lt; T &gt;</h3>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class T&gt; </div>
+template&lt;class T &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="classGPUHamiltonian.html">GPUHamiltonian</a>&lt; T &gt;::<a class="el" href="classGPUHamiltonian.html">GPUHamiltonian</a> </td>
@@ -213,7 +228,7 @@ template&lt;class T&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class T&gt; </div>
+template&lt;class T &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="classGPUHamiltonian.html">GPUHamiltonian</a>&lt; T &gt;::<a class="el" href="classGPUHamiltonian.html">GPUHamiltonian</a> </td>
@@ -261,17 +276,17 @@ template&lt;class T&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a68200d281388a1b77fa62639032ab099"></a>
+<a class="anchor" id="acc8d3b1e628ed6d8d3accff2e809e855"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class T&gt; </div>
+template&lt;class T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual <a class="el" href="classGPUHamiltonian.html">GPUHamiltonian</a>&lt; T &gt;::~<a class="el" href="classGPUHamiltonian.html">GPUHamiltonian</a> </td>
+          <td class="memname"><a class="el" href="classGPUHamiltonian.html">GPUHamiltonian</a>&lt; T &gt;::~<a class="el" href="classGPUHamiltonian.html">GPUHamiltonian</a> </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -284,6 +299,112 @@ template&lt;class T&gt; </div>
 </table>
 </div><div class="memdoc">
 
+<p>Definition at line <a class="el" href="hamgpu_8cu_source.html#l00062">62</a> of file <a class="el" href="hamgpu_8cu_source.html">hamgpu.cu</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a0e8a15c1d69b54339c56537c335c8869"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classGPUHamiltonian.html">GPUHamiltonian</a>&lt; <a class="el" href="classSparseHamiltonian.html">SparseHamiltonian</a> &gt;::<a class="el" href="classGPUHamiltonian.html">GPUHamiltonian</a> </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>Ns</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>Nu</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>Nd</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>J</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>U</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>The constructor for the <a class="el" href="classSparseHamiltonian.html">SparseHamiltonian</a> Class </p>
+
+<p>Definition at line <a class="el" href="hamgpu_8cu_source.html#l00047">47</a> of file <a class="el" href="hamgpu_8cu_source.html">hamgpu.cu</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a13cb33c6abbf2710afe7a49ebbd0cc36"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classGPUHamiltonian.html">GPUHamiltonian</a>&lt; <a class="el" href="classSparseHamiltonian2D.html">SparseHamiltonian2D</a> &gt;::<a class="el" href="classGPUHamiltonian.html">GPUHamiltonian</a> </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>L</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>D</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>Nu</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>Nd</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>J</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>U</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>The constructor for the <a class="el" href="classSparseHamiltonian2D.html">SparseHamiltonian2D</a> Class </p>
+
+<p>Definition at line <a class="el" href="hamgpu_8cu_source.html#l00056">56</a> of file <a class="el" href="hamgpu_8cu_source.html">hamgpu.cu</a>.</p>
+
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
@@ -291,7 +412,7 @@ template&lt;class T&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class T&gt; </div>
+template&lt;class T &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">double <a class="el" href="classGPUHamiltonian.html">GPUHamiltonian</a>&lt; T &gt;::LanczosDiagonalize </td>
@@ -302,29 +423,41 @@ template&lt;class T&gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Calculates the lowest eigenvalue of the hamiltonian matrix using the lanczos algorithm. Needs lapack. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">m</td><td>an optional estimate for the lanczos space size </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>the lowest eigenvalue </dd></dl>
 
-<p><div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="classGPUHamiltonian_a92d4611f94589489534b361146f7f20b_icgraph.png" border="0" usemap="#classGPUHamiltonian_a92d4611f94589489534b361146f7f20b_icgraph" alt=""/></div>
-<map name="classGPUHamiltonian_a92d4611f94589489534b361146f7f20b_icgraph" id="classGPUHamiltonian_a92d4611f94589489534b361146f7f20b_icgraph">
-<area shape="rect" id="node2" href="main_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627" title="main" alt="" coords="299,5,349,32"/></map>
+<p>Definition at line <a class="el" href="hamgpu_8cu_source.html#l00141">141</a> of file <a class="el" href="hamgpu_8cu_source.html">hamgpu.cu</a>.</p>
+
+<p><div id="dynsection-2" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-2-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
+<div id="dynsection-2-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-2-content" class="dyncontent" style="display:none;">
+<div class="center"><img src="classGPUHamiltonian_a92d4611f94589489534b361146f7f20b_cgraph.png" border="0" usemap="#classGPUHamiltonian_a92d4611f94589489534b361146f7f20b_cgraph" alt=""/></div>
+<map name="classGPUHamiltonian_a92d4611f94589489534b361146f7f20b_cgraph" id="classGPUHamiltonian_a92d4611f94589489534b361146f7f20b_cgraph">
+<area shape="rect" id="node2" href="bare-ham_8h.html#a2247ca92b3cf0e88e9448ad05240921f" title="ddot_" alt="" coords="302,5,357,32"/><area shape="rect" id="node3" href="bare-ham_8h.html#a9d4e5f6c81fb4bb87223f92b5347daf1" title="dscal_" alt="" coords="299,56,359,83"/><area shape="rect" id="node4" href="bare-ham_8h.html#adab72a2a47e9a4dda768424878b4330c" title="dstev_" alt="" coords="299,107,360,133"/></map>
 </div>
 </p>
 
 </div>
 </div>
-<a class="anchor" id="a6adf6ac7c9b642ea4804097b0a2ee7bf"></a>
+<a class="anchor" id="a03e78ff5eefcd22272e472eacce57536"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class T&gt; </div>
+template&lt;class T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual void <a class="el" href="classGPUHamiltonian.html">GPUHamiltonian</a>&lt; T &gt;::mvprod </td>
+          <td class="memname">void <a class="el" href="classGPUHamiltonian.html">GPUHamiltonian</a>&lt; T &gt;::mvprod </td>
           <td>(</td>
           <td class="paramtype">double *&#160;</td>
           <td class="paramname"><em>x</em>, </td>
@@ -353,6 +486,17 @@ template&lt;class T&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>The matrix vector product. The method should calculate y = A*x + alpha * y </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>the input vector </td></tr>
+    <tr><td class="paramname">y</td><td>the output vector </td></tr>
+    <tr><td class="paramname">alpha</td><td>the multiplicative constant </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="hamgpu_8cu_source.html#l00114">114</a> of file <a class="el" href="hamgpu_8cu_source.html">hamgpu.cu</a>.</p>
 
 </div>
 </div>
@@ -361,7 +505,7 @@ template&lt;class T&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class T&gt; </div>
+template&lt;class T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -387,7 +531,7 @@ template&lt;class T&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class T&gt; </div>
+template&lt;class T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -413,7 +557,7 @@ template&lt;class T&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class T&gt; </div>
+template&lt;class T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -439,7 +583,7 @@ template&lt;class T&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class T&gt; </div>
+template&lt;class T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -465,7 +609,7 @@ template&lt;class T&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class T&gt; </div>
+template&lt;class T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -487,8 +631,9 @@ template&lt;class T&gt; </div>
 
 </div>
 </div>
-<hr/>The documentation for this class was generated from the following file:<ul>
+<hr/>The documentation for this class was generated from the following files:<ul>
 <li><a class="el" href="hamgpu_8h_source.html">hamgpu.h</a></li>
+<li><a class="el" href="hamgpu_8cu_source.html">hamgpu.cu</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
@@ -496,7 +641,7 @@ template&lt;class T&gt; </div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classGPUHamiltonian.html">GPUHamiltonian</a></li>
-    <li class="footer">Generated by
+    <li class="footer">Generated on Wed Feb 5 2014 17:02:52 for HubbardGPU by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
   </ul>

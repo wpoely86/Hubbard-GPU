@@ -1,4 +1,4 @@
 <map id="HubHam2D::hopping" name="HubHam2D::hopping">
-<area shape="rect" id="node2" href="$classHubHam2D.html#adf395bef67873ca2890ddff1623aa71f" title="HubHam2D::CalcSign" alt="" coords="197,5,349,32"/>
-<area shape="rect" id="node3" href="$classHamiltonian.html#a1a1c61f3baf8ea6d0efc66028c6674c4" title="Hamiltonian::CountBits" alt="" coords="397,5,555,32"/>
+<area shape="rect" id="node2" href="$classBareHamiltonian.html#a71a6f71bb77ccf7ab241fdfdd46ce9e9" title="BareHamiltonian::CalcSign" alt="" coords="197,5,376,32"/>
+<area shape="rect" id="node3" href="$classBareHamiltonian.html#a9393391804a06e0ee4970e21d0b729ff" title="BareHamiltonian::CountBits" alt="" coords="424,5,608,32"/>
 </map>

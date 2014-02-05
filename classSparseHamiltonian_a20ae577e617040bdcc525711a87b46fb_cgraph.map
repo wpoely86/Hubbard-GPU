@@ -1,4 +1,4 @@
 <map id="SparseHamiltonian::mvprod" name="SparseHamiltonian::mvprod">
-<area shape="rect" id="node2" href="$classHamiltonian.html#a1a1c61f3baf8ea6d0efc66028c6674c4" title="Hamiltonian::CountBits" alt="" coords="195,5,352,32"/>
-<area shape="rect" id="node3" href="$ham_8h.html#abb7d6c365abc5d11a16c1c085bca91a4" title="daxpy_" alt="" coords="241,56,305,83"/>
+<area shape="rect" id="node2" href="$classBareHamiltonian.html#a9393391804a06e0ee4970e21d0b729ff" title="BareHamiltonian::CountBits" alt="" coords="195,5,379,32"/>
+<area shape="rect" id="node3" href="$bare-ham_8h.html#abb7d6c365abc5d11a16c1c085bca91a4" title="daxpy_" alt="" coords="255,56,319,83"/>
 </map>

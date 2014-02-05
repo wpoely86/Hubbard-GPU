@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.3.1"/>
-<title>Hubbard GPU: Class Members - Variables</title>
+<title>HubbardGPU: Class Members - Variables</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -29,8 +29,9 @@
  <tbody>
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
-   <div id="projectname">Hubbard GPU
+   <div id="projectname">HubbardGPU
    </div>
+   <div id="projectbrief">Hubbard diagonalisation on the GPU (and CPU)</div>
   </td>
  </tr>
  </tbody>
@@ -86,6 +87,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="#index_h"><span>h</span></a></li>
       <li><a href="#index_j"><span>j</span></a></li>
       <li><a href="#index_l"><span>l</span></a></li>
+      <li><a href="#index_m"><span>m</span></a></li>
       <li><a href="#index_n"><span>n</span></a></li>
       <li><a href="#index_s"><span>s</span></a></li>
       <li><a href="#index_u"><span>u</span></a></li>
@@ -125,10 +127,13 @@ $(document).ready(function(){initNavTree('functions_vars.html','');});
 
 <h3><a class="anchor" id="index_b"></a>- b -</h3><ul>
 <li>baseDown
-: <a class="el" href="classHamiltonian.html#a2b3f5ccb8dc514a8e97f876f12ec7d5b">Hamiltonian</a>
+: <a class="el" href="classBareHamiltonian.html#a3cc3ebc00702f55d5b1376167266409c">BareHamiltonian</a>
 </li>
 <li>baseUp
-: <a class="el" href="classHamiltonian.html#acdec983d4e787b7716f1d2540966bada">Hamiltonian</a>
+: <a class="el" href="classBareHamiltonian.html#ad8bd92d0a6ce8bb91992d75d9fe7a9ad">BareHamiltonian</a>
+</li>
+<li>blockmat
+: <a class="el" href="classMomHamiltonian.html#a07f51364183b92255adf2ddcf21a449d">MomHamiltonian</a>
 </li>
 </ul>
 
@@ -138,7 +143,7 @@ $(document).ready(function(){initNavTree('functions_vars.html','');});
 : <a class="el" href="classHubHam2D.html#a7220e5528edce22224acc37453657b32">HubHam2D</a>
 </li>
 <li>dim
-: <a class="el" href="classHamiltonian.html#aad13677008db9a013ce7a9fc648fee82">Hamiltonian</a>
+: <a class="el" href="classBareHamiltonian.html#a7e973232b231d17e01d2fefaf4e9a96d">BareHamiltonian</a>
 </li>
 <li>Down_col
 : <a class="el" href="classSparseHamiltonian2D__CSR.html#a4faf7b9155bbd22f9db713c680fb292d">SparseHamiltonian2D_CSR</a>
@@ -168,37 +173,45 @@ $(document).ready(function(){initNavTree('functions_vars.html','');});
 
 <h3><a class="anchor" id="index_h"></a>- h -</h3><ul>
 <li>ham
-: <a class="el" href="classHamiltonian.html#a1908559547aae575482f33115f33fa83">Hamiltonian</a>
+: <a class="el" href="classBareHamiltonian.html#a454cf3fddee5eb5b6a8b651f140c2831">BareHamiltonian</a>
 </li>
 <li>Hb
-: <a class="el" href="classHamiltonian.html#aa976f872c14ca2286c758b9b2ca25953">Hamiltonian</a>
+: <a class="el" href="classBareHamiltonian.html#a89ca58920abaa4560de0a1d48400b84b">BareHamiltonian</a>
+</li>
+<li>Hbc
+: <a class="el" href="classBareHamiltonian.html#af00dff713a5ccd79f2ae5956b058ba77">BareHamiltonian</a>
 </li>
 </ul>
 
 
 <h3><a class="anchor" id="index_j"></a>- j -</h3><ul>
 <li>J
-: <a class="el" href="classHamiltonian.html#a0950f5c5e2146f57e6635bd4ba21dae3">Hamiltonian</a>
+: <a class="el" href="classBareHamiltonian.html#ab36c84b6b581fa85c48f0e070e5483c5">BareHamiltonian</a>
 </li>
 </ul>
 
 
 <h3><a class="anchor" id="index_l"></a>- l -</h3><ul>
 <li>L
-: <a class="el" href="classHubHam2D.html#aa28a5aff5b4fa6d1d76a02b48a370eab">HubHam2D</a>
+: <a class="el" href="classBareHamiltonian.html#af379bf26dc3022b5a0b98a7081f2705a">BareHamiltonian</a>
+, <a class="el" href="classHubHam2D.html#aa28a5aff5b4fa6d1d76a02b48a370eab">HubHam2D</a>
+</li>
+</ul>
+
+
+<h3><a class="anchor" id="index_m"></a>- m -</h3><ul>
+<li>mombase
+: <a class="el" href="classMomHamiltonian.html#aa2563480fc14b4030c1a66ff857291be">MomHamiltonian</a>
 </li>
 </ul>
 
 
 <h3><a class="anchor" id="index_n"></a>- n -</h3><ul>
 <li>Nd
-: <a class="el" href="classHamiltonian.html#a23335fbccf79568763a99e8944bd2024">Hamiltonian</a>
-</li>
-<li>Ns
-: <a class="el" href="classHamiltonian.html#ab0b3a06ac8a254805f6f1e0d12f92fa3">Hamiltonian</a>
+: <a class="el" href="classBareHamiltonian.html#a0c910682d208f47539db2e8fa72db13a">BareHamiltonian</a>
 </li>
 <li>Nu
-: <a class="el" href="classHamiltonian.html#aeaea910b7ff30da7f1dbe0a6e7b1f5d7">Hamiltonian</a>
+: <a class="el" href="classBareHamiltonian.html#a497a2631a48701c6a0aba04f80bc31e5">BareHamiltonian</a>
 </li>
 </ul>
 
@@ -217,7 +230,7 @@ $(document).ready(function(){initNavTree('functions_vars.html','');});
 
 <h3><a class="anchor" id="index_u"></a>- u -</h3><ul>
 <li>U
-: <a class="el" href="classHamiltonian.html#ac717f0e298197474392806c804836e35">Hamiltonian</a>
+: <a class="el" href="classBareHamiltonian.html#aeee149d8a40deeaf1c2b18bd7542649d">BareHamiltonian</a>
 </li>
 <li>Umat_gpu
 : <a class="el" href="classGPUHamiltonian.html#a641278471887e327f43fae93d8352a1a">GPUHamiltonian&lt; T &gt;</a>
@@ -251,7 +264,7 @@ $(document).ready(function(){initNavTree('functions_vars.html','');});
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated by
+    <li class="footer">Generated on Wed Feb 5 2014 17:02:52 for HubbardGPU by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
   </ul>

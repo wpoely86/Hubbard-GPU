@@ -1,5 +1,5 @@
 <map id="SparseHamiltonian2D_CSR::BuildSparseHam" name="SparseHamiltonian2D_CSR::BuildSparseHam">
 <area shape="rect" id="node2" href="$classHubHam2D.html#ad0cf5454e30f548e8a19e6e041c4238c" title="HubHam2D::hopping" alt="" coords="219,12,363,39"/>
-<area shape="rect" id="node3" href="$classHubHam2D.html#adf395bef67873ca2890ddff1623aa71f" title="HubHam2D::CalcSign" alt="" coords="411,12,563,39"/>
-<area shape="rect" id="node4" href="$classHamiltonian.html#a1a1c61f3baf8ea6d0efc66028c6674c4" title="Hamiltonian::CountBits" alt="" coords="611,12,768,39"/>
+<area shape="rect" id="node3" href="$classBareHamiltonian.html#a71a6f71bb77ccf7ab241fdfdd46ce9e9" title="BareHamiltonian::CalcSign" alt="" coords="411,12,589,39"/>
+<area shape="rect" id="node4" href="$classBareHamiltonian.html#a9393391804a06e0ee4970e21d0b729ff" title="BareHamiltonian::CountBits" alt="" coords="637,12,821,39"/>
 </map>

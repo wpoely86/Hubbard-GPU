@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.3.1"/>
-<title>Hubbard GPU: hamgpu.h Source File</title>
+<title>HubbardGPU: hamgpu.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -29,8 +29,9 @@
  <tbody>
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
-   <div id="projectname">Hubbard GPU
+   <div id="projectname">HubbardGPU
    </div>
+   <div id="projectbrief">Hubbard diagonalisation on the GPU (and CPU)</div>
   </td>
  </tr>
  </tbody>
@@ -129,11 +130,11 @@ $(document).ready(function(){initNavTree('hamgpu_8h_source.html','');});
 <div class="line"><a name="l00028"></a><span class="lineno"><a class="code" href="classGPUHamiltonian.html">   28</a></span>&#160;<span class="keyword">class </span><a class="code" href="classGPUHamiltonian.html">GPUHamiltonian</a>: <span class="keyword">public</span> T</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;{</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <a class="code" href="classGPUHamiltonian.html#a3db11b82a99c73409643dd5bbdd401fd">GPUHamiltonian</a>(<span class="keywordtype">int</span> Ns, <span class="keywordtype">int</span> Nu, <span class="keywordtype">int</span> Nd, <span class="keywordtype">double</span> J, <span class="keywordtype">double</span> U);</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <a class="code" href="classGPUHamiltonian.html#a3db11b82a99c73409643dd5bbdd401fd">GPUHamiltonian</a>(<span class="keywordtype">int</span> L, <span class="keywordtype">int</span> D, <span class="keywordtype">int</span> Nu, <span class="keywordtype">int</span> Nd, <span class="keywordtype">double</span> J, <span class="keywordtype">double</span> U);</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="classGPUHamiltonian.html#a68200d281388a1b77fa62639032ab099">~GPUHamiltonian</a>();</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        <a class="code" href="classGPUHamiltonian.html#a3db11b82a99c73409643dd5bbdd401fd">GPUHamiltonian</a>(<span class="keywordtype">int</span> Ns, <span class="keywordtype">int</span> Nu, <span class="keywordtype">int</span> Nd, <span class="keywordtype">double</span> J, <span class="keywordtype">double</span> U);</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        <a class="code" href="classGPUHamiltonian.html#a3db11b82a99c73409643dd5bbdd401fd">GPUHamiltonian</a>(<span class="keywordtype">int</span> L, <span class="keywordtype">int</span> D, <span class="keywordtype">int</span> Nu, <span class="keywordtype">int</span> Nd, <span class="keywordtype">double</span> J, <span class="keywordtype">double</span> U);</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        <span class="keyword">virtual</span> <a class="code" href="classGPUHamiltonian.html#acc8d3b1e628ed6d8d3accff2e809e855">~GPUHamiltonian</a>();</div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classGPUHamiltonian.html#a6adf6ac7c9b642ea4804097b0a2ee7bf">mvprod</a>(<span class="keywordtype">double</span> *x, <span class="keywordtype">double</span> *y, <span class="keywordtype">double</span> alpha) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classGPUHamiltonian.html#a03e78ff5eefcd22272e472eacce57536">mvprod</a>(<span class="keywordtype">double</span> *x, <span class="keywordtype">double</span> *y, <span class="keywordtype">double</span> alpha) <span class="keyword">const</span>;</div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;</div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        <span class="keywordtype">double</span> <a class="code" href="classGPUHamiltonian.html#a92d4611f94589489534b361146f7f20b">LanczosDiagonalize</a>(<span class="keywordtype">int</span> m=0);</div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;</div>
@@ -141,11 +142,11 @@ $(document).ready(function(){initNavTree('hamgpu_8h_source.html','');});
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;</div>
 <div class="line"><a name="l00042"></a><span class="lineno"><a class="code" href="classGPUHamiltonian.html#a641278471887e327f43fae93d8352a1a">   42</a></span>&#160;        <span class="keywordtype">double</span> *<a class="code" href="classGPUHamiltonian.html#a641278471887e327f43fae93d8352a1a" title="The diagonal of the full hamiltonian (onsite interaction)">Umat_gpu</a>;</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;</div>
-<div class="line"><a name="l00045"></a><span class="lineno"><a class="code" href="classGPUHamiltonian.html#a43330fa1a5bb9186267efad657ecf751">   45</a></span>&#160;    <span class="keywordtype">double</span> *<a class="code" href="classGPUHamiltonian.html#a43330fa1a5bb9186267efad657ecf751" title="The array to hold the data (ELL format) for the up hamiltonian.">Up_data_gpu</a>;</div>
-<div class="line"><a name="l00047"></a><span class="lineno"><a class="code" href="classGPUHamiltonian.html#aef408a62711f45b502337ce2361013e3">   47</a></span>&#160;    <span class="keywordtype">double</span> *<a class="code" href="classGPUHamiltonian.html#aef408a62711f45b502337ce2361013e3" title="The array to hold the data (ELL format) for the down hamiltonian.">Down_data_gpu</a>;</div>
+<div class="line"><a name="l00045"></a><span class="lineno"><a class="code" href="classGPUHamiltonian.html#a43330fa1a5bb9186267efad657ecf751">   45</a></span>&#160;        <span class="keywordtype">double</span> *<a class="code" href="classGPUHamiltonian.html#a43330fa1a5bb9186267efad657ecf751" title="The array to hold the data (ELL format) for the up hamiltonian.">Up_data_gpu</a>;</div>
+<div class="line"><a name="l00047"></a><span class="lineno"><a class="code" href="classGPUHamiltonian.html#aef408a62711f45b502337ce2361013e3">   47</a></span>&#160;        <span class="keywordtype">double</span> *<a class="code" href="classGPUHamiltonian.html#aef408a62711f45b502337ce2361013e3" title="The array to hold the data (ELL format) for the down hamiltonian.">Down_data_gpu</a>;</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;</div>
-<div class="line"><a name="l00050"></a><span class="lineno"><a class="code" href="classGPUHamiltonian.html#a4755baba81c69787364fd582cdf03c84">   50</a></span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> *<a class="code" href="classGPUHamiltonian.html#a4755baba81c69787364fd582cdf03c84" title="The array to hold the indices for the up hamiltonian.">Up_ind_gpu</a>;</div>
-<div class="line"><a name="l00052"></a><span class="lineno"><a class="code" href="classGPUHamiltonian.html#a1ad0bfe61a413002964406385e0a83c2">   52</a></span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> *<a class="code" href="classGPUHamiltonian.html#a1ad0bfe61a413002964406385e0a83c2" title="The array to hold the indices for the down hamiltonian.">Down_ind_gpu</a>;</div>
+<div class="line"><a name="l00050"></a><span class="lineno"><a class="code" href="classGPUHamiltonian.html#a4755baba81c69787364fd582cdf03c84">   50</a></span>&#160;        <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> *<a class="code" href="classGPUHamiltonian.html#a4755baba81c69787364fd582cdf03c84" title="The array to hold the indices for the up hamiltonian.">Up_ind_gpu</a>;</div>
+<div class="line"><a name="l00052"></a><span class="lineno"><a class="code" href="classGPUHamiltonian.html#a1ad0bfe61a413002964406385e0a83c2">   52</a></span>&#160;        <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> *<a class="code" href="classGPUHamiltonian.html#a1ad0bfe61a413002964406385e0a83c2" title="The array to hold the indices for the down hamiltonian.">Down_ind_gpu</a>;</div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;</div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;};</div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;</div>
@@ -158,7 +159,7 @@ $(document).ready(function(){initNavTree('hamgpu_8h_source.html','');});
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="hamgpu_8h.html">hamgpu.h</a></li>
-    <li class="footer">Generated by
+    <li class="footer">Generated on Wed Feb 5 2014 17:02:52 for HubbardGPU by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
   </ul>

@@ -1,7 +1,6 @@
 var NAVTREE =
 [
-  [ "Hubbard GPU", "index.html", [
-    [ "LICENSE", "index.html#LICENSE", null ],
+  [ "HubbardGPU", "index.html", [
     [ "Classes", null, [
       [ "Class List", "annotated.html", "annotated" ],
       [ "Class Index", "classes.html", null ],
@@ -26,7 +25,8 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"annotated.html"
+"annotated.html",
+"classSparseHamiltonian2D.html#a001275e5978383d32cd9f39facc1b01e"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

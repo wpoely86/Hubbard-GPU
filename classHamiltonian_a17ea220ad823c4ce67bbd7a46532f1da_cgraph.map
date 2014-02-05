@@ -1,8 +1,8 @@
 <map id="Hamiltonian::LanczosDiagonalize" name="Hamiltonian::LanczosDiagonalize">
-<area shape="rect" id="node2" href="$ham_8h.html#a2247ca92b3cf0e88e9448ad05240921f" title="ddot_" alt="" coords="314,5,369,32"/>
-<area shape="rect" id="node3" href="$ham_8h.html#a9d4e5f6c81fb4bb87223f92b5347daf1" title="dscal_" alt="" coords="311,56,371,83"/>
+<area shape="rect" id="node2" href="$bare-ham_8h.html#a2247ca92b3cf0e88e9448ad05240921f" title="ddot_" alt="" coords="314,5,369,32"/>
+<area shape="rect" id="node3" href="$bare-ham_8h.html#a9d4e5f6c81fb4bb87223f92b5347daf1" title="dscal_" alt="" coords="311,56,371,83"/>
 <area shape="rect" id="node4" href="$classHamiltonian.html#ae31ba4590d7a497aed8ef2cac36abd1c" title="Hamiltonian::mvprod" alt="" coords="270,107,413,133"/>
-<area shape="rect" id="node6" href="$ham_8h.html#abb7d6c365abc5d11a16c1c085bca91a4" title="daxpy_" alt="" coords="309,157,373,184"/>
-<area shape="rect" id="node7" href="$ham_8h.html#adab72a2a47e9a4dda768424878b4330c" title="dstev_" alt="" coords="311,208,372,235"/>
-<area shape="rect" id="node5" href="$ham_8h.html#aad27beb06b23ce25ab9637d76286677f" title="dsymv_" alt="" coords="462,107,530,133"/>
+<area shape="rect" id="node6" href="$bare-ham_8h.html#abb7d6c365abc5d11a16c1c085bca91a4" title="daxpy_" alt="" coords="309,157,373,184"/>
+<area shape="rect" id="node7" href="$bare-ham_8h.html#adab72a2a47e9a4dda768424878b4330c" title="dstev_" alt="" coords="311,208,372,235"/>
+<area shape="rect" id="node5" href="$bare-ham_8h.html#aad27beb06b23ce25ab9637d76286677f" title="dsymv_" alt="" coords="462,107,530,133"/>
 </map>

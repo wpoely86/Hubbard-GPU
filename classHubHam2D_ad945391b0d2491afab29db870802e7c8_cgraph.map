@@ -1,6 +1,6 @@
 <map id="HubHam2D::BuildFullHam" name="HubHam2D::BuildFullHam">
-<area shape="rect" id="node2" href="$classHamiltonian.html#a25687bfbb047a3557f85310daede2442" title="Hamiltonian::CalcDim" alt="" coords="233,5,383,32"/>
-<area shape="rect" id="node3" href="$classHubHam2D.html#ad0cf5454e30f548e8a19e6e041c4238c" title="HubHam2D::hopping" alt="" coords="236,56,380,83"/>
-<area shape="rect" id="node5" href="$classHamiltonian.html#a1a1c61f3baf8ea6d0efc66028c6674c4" title="Hamiltonian::CountBits" alt="" coords="632,81,789,108"/>
-<area shape="rect" id="node4" href="$classHubHam2D.html#adf395bef67873ca2890ddff1623aa71f" title="HubHam2D::CalcSign" alt="" coords="432,56,584,83"/>
+<area shape="rect" id="node2" href="$classBareHamiltonian.html#acfb89409533465961fb5b1c53056bbaa" title="BareHamiltonian::CalcDim" alt="" coords="233,5,410,32"/>
+<area shape="rect" id="node3" href="$classHubHam2D.html#ad0cf5454e30f548e8a19e6e041c4238c" title="HubHam2D::hopping" alt="" coords="249,56,393,83"/>
+<area shape="rect" id="node5" href="$classBareHamiltonian.html#a9393391804a06e0ee4970e21d0b729ff" title="BareHamiltonian::CountBits" alt="" coords="685,81,869,108"/>
+<area shape="rect" id="node4" href="$classBareHamiltonian.html#a71a6f71bb77ccf7ab241fdfdd46ce9e9" title="BareHamiltonian::CalcSign" alt="" coords="459,56,637,83"/>
 </map>

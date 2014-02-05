@@ -1,7 +1,6 @@
 <map id="Hamiltonian::arpackDiagonalize" name="Hamiltonian::arpackDiagonalize">
-<area shape="rect" id="node2" href="$classHamiltonian.html#a25687bfbb047a3557f85310daede2442" title="Hamiltonian::CalcDim" alt="" coords="262,5,413,32"/>
-<area shape="rect" id="node3" href="$ham_8cpp.html#a3eabc0ee91c768347f7fc904d5048502" title="dsaupd_" alt="" coords="302,56,373,83"/>
-<area shape="rect" id="node4" href="$classHamiltonian.html#ae31ba4590d7a497aed8ef2cac36abd1c" title="Hamiltonian::mvprod" alt="" coords="266,107,409,133"/>
-<area shape="rect" id="node6" href="$ham_8cpp.html#abbfc1658604845f75cda50de100e6f9e" title="dseupd_" alt="" coords="302,157,373,184"/>
-<area shape="rect" id="node5" href="$ham_8h.html#aad27beb06b23ce25ab9637d76286677f" title="dsymv_" alt="" coords="462,107,530,133"/>
+<area shape="rect" id="node2" href="$bare-ham_8h.html#a3eabc0ee91c768347f7fc904d5048502" title="dsaupd_" alt="" coords="298,5,369,32"/>
+<area shape="rect" id="node3" href="$classHamiltonian.html#ae31ba4590d7a497aed8ef2cac36abd1c" title="Hamiltonian::mvprod" alt="" coords="262,56,405,83"/>
+<area shape="rect" id="node5" href="$bare-ham_8h.html#abbfc1658604845f75cda50de100e6f9e" title="dseupd_" alt="" coords="298,107,369,133"/>
+<area shape="rect" id="node4" href="$bare-ham_8h.html#aad27beb06b23ce25ab9637d76286677f" title="dsymv_" alt="" coords="454,56,522,83"/>
 </map>

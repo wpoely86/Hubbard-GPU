@@ -1,0 +1,12 @@
+*~
+*.o
+*.bak
+*.txt
+tags
+.gdb_history
+*.swp
+*.swo
+main
+main2D
+libprimme.a
+docs

@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['nd',['Nd',['../classHamiltonian.html#a23335fbccf79568763a99e8944bd2024',1,'Hamiltonian']]],
-  ['ns',['Ns',['../classHamiltonian.html#ab0b3a06ac8a254805f6f1e0d12f92fa3',1,'Hamiltonian']]],
-  ['nu',['Nu',['../classHamiltonian.html#aeaea910b7ff30da7f1dbe0a6e7b1f5d7',1,'Hamiltonian']]]
+  ['nd',['Nd',['../classBareHamiltonian.html#a0c910682d208f47539db2e8fa72db13a',1,'BareHamiltonian']]],
+  ['nu',['Nu',['../classBareHamiltonian.html#a497a2631a48701c6a0aba04f80bc31e5',1,'BareHamiltonian']]],
+  ['numthreads',['NUMTHREADS',['../hamgpu_8cu.html#acf854d1717130336e7cb353248c53541',1,'hamgpu.cu']]]
 ];

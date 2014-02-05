@@ -1,12 +1,20 @@
 var files =
 [
-    [ "gcc_cuda_compat.h", "gcc__cuda__compat_8h.html", "gcc__cuda__compat_8h" ],
-    [ "ham.cpp", "ham_8cpp.html", "ham_8cpp" ],
-    [ "ham.h", "ham_8h.html", "ham_8h" ],
+    [ "bare-ham.cpp", "bare-ham_8cpp.html", null ],
+    [ "bare-ham.h", "bare-ham_8h.html", "bare-ham_8h" ],
+    [ "ham-mom.cpp", "ham-mom_8cpp.html", "ham-mom_8cpp" ],
+    [ "ham-mom.h", "ham-mom_8h.html", [
+      [ "MomHamiltonian", "classMomHamiltonian.html", "classMomHamiltonian" ]
+    ] ],
+    [ "ham.cpp", "ham_8cpp.html", null ],
+    [ "ham.h", "ham_8h.html", [
+      [ "Hamiltonian", "classHamiltonian.html", "classHamiltonian" ]
+    ] ],
     [ "ham2D.cpp", "ham2D_8cpp.html", null ],
     [ "ham2D.h", "ham2D_8h.html", [
       [ "HubHam2D", "classHubHam2D.html", "classHubHam2D" ]
     ] ],
+    [ "hamgpu.cu", "hamgpu_8cu.html", "hamgpu_8cu" ],
     [ "hamgpu.h", "hamgpu_8h.html", [
       [ "GPUHamiltonian", "classGPUHamiltonian.html", "classGPUHamiltonian" ]
     ] ],

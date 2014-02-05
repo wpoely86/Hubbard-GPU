@@ -1,5 +1,6 @@
 <map id="SparseHamiltonian2D_CSR" name="SparseHamiltonian2D_CSR">
-<area shape="rect" id="node4" href="$classSparseHamiltonian2D.html" title="SparseHamiltonian2D" alt="" coords="23,229,172,256"/>
-<area shape="rect" id="node2" href="$classHubHam2D.html" title="HubHam2D" alt="" coords="52,80,143,107"/>
-<area shape="rect" id="node3" href="$classHamiltonian.html" title="Hamiltonian" alt="" coords="52,5,143,32"/>
+<area shape="rect" id="node5" href="$classSparseHamiltonian2D.html" title="SparseHamiltonian2D" alt="" coords="23,304,172,331"/>
+<area shape="rect" id="node2" href="$classHubHam2D.html" title="HubHam2D" alt="" coords="52,155,143,181"/>
+<area shape="rect" id="node3" href="$classHamiltonian.html" title="Hamiltonian" alt="" coords="52,80,143,107"/>
+<area shape="rect" id="node4" href="$classBareHamiltonian.html" title="BareHamiltonian" alt="" coords="38,5,156,32"/>
 </map>

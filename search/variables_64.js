@@ -1,7 +1,7 @@
 var searchData=
 [
   ['d',['D',['../classHubHam2D.html#a7220e5528edce22224acc37453657b32',1,'HubHam2D']]],
-  ['dim',['dim',['../classHamiltonian.html#aad13677008db9a013ce7a9fc648fee82',1,'Hamiltonian']]],
+  ['dim',['dim',['../classBareHamiltonian.html#a7e973232b231d17e01d2fefaf4e9a96d',1,'BareHamiltonian']]],
   ['down_5fcol',['Down_col',['../classSparseHamiltonian2D__CSR.html#a4faf7b9155bbd22f9db713c680fb292d',1,'SparseHamiltonian2D_CSR']]],
   ['down_5fdata',['Down_data',['../classSparseHamiltonian.html#a9de29c5ce417cb15926609010c030442',1,'SparseHamiltonian::Down_data()'],['../classSparseHamiltonian2D.html#ac9aacf74e5771238bf6d503256a9ae2c',1,'SparseHamiltonian2D::Down_data()']]],
   ['down_5fdata_5fcsr',['Down_data_CSR',['../classSparseHamiltonian2D__CSR.html#a51169fbda01a04544e6ccb59a209f87c',1,'SparseHamiltonian2D_CSR']]],

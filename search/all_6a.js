@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['j',['J',['../classHamiltonian.html#a0950f5c5e2146f57e6635bd4ba21dae3',1,'Hamiltonian']]]
+  ['j',['J',['../classBareHamiltonian.html#ab36c84b6b581fa85c48f0e070e5483c5',1,'BareHamiltonian']]]
 ];

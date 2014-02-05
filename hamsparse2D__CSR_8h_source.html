@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.3.1"/>
-<title>Hubbard GPU: hamsparse2D_CSR.h Source File</title>
+<title>HubbardGPU: hamsparse2D_CSR.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -29,8 +29,9 @@
  <tbody>
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
-   <div id="projectname">Hubbard GPU
+   <div id="projectname">HubbardGPU
    </div>
+   <div id="projectbrief">Hubbard diagonalisation on the GPU (and CPU)</div>
   </td>
  </tr>
  </tbody>
@@ -131,14 +132,14 @@ $(document).ready(function(){initNavTree('hamsparse2D__CSR_8h_source.html','');}
 <div class="line"><a name="l00029"></a><span class="lineno"><a class="code" href="classSparseHamiltonian2D__CSR.html">   29</a></span>&#160;<span class="keyword">class </span><a class="code" href="classSparseHamiltonian2D__CSR.html">SparseHamiltonian2D_CSR</a>: <span class="keyword">public</span> <a class="code" href="classHubHam2D.html">HubHam2D</a></div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;{</div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <a class="code" href="classSparseHamiltonian2D__CSR.html#adcf84fe0a2d5fd288f357bdbd86e835d">SparseHamiltonian2D_CSR</a>(<span class="keywordtype">int</span> <a class="code" href="classHubHam2D.html#aa28a5aff5b4fa6d1d76a02b48a370eab" title="The length of the 2D grid.">L</a>,<span class="keywordtype">int</span> <a class="code" href="classHubHam2D.html#a7220e5528edce22224acc37453657b32" title="The depth of the 2D grid.">D</a>, <span class="keywordtype">int</span> <a class="code" href="classHamiltonian.html#aeaea910b7ff30da7f1dbe0a6e7b1f5d7" title="Number of up electrons.">Nu</a>, <span class="keywordtype">int</span> <a class="code" href="classHamiltonian.html#a23335fbccf79568763a99e8944bd2024" title="Number of down electrons.">Nd</a>, <span class="keywordtype">double</span> <a class="code" href="classHamiltonian.html#a0950f5c5e2146f57e6635bd4ba21dae3" title="Hopping strength.">J</a>, <span class="keywordtype">double</span> <a class="code" href="classHamiltonian.html#ac717f0e298197474392806c804836e35" title="On site interaction strength.">U</a>);</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="classSparseHamiltonian2D__CSR.html#a80b6c7099c4f298826c32a4d8fb45364">~SparseHamiltonian2D_CSR</a>();</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        <a class="code" href="classSparseHamiltonian2D__CSR.html#adcf84fe0a2d5fd288f357bdbd86e835d">SparseHamiltonian2D_CSR</a>(<span class="keywordtype">int</span> <a class="code" href="classHubHam2D.html#aa28a5aff5b4fa6d1d76a02b48a370eab" title="The length of the 2D grid.">L</a>,<span class="keywordtype">int</span> <a class="code" href="classHubHam2D.html#a7220e5528edce22224acc37453657b32" title="The depth of the 2D grid.">D</a>, <span class="keywordtype">int</span> <a class="code" href="classBareHamiltonian.html#a497a2631a48701c6a0aba04f80bc31e5" title="Number of up electrons.">Nu</a>, <span class="keywordtype">int</span> <a class="code" href="classBareHamiltonian.html#a0c910682d208f47539db2e8fa72db13a" title="Number of down electrons.">Nd</a>, <span class="keywordtype">double</span> <a class="code" href="classBareHamiltonian.html#ab36c84b6b581fa85c48f0e070e5483c5" title="Hopping strength.">J</a>, <span class="keywordtype">double</span> <a class="code" href="classBareHamiltonian.html#aeee149d8a40deeaf1c2b18bd7542649d" title="On site interaction strength.">U</a>);</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        <span class="keyword">virtual</span> <a class="code" href="classSparseHamiltonian2D__CSR.html#a80b6c7099c4f298826c32a4d8fb45364">~SparseHamiltonian2D_CSR</a>();</div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classSparseHamiltonian2D__CSR.html#a0f3ea43d0d27705ddc249e9372506c3e">BuildSparseHam</a>();</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classSparseHamiltonian2D__CSR.html#a0f3ea43d0d27705ddc249e9372506c3e">BuildSparseHam</a>();</div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classSparseHamiltonian2D__CSR.html#a3786c4bdb5dc934f0e01039d21fcf116">PrintSparse</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classSparseHamiltonian2D__CSR.html#a3786c4bdb5dc934f0e01039d21fcf116">PrintSparse</a>() <span class="keyword">const</span>;</div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classSparseHamiltonian2D__CSR.html#ad63bea7cba588a6802c096f240685612">PrintRawCSR</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classSparseHamiltonian2D__CSR.html#ad63bea7cba588a6802c096f240685612">PrintRawCSR</a>() <span class="keyword">const</span>;</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classSparseHamiltonian2D__CSR.html#ad355ef212b019050598f547696548eb2">mvprod</a>(<span class="keywordtype">double</span> *, <span class="keywordtype">double</span> *, <span class="keywordtype">double</span>) <span class="keyword">const</span>;</div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;</div>
@@ -147,13 +148,13 @@ $(document).ready(function(){initNavTree('hamsparse2D__CSR_8h_source.html','');}
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keyword">protected</span>:</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;</div>
 <div class="line"><a name="l00048"></a><span class="lineno"><a class="code" href="classSparseHamiltonian2D__CSR.html#a5332697621f780a27e4b9bd8047f768b">   48</a></span>&#160;        std::vector&lt;double&gt; <a class="code" href="classSparseHamiltonian2D__CSR.html#a5332697621f780a27e4b9bd8047f768b" title="The array to hold the data (CSR format) for the up hamiltonian.">Up_data_CSR</a>;</div>
-<div class="line"><a name="l00050"></a><span class="lineno"><a class="code" href="classSparseHamiltonian2D__CSR.html#a51169fbda01a04544e6ccb59a209f87c">   50</a></span>&#160;    std::vector&lt;double&gt; <a class="code" href="classSparseHamiltonian2D__CSR.html#a51169fbda01a04544e6ccb59a209f87c" title="The array to hold the data (CSR format) for the down hamiltonian.">Down_data_CSR</a>;</div>
+<div class="line"><a name="l00050"></a><span class="lineno"><a class="code" href="classSparseHamiltonian2D__CSR.html#a51169fbda01a04544e6ccb59a209f87c">   50</a></span>&#160;        std::vector&lt;double&gt; <a class="code" href="classSparseHamiltonian2D__CSR.html#a51169fbda01a04544e6ccb59a209f87c" title="The array to hold the data (CSR format) for the down hamiltonian.">Down_data_CSR</a>;</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;</div>
-<div class="line"><a name="l00053"></a><span class="lineno"><a class="code" href="classSparseHamiltonian2D__CSR.html#a5adc59a81625770a08694ddd889f0395">   53</a></span>&#160;    std::vector&lt;unsigned int&gt; <a class="code" href="classSparseHamiltonian2D__CSR.html#a5adc59a81625770a08694ddd889f0395" title="The array to hold the column indices for the up hamiltonian.">Up_col</a>;</div>
-<div class="line"><a name="l00055"></a><span class="lineno"><a class="code" href="classSparseHamiltonian2D__CSR.html#a4faf7b9155bbd22f9db713c680fb292d">   55</a></span>&#160;    std::vector&lt;unsigned int&gt; <a class="code" href="classSparseHamiltonian2D__CSR.html#a4faf7b9155bbd22f9db713c680fb292d" title="The array to hold the column indices for the down hamiltonian.">Down_col</a>;</div>
+<div class="line"><a name="l00053"></a><span class="lineno"><a class="code" href="classSparseHamiltonian2D__CSR.html#a5adc59a81625770a08694ddd889f0395">   53</a></span>&#160;        std::vector&lt;unsigned int&gt; <a class="code" href="classSparseHamiltonian2D__CSR.html#a5adc59a81625770a08694ddd889f0395" title="The array to hold the column indices for the up hamiltonian.">Up_col</a>;</div>
+<div class="line"><a name="l00055"></a><span class="lineno"><a class="code" href="classSparseHamiltonian2D__CSR.html#a4faf7b9155bbd22f9db713c680fb292d">   55</a></span>&#160;        std::vector&lt;unsigned int&gt; <a class="code" href="classSparseHamiltonian2D__CSR.html#a4faf7b9155bbd22f9db713c680fb292d" title="The array to hold the column indices for the down hamiltonian.">Down_col</a>;</div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;</div>
-<div class="line"><a name="l00058"></a><span class="lineno"><a class="code" href="classSparseHamiltonian2D__CSR.html#ab02eeb8c1b251a8724c8a093370a20af">   58</a></span>&#160;    std::vector&lt;unsigned int&gt; <a class="code" href="classSparseHamiltonian2D__CSR.html#ab02eeb8c1b251a8724c8a093370a20af" title="The array to hold the row indices for the up hamiltonian.">Up_row</a>;</div>
-<div class="line"><a name="l00060"></a><span class="lineno"><a class="code" href="classSparseHamiltonian2D__CSR.html#adb2fd14d3735a4a3a583d11215937b44">   60</a></span>&#160;    std::vector&lt;unsigned int&gt; <a class="code" href="classSparseHamiltonian2D__CSR.html#adb2fd14d3735a4a3a583d11215937b44" title="The array to hold the row indices for the down hamiltonian.">Down_row</a>;</div>
+<div class="line"><a name="l00058"></a><span class="lineno"><a class="code" href="classSparseHamiltonian2D__CSR.html#ab02eeb8c1b251a8724c8a093370a20af">   58</a></span>&#160;        std::vector&lt;unsigned int&gt; <a class="code" href="classSparseHamiltonian2D__CSR.html#ab02eeb8c1b251a8724c8a093370a20af" title="The array to hold the row indices for the up hamiltonian.">Up_row</a>;</div>
+<div class="line"><a name="l00060"></a><span class="lineno"><a class="code" href="classSparseHamiltonian2D__CSR.html#adb2fd14d3735a4a3a583d11215937b44">   60</a></span>&#160;        std::vector&lt;unsigned int&gt; <a class="code" href="classSparseHamiltonian2D__CSR.html#adb2fd14d3735a4a3a583d11215937b44" title="The array to hold the row indices for the down hamiltonian.">Down_row</a>;</div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;</div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;};</div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;</div>
@@ -166,7 +167,7 @@ $(document).ready(function(){initNavTree('hamsparse2D__CSR_8h_source.html','');}
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="hamsparse2D__CSR_8h.html">hamsparse2D_CSR.h</a></li>
-    <li class="footer">Generated by
+    <li class="footer">Generated on Wed Feb 5 2014 17:02:52 for HubbardGPU by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
   </ul>

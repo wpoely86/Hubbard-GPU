@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.3.1"/>
-<title>Hubbard GPU: lanczos.cpp Source File</title>
+<title>HubbardGPU: lanczos.cpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -29,8 +29,9 @@
  <tbody>
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
-   <div id="projectname">Hubbard GPU
+   <div id="projectname">HubbardGPU
    </div>
+   <div id="projectbrief">Hubbard diagonalisation on the GPU (and CPU)</div>
   </td>
  </tr>
  </tbody>
@@ -158,8 +159,8 @@ $(document).ready(function(){initNavTree('lanczos_8cpp_source.html','');});
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    srand(time(0));</div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;</div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i=0;i&lt;size;i++)</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> j=i;j&lt;size;j++)</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        matrix(i,j) = matrix(j,i) = rand()*1.0/RAND_MAX;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        <span class="keywordflow">for</span>(<span class="keywordtype">int</span> j=i;j&lt;size;j++)</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;            matrix(i,j) = matrix(j,i) = rand()*1.0/RAND_MAX;</div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;</div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    vector&lt;double&gt; a(m,0);</div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    vector&lt;double&gt; b(m,0);</div>
@@ -181,22 +182,22 @@ $(document).ready(function(){initNavTree('lanczos_8cpp_source.html','');});
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;</div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <span class="keywordflow">for</span>(i=1;i&lt;m;i++)</div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    {</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    (*f1) *= -b[i-1];</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    (*f1) += matrix*(*f2);</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        (*f1) *= -b[i-1];</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        (*f1) += matrix*(*f2);</div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    a[i-1] = dot(*f1,*f2);</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        a[i-1] = dot(*f1,*f2);</div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    (*f1) -= a[i-1]*(*f2);</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        (*f1) -= a[i-1]*(*f2);</div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    b[i] = sqrt(dot(*f1,*f1));</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        b[i] = sqrt(dot(*f1,*f1));</div>
 <div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    <span class="keywordflow">if</span>( fabs(b[i]) &lt; 1e-10 )</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;        <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        <span class="keywordflow">if</span>( fabs(b[i]) &lt; 1e-10 )</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;            <span class="keywordflow">break</span>;</div>
 <div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    (*f1) /= b[i];</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    tmp = f2;</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    f2 = f1;</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    f1 = tmp;</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        (*f1) /= b[i];</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;        tmp = f2;</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;        f2 = f1;</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        f1 = tmp;</div>
 <div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    }</div>
 <div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;</div>
 <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    mat T(i,i);</div>
@@ -206,8 +207,8 @@ $(document).ready(function(){initNavTree('lanczos_8cpp_source.html','');});
 <div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;</div>
 <div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> j=1;j&lt;i;j++)</div>
 <div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    {</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    T(j,j) = a[j];</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    T(j,j-1) = T(j-1,j) = b[j];</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;        T(j,j) = a[j];</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;        T(j,j-1) = T(j-1,j) = b[j];</div>
 <div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    }</div>
 <div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;</div>
 <div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    vec eigs1 = eig_sym(T);</div>
@@ -227,7 +228,7 @@ $(document).ready(function(){initNavTree('lanczos_8cpp_source.html','');});
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="lanczos_8cpp.html">lanczos.cpp</a></li>
-    <li class="footer">Generated by
+    <li class="footer">Generated on Wed Feb 5 2014 17:02:52 for HubbardGPU by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
   </ul>
