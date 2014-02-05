@@ -23,14 +23,14 @@ along with Hubbard-GPU.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Constructor of the SparseHamiltonian class
- * @param Ns Number of lattice sites
+ * @param L Number of lattice sites
  * @param Nu Number of Up Electrons
  * @param Nd Number of Down Electrons
  * @param J The hopping strengh
  * @param U The onsite interaction strength
  */
-SparseHamiltonian::SparseHamiltonian(int Ns, int Nu, int Nd, double J, double U)
-    : Hamiltonian(Ns,Nu,Nd,J,U)
+SparseHamiltonian::SparseHamiltonian(int L, int Nu, int Nd, double J, double U)
+    : Hamiltonian(L,Nu,Nd,J,U)
 {
     Up_data = 0;
     Down_data = 0;
@@ -86,8 +86,8 @@ void SparseHamiltonian::BuildSparseHam()
     else
 	downjumpsign = 1;
 
-    size_Up = ((Ns-Nu)>Nu) ? 2*Nu : 2*(Ns-Nu);
-    size_Down = ((Ns-Nd)>Nd) ? 2*Nd : 2*(Ns-Nd);
+    size_Up = ((L-Nu)>Nu) ? 2*Nu : 2*(L-Nu);
+    size_Down = ((L-Nd)>Nd) ? 2*Nd : 2*(L-Nd);
 
     Up_data = new double [NumUp*size_Up];
     Up_ind = new unsigned int [NumUp*size_Up];
