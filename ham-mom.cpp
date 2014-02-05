@@ -285,8 +285,7 @@ int MomHamiltonian::interaction(int a, int b, int c, int d) const
 /**
   * private method used to see if a hopping between state a and b is
   * possible and with which sign. Only for 1D Hubbard.
-  * @param a the bra to use
-  * @param b the ket to use
+  * @param ket the ket to use
   * @returns matrix element of the hopping term between the ket and the bra. You still
   * have to multiply this with the hopping strength J
   */

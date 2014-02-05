@@ -1,4 +1,4 @@
-/* Copyright (C) 2012  Ward Poelmans
+/* Copyright (C) 2012-2014  Ward Poelmans
 
 This file is part of Hubbard-GPU.
 
@@ -15,41 +15,6 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with Hubbard-GPU.  If not, see <http://www.gnu.org/licenses/>.
 */
-
-/**
- * @mainpage
- * This is an implementation of http://arxiv.org/abs/1204.3425
- * "Exact diagonalization of the Hubbard model on graphics processing units" by Siro and Harju\n\n\n
- * There are 2 programs: main and main2D. The former is for 1D Hubbard, the latter is for
- * 2D Hubbard. Everything is split up in several classes to make reusing code easy:\n
- * The Hamiltonian and HubHam2D classes build the full (dense) Hamiltonian Matrix. SparseHamiltonian
- * stores the Hubbard Hamiltonian in parts: an spin up and a spin down part. The matrix themselves are
- * storred in the ELL format.\n
- * The SparseHamiltonian2D does the same but for 2D Hubbard. However, here we make a detour: we first store
- * the matrices in the CRS format (the SparseHamiltonian2D_CSR class) and then convert it in the ELL format.
- * The reason is that for ELL, we need to know the maximum number of non-zero elements (nnz) of a row.\n\n
- *
- * There are several branches in the git repo: the master contains only the CPU version. The branch 'GPU'
- * constains the GPU version and the branch 'PRIMME' used the PRIMME library to find the eigenvalues and
- * eigenvectors. You can find PRIMME at http://www.cs.wm.edu/~andreas/software/
- *
- * @author Ward Poelmans <wpoely86@gmail.com>
- * @date 29-05-2012
- * @section LICENSE
- *
- * Hubbard-GPU is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * Hubbard-GPU is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with Hubbard-GPU.  If not, see <http://www.gnu.org/licenses/>.
- */
 
 #include <iostream>
 #include <algorithm>
