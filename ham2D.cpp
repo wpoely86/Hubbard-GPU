@@ -54,13 +54,13 @@ int HubHam2D::hopping(myint a, myint b) const
 {
     int result(0), sign;
 
-    for(int i=0;i<Ns;i++)
+    for(int i=0;i<L;i++)
         if( a & 1<<i ) // is the i'th bit set?
         {
 	    int j;
 
 	    // jump up
-	    j = (i + L) % Ns;
+	    j = (i + L) % L;
 	    if( (~a & 1<<j) && ((a ^ ((1<<i)+(1<<j)) ) == b ) )
 	    {
 		if(j>i)
@@ -68,12 +68,13 @@ int HubHam2D::hopping(myint a, myint b) const
 		else
 		    sign = CalcSign(j,i,a);
 
-		result = sign;
+                // a minus sign in the hamiltonian ( -J *)
+		result = -1 * sign;
 		break;
 	    }
 
 	    // jump down
-	    j = (i - L + Ns) % Ns;
+	    j = (i - L + L) % L;
 	    if( (~a & 1<<j) && ((a ^ ((1<<i)+(1<<j)) ) == b ) )
 	    {
 		if(j>i)
@@ -81,7 +82,7 @@ int HubHam2D::hopping(myint a, myint b) const
 		else
 		    sign = CalcSign(j,i,a);
 
-		result = sign;
+		result = -1 * sign;
 		break;
 	    }
 
@@ -94,7 +95,7 @@ int HubHam2D::hopping(myint a, myint b) const
 		else
 		    sign = CalcSign(j,i,a);
 
-		result = sign;
+		result = -1 * sign;
 		break;
 	    }
 
@@ -107,35 +108,12 @@ int HubHam2D::hopping(myint a, myint b) const
 		else
 		    sign = CalcSign(j,i,a);
 
-		result = sign;
+		result = -1 * sign;
 		break;
 	    }
         }
 
     return result;
-}
-
-/**
- * Calculates the sign of the hop between site i and site j on ket a. Make sure
- * that i < j!
- * @param i the first site
- * @param j the second site
- * @param a the ket to use
- * @return the sign of the hop
- */
-int HubHam2D::CalcSign(int i,int j,myint a) const
-{
-    int sign;
-
-    // count the number of set bits between i and j in ket a
-    sign = CountBits(( ((1<<j) - 1) ^ ((1<<i) | ((1<<i) - 1)) ) & a);
-
-    // when uneven, we get an minus sign but as we already have
-    // a minus sign in the hamiltonian ( -J *), the result is +.
-    if( sign & 0x1 )
-	return +1;
-    else
-	return -1;
 }
 
 /**
@@ -151,7 +129,7 @@ void HubHam2D::BuildFullHam()
 
     ham = new double[dim*dim];
 
-    int NumDown = CalcDim(Ns,Nd);
+    int NumDown = CalcDim(L,Nd);
 
     for(unsigned int a=0;a<baseUp.size();a++)
 	for(unsigned int b=0;b<baseDown.size();b++)

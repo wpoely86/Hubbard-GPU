@@ -52,16 +52,19 @@ along with Hubbard-GPU.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 #include <iostream>
+#include <algorithm>
+#include <memory>
 #include <boost/timer.hpp>
 #include <getopt.h>
 #include "ham.h"
 #include "hamsparse.h"
+#include "ham-mom.h"
 
 using namespace std;
 
 int main(int argc, char **argv)
 {
-    int Ns = 4; // number of sites
+    int L = 4; // number of sites
     int Nu = 2; // number of up electrons
     int Nd = 3; // number of down electrons
     double J = 1.0; // hopping term
@@ -69,6 +72,7 @@ int main(int argc, char **argv)
 
     bool exact = false;
     bool lanczos = false;
+    bool momentum = false;
 
     struct option long_options[] =
     {
@@ -79,25 +83,27 @@ int main(int argc, char **argv)
         {"hopping",  required_argument, 0, 'J'},
         {"exact",  no_argument, 0, 'e'},
         {"lanczos",  no_argument, 0, 'l'},
+        {"momentum",  no_argument, 0, 'p'},
         {"help",  no_argument, 0, 'h'},
         {0, 0, 0, 0}
     };
 
     int i,j;
-    while( (j = getopt_long (argc, argv, "hu:d:s:U:J:el", long_options, &i)) != -1)
+    while( (j = getopt_long (argc, argv, "hu:d:s:U:J:elp", long_options, &i)) != -1)
         switch(j)
         {
             case 'h':
             case '?':
                 cout << "Usage: " << argv[0] << " [OPTIONS]\n"
                     "\n"
-                    "    -s  --sites=Ns               The number of sites\n"
+                    "    -s  --sites=L               The number of sites\n"
                     "    -u  --up=Nu                  The number of up electrons\n"
                     "    -d  --down=Nd                The number of down electrons\n"
                     "    -U  --interaction=U          The onsite interaction strength\n"
                     "    -J  --hopping=J              The hopping strength\n"
                     "    -e  --exact                  Solve with exact diagonalisation\n"
                     "    -l  --lanczos                Solve with Lanczos algorithm\n"
+                    "    -p  --momentum               Solve in the momentum basis\n"
                     "    -h, --help                   Display this help\n"
                     "\n";
                 return 0;
@@ -109,7 +115,7 @@ int main(int argc, char **argv)
                 Nd = atoi(optarg);
                 break;
             case 's':
-                Ns = atoi(optarg);
+                L = atoi(optarg);
                 break;
             case 'U':
                 U = atof(optarg);
@@ -120,12 +126,15 @@ int main(int argc, char **argv)
             case 'l':
                 lanczos = true;
                 break;
+            case 'p':
+                momentum = true;
+                break;
             case 'e':
                 exact = true;
                 break;
         }
 
-    cout << "Ns = " << Ns << "; Nu = " << Nu << "; Nd = " << Nd << "; J = " << J << "; U = " << U << ";" << endl;
+    cout << "L = " << L << "; Nu = " << Nu << "; Nd = " << Nd << "; J = " << J << "; U = " << U << ";" << endl;
 
     cout.precision(10);
 
@@ -135,17 +144,48 @@ int main(int argc, char **argv)
     {
         tijd.restart();
 
-        Hamiltonian ham(Ns,Nu,Nd,J,U);
+        std::unique_ptr<BareHamiltonian> ham;
 
-        cout << "Memory needed: " << ham.MemoryNeededFull()*1.0/1024*1.0/1024 << " MB" << endl;
+        if(momentum)
+            ham.reset(new MomHamiltonian(L,Nu,Nd,J,U));
+        else
+            ham.reset(new Hamiltonian(L,Nu,Nd,J,U));
 
-        ham.BuildBase();
-        ham.BuildFullHam();
+        cout << "Memory needed: " << ham->MemoryNeededFull()*1.0/1024*1.0/1024 << " MB" << endl;
 
-        cout << "Dim: " << ham.getDim() << endl;
+        ham->BuildBase();
 
-        double E = ham.ExactDiagonalizeFull();
-        cout << "E = " << E << endl;
+        ham->BuildFullHam();
+
+        cout << "Dim: " << ham->getDim() << endl;
+
+        double Egroundstate = 0;
+
+        if(momentum)
+        {
+            auto E = (static_cast<MomHamiltonian *>(ham.get()))->ExactMomDiagonalizeFull(false);
+
+            cout << "Energy levels: " << endl;
+            for(auto p : E)
+                cout << p.second << "\t" << p.first << endl;
+
+            Egroundstate = E[0].second;
+
+//            (static_cast<MomHamiltonian *>(ham.get()))->GenerateData(0,10,1,"data-test.h5");
+        }
+        else
+        {
+            auto E = ham->ExactDiagonalizeFull(true);
+
+            cout << "Energy levels: " << endl;
+            for(auto p : E)
+                cout << p << endl;
+
+            Egroundstate = E[0];
+        }
+
+        cout << endl;
+        cout << "lowest E = " << Egroundstate << endl;
 
         cout << "Time: " << tijd.elapsed() << " s" << endl;
     }
@@ -154,7 +194,7 @@ int main(int argc, char **argv)
     {
         tijd.restart();
 
-        SparseHamiltonian sham(Ns,Nu,Nd,J,U);
+        SparseHamiltonian sham(L,Nu,Nd,J,U);
 
         cout << "Memory needed: " << sham.MemoryNeededArpack()*1.0/1024*1.0/1024 << " MB" << endl;
 
