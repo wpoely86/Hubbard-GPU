@@ -1,18 +1,19 @@
 <map id="main" name="main">
-<area shape="rect" id="node2" href="$classBareHamiltonian.html#afcf1853d7151e97d7853d0a3b8c3ef53" title="BareHamiltonian::BuildBase" alt="" coords="123,23,309,50"/>
-<area shape="rect" id="node5" href="$classHubHam2D.html#ad945391b0d2491afab29db870802e7c8" title="HubHam2D::BuildFullHam" alt="" coords="127,125,305,151"/>
-<area shape="rect" id="node8" href="$classBareHamiltonian.html#a79005e481ccd821d8672d2989242df1d" title="BareHamiltonian::getDim" alt="" coords="132,242,300,269"/>
-<area shape="rect" id="node9" href="$classHamiltonian.html#a1cf691e59a4308590d87083439c895e8" title="Hamiltonian::ExactDiagonalizeFull" alt="" coords="105,74,327,101"/>
-<area shape="rect" id="node11" href="$classSparseHamiltonian2D.html#a705d999fe46f1c32330a7e1074fd234a" title="SparseHamiltonian2D\l::BuildSparseHam" alt="" coords="141,176,291,217"/>
-<area shape="rect" id="node13" href="$classHamiltonian.html#a5fd02d9ba0eb128cc3435d950d858b60" title="Hamiltonian::arpackDiagonalize" alt="" coords="113,318,319,345"/>
-<area shape="rect" id="node3" href="$classBareHamiltonian.html#acfb89409533465961fb5b1c53056bbaa" title="BareHamiltonian::CalcDim" alt="" coords="377,23,554,50"/>
-<area shape="rect" id="node4" href="$classBareHamiltonian.html#a9393391804a06e0ee4970e21d0b729ff" title="BareHamiltonian::CountBits" alt="" coords="1021,125,1205,151"/>
-<area shape="rect" id="node6" href="$classHubHam2D.html#ad0cf5454e30f548e8a19e6e041c4238c" title="HubHam2D::hopping" alt="" coords="603,175,747,202"/>
-<area shape="rect" id="node7" href="$classBareHamiltonian.html#a71a6f71bb77ccf7ab241fdfdd46ce9e9" title="BareHamiltonian::CalcSign" alt="" coords="795,175,973,202"/>
-<area shape="rect" id="node10" href="$bare-ham_8h.html#ad0cfc41b12c93c0f2aad995d39d5fe42" title="dsyevd_" alt="" coords="430,74,501,101"/>
-<area shape="rect" id="node12" href="$classSparseHamiltonian2D__CSR.html#a0f3ea43d0d27705ddc249e9372506c3e" title="SparseHamiltonian2D\l_CSR::BuildSparseHam" alt="" coords="383,227,547,268"/>
-<area shape="rect" id="node14" href="$bare-ham_8h.html#a3eabc0ee91c768347f7fc904d5048502" title="dsaupd_" alt="" coords="430,293,501,319"/>
-<area shape="rect" id="node15" href="$classHamiltonian.html#ae31ba4590d7a497aed8ef2cac36abd1c" title="Hamiltonian::mvprod" alt="" coords="394,343,537,370"/>
-<area shape="rect" id="node17" href="$bare-ham_8h.html#abbfc1658604845f75cda50de100e6f9e" title="dseupd_" alt="" coords="430,394,501,421"/>
-<area shape="rect" id="node16" href="$bare-ham_8h.html#aad27beb06b23ce25ab9637d76286677f" title="dsymv_" alt="" coords="641,343,709,370"/>
+<area shape="rect" id="node2" href="$classBareHamiltonian.html#afcf1853d7151e97d7853d0a3b8c3ef53" title="BareHamiltonian::BuildBase" alt="" coords="407,5,593,32"/>
+<area shape="rect" id="node5" href="$classHubHam2D.html#ad945391b0d2491afab29db870802e7c8" title="HubHam2D::BuildFullHam" alt="" coords="411,77,589,104"/>
+<area shape="rect" id="node8" href="$classBareHamiltonian.html#a79005e481ccd821d8672d2989242df1d" title="BareHamiltonian::getDim" alt="" coords="145,107,313,133"/>
+<area shape="rect" id="node9" href="$classBareHamiltonian.html#aea1d4034d8830ad1001cf6e3baa6d1ca" title="BareHamiltonian::ExactDiagonalizeFull" alt="" coords="105,224,354,251"/>
+<area shape="rect" id="node12" href="$classSparseHamiltonian2D.html#a705d999fe46f1c32330a7e1074fd234a" title="SparseHamiltonian2D\l::BuildSparseHam" alt="" coords="155,158,304,199"/>
+<area shape="rect" id="node14" href="$classBareHamiltonian.html#ad58e05dbe722161b41afeeee1a1ca891" title="BareHamiltonian::arpackDiagonalize" alt="" coords="113,317,346,344"/>
+<area shape="rect" id="node3" href="$classBareHamiltonian.html#acfb89409533465961fb5b1c53056bbaa" title="BareHamiltonian::CalcDim" alt="" coords="646,35,823,61"/>
+<area shape="rect" id="node4" href="$classBareHamiltonian.html#a9393391804a06e0ee4970e21d0b729ff" title="BareHamiltonian::CountBits" alt="" coords="1099,85,1283,112"/>
+<area shape="rect" id="node6" href="$classHubHam2D.html#a5fcf36f25194dee6dd31626d70955dfd" title="HubHam2D::hopping" alt="" coords="663,136,807,163"/>
+<area shape="rect" id="node7" href="$classBareHamiltonian.html#a71a6f71bb77ccf7ab241fdfdd46ce9e9" title="BareHamiltonian::CalcSign" alt="" coords="872,136,1051,163"/>
+<area shape="rect" id="node10" href="$classBareHamiltonian.html#af0c4e86609ea0f977bc13b2905472867" title="BareHamiltonian::Diagonalize" alt="" coords="403,216,597,243"/>
+<area shape="rect" id="node11" href="$bare-ham_8h.html#ad0cfc41b12c93c0f2aad995d39d5fe42" title="dsyevd_" alt="" coords="699,216,770,243"/>
+<area shape="rect" id="node13" href="$classSparseHamiltonian2D__CSR.html#a0f3ea43d0d27705ddc249e9372506c3e" title="SparseHamiltonian2D\l_CSR::BuildSparseHam" alt="" coords="418,135,582,177"/>
+<area shape="rect" id="node15" href="$bare-ham_8h.html#a3eabc0ee91c768347f7fc904d5048502" title="dsaupd_" alt="" coords="465,267,535,293"/>
+<area shape="rect" id="node16" href="$classBareHamiltonian.html#ab3ac26f412dfe8fe2d2759520b37f089" title="BareHamiltonian::mvprod" alt="" coords="415,317,585,344"/>
+<area shape="rect" id="node17" href="$bare-ham_8h.html#abbfc1658604845f75cda50de100e6f9e" title="dseupd_" alt="" coords="465,368,535,395"/>
+<area shape="rect" id="node18" href="$classBareHamiltonian.html#ae2b4a7e01118ca9ff8a999fdc5d65f18" title="BareHamiltonian::SaveToFile" alt="" coords="404,419,596,445"/>
 </map>

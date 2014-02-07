@@ -7,9 +7,12 @@ var hierarchy =
             [ "SparseHamiltonian2D", "classSparseHamiltonian2D.html", null ]
           ] ]
         ] ],
-        [ "SparseHamiltonian", "classSparseHamiltonian.html", null ]
+        [ "NonPeriodicHamiltonian", "classNonPeriodicHamiltonian.html", null ]
       ] ],
       [ "MomHamiltonian", "classMomHamiltonian.html", null ]
+    ] ],
+    [ "Ham", null, [
+      [ "SparseHamiltonian< Ham >", "classSparseHamiltonian.html", null ]
     ] ],
     [ "T", null, [
       [ "GPUHamiltonian< T >", "classGPUHamiltonian.html", null ]

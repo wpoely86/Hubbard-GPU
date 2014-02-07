@@ -1,9 +1,9 @@
 <map id="hamgpu.cu" name="hamgpu.cu">
 <area shape="rect" id="node6" href="$hamgpu_8h.html" title="hamgpu.h" alt="" coords="383,80,461,107"/>
-<area shape="rect" id="node7" href="$hamsparse_8h.html" title="hamsparse.h" alt="" coords="438,155,535,181"/>
-<area shape="rect" id="node12" href="$hamsparse2D_8h.html" title="hamsparse2D.h" alt="" coords="564,80,679,107"/>
-<area shape="rect" id="node8" href="$ham_8h.html" title="ham.h" alt="" coords="475,304,533,331"/>
-<area shape="rect" id="node11" href="$bare-ham_8h.html" title="bare&#45;ham.h" alt="" coords="461,379,547,405"/>
-<area shape="rect" id="node13" href="$hamsparse2D__CSR_8h.html" title="hamsparse2D_CSR.h" alt="" coords="559,155,709,181"/>
-<area shape="rect" id="node14" href="$ham2D_8h.html" title="ham2D.h" alt="" coords="524,229,599,256"/>
+<area shape="rect" id="node7" href="$hamsparse_8h.html" title="hamsparse.h" alt="" coords="486,80,583,107"/>
+<area shape="rect" id="node8" href="$hamsparse2D_8h.html" title="hamsparse2D.h" alt="" coords="608,80,723,107"/>
+<area shape="rect" id="node9" href="$hamsparse2D__CSR_8h.html" title="hamsparse2D_CSR.h" alt="" coords="590,155,740,181"/>
+<area shape="rect" id="node10" href="$ham2D_8h.html" title="ham2D.h" alt="" coords="577,229,652,256"/>
+<area shape="rect" id="node11" href="$ham_8h.html" title="ham.h" alt="" coords="571,304,629,331"/>
+<area shape="rect" id="node14" href="$bare-ham_8h.html" title="bare&#45;ham.h" alt="" coords="542,379,628,405"/>
 </map>

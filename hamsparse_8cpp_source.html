@@ -105,7 +105,7 @@ $(document).ready(function(){initNavTree('hamsparse_8cpp_source.html','');});
 <div class="title">hamsparse.cpp</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="hamsparse_8cpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/* Copyright (C) 2012  Ward Poelmans</span></div>
+<a href="hamsparse_8cpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/* Copyright (C) 2012-2014  Ward Poelmans</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"></span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">This file is part of Hubbard-GPU.</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"></span></div>
@@ -127,252 +127,271 @@ $(document).ready(function(){initNavTree('hamsparse_8cpp_source.html','');});
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#include &lt;cstdlib&gt;</span></div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#include &lt;cmath&gt;</span></div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="hamsparse_8h.html">hamsparse.h</a>&quot;</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;</div>
-<div class="line"><a name="l00032"></a><span class="lineno"><a class="code" href="classSparseHamiltonian.html#a20922f3d5a57de019d9e057ed105057a">   32</a></span>&#160;<a class="code" href="classSparseHamiltonian.html#a20922f3d5a57de019d9e057ed105057a">SparseHamiltonian::SparseHamiltonian</a>(<span class="keywordtype">int</span> L, <span class="keywordtype">int</span> Nu, <span class="keywordtype">int</span> Nd, <span class="keywordtype">double</span> J, <span class="keywordtype">double</span> U)</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    : <a class="code" href="classHamiltonian.html">Hamiltonian</a>(L,Nu,Nd,J,U)</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;{</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <a class="code" href="classSparseHamiltonian.html#a3137ea12f044b0b0dffe49db5b05222e" title="The array to hold the data (ELL format) for the up hamiltonian.">Up_data</a> = 0;</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <a class="code" href="classSparseHamiltonian.html#a9de29c5ce417cb15926609010c030442" title="The array to hold the data (ELL format) for the down hamiltonian.">Down_data</a> = 0;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <a class="code" href="classSparseHamiltonian.html#a6a4ef08563e7f2a3ec1a488351f3102d" title="The array to hold the indices for the up hamiltonian.">Up_ind</a> = 0;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <a class="code" href="classSparseHamiltonian.html#a5976f3acd763b30b2382b1c678e3d83e" title="The array to hold the indices for the down hamiltonian.">Down_ind</a> = 0;</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="ham_8h.html">ham.h</a>&quot;</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="nonp-ham_8h.html">nonp-ham.h</a>&quot;</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> Ham&gt;</div>
+<div class="line"><a name="l00035"></a><span class="lineno"><a class="code" href="classSparseHamiltonian.html#ae3155cf9ffa2b57132897aee92d3dbff">   35</a></span>&#160;<a class="code" href="classSparseHamiltonian.html#ae3155cf9ffa2b57132897aee92d3dbff">SparseHamiltonian&lt;Ham&gt;::SparseHamiltonian</a>(<span class="keywordtype">int</span> L, <span class="keywordtype">int</span> Nu, <span class="keywordtype">int</span> Nd, <span class="keywordtype">double</span> J, <span class="keywordtype">double</span> U)</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    : Ham(L,Nu,Nd,J,U)</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;{</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <a class="code" href="classSparseHamiltonian.html#a5e212d3376e8c9328e178ee231623e4b" title="The array to hold the data (ELL format) for the up hamiltonian.">Up_data</a> = 0;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <a class="code" href="classSparseHamiltonian.html#ad363455d572faa6186780e85bf04442d" title="The array to hold the data (ELL format) for the down hamiltonian.">Down_data</a> = 0;</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <a class="code" href="classSparseHamiltonian.html#a88392552a8c443bc3662f21733191668" title="Maximum number of non zero elements in a row for the up hamiltonian.">size_Up</a> = 0;</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <a class="code" href="classSparseHamiltonian.html#a129bea5ae1ce004bd231bdfa5a2ae04a" title="Maximum number of non zero elements in a row for the down hamiltonian.">size_Down</a> = 0;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;}</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;</div>
-<div class="line"><a name="l00048"></a><span class="lineno"><a class="code" href="classSparseHamiltonian.html#a7c456ecd6aa2669ba3c24514b9465b65">   48</a></span>&#160;<a class="code" href="classSparseHamiltonian.html#a7c456ecd6aa2669ba3c24514b9465b65">SparseHamiltonian::~SparseHamiltonian</a>()</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;{</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keywordflow">if</span>(<a class="code" href="classSparseHamiltonian.html#a3137ea12f044b0b0dffe49db5b05222e" title="The array to hold the data (ELL format) for the up hamiltonian.">Up_data</a>)</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        <span class="keyword">delete</span> [] <a class="code" href="classSparseHamiltonian.html#a3137ea12f044b0b0dffe49db5b05222e" title="The array to hold the data (ELL format) for the up hamiltonian.">Up_data</a>;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keywordflow">if</span>(<a class="code" href="classSparseHamiltonian.html#a9de29c5ce417cb15926609010c030442" title="The array to hold the data (ELL format) for the down hamiltonian.">Down_data</a>)</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        <span class="keyword">delete</span> [] <a class="code" href="classSparseHamiltonian.html#a9de29c5ce417cb15926609010c030442" title="The array to hold the data (ELL format) for the down hamiltonian.">Down_data</a>;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="keywordflow">if</span>(<a class="code" href="classSparseHamiltonian.html#a6a4ef08563e7f2a3ec1a488351f3102d" title="The array to hold the indices for the up hamiltonian.">Up_ind</a>)</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        <span class="keyword">delete</span> [] <a class="code" href="classSparseHamiltonian.html#a6a4ef08563e7f2a3ec1a488351f3102d" title="The array to hold the indices for the up hamiltonian.">Up_ind</a>;</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="keywordflow">if</span>(<a class="code" href="classSparseHamiltonian.html#a5976f3acd763b30b2382b1c678e3d83e" title="The array to hold the indices for the down hamiltonian.">Down_ind</a>)</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        <span class="keyword">delete</span> [] <a class="code" href="classSparseHamiltonian.html#a5976f3acd763b30b2382b1c678e3d83e" title="The array to hold the indices for the down hamiltonian.">Down_ind</a>;</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;}</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <a class="code" href="classSparseHamiltonian.html#ae51888698352f772afae1341b0d3845f" title="The array to hold the indices for the up hamiltonian.">Up_ind</a> = 0;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <a class="code" href="classSparseHamiltonian.html#af05409ca29ffbb4a6eaaae38c52707ef" title="The array to hold the indices for the down hamiltonian.">Down_ind</a> = 0;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <a class="code" href="classSparseHamiltonian.html#a83cae8b165ec4cec503f4654791d4bde" title="Maximum number of non zero elements in a row for the up hamiltonian.">size_Up</a> = 0;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <a class="code" href="classSparseHamiltonian.html#adaac69b483daf411e3162c7735f50041" title="Maximum number of non zero elements in a row for the down hamiltonian.">size_Down</a> = 0;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;}</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> Ham&gt;</div>
+<div class="line"><a name="l00052"></a><span class="lineno"><a class="code" href="classSparseHamiltonian.html#a146f2f60953197ca72bf0f3adc7e380b">   52</a></span>&#160;<a class="code" href="classSparseHamiltonian.html#a146f2f60953197ca72bf0f3adc7e380b">SparseHamiltonian&lt;Ham&gt;::~SparseHamiltonian</a>()</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;{</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="keywordflow">if</span>(Up_data)</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        <span class="keyword">delete</span> [] Up_data;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <span class="keywordflow">if</span>(Down_data)</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        <span class="keyword">delete</span> [] Down_data;</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="keywordflow">if</span>(Up_ind)</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        <span class="keyword">delete</span> [] Up_ind;</div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;</div>
-<div class="line"><a name="l00066"></a><span class="lineno"><a class="code" href="classSparseHamiltonian.html#a99ea19b2b0ee2f56c39eb44b2353bebb">   66</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classSparseHamiltonian.html#a99ea19b2b0ee2f56c39eb44b2353bebb">SparseHamiltonian::BuildSparseHam</a>()</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;{</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <span class="keywordflow">if</span>( !<a class="code" href="classBareHamiltonian.html#ad8bd92d0a6ce8bb91992d75d9fe7a9ad" title="vector to hold all bases ket&#39;s for up electrons">baseUp</a>.size() || !<a class="code" href="classBareHamiltonian.html#a3cc3ebc00702f55d5b1376167266409c" title="vector to hold all bases ket&#39;s for down electrons">baseDown</a>.size() )</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    {</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        std::cerr &lt;&lt; <span class="stringliteral">&quot;Build base before building Hamiltonian&quot;</span> &lt;&lt; std::endl;</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        <span class="keywordflow">return</span>;</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    }</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> NumUp = <a class="code" href="classBareHamiltonian.html#ad8bd92d0a6ce8bb91992d75d9fe7a9ad" title="vector to hold all bases ket&#39;s for up electrons">baseUp</a>.size();</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> NumDown = <a class="code" href="classBareHamiltonian.html#a3cc3ebc00702f55d5b1376167266409c" title="vector to hold all bases ket&#39;s for down electrons">baseDown</a>.size();</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <span class="keywordtype">int</span> upjumpsign, downjumpsign;</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <span class="keywordflow">if</span>( <a class="code" href="classBareHamiltonian.html#a497a2631a48701c6a0aba04f80bc31e5" title="Number of up electrons.">Nu</a> % 2 == 0)</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        upjumpsign = -1;</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        upjumpsign = 1;</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    <span class="keywordflow">if</span>( <a class="code" href="classBareHamiltonian.html#a0c910682d208f47539db2e8fa72db13a" title="Number of down electrons.">Nd</a> % 2 == 0)</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        downjumpsign = -1;</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        downjumpsign = 1;</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    <a class="code" href="classSparseHamiltonian.html#a88392552a8c443bc3662f21733191668" title="Maximum number of non zero elements in a row for the up hamiltonian.">size_Up</a> = ((<a class="code" href="classBareHamiltonian.html#af379bf26dc3022b5a0b98a7081f2705a" title="Number of sites.">L</a>-<a class="code" href="classBareHamiltonian.html#a497a2631a48701c6a0aba04f80bc31e5" title="Number of up electrons.">Nu</a>)&gt;<a class="code" href="classBareHamiltonian.html#a497a2631a48701c6a0aba04f80bc31e5" title="Number of up electrons.">Nu</a>) ? 2*<a class="code" href="classBareHamiltonian.html#a497a2631a48701c6a0aba04f80bc31e5" title="Number of up electrons.">Nu</a> : 2*(<a class="code" href="classBareHamiltonian.html#af379bf26dc3022b5a0b98a7081f2705a" title="Number of sites.">L</a>-<a class="code" href="classBareHamiltonian.html#a497a2631a48701c6a0aba04f80bc31e5" title="Number of up electrons.">Nu</a>);</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    <a class="code" href="classSparseHamiltonian.html#a129bea5ae1ce004bd231bdfa5a2ae04a" title="Maximum number of non zero elements in a row for the down hamiltonian.">size_Down</a> = ((<a class="code" href="classBareHamiltonian.html#af379bf26dc3022b5a0b98a7081f2705a" title="Number of sites.">L</a>-<a class="code" href="classBareHamiltonian.html#a0c910682d208f47539db2e8fa72db13a" title="Number of down electrons.">Nd</a>)&gt;<a class="code" href="classBareHamiltonian.html#a0c910682d208f47539db2e8fa72db13a" title="Number of down electrons.">Nd</a>) ? 2*<a class="code" href="classBareHamiltonian.html#a0c910682d208f47539db2e8fa72db13a" title="Number of down electrons.">Nd</a> : 2*(<a class="code" href="classBareHamiltonian.html#af379bf26dc3022b5a0b98a7081f2705a" title="Number of sites.">L</a>-<a class="code" href="classBareHamiltonian.html#a0c910682d208f47539db2e8fa72db13a" title="Number of down electrons.">Nd</a>);</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    <a class="code" href="classSparseHamiltonian.html#a3137ea12f044b0b0dffe49db5b05222e" title="The array to hold the data (ELL format) for the up hamiltonian.">Up_data</a> = <span class="keyword">new</span> <span class="keywordtype">double</span> [NumUp*<a class="code" href="classSparseHamiltonian.html#a88392552a8c443bc3662f21733191668" title="Maximum number of non zero elements in a row for the up hamiltonian.">size_Up</a>];</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    <a class="code" href="classSparseHamiltonian.html#a6a4ef08563e7f2a3ec1a488351f3102d" title="The array to hold the indices for the up hamiltonian.">Up_ind</a> = <span class="keyword">new</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> [NumUp*<a class="code" href="classSparseHamiltonian.html#a88392552a8c443bc3662f21733191668" title="Maximum number of non zero elements in a row for the up hamiltonian.">size_Up</a>];</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keywordflow">if</span>(Down_ind)</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        <span class="keyword">delete</span> [] Down_ind;</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;}</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> Ham&gt;</div>
+<div class="line"><a name="l00068"></a><span class="lineno"><a class="code" href="classSparseHamiltonian.html#aafca35d9312ccd7b5710a09c97ddbb71">   68</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classSparseHamiltonian.html#aafca35d9312ccd7b5710a09c97ddbb71">SparseHamiltonian&lt;Ham&gt;::BuildHam</a>()</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;{</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    BuildSparseHam();</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;}</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> Ham&gt;</div>
+<div class="line"><a name="l00077"></a><span class="lineno"><a class="code" href="classSparseHamiltonian.html#aa82e9b5845d954973942b551907d090c">   77</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classSparseHamiltonian.html#aa82e9b5845d954973942b551907d090c">SparseHamiltonian&lt;Ham&gt;::BuildSparseHam</a>()</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;{</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <span class="keywordflow">if</span>( !Ham::baseUp.size() || !Ham::baseDown.size() )</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    {</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        std::cerr &lt;&lt; <span class="stringliteral">&quot;Build base before building Hamiltonian&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    }</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> NumUp = Ham::baseUp.size();</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> NumDown = Ham::baseDown.size();</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    <span class="keywordtype">int</span> upjumpsign, downjumpsign;</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    <span class="keywordflow">if</span>( Ham::Nu % 2 == 0)</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;        upjumpsign = -1;</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        upjumpsign = 1;</div>
 <div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    <a class="code" href="classSparseHamiltonian.html#a9de29c5ce417cb15926609010c030442" title="The array to hold the data (ELL format) for the down hamiltonian.">Down_data</a> = <span class="keyword">new</span> <span class="keywordtype">double</span> [NumDown*<a class="code" href="classSparseHamiltonian.html#a129bea5ae1ce004bd231bdfa5a2ae04a" title="Maximum number of non zero elements in a row for the down hamiltonian.">size_Down</a>];</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    <a class="code" href="classSparseHamiltonian.html#a5976f3acd763b30b2382b1c678e3d83e" title="The array to hold the indices for the down hamiltonian.">Down_ind</a> = <span class="keyword">new</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> [NumDown*<a class="code" href="classSparseHamiltonian.html#a129bea5ae1ce004bd231bdfa5a2ae04a" title="Maximum number of non zero elements in a row for the down hamiltonian.">size_Down</a>];</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> a=0;a&lt;NumUp;a++)</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    {</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;        <span class="keywordtype">int</span> count = 0;</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;        <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> b=0;b&lt;NumUp;b++)</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;        {</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;            <span class="keywordtype">int</span> result = <a class="code" href="classHamiltonian.html#afa972f88c6d0a06f6537c9b667bd0f36">hopping</a>(<a class="code" href="classBareHamiltonian.html#ad8bd92d0a6ce8bb91992d75d9fe7a9ad" title="vector to hold all bases ket&#39;s for up electrons">baseUp</a>[a], <a class="code" href="classBareHamiltonian.html#ad8bd92d0a6ce8bb91992d75d9fe7a9ad" title="vector to hold all bases ket&#39;s for up electrons">baseUp</a>[b],upjumpsign);</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    <span class="keywordflow">if</span>( Ham::Nd % 2 == 0)</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;        downjumpsign = -1;</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;        downjumpsign = 1;</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    size_Up = ((Ham::L-Ham::Nu)&gt;Ham::Nu) ? 2*Ham::Nu : 2*(Ham::L-Ham::Nu);</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    size_Down = ((Ham::L-Ham::Nd)&gt;Ham::Nd) ? 2*Ham::Nd : 2*(Ham::L-Ham::Nd);</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    Up_data = <span class="keyword">new</span> <span class="keywordtype">double</span> [NumUp*size_Up];</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    Up_ind = <span class="keyword">new</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> [NumUp*size_Up];</div>
 <div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;            <span class="keywordflow">if</span>(result != 0)</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;            {</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;                <a class="code" href="classSparseHamiltonian.html#a3137ea12f044b0b0dffe49db5b05222e" title="The array to hold the data (ELL format) for the up hamiltonian.">Up_data</a>[a+count*NumUp] = <a class="code" href="classBareHamiltonian.html#ab36c84b6b581fa85c48f0e070e5483c5" title="Hopping strength.">J</a>*result;</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;                <a class="code" href="classSparseHamiltonian.html#a6a4ef08563e7f2a3ec1a488351f3102d" title="The array to hold the indices for the up hamiltonian.">Up_ind</a>[a+count*NumUp] = b;</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;                count++;</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;            }</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;        }</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;        <span class="keywordflow">if</span>(count &lt; <a class="code" href="classSparseHamiltonian.html#a88392552a8c443bc3662f21733191668" title="Maximum number of non zero elements in a row for the up hamiltonian.">size_Up</a>)</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;            <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i=count;i&lt;<a class="code" href="classSparseHamiltonian.html#a88392552a8c443bc3662f21733191668" title="Maximum number of non zero elements in a row for the up hamiltonian.">size_Up</a>;i++)</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;            {</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;                <a class="code" href="classSparseHamiltonian.html#a3137ea12f044b0b0dffe49db5b05222e" title="The array to hold the data (ELL format) for the up hamiltonian.">Up_data</a>[a+i*NumUp] = 0;</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;                <a class="code" href="classSparseHamiltonian.html#a6a4ef08563e7f2a3ec1a488351f3102d" title="The array to hold the indices for the up hamiltonian.">Up_ind</a>[a+i*NumUp] = 0;</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;            }</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;        <span class="keywordflow">else</span> <span class="keywordflow">if</span>(count &gt; size_Up)</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;            std::cerr &lt;&lt; <span class="stringliteral">&quot;Something went terribly wrong!&quot;</span> &lt;&lt; std::endl;</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;    }</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;    <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> a=0;a&lt;NumDown;a++)</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;    {</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;        <span class="keywordtype">int</span> count = 0;</div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;</div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;        <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> b=0;b&lt;NumDown;b++)</div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;        {</div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;            <span class="keywordtype">int</span> result = <a class="code" href="classHamiltonian.html#afa972f88c6d0a06f6537c9b667bd0f36">hopping</a>(<a class="code" href="classBareHamiltonian.html#a3cc3ebc00702f55d5b1376167266409c" title="vector to hold all bases ket&#39;s for down electrons">baseDown</a>[a], <a class="code" href="classBareHamiltonian.html#a3cc3ebc00702f55d5b1376167266409c" title="vector to hold all bases ket&#39;s for down electrons">baseDown</a>[b],downjumpsign);</div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;</div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;            <span class="keywordflow">if</span>(result != 0)</div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;            {</div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;                <a class="code" href="classSparseHamiltonian.html#a9de29c5ce417cb15926609010c030442" title="The array to hold the data (ELL format) for the down hamiltonian.">Down_data</a>[a+count*NumDown] = <a class="code" href="classBareHamiltonian.html#ab36c84b6b581fa85c48f0e070e5483c5" title="Hopping strength.">J</a>*result;</div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;                <a class="code" href="classSparseHamiltonian.html#a5976f3acd763b30b2382b1c678e3d83e" title="The array to hold the indices for the down hamiltonian.">Down_ind</a>[a+count*NumDown] = b;</div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;                count++;</div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;            }</div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;        }</div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;</div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;        <span class="keywordflow">if</span>(count &lt; <a class="code" href="classSparseHamiltonian.html#a129bea5ae1ce004bd231bdfa5a2ae04a" title="Maximum number of non zero elements in a row for the down hamiltonian.">size_Down</a>)</div>
-<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;            <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i=count;i&lt;<a class="code" href="classSparseHamiltonian.html#a129bea5ae1ce004bd231bdfa5a2ae04a" title="Maximum number of non zero elements in a row for the down hamiltonian.">size_Down</a>;i++)</div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;            {</div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;                <a class="code" href="classSparseHamiltonian.html#a9de29c5ce417cb15926609010c030442" title="The array to hold the data (ELL format) for the down hamiltonian.">Down_data</a>[a+i*NumDown] = 0;</div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;                <a class="code" href="classSparseHamiltonian.html#a5976f3acd763b30b2382b1c678e3d83e" title="The array to hold the indices for the down hamiltonian.">Down_ind</a>[a+i*NumDown] = 0;</div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;            }</div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;        <span class="keywordflow">else</span> <span class="keywordflow">if</span>(count &gt; size_Down)</div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;            std::cerr &lt;&lt; <span class="stringliteral">&quot;Something went terribly wrong!&quot;</span> &lt;&lt; std::endl;</div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;    }</div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;}</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    Down_data = <span class="keyword">new</span> <span class="keywordtype">double</span> [NumDown*size_Down];</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    Down_ind = <span class="keyword">new</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> [NumDown*size_Down];</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> a=0;a&lt;NumUp;a++)</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    {</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;        <span class="keywordtype">int</span> count = 0;</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;        <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> b=0;b&lt;NumUp;b++)</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;        {</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;            <span class="keywordtype">int</span> result = Ham::hopping(Ham::baseUp[a], Ham::baseUp[b],upjumpsign);</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;            <span class="keywordflow">if</span>(result != 0)</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;            {</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;                Up_data[a+count*NumUp] = Ham::J*result;</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;                Up_ind[a+count*NumUp] = b;</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;                count++;</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;            }</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;        }</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;        <span class="keywordflow">if</span>(count &lt; size_Up)</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;            <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i=count;i&lt;size_Up;i++)</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;            {</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;                Up_data[a+i*NumUp] = 0;</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;                Up_ind[a+i*NumUp] = 0;</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;            }</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;        <span class="keywordflow">else</span> <span class="keywordflow">if</span>(count &gt; size_Up)</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;            std::cerr &lt;&lt; <span class="stringliteral">&quot;Something went terribly wrong!&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;    }</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;    <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> a=0;a&lt;NumDown;a++)</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;    {</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;        <span class="keywordtype">int</span> count = 0;</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;        <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> b=0;b&lt;NumDown;b++)</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;        {</div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;            <span class="keywordtype">int</span> result = Ham::hopping(Ham::baseDown[a], Ham::baseDown[b],downjumpsign);</div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;            <span class="keywordflow">if</span>(result != 0)</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;            {</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;                Down_data[a+count*NumDown] = Ham::J*result;</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;                Down_ind[a+count*NumDown] = b;</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;                count++;</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;            }</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;        }</div>
 <div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;</div>
-<div class="line"><a name="l00154"></a><span class="lineno"><a class="code" href="classSparseHamiltonian.html#a7a5ddcf048f6f38ee73e8fcabf22122f">  154</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classSparseHamiltonian.html#a7a5ddcf048f6f38ee73e8fcabf22122f">SparseHamiltonian::PrintSparse</a>()<span class="keyword"> const</span></div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;<span class="keyword"></span>{</div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> NumUp = <a class="code" href="classBareHamiltonian.html#ad8bd92d0a6ce8bb91992d75d9fe7a9ad" title="vector to hold all bases ket&#39;s for up electrons">baseUp</a>.size();</div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> NumDown = <a class="code" href="classBareHamiltonian.html#a3cc3ebc00702f55d5b1376167266409c" title="vector to hold all bases ket&#39;s for down electrons">baseDown</a>.size();</div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;</div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;    std::cout &lt;&lt; <span class="stringliteral">&quot;Up:&quot;</span> &lt;&lt; std::endl;</div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;</div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;    <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i=0;i&lt;NumUp;i++)</div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;    {</div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;        <span class="keywordtype">int</span> count = 0;</div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;</div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;        <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> j=0;j&lt;NumUp;j++)</div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;            <span class="keywordflow">if</span>(count &lt; <a class="code" href="classSparseHamiltonian.html#a88392552a8c443bc3662f21733191668" title="Maximum number of non zero elements in a row for the up hamiltonian.">size_Up</a> &amp;&amp; <a class="code" href="classSparseHamiltonian.html#a6a4ef08563e7f2a3ec1a488351f3102d" title="The array to hold the indices for the up hamiltonian.">Up_ind</a>[i+count*NumUp] == j)</div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;                std::cout &lt;&lt; <a class="code" href="classSparseHamiltonian.html#a3137ea12f044b0b0dffe49db5b05222e" title="The array to hold the data (ELL format) for the up hamiltonian.">Up_data</a>[i + NumUp*count++] &lt;&lt; <span class="stringliteral">&quot;\t&quot;</span>;</div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;            <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;                std::cout &lt;&lt; <span class="stringliteral">&quot;0\t&quot;</span>;</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;        <span class="keywordflow">if</span>(count &lt; size_Down)</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;            <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i=count;i&lt;size_Down;i++)</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;            {</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;                Down_data[a+i*NumDown] = 0;</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;                Down_ind[a+i*NumDown] = 0;</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;            }</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;        <span class="keywordflow">else</span> <span class="keywordflow">if</span>(count &gt; size_Down)</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;            std::cerr &lt;&lt; <span class="stringliteral">&quot;Something went terribly wrong!&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;    }</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;}</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> Ham&gt;</div>
+<div class="line"><a name="l00166"></a><span class="lineno"><a class="code" href="classSparseHamiltonian.html#a42db9352c7ae55f0a09186a649570717">  166</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classSparseHamiltonian.html#a42db9352c7ae55f0a09186a649570717">SparseHamiltonian&lt;Ham&gt;::PrintSparse</a>()<span class="keyword"> const</span></div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;<span class="keyword"></span>{</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> NumUp = Ham::baseUp.size();</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> NumDown = Ham::baseDown.size();</div>
 <div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;</div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;        std::cout &lt;&lt; std::endl;</div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;    }</div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;</div>
-<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;    std::cout &lt;&lt; <span class="stringliteral">&quot;Down:&quot;</span> &lt;&lt; std::endl;</div>
-<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;</div>
-<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;    <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i=0;i&lt;NumDown;i++)</div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;    {</div>
-<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;        <span class="keywordtype">int</span> count = 0;</div>
-<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;</div>
-<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;        <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> j=0;j&lt;NumDown;j++)</div>
-<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;            <span class="keywordflow">if</span>(count &lt; <a class="code" href="classSparseHamiltonian.html#a129bea5ae1ce004bd231bdfa5a2ae04a" title="Maximum number of non zero elements in a row for the down hamiltonian.">size_Down</a> &amp;&amp; <a class="code" href="classSparseHamiltonian.html#a5976f3acd763b30b2382b1c678e3d83e" title="The array to hold the indices for the down hamiltonian.">Down_ind</a>[i + count*NumDown] == j)</div>
-<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;                std::cout &lt;&lt; <a class="code" href="classSparseHamiltonian.html#a9de29c5ce417cb15926609010c030442" title="The array to hold the data (ELL format) for the down hamiltonian.">Down_data</a>[i + NumDown*count++] &lt;&lt; <span class="stringliteral">&quot;\t&quot;</span>;</div>
-<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;            <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;                std::cout &lt;&lt; <span class="stringliteral">&quot;0\t&quot;</span>;</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;    std::cout &lt;&lt; <span class="stringliteral">&quot;Up:&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;    <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i=0;i&lt;NumUp;i++)</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;    {</div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;        <span class="keywordtype">int</span> count = 0;</div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;</div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;        <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> j=0;j&lt;NumUp;j++)</div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;            <span class="keywordflow">if</span>(count &lt; size_Up &amp;&amp; Up_ind[i+count*NumUp] == j)</div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;                std::cout &lt;&lt; Up_data[i + NumUp*count++] &lt;&lt; <span class="stringliteral">&quot;\t&quot;</span>;</div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;            <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;                std::cout &lt;&lt; <span class="stringliteral">&quot;0\t&quot;</span>;</div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;</div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;        std::cout &lt;&lt; std::endl;</div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;    }</div>
 <div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;</div>
-<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;        std::cout &lt;&lt; std::endl;</div>
-<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;    }</div>
-<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;}</div>
-<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;</div>
-<div class="line"><a name="l00193"></a><span class="lineno"><a class="code" href="classSparseHamiltonian.html#ab5f77386c10fbbb1970618a142daf192">  193</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classSparseHamiltonian.html#ab5f77386c10fbbb1970618a142daf192">SparseHamiltonian::PrintRawELL</a>()<span class="keyword"> const</span></div>
-<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;<span class="keyword"></span>{</div>
-<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> NumUp = <a class="code" href="classBareHamiltonian.html#ad8bd92d0a6ce8bb91992d75d9fe7a9ad" title="vector to hold all bases ket&#39;s for up electrons">baseUp</a>.size();</div>
-<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> NumDown = <a class="code" href="classBareHamiltonian.html#a3cc3ebc00702f55d5b1376167266409c" title="vector to hold all bases ket&#39;s for down electrons">baseDown</a>.size();</div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;    std::cout &lt;&lt; <span class="stringliteral">&quot;Down:&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;</div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;    <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i=0;i&lt;NumDown;i++)</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;    {</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;        <span class="keywordtype">int</span> count = 0;</div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;</div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;        <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> j=0;j&lt;NumDown;j++)</div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;            <span class="keywordflow">if</span>(count &lt; size_Down &amp;&amp; Down_ind[i + count*NumDown] == j)</div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;                std::cout &lt;&lt; Down_data[i + NumDown*count++] &lt;&lt; <span class="stringliteral">&quot;\t&quot;</span>;</div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;            <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;                std::cout &lt;&lt; <span class="stringliteral">&quot;0\t&quot;</span>;</div>
 <div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;</div>
-<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;    std::cout &lt;&lt; <span class="stringliteral">&quot;Up:&quot;</span> &lt;&lt; std::endl;</div>
-<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;</div>
-<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;    std::cout &lt;&lt; <span class="stringliteral">&quot;Data:&quot;</span> &lt;&lt; std::endl;</div>
-<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;    <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i=0;i&lt;NumUp;i++)</div>
-<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;    {</div>
-<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;        <span class="keywordflow">for</span>(<span class="keywordtype">int</span> j=0;j&lt;<a class="code" href="classSparseHamiltonian.html#a88392552a8c443bc3662f21733191668" title="Maximum number of non zero elements in a row for the up hamiltonian.">size_Up</a>;j++)</div>
-<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;            std::cout &lt;&lt; <a class="code" href="classSparseHamiltonian.html#a3137ea12f044b0b0dffe49db5b05222e" title="The array to hold the data (ELL format) for the up hamiltonian.">Up_data</a>[i+j*NumUp] &lt;&lt; <span class="stringliteral">&quot;\t&quot;</span>;</div>
-<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;</div>
-<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;        std::cout &lt;&lt; std::endl;</div>
-<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;    }</div>
-<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;</div>
-<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;    std::cout &lt;&lt; <span class="stringliteral">&quot;Indices:&quot;</span> &lt;&lt; std::endl;</div>
-<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;    <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i=0;i&lt;NumUp;i++)</div>
-<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;    {</div>
-<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;        <span class="keywordflow">for</span>(<span class="keywordtype">int</span> j=0;j&lt;<a class="code" href="classSparseHamiltonian.html#a88392552a8c443bc3662f21733191668" title="Maximum number of non zero elements in a row for the up hamiltonian.">size_Up</a>;j++)</div>
-<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;            std::cout &lt;&lt; <a class="code" href="classSparseHamiltonian.html#a6a4ef08563e7f2a3ec1a488351f3102d" title="The array to hold the indices for the up hamiltonian.">Up_ind</a>[i+j*NumUp] &lt;&lt; <span class="stringliteral">&quot;\t&quot;</span>;</div>
-<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;</div>
-<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;        std::cout &lt;&lt; std::endl;</div>
-<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;    }</div>
-<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;</div>
-<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;    std::cout &lt;&lt; <span class="stringliteral">&quot;Down:&quot;</span> &lt;&lt; std::endl;</div>
-<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;</div>
-<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;    std::cout &lt;&lt; <span class="stringliteral">&quot;Data:&quot;</span> &lt;&lt; std::endl;</div>
-<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;    <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i=0;i&lt;NumDown;i++)</div>
-<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;    {</div>
-<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;        <span class="keywordflow">for</span>(<span class="keywordtype">int</span> j=0;j&lt;<a class="code" href="classSparseHamiltonian.html#a129bea5ae1ce004bd231bdfa5a2ae04a" title="Maximum number of non zero elements in a row for the down hamiltonian.">size_Down</a>;j++)</div>
-<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;            std::cout &lt;&lt; <a class="code" href="classSparseHamiltonian.html#a9de29c5ce417cb15926609010c030442" title="The array to hold the data (ELL format) for the down hamiltonian.">Down_data</a>[i+j*NumDown] &lt;&lt; <span class="stringliteral">&quot;\t&quot;</span>;</div>
-<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;</div>
-<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;        std::cout &lt;&lt; std::endl;</div>
-<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;    }</div>
-<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;</div>
-<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;    std::cout &lt;&lt; <span class="stringliteral">&quot;Indices:&quot;</span> &lt;&lt; std::endl;</div>
-<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;    <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i=0;i&lt;NumDown;i++)</div>
-<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;    {</div>
-<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;        <span class="keywordflow">for</span>(<span class="keywordtype">int</span> j=0;j&lt;<a class="code" href="classSparseHamiltonian.html#a129bea5ae1ce004bd231bdfa5a2ae04a" title="Maximum number of non zero elements in a row for the down hamiltonian.">size_Down</a>;j++)</div>
-<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;            std::cout &lt;&lt; <a class="code" href="classSparseHamiltonian.html#a5976f3acd763b30b2382b1c678e3d83e" title="The array to hold the indices for the down hamiltonian.">Down_ind</a>[i+j*NumDown] &lt;&lt; <span class="stringliteral">&quot;\t&quot;</span>;</div>
-<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;</div>
-<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;        std::cout &lt;&lt; std::endl;</div>
-<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;    }</div>
-<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;}</div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;        std::cout &lt;&lt; std::endl;</div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;    }</div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;}</div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;</div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> Ham&gt;</div>
+<div class="line"><a name="l00206"></a><span class="lineno"><a class="code" href="classSparseHamiltonian.html#a70e77d92260ba1298d9b30cf0d180b03">  206</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classSparseHamiltonian.html#a70e77d92260ba1298d9b30cf0d180b03">SparseHamiltonian&lt;Ham&gt;::PrintRawELL</a>()<span class="keyword"> const</span></div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;<span class="keyword"></span>{</div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> NumUp = Ham::baseUp.size();</div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> NumDown = Ham::baseDown.size();</div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;</div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;    std::cout &lt;&lt; <span class="stringliteral">&quot;Up:&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;</div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;    std::cout &lt;&lt; <span class="stringliteral">&quot;Data:&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;    <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i=0;i&lt;NumUp;i++)</div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;    {</div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;        <span class="keywordflow">for</span>(<span class="keywordtype">int</span> j=0;j&lt;size_Up;j++)</div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;            std::cout &lt;&lt; Up_data[i+j*NumUp] &lt;&lt; <span class="stringliteral">&quot;\t&quot;</span>;</div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;</div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;        std::cout &lt;&lt; std::endl;</div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;    }</div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;</div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;    std::cout &lt;&lt; <span class="stringliteral">&quot;Indices:&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;    <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i=0;i&lt;NumUp;i++)</div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;    {</div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;        <span class="keywordflow">for</span>(<span class="keywordtype">int</span> j=0;j&lt;size_Up;j++)</div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;            std::cout &lt;&lt; Up_ind[i+j*NumUp] &lt;&lt; <span class="stringliteral">&quot;\t&quot;</span>;</div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;</div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;        std::cout &lt;&lt; std::endl;</div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;    }</div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;</div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;    std::cout &lt;&lt; <span class="stringliteral">&quot;Down:&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;</div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;    std::cout &lt;&lt; <span class="stringliteral">&quot;Data:&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;    <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i=0;i&lt;NumDown;i++)</div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;    {</div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;        <span class="keywordflow">for</span>(<span class="keywordtype">int</span> j=0;j&lt;size_Down;j++)</div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;            std::cout &lt;&lt; Down_data[i+j*NumDown] &lt;&lt; <span class="stringliteral">&quot;\t&quot;</span>;</div>
 <div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;</div>
-<div class="line"><a name="l00245"></a><span class="lineno"><a class="code" href="classSparseHamiltonian.html#a20ae577e617040bdcc525711a87b46fb">  245</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classSparseHamiltonian.html#a20ae577e617040bdcc525711a87b46fb">SparseHamiltonian::mvprod</a>(<span class="keywordtype">double</span> *x, <span class="keywordtype">double</span> *y, <span class="keywordtype">double</span> alpha)<span class="keyword"> const</span></div>
-<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;<span class="keyword"></span>{</div>
-<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;    <span class="keywordtype">int</span> NumUp = <a class="code" href="classBareHamiltonian.html#ad8bd92d0a6ce8bb91992d75d9fe7a9ad" title="vector to hold all bases ket&#39;s for up electrons">baseUp</a>.size();</div>
-<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;    <span class="keywordtype">int</span> NumDown = <a class="code" href="classBareHamiltonian.html#a3cc3ebc00702f55d5b1376167266409c" title="vector to hold all bases ket&#39;s for down electrons">baseDown</a>.size();</div>
-<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;</div>
-<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;    <span class="keywordtype">int</span> incx = 1;</div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;        std::cout &lt;&lt; std::endl;</div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;    }</div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;</div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;    std::cout &lt;&lt; <span class="stringliteral">&quot;Indices:&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;    <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i=0;i&lt;NumDown;i++)</div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;    {</div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;        <span class="keywordflow">for</span>(<span class="keywordtype">int</span> j=0;j&lt;size_Down;j++)</div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;            std::cout &lt;&lt; Down_ind[i+j*NumDown] &lt;&lt; <span class="stringliteral">&quot;\t&quot;</span>;</div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;</div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;        std::cout &lt;&lt; std::endl;</div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;    }</div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;}</div>
 <div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;</div>
-<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i=0;i&lt;NumUp;i++)</div>
-<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;    {</div>
-<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;<span class="preprocessor">#pragma omp parallel for</span></div>
-<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;<span class="preprocessor"></span>        <span class="keywordflow">for</span>(<span class="keywordtype">int</span> k=0;k&lt;NumDown;k++)</div>
-<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;        {</div>
-<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;            <span class="comment">// the interaction part</span></div>
-<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;            y[i*NumDown+k] = alpha*y[i*NumDown+k] + <a class="code" href="classBareHamiltonian.html#aeee149d8a40deeaf1c2b18bd7542649d" title="On site interaction strength.">U</a> * <a class="code" href="classBareHamiltonian.html#a9393391804a06e0ee4970e21d0b729ff">CountBits</a>(<a class="code" href="classBareHamiltonian.html#ad8bd92d0a6ce8bb91992d75d9fe7a9ad" title="vector to hold all bases ket&#39;s for up electrons">baseUp</a>[i] &amp; <a class="code" href="classBareHamiltonian.html#a3cc3ebc00702f55d5b1376167266409c" title="vector to hold all bases ket&#39;s for down electrons">baseDown</a>[k]) * x[i*NumDown+k];</div>
-<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;</div>
-<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;            <span class="comment">// the Hop_down part</span></div>
-<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;            <span class="keywordflow">for</span>(<span class="keywordtype">int</span> l=0;l&lt;<a class="code" href="classSparseHamiltonian.html#a129bea5ae1ce004bd231bdfa5a2ae04a" title="Maximum number of non zero elements in a row for the down hamiltonian.">size_Down</a>;l++)</div>
-<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;                y[i*NumDown+k] += <a class="code" href="classSparseHamiltonian.html#a9de29c5ce417cb15926609010c030442" title="The array to hold the data (ELL format) for the down hamiltonian.">Down_data</a>[k+l*NumDown] * x[i*NumDown + <a class="code" href="classSparseHamiltonian.html#a5976f3acd763b30b2382b1c678e3d83e" title="The array to hold the indices for the down hamiltonian.">Down_ind</a>[k+l*NumDown]];</div>
-<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;        }</div>
-<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;</div>
-<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;        <span class="comment">// the Hop_Up part</span></div>
-<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;        <span class="keywordflow">for</span>(<span class="keywordtype">int</span> l=0;l&lt;<a class="code" href="classSparseHamiltonian.html#a88392552a8c443bc3662f21733191668" title="Maximum number of non zero elements in a row for the up hamiltonian.">size_Up</a>;l++)</div>
-<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;            <a class="code" href="bare-ham_8h.html#abb7d6c365abc5d11a16c1c085bca91a4">daxpy_</a>(&amp;NumDown,&amp;<a class="code" href="classSparseHamiltonian.html#a3137ea12f044b0b0dffe49db5b05222e" title="The array to hold the data (ELL format) for the up hamiltonian.">Up_data</a>[i+l*NumUp],&amp;x[<a class="code" href="classSparseHamiltonian.html#a6a4ef08563e7f2a3ec1a488351f3102d" title="The array to hold the indices for the up hamiltonian.">Up_ind</a>[i+l*NumUp]*NumDown],&amp;incx,&amp;y[i*NumDown],&amp;incx);</div>
-<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;    }</div>
-<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;}</div>
-<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;</div>
-<div class="line"><a name="l00275"></a><span class="lineno"><a class="code" href="classSparseHamiltonian.html#aeb4fc3de07712402b7e3279a808e3e95">  275</a></span>&#160;<span class="keywordtype">double</span>* <a class="code" href="classSparseHamiltonian.html#aeb4fc3de07712402b7e3279a808e3e95">SparseHamiltonian::Umatrix</a>()<span class="keyword"> const</span></div>
-<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;<span class="keyword"></span>{</div>
-<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;    <span class="keywordtype">double</span> *Umat = <span class="keyword">new</span> <span class="keywordtype">double</span>[<a class="code" href="classBareHamiltonian.html#a79005e481ccd821d8672d2989242df1d">getDim</a>()];</div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> Ham&gt;</div>
+<div class="line"><a name="l00259"></a><span class="lineno"><a class="code" href="classSparseHamiltonian.html#a040b0bd99d853823683d1e72657c9a77">  259</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classSparseHamiltonian.html#a040b0bd99d853823683d1e72657c9a77">SparseHamiltonian&lt;Ham&gt;::mvprod</a>(<span class="keywordtype">double</span> *x, <span class="keywordtype">double</span> *y, <span class="keywordtype">double</span> alpha)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;<span class="keyword"></span>{</div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;    <span class="keywordtype">int</span> NumUp = Ham::baseUp.size();</div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;    <span class="keywordtype">int</span> NumDown = Ham::baseDown.size();</div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;</div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;    <span class="keywordtype">int</span> incx = 1;</div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;</div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i=0;i&lt;NumUp;i++)</div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;    {</div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;<span class="preprocessor">#pragma omp parallel for</span></div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;<span class="preprocessor"></span>        <span class="keywordflow">for</span>(<span class="keywordtype">int</span> k=0;k&lt;NumDown;k++)</div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;        {</div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;            <span class="comment">// the interaction part</span></div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;            y[i*NumDown+k] = alpha*y[i*NumDown+k] + Ham::U * Ham::CountBits(Ham::baseUp[i] &amp; Ham::baseDown[k]) * x[i*NumDown+k];</div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;</div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;            <span class="comment">// the Hop_down part</span></div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;            <span class="keywordflow">for</span>(<span class="keywordtype">int</span> l=0;l&lt;size_Down;l++)</div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;                y[i*NumDown+k] += Down_data[k+l*NumDown] * x[i*NumDown + Down_ind[k+l*NumDown]];</div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;        }</div>
 <div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;</div>
-<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;    <span class="keywordtype">int</span> NumDown = <a class="code" href="classBareHamiltonian.html#a3cc3ebc00702f55d5b1376167266409c" title="vector to hold all bases ket&#39;s for down electrons">baseDown</a>.size();</div>
-<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;</div>
-<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i=0;i&lt;<a class="code" href="classBareHamiltonian.html#a79005e481ccd821d8672d2989242df1d">getDim</a>();i++)</div>
-<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;    {</div>
-<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;        <span class="keywordtype">int</span> a = i / NumDown;</div>
-<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;        <span class="keywordtype">int</span> b = i % NumDown;</div>
-<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;        Umat[i] = <a class="code" href="classBareHamiltonian.html#aeee149d8a40deeaf1c2b18bd7542649d" title="On site interaction strength.">U</a> * <a class="code" href="classBareHamiltonian.html#a9393391804a06e0ee4970e21d0b729ff">CountBits</a>(<a class="code" href="classBareHamiltonian.html#ad8bd92d0a6ce8bb91992d75d9fe7a9ad" title="vector to hold all bases ket&#39;s for up electrons">baseUp</a>[a] &amp; <a class="code" href="classBareHamiltonian.html#a3cc3ebc00702f55d5b1376167266409c" title="vector to hold all bases ket&#39;s for down electrons">baseDown</a>[b]);</div>
-<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;    }</div>
-<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;</div>
-<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;    <span class="keywordflow">return</span> Umat;</div>
-<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;}</div>
-<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;</div>
-<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;<span class="comment">/* vim: set ts=8 sw=4 tw=0 expandtab :*/</span></div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;        <span class="comment">// the Hop_Up part</span></div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;        <span class="keywordflow">for</span>(<span class="keywordtype">int</span> l=0;l&lt;size_Up;l++)</div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;            <a class="code" href="bare-ham_8h.html#abb7d6c365abc5d11a16c1c085bca91a4">daxpy_</a>(&amp;NumDown,&amp;Up_data[i+l*NumUp],&amp;x[Up_ind[i+l*NumUp]*NumDown],&amp;incx,&amp;y[i*NumDown],&amp;incx);</div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;    }</div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;}</div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;</div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> Ham&gt;</div>
+<div class="line"><a name="l00290"></a><span class="lineno"><a class="code" href="classSparseHamiltonian.html#a82a9d792bb7abd90971bd93be26e5948">  290</a></span>&#160;<span class="keywordtype">double</span>* <a class="code" href="classSparseHamiltonian.html#a82a9d792bb7abd90971bd93be26e5948">SparseHamiltonian&lt;Ham&gt;::Umatrix</a>()<span class="keyword"> const</span></div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;<span class="keyword"></span>{</div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;    <span class="keywordtype">double</span> *Umat = <span class="keyword">new</span> <span class="keywordtype">double</span>[Ham::getDim()];</div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;</div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;    <span class="keywordtype">int</span> NumDown = Ham::baseDown.size();</div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;</div>
+<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i=0;i&lt;Ham::getDim();i++)</div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;    {</div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;        <span class="keywordtype">int</span> a = i / NumDown;</div>
+<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;        <span class="keywordtype">int</span> b = i % NumDown;</div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;        Umat[i] = Ham::U * Ham::CountBits(Ham::baseUp[a] &amp; Ham::baseDown[b]);</div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;    }</div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;</div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;    <span class="keywordflow">return</span> Umat;</div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;}</div>
+<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;</div>
+<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;<span class="comment">// Expliciet specify the template class with the possible template parameters</span></div>
+<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;<span class="keyword">template</span> <span class="keyword">class </span><a class="code" href="classSparseHamiltonian.html">SparseHamiltonian&lt;Hamiltonian&gt;</a>;</div>
+<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;<span class="keyword">template</span> <span class="keyword">class </span><a class="code" href="classSparseHamiltonian.html">SparseHamiltonian&lt;NonPeriodicHamiltonian&gt;</a>;</div>
+<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;</div>
+<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;<span class="comment">/* vim: set ts=8 sw=4 tw=0 expandtab :*/</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="hamsparse_8cpp.html">hamsparse.cpp</a></li>
-    <li class="footer">Generated on Wed Feb 5 2014 17:08:59 for HubbardGPU by
+    <li class="footer">Generated on Fri Feb 7 2014 14:38:54 for HubbardGPU by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
   </ul>

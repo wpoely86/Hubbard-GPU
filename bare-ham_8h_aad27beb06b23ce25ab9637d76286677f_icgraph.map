@@ -1,7 +1,4 @@
 <map id="dsymv_" name="dsymv_">
 <area shape="rect" id="node2" href="$classMomHamiltonian.html#a45c085901cf18b80b5a5cae99b1d3b12" title="MomHamiltonian::mvprod" alt="" coords="123,5,293,32"/>
 <area shape="rect" id="node3" href="$classHamiltonian.html#ae31ba4590d7a497aed8ef2cac36abd1c" title="Hamiltonian::mvprod" alt="" coords="137,56,279,83"/>
-<area shape="rect" id="node4" href="$classHamiltonian.html#a17ea220ad823c4ce67bbd7a46532f1da" title="Hamiltonian::LanczosDiagonalize" alt="" coords="341,31,557,57"/>
-<area shape="rect" id="node5" href="$classHamiltonian.html#a5fd02d9ba0eb128cc3435d950d858b60" title="Hamiltonian::arpackDiagonalize" alt="" coords="346,81,553,108"/>
-<area shape="rect" id="node6" href="$main_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627" title="main" alt="" coords="605,81,656,108"/>
 </map>

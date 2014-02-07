@@ -26,7 +26,7 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "annotated.html",
-"classSparseHamiltonian2D.html#a001275e5978383d32cd9f39facc1b01e"
+"classNonPeriodicHamiltonian.html#af0c4e86609ea0f977bc13b2905472867"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

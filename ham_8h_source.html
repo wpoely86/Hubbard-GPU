@@ -138,26 +138,22 @@ $(document).ready(function(){initNavTree('ham_8h_source.html','');});
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;</div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classHamiltonian.html#a1ca97f5088a0609826b3d39ca99a2c6d">BuildFullHam</a>();</div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        std::vector&lt;double&gt; <a class="code" href="classHamiltonian.html#a1cf691e59a4308590d87083439c895e8">ExactDiagonalizeFull</a>(<span class="keywordtype">bool</span> calc_eigenvectors=<span class="keyword">false</span>);</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        <span class="keywordtype">double</span> <a class="code" href="classHamiltonian.html#a17ea220ad823c4ce67bbd7a46532f1da">LanczosDiagonalize</a>(<span class="keywordtype">int</span> m=0);</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        <span class="keywordtype">double</span> <a class="code" href="classHamiltonian.html#a5fd02d9ba0eb128cc3435d950d858b60">arpackDiagonalize</a>();</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classHamiltonian.html#ae31ba4590d7a497aed8ef2cac36abd1c">mvprod</a>(<span class="keywordtype">double</span> *x, <span class="keywordtype">double</span> *y, <span class="keywordtype">double</span> alpha) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classHamiltonian.html#ae31ba4590d7a497aed8ef2cac36abd1c">mvprod</a>(<span class="keywordtype">double</span> *x, <span class="keywordtype">double</span> *y, <span class="keywordtype">double</span> alpha) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">int</span> <a class="code" href="classHamiltonian.html#afa972f88c6d0a06f6537c9b667bd0f36">hopping</a>(<a class="code" href="bare-ham_8h.html#ad9e4dd13155f827d121a0b0559473480" title="type to store the basis set vectors in">myint</a> a, <a class="code" href="bare-ham_8h.html#ad9e4dd13155f827d121a0b0559473480" title="type to store the basis set vectors in">myint</a> b, <span class="keywordtype">int</span> jumpsign) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;};</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        <span class="keywordtype">int</span> <a class="code" href="classHamiltonian.html#afa972f88c6d0a06f6537c9b667bd0f36">hopping</a>(<a class="code" href="bare-ham_8h.html#ad9e4dd13155f827d121a0b0559473480" title="type to store the basis set vectors in">myint</a> a, <a class="code" href="bare-ham_8h.html#ad9e4dd13155f827d121a0b0559473480" title="type to store the basis set vectors in">myint</a> b, <span class="keywordtype">int</span> jumpsign) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;};</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* HAM_H */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment">/* vim: set ts=8 sw=4 tw=0 expandtab :*/</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* HAM_H */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment">/* vim: set ts=8 sw=4 tw=0 expandtab :*/</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="ham_8h.html">ham.h</a></li>
-    <li class="footer">Generated on Wed Feb 5 2014 17:08:59 for HubbardGPU by
+    <li class="footer">Generated on Fri Feb 7 2014 14:38:54 for HubbardGPU by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
   </ul>

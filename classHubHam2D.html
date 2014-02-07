@@ -142,12 +142,6 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a65cb0fc2ade5fe6dbc090d4ea401441e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad945391b0d2491afab29db870802e7c8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHubHam2D.html#ad945391b0d2491afab29db870802e7c8">BuildFullHam</a> ()</td></tr>
 <tr class="separator:ad945391b0d2491afab29db870802e7c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1cf691e59a4308590d87083439c895e8"><td class="memItemLeft" align="right" valign="top">std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHamiltonian.html#a1cf691e59a4308590d87083439c895e8">ExactDiagonalizeFull</a> (bool calc_eigenvectors=false)</td></tr>
-<tr class="separator:a1cf691e59a4308590d87083439c895e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a17ea220ad823c4ce67bbd7a46532f1da"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHamiltonian.html#a17ea220ad823c4ce67bbd7a46532f1da">LanczosDiagonalize</a> (int m=0)</td></tr>
-<tr class="separator:a17ea220ad823c4ce67bbd7a46532f1da"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5fd02d9ba0eb128cc3435d950d858b60"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHamiltonian.html#a5fd02d9ba0eb128cc3435d950d858b60">arpackDiagonalize</a> ()</td></tr>
-<tr class="separator:a5fd02d9ba0eb128cc3435d950d858b60"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae31ba4590d7a497aed8ef2cac36abd1c"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHamiltonian.html#ae31ba4590d7a497aed8ef2cac36abd1c">mvprod</a> (double *x, double *y, double alpha) const </td></tr>
 <tr class="separator:ae31ba4590d7a497aed8ef2cac36abd1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acfb89409533465961fb5b1c53056bbaa"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBareHamiltonian.html#acfb89409533465961fb5b1c53056bbaa">CalcDim</a> (int Ns, int N) const </td></tr>
@@ -158,6 +152,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ab6dbeacb89818b5eb02f39d1949c797c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afcf1853d7151e97d7853d0a3b8c3ef53"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBareHamiltonian.html#afcf1853d7151e97d7853d0a3b8c3ef53">BuildBase</a> ()</td></tr>
 <tr class="separator:afcf1853d7151e97d7853d0a3b8c3ef53"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa1da8ad96bc5df57e39845e4a48d7000"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBareHamiltonian.html#aa1da8ad96bc5df57e39845e4a48d7000">BuildHam</a> ()</td></tr>
+<tr class="separator:aa1da8ad96bc5df57e39845e4a48d7000"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aed812fb716fb48c6b70b6f4d72824b41"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBareHamiltonian.html#aed812fb716fb48c6b70b6f4d72824b41">getL</a> () const </td></tr>
 <tr class="separator:aed812fb716fb48c6b70b6f4d72824b41"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a185e23093e417423190b04cd44243acf"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBareHamiltonian.html#a185e23093e417423190b04cd44243acf">getNu</a> () const </td></tr>
@@ -176,6 +172,12 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a039e51028de430d80a1813e8f2b8360e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a57b7a817d006d0927298ce6900559ef6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="bare-ham_8h.html#ad9e4dd13155f827d121a0b0559473480">myint</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBareHamiltonian.html#a57b7a817d006d0927298ce6900559ef6">getBaseDown</a> (unsigned int i) const </td></tr>
 <tr class="separator:a57b7a817d006d0927298ce6900559ef6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aea1d4034d8830ad1001cf6e3baa6d1ca"><td class="memItemLeft" align="right" valign="top">virtual std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBareHamiltonian.html#aea1d4034d8830ad1001cf6e3baa6d1ca">ExactDiagonalizeFull</a> (bool calc_eigenvectors=false)</td></tr>
+<tr class="separator:aea1d4034d8830ad1001cf6e3baa6d1ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa8daa208c5952a41c25c6bd2bd3d3647"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBareHamiltonian.html#aa8daa208c5952a41c25c6bd2bd3d3647">LanczosDiagonalize</a> (int m=0)</td></tr>
+<tr class="separator:aa8daa208c5952a41c25c6bd2bd3d3647"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad58e05dbe722161b41afeeee1a1ca891"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBareHamiltonian.html#ad58e05dbe722161b41afeeee1a1ca891">arpackDiagonalize</a> ()</td></tr>
+<tr class="separator:ad58e05dbe722161b41afeeee1a1ca891"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5d96b4d0a956ba33c531a1ca2a16a4bc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBareHamiltonian.html#a5d96b4d0a956ba33c531a1ca2a16a4bc">Print</a> (bool list=false) const </td></tr>
 <tr class="separator:a5d96b4d0a956ba33c531a1ca2a16a4bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad0d3f7e4dbf383842356d890ede5e7ce"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBareHamiltonian.html#ad0d3f7e4dbf383842356d890ede5e7ce">PrintBase</a> () const </td></tr>
@@ -188,13 +190,15 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:aa420c3ff1b2ad0e7edb363a9807c6673"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af5dffe0480ba79da40af76f26e66a30a"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBareHamiltonian.html#af5dffe0480ba79da40af76f26e66a30a">MemoryNeededArpack</a> () const </td></tr>
 <tr class="separator:af5dffe0480ba79da40af76f26e66a30a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae2b4a7e01118ca9ff8a999fdc5d65f18"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBareHamiltonian.html#ae2b4a7e01118ca9ff8a999fdc5d65f18">SaveToFile</a> (const std::string filename) const </td></tr>
+<tr class="separator:ae2b4a7e01118ca9ff8a999fdc5d65f18"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:ad0cf5454e30f548e8a19e6e041c4238c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHubHam2D.html#ad0cf5454e30f548e8a19e6e041c4238c">hopping</a> (<a class="el" href="bare-ham_8h.html#ad9e4dd13155f827d121a0b0559473480">myint</a> a, <a class="el" href="bare-ham_8h.html#ad9e4dd13155f827d121a0b0559473480">myint</a> b) const </td></tr>
-<tr class="separator:ad0cf5454e30f548e8a19e6e041c4238c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afa972f88c6d0a06f6537c9b667bd0f36"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHamiltonian.html#afa972f88c6d0a06f6537c9b667bd0f36">hopping</a> (<a class="el" href="bare-ham_8h.html#ad9e4dd13155f827d121a0b0559473480">myint</a> a, <a class="el" href="bare-ham_8h.html#ad9e4dd13155f827d121a0b0559473480">myint</a> b, int jumpsign) const </td></tr>
-<tr class="separator:afa972f88c6d0a06f6537c9b667bd0f36"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5fcf36f25194dee6dd31626d70955dfd"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHubHam2D.html#a5fcf36f25194dee6dd31626d70955dfd">hopping</a> (<a class="el" href="bare-ham_8h.html#ad9e4dd13155f827d121a0b0559473480">myint</a> a, <a class="el" href="bare-ham_8h.html#ad9e4dd13155f827d121a0b0559473480">myint</a> b, int jump=0) const </td></tr>
+<tr class="separator:a5fcf36f25194dee6dd31626d70955dfd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a746b83e666bdce9992a3f055d5d53c44"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBareHamiltonian.html#a746b83e666bdce9992a3f055d5d53c44">SaveToFile</a> (const std::string filename, double *data, int <a class="el" href="classBareHamiltonian.html#a7e973232b231d17e01d2fefaf4e9a96d">dim</a>) const </td></tr>
+<tr class="separator:a746b83e666bdce9992a3f055d5d53c44"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a71a6f71bb77ccf7ab241fdfdd46ce9e9"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBareHamiltonian.html#a71a6f71bb77ccf7ab241fdfdd46ce9e9">CalcSign</a> (int i, int j, <a class="el" href="bare-ham_8h.html#ad9e4dd13155f827d121a0b0559473480">myint</a> a) const </td></tr>
 <tr class="separator:a71a6f71bb77ccf7ab241fdfdd46ce9e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -342,7 +346,7 @@ Protected Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="a5fd02d9ba0eb128cc3435d950d858b60"></a>
+<a class="anchor" id="ad58e05dbe722161b41afeeee1a1ca891"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -350,7 +354,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">double Hamiltonian::arpackDiagonalize </td>
+          <td class="memname">double BareHamiltonian::arpackDiagonalize </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -363,18 +367,16 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="classBareHamiltonian.html#ad58e05dbe722161b41afeeee1a1ca891">BareHamiltonian</a>.</p>
-
-<p>Definition at line <a class="el" href="ham_8cpp_source.html#l00356">356</a> of file <a class="el" href="ham_8cpp_source.html">ham.cpp</a>.</p>
+<p>Definition at line <a class="el" href="bare-ham_8cpp_source.html#l00429">429</a> of file <a class="el" href="bare-ham_8cpp_source.html">bare-ham.cpp</a>.</p>
 
 <p><div id="dynsection-2" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-2-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
 <div id="dynsection-2-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-2-content" class="dyncontent" style="display:none;">
-<div class="center"><img src="classHamiltonian_a5fd02d9ba0eb128cc3435d950d858b60_cgraph.png" border="0" usemap="#classHamiltonian_a5fd02d9ba0eb128cc3435d950d858b60_cgraph" alt=""/></div>
-<map name="classHamiltonian_a5fd02d9ba0eb128cc3435d950d858b60_cgraph" id="classHamiltonian_a5fd02d9ba0eb128cc3435d950d858b60_cgraph">
-<area shape="rect" id="node2" href="bare-ham_8h.html#a3eabc0ee91c768347f7fc904d5048502" title="dsaupd_" alt="" coords="298,5,369,32"/><area shape="rect" id="node3" href="classHamiltonian.html#ae31ba4590d7a497aed8ef2cac36abd1c" title="Hamiltonian::mvprod" alt="" coords="262,56,405,83"/><area shape="rect" id="node5" href="bare-ham_8h.html#abbfc1658604845f75cda50de100e6f9e" title="dseupd_" alt="" coords="298,107,369,133"/><area shape="rect" id="node4" href="bare-ham_8h.html#aad27beb06b23ce25ab9637d76286677f" title="dsymv_" alt="" coords="454,56,522,83"/></map>
+<div class="center"><img src="classBareHamiltonian_ad58e05dbe722161b41afeeee1a1ca891_cgraph.png" border="0" usemap="#classBareHamiltonian_ad58e05dbe722161b41afeeee1a1ca891_cgraph" alt=""/></div>
+<map name="classBareHamiltonian_ad58e05dbe722161b41afeeee1a1ca891_cgraph" id="classBareHamiltonian_ad58e05dbe722161b41afeeee1a1ca891_cgraph">
+<area shape="rect" id="node2" href="bare-ham_8h.html#a3eabc0ee91c768347f7fc904d5048502" title="dsaupd_" alt="" coords="338,5,409,32"/><area shape="rect" id="node3" href="classBareHamiltonian.html#ab3ac26f412dfe8fe2d2759520b37f089" title="BareHamiltonian::mvprod" alt="" coords="289,56,458,83"/><area shape="rect" id="node4" href="bare-ham_8h.html#abbfc1658604845f75cda50de100e6f9e" title="dseupd_" alt="" coords="338,107,409,133"/></map>
 </div>
 </p>
 
@@ -383,9 +385,9 @@ Protected Attributes</h2></td></tr>
 <div id="dynsection-3-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-3-content" class="dyncontent" style="display:none;">
-<div class="center"><img src="classHamiltonian_a5fd02d9ba0eb128cc3435d950d858b60_icgraph.png" border="0" usemap="#classHamiltonian_a5fd02d9ba0eb128cc3435d950d858b60_icgraph" alt=""/></div>
-<map name="classHamiltonian_a5fd02d9ba0eb128cc3435d950d858b60_icgraph" id="classHamiltonian_a5fd02d9ba0eb128cc3435d950d858b60_icgraph">
-<area shape="rect" id="node2" href="main_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627" title="main" alt="" coords="261,5,312,32"/></map>
+<div class="center"><img src="classBareHamiltonian_ad58e05dbe722161b41afeeee1a1ca891_icgraph.png" border="0" usemap="#classBareHamiltonian_ad58e05dbe722161b41afeeee1a1ca891_icgraph" alt=""/></div>
+<map name="classBareHamiltonian_ad58e05dbe722161b41afeeee1a1ca891_icgraph" id="classBareHamiltonian_ad58e05dbe722161b41afeeee1a1ca891_icgraph">
+<area shape="rect" id="node2" href="main2D_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627" title="main" alt="" coords="288,5,339,32"/></map>
 </div>
 </p>
 
@@ -415,7 +417,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Reimplemented in <a class="el" href="classMomHamiltonian.html#a962fc3190f39fc82da838d46a901e2e9">MomHamiltonian</a>.</p>
 
-<p>Definition at line <a class="el" href="bare-ham_8cpp_source.html#l00128">128</a> of file <a class="el" href="bare-ham_8cpp_source.html">bare-ham.cpp</a>.</p>
+<p>Definition at line <a class="el" href="bare-ham_8cpp_source.html#l00138">138</a> of file <a class="el" href="bare-ham_8cpp_source.html">bare-ham.cpp</a>.</p>
 
 <p><div id="dynsection-4" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-4-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
@@ -465,7 +467,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="classHamiltonian.html#a1ca97f5088a0609826b3d39ca99a2c6d">Hamiltonian</a>.</p>
 
-<p>Definition at line <a class="el" href="ham2D_8cpp_source.html#l00122">122</a> of file <a class="el" href="ham2D_8cpp_source.html">ham2D.cpp</a>.</p>
+<p>Definition at line <a class="el" href="ham2D_8cpp_source.html#l00123">123</a> of file <a class="el" href="ham2D_8cpp_source.html">ham2D.cpp</a>.</p>
 
 <p><div id="dynsection-6" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-6-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
@@ -486,6 +488,43 @@ Protected Attributes</h2></td></tr>
 <div class="center"><img src="classHubHam2D_ad945391b0d2491afab29db870802e7c8_icgraph.png" border="0" usemap="#classHubHam2D_ad945391b0d2491afab29db870802e7c8_icgraph" alt=""/></div>
 <map name="classHubHam2D_ad945391b0d2491afab29db870802e7c8_icgraph" id="classHubHam2D_ad945391b0d2491afab29db870802e7c8_icgraph">
 <area shape="rect" id="node2" href="main2D_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627" title="main" alt="" coords="232,5,283,32"/></map>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="aa1da8ad96bc5df57e39845e4a48d7000"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void BareHamiltonian::BuildHam </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>This method is always present and should build the <a class="el" href="classHamiltonian.html">Hamiltonian</a>, either full or sparse </p>
+
+<p>Definition at line <a class="el" href="bare-ham_8cpp_source.html#l00157">157</a> of file <a class="el" href="bare-ham_8cpp_source.html">bare-ham.cpp</a>.</p>
+
+<p><div id="dynsection-8" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-8-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
+<div id="dynsection-8-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-8-content" class="dyncontent" style="display:none;">
+<div class="center"><img src="classBareHamiltonian_aa1da8ad96bc5df57e39845e4a48d7000_cgraph.png" border="0" usemap="#classBareHamiltonian_aa1da8ad96bc5df57e39845e4a48d7000_cgraph" alt=""/></div>
+<map name="classBareHamiltonian_aa1da8ad96bc5df57e39845e4a48d7000_cgraph" id="classBareHamiltonian_aa1da8ad96bc5df57e39845e4a48d7000_cgraph">
+<area shape="rect" id="node2" href="classBareHamiltonian.html#a2e1555e4e6cf74d226dea9a01f5e48e8" title="BareHamiltonian::BuildFullHam" alt="" coords="238,5,442,32"/></map>
 </div>
 </p>
 
@@ -532,13 +571,13 @@ Protected Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>the dimension of the up or down electron space </dd></dl>
 
-<p>Definition at line <a class="el" href="bare-ham_8cpp_source.html#l00074">74</a> of file <a class="el" href="bare-ham_8cpp_source.html">bare-ham.cpp</a>.</p>
+<p>Definition at line <a class="el" href="bare-ham_8cpp_source.html#l00084">84</a> of file <a class="el" href="bare-ham_8cpp_source.html">bare-ham.cpp</a>.</p>
 
-<p><div id="dynsection-8" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-8-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
-<div id="dynsection-8-summary" class="dynsummary" style="display:block;">
+<p><div id="dynsection-9" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-9-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-9-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-8-content" class="dyncontent" style="display:none;">
+<div id="dynsection-9-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classBareHamiltonian_acfb89409533465961fb5b1c53056bbaa_icgraph.png" border="0" usemap="#classBareHamiltonian_acfb89409533465961fb5b1c53056bbaa_icgraph" alt=""/></div>
 <map name="classBareHamiltonian_acfb89409533465961fb5b1c53056bbaa_icgraph" id="classBareHamiltonian_acfb89409533465961fb5b1c53056bbaa_icgraph">
 <area shape="rect" id="node2" href="classBareHamiltonian.html#a3785788803e59876b3b71a980f990e0a" title="BareHamiltonian::BareHamiltonian" alt="" coords="241,5,463,32"/><area shape="rect" id="node3" href="classBareHamiltonian.html#afcf1853d7151e97d7853d0a3b8c3ef53" title="BareHamiltonian::BuildBase" alt="" coords="259,56,445,83"/><area shape="rect" id="node5" href="classBareHamiltonian.html#a8acdfb1a78cbcddd169a3c326008969f" title="BareHamiltonian::PrintGroundstate\lVector" alt="" coords="240,107,464,149"/><area shape="rect" id="node6" href="classBareHamiltonian.html#a7a1cd1f60b1bcac5b63395e17ca7618b" title="BareHamiltonian::MemoryNeededFull" alt="" coords="233,173,471,200"/><area shape="rect" id="node7" href="classBareHamiltonian.html#aa420c3ff1b2ad0e7edb363a9807c6673" title="BareHamiltonian::MemoryNeeded\lLanczos" alt="" coords="243,225,461,266"/><area shape="rect" id="node8" href="classBareHamiltonian.html#af5dffe0480ba79da40af76f26e66a30a" title="BareHamiltonian::MemoryNeeded\lArpack" alt="" coords="243,290,461,331"/><area shape="rect" id="node9" href="classMomHamiltonian.html#a962fc3190f39fc82da838d46a901e2e9" title="MomHamiltonian::BuildBase" alt="" coords="259,356,445,383"/><area shape="rect" id="node11" href="classHamiltonian.html#a1ca97f5088a0609826b3d39ca99a2c6d" title="Hamiltonian::BuildFullHam" alt="" coords="263,407,441,433"/><area shape="rect" id="node12" href="classHamiltonian.html#a1cf691e59a4308590d87083439c895e8" title="Hamiltonian::ExactDiagonalizeFull" alt="" coords="241,457,463,484"/><area shape="rect" id="node14" href="classHubHam2D.html#ad945391b0d2491afab29db870802e7c8" title="HubHam2D::BuildFullHam" alt="" coords="263,508,441,535"/><area shape="rect" id="node4" href="main_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627" title="main" alt="" coords="600,177,651,204"/><area shape="rect" id="node10" href="classMomHamiltonian.html#af71863a9bd620bebd16d6f64d8de7ff4" title="MomHamiltonian::GenerateData" alt="" coords="521,356,730,383"/><area shape="rect" id="node13" href="main2D_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627" title="main" alt="" coords="600,483,651,509"/></map>
@@ -595,24 +634,24 @@ Protected Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>the sign of the hop </dd></dl>
 
-<p>Definition at line <a class="el" href="bare-ham_8cpp_source.html#l00151">151</a> of file <a class="el" href="bare-ham_8cpp_source.html">bare-ham.cpp</a>.</p>
+<p>Definition at line <a class="el" href="bare-ham_8cpp_source.html#l00170">170</a> of file <a class="el" href="bare-ham_8cpp_source.html">bare-ham.cpp</a>.</p>
 
-<p><div id="dynsection-9" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-9-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
-<div id="dynsection-9-summary" class="dynsummary" style="display:block;">
+<p><div id="dynsection-10" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-10-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
+<div id="dynsection-10-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-9-content" class="dyncontent" style="display:none;">
+<div id="dynsection-10-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classBareHamiltonian_a71a6f71bb77ccf7ab241fdfdd46ce9e9_cgraph.png" border="0" usemap="#classBareHamiltonian_a71a6f71bb77ccf7ab241fdfdd46ce9e9_cgraph" alt=""/></div>
 <map name="classBareHamiltonian_a71a6f71bb77ccf7ab241fdfdd46ce9e9_cgraph" id="classBareHamiltonian_a71a6f71bb77ccf7ab241fdfdd46ce9e9_cgraph">
 <area shape="rect" id="node2" href="classBareHamiltonian.html#a9393391804a06e0ee4970e21d0b729ff" title="BareHamiltonian::CountBits" alt="" coords="232,5,416,32"/></map>
 </div>
 </p>
 
-<p><div id="dynsection-10" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-10-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
-<div id="dynsection-10-summary" class="dynsummary" style="display:block;">
+<p><div id="dynsection-11" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-11-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-11-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-10-content" class="dyncontent" style="display:none;">
+<div id="dynsection-11-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classBareHamiltonian_a71a6f71bb77ccf7ab241fdfdd46ce9e9_icgraph.png" border="0" usemap="#classBareHamiltonian_a71a6f71bb77ccf7ab241fdfdd46ce9e9_icgraph" alt=""/></div>
 <map name="classBareHamiltonian_a71a6f71bb77ccf7ab241fdfdd46ce9e9_icgraph" id="classBareHamiltonian_a71a6f71bb77ccf7ab241fdfdd46ce9e9_icgraph">
 <area shape="rect" id="node2" href="classMomHamiltonian.html#a6007eb5c918adc93258cabad16a29afd" title="MomHamiltonian::interaction" alt="" coords="233,56,421,83"/><area shape="rect" id="node5" href="classHubHam2D.html#ad0cf5454e30f548e8a19e6e041c4238c" title="HubHam2D::hopping" alt="" coords="255,107,399,133"/><area shape="rect" id="node3" href="classMomHamiltonian.html#a24ea0b2bd0b721c8050da6615ad92b5f" title="MomHamiltonian::BuildFullHam" alt="" coords="471,5,678,32"/><area shape="rect" id="node4" href="classMomHamiltonian.html#af71863a9bd620bebd16d6f64d8de7ff4" title="MomHamiltonian::GenerateData" alt="" coords="470,56,679,83"/><area shape="rect" id="node6" href="classHubHam2D.html#ad945391b0d2491afab29db870802e7c8" title="HubHam2D::BuildFullHam" alt="" coords="729,107,906,133"/><area shape="rect" id="node8" href="classSparseHamiltonian2D__CSR.html#a0f3ea43d0d27705ddc249e9372506c3e" title="SparseHamiltonian2D\l_CSR::BuildSparseHam" alt="" coords="493,158,657,199"/><area shape="rect" id="node7" href="main2D_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627" title="main" alt="" coords="955,136,1005,163"/><area shape="rect" id="node9" href="classSparseHamiltonian2D.html#a705d999fe46f1c32330a7e1074fd234a" title="SparseHamiltonian2D\l::BuildSparseHam" alt="" coords="743,158,892,199"/></map>
@@ -651,13 +690,13 @@ Protected Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>the number of bits set </dd></dl>
 
-<p>Definition at line <a class="el" href="bare-ham_8cpp_source.html#l00097">97</a> of file <a class="el" href="bare-ham_8cpp_source.html">bare-ham.cpp</a>.</p>
+<p>Definition at line <a class="el" href="bare-ham_8cpp_source.html#l00107">107</a> of file <a class="el" href="bare-ham_8cpp_source.html">bare-ham.cpp</a>.</p>
 
-<p><div id="dynsection-11" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-11-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
-<div id="dynsection-11-summary" class="dynsummary" style="display:block;">
+<p><div id="dynsection-12" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-12-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-12-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-11-content" class="dyncontent" style="display:none;">
+<div id="dynsection-12-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classBareHamiltonian_a9393391804a06e0ee4970e21d0b729ff_icgraph.png" border="0" usemap="#classBareHamiltonian_a9393391804a06e0ee4970e21d0b729ff_icgraph" alt=""/></div>
 <map name="classBareHamiltonian_a9393391804a06e0ee4970e21d0b729ff_icgraph" id="classBareHamiltonian_a9393391804a06e0ee4970e21d0b729ff_icgraph">
 <area shape="rect" id="node2" href="classBareHamiltonian.html#a3785788803e59876b3b71a980f990e0a" title="BareHamiltonian::BareHamiltonian" alt="" coords="238,5,461,32"/><area shape="rect" id="node3" href="classBareHamiltonian.html#afcf1853d7151e97d7853d0a3b8c3ef53" title="BareHamiltonian::BuildBase" alt="" coords="257,56,442,83"/><area shape="rect" id="node5" href="classBareHamiltonian.html#a71a6f71bb77ccf7ab241fdfdd46ce9e9" title="BareHamiltonian::CalcSign" alt="" coords="260,259,439,285"/><area shape="rect" id="node14" href="classMomHamiltonian.html#a962fc3190f39fc82da838d46a901e2e9" title="MomHamiltonian::BuildBase" alt="" coords="511,208,697,235"/><area shape="rect" id="node6" href="classMomHamiltonian.html#a6007eb5c918adc93258cabad16a29afd" title="MomHamiltonian::interaction" alt="" coords="510,157,698,184"/><area shape="rect" id="node15" href="classMomHamiltonian.html#a27712aee46dcc78180ee20aa7c40a8ee" title="MomHamiltonian::hopping" alt="" coords="517,107,691,133"/><area shape="rect" id="node16" href="classHamiltonian.html#a1ca97f5088a0609826b3d39ca99a2c6d" title="Hamiltonian::BuildFullHam" alt="" coords="261,360,438,387"/><area shape="rect" id="node10" href="classHubHam2D.html#ad945391b0d2491afab29db870802e7c8" title="HubHam2D::BuildFullHam" alt="" coords="763,309,941,336"/><area shape="rect" id="node17" href="classSparseHamiltonian.html#a20ae577e617040bdcc525711a87b46fb" title="SparseHamiltonian::\lmvprod" alt="" coords="279,411,419,453"/><area shape="rect" id="node18" href="classSparseHamiltonian.html#aeb4fc3de07712402b7e3279a808e3e95" title="SparseHamiltonian::\lUmatrix" alt="" coords="279,477,419,518"/><area shape="rect" id="node19" href="classSparseHamiltonian2D.html#a0883f62aa65bd37b285585e565bf0a9d" title="SparseHamiltonian2D\l::mvprod" alt="" coords="275,542,424,583"/><area shape="rect" id="node20" href="classSparseHamiltonian2D__CSR.html#ad355ef212b019050598f547696548eb2" title="SparseHamiltonian2D\l_CSR::mvprod" alt="" coords="275,607,424,649"/><area shape="rect" id="node21" href="classSparseHamiltonian2D__CSR.html#a1bc2f7a843679c623635fd49b5483dd6" title="SparseHamiltonian2D\l_CSR::Umatrix" alt="" coords="275,673,424,714"/><area shape="rect" id="node4" href="main_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627" title="main" alt="" coords="579,56,629,83"/><area shape="rect" id="node9" href="classHubHam2D.html#ad0cf5454e30f548e8a19e6e041c4238c" title="HubHam2D::hopping" alt="" coords="532,259,676,285"/><area shape="rect" id="node7" href="classMomHamiltonian.html#a24ea0b2bd0b721c8050da6615ad92b5f" title="MomHamiltonian::BuildFullHam" alt="" coords="749,107,955,133"/><area shape="rect" id="node8" href="classMomHamiltonian.html#af71863a9bd620bebd16d6f64d8de7ff4" title="MomHamiltonian::GenerateData" alt="" coords="747,157,957,184"/><area shape="rect" id="node12" href="classSparseHamiltonian2D__CSR.html#a0f3ea43d0d27705ddc249e9372506c3e" title="SparseHamiltonian2D\l_CSR::BuildSparseHam" alt="" coords="770,243,934,285"/><area shape="rect" id="node11" href="main2D_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627" title="main" alt="" coords="1203,280,1253,307"/><area shape="rect" id="node13" href="classSparseHamiltonian2D.html#a705d999fe46f1c32330a7e1074fd234a" title="SparseHamiltonian2D\l::BuildSparseHam" alt="" coords="1005,243,1155,285"/></map>
@@ -720,24 +759,24 @@ Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="bare-ham_8cpp_source.html#l00630">630</a> of file <a class="el" href="bare-ham_8cpp_source.html">bare-ham.cpp</a>.</p>
+<p>Definition at line <a class="el" href="bare-ham_8cpp_source.html#l00654">654</a> of file <a class="el" href="bare-ham_8cpp_source.html">bare-ham.cpp</a>.</p>
 
-<p><div id="dynsection-12" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-12-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
-<div id="dynsection-12-summary" class="dynsummary" style="display:block;">
+<p><div id="dynsection-13" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-13-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
+<div id="dynsection-13-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-12-content" class="dyncontent" style="display:none;">
+<div id="dynsection-13-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classBareHamiltonian_af0c4e86609ea0f977bc13b2905472867_cgraph.png" border="0" usemap="#classBareHamiltonian_af0c4e86609ea0f977bc13b2905472867_cgraph" alt=""/></div>
 <map name="classBareHamiltonian_af0c4e86609ea0f977bc13b2905472867_cgraph" id="classBareHamiltonian_af0c4e86609ea0f977bc13b2905472867_cgraph">
 <area shape="rect" id="node2" href="bare-ham_8h.html#ad0cfc41b12c93c0f2aad995d39d5fe42" title="dsyevd_" alt="" coords="249,5,319,32"/></map>
 </div>
 </p>
 
-<p><div id="dynsection-13" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-13-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
-<div id="dynsection-13-summary" class="dynsummary" style="display:block;">
+<p><div id="dynsection-14" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-14-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-14-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-13-content" class="dyncontent" style="display:none;">
+<div id="dynsection-14-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classBareHamiltonian_af0c4e86609ea0f977bc13b2905472867_icgraph.png" border="0" usemap="#classBareHamiltonian_af0c4e86609ea0f977bc13b2905472867_icgraph" alt=""/></div>
 <map name="classBareHamiltonian_af0c4e86609ea0f977bc13b2905472867_icgraph" id="classBareHamiltonian_af0c4e86609ea0f977bc13b2905472867_icgraph">
 <area shape="rect" id="node2" href="classBareHamiltonian.html#aea1d4034d8830ad1001cf6e3baa6d1ca" title="BareHamiltonian::ExactDiagonalizeFull" alt="" coords="249,5,498,32"/><area shape="rect" id="node3" href="classMomHamiltonian.html#abc370da4a9f19c97ea70896e5e5dbaff" title="MomHamiltonian::ExactDiagonalizeFull" alt="" coords="248,56,499,83"/><area shape="rect" id="node4" href="classMomHamiltonian.html#a5412bcf8d5455c54f14f780dbaf40282" title="MomHamiltonian::ExactMom\lDiagonalizeFull" alt="" coords="278,107,469,149"/><area shape="rect" id="node5" href="classMomHamiltonian.html#af71863a9bd620bebd16d6f64d8de7ff4" title="MomHamiltonian::GenerateData" alt="" coords="269,173,478,200"/></map>
@@ -746,7 +785,7 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a1cf691e59a4308590d87083439c895e8"></a>
+<a class="anchor" id="aea1d4034d8830ad1001cf6e3baa6d1ca"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -754,7 +793,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::vector&lt; double &gt; Hamiltonian::ExactDiagonalizeFull </td>
+          <td class="memname">std::vector&lt; double &gt; BareHamiltonian::ExactDiagonalizeFull </td>
           <td>(</td>
           <td class="paramtype">bool&#160;</td>
           <td class="paramname"><em>calc_eigenvectors</em> = <code>false</code></td><td>)</td>
@@ -767,32 +806,32 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Exactly calculates the eigenvalues of the hamiltonian matrix. Needs lapack. </p>
+<p>Exactly calculates the eigenvalues of the <a class="el" href="classBareHamiltonian.html">BareHamiltonian</a> matrix. Needs lapack. </p>
 <dl class="section return"><dt>Returns</dt><dd>the lowest eigenvalue </dd></dl>
 
-<p>Reimplemented from <a class="el" href="classBareHamiltonian.html#aea1d4034d8830ad1001cf6e3baa6d1ca">BareHamiltonian</a>.</p>
+<p>Reimplemented in <a class="el" href="classMomHamiltonian.html#abc370da4a9f19c97ea70896e5e5dbaff">MomHamiltonian</a>.</p>
 
-<p>Definition at line <a class="el" href="ham_8cpp_source.html#l00188">188</a> of file <a class="el" href="ham_8cpp_source.html">ham.cpp</a>.</p>
-
-<p><div id="dynsection-14" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-14-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
-<div id="dynsection-14-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-14-content" class="dyncontent" style="display:none;">
-<div class="center"><img src="classHamiltonian_a1cf691e59a4308590d87083439c895e8_cgraph.png" border="0" usemap="#classHamiltonian_a1cf691e59a4308590d87083439c895e8_cgraph" alt=""/></div>
-<map name="classHamiltonian_a1cf691e59a4308590d87083439c895e8_cgraph" id="classHamiltonian_a1cf691e59a4308590d87083439c895e8_cgraph">
-<area shape="rect" id="node2" href="classBareHamiltonian.html#acfb89409533465961fb5b1c53056bbaa" title="BareHamiltonian::CalcDim" alt="" coords="278,5,455,32"/><area shape="rect" id="node3" href="bare-ham_8h.html#ad0cfc41b12c93c0f2aad995d39d5fe42" title="dsyevd_" alt="" coords="331,56,402,83"/></map>
-</div>
-</p>
+<p>Definition at line <a class="el" href="bare-ham_8cpp_source.html#l00272">272</a> of file <a class="el" href="bare-ham_8cpp_source.html">bare-ham.cpp</a>.</p>
 
 <p><div id="dynsection-15" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-15-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+  <img id="dynsection-15-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
 <div id="dynsection-15-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-15-content" class="dyncontent" style="display:none;">
-<div class="center"><img src="classHamiltonian_a1cf691e59a4308590d87083439c895e8_icgraph.png" border="0" usemap="#classHamiltonian_a1cf691e59a4308590d87083439c895e8_icgraph" alt=""/></div>
-<map name="classHamiltonian_a1cf691e59a4308590d87083439c895e8_icgraph" id="classHamiltonian_a1cf691e59a4308590d87083439c895e8_icgraph">
-<area shape="rect" id="node2" href="main2D_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627" title="main" alt="" coords="277,5,328,32"/></map>
+<div class="center"><img src="classBareHamiltonian_aea1d4034d8830ad1001cf6e3baa6d1ca_cgraph.png" border="0" usemap="#classBareHamiltonian_aea1d4034d8830ad1001cf6e3baa6d1ca_cgraph" alt=""/></div>
+<map name="classBareHamiltonian_aea1d4034d8830ad1001cf6e3baa6d1ca_cgraph" id="classBareHamiltonian_aea1d4034d8830ad1001cf6e3baa6d1ca_cgraph">
+<area shape="rect" id="node2" href="classBareHamiltonian.html#af0c4e86609ea0f977bc13b2905472867" title="BareHamiltonian::Diagonalize" alt="" coords="304,5,499,32"/><area shape="rect" id="node3" href="bare-ham_8h.html#ad0cfc41b12c93c0f2aad995d39d5fe42" title="dsyevd_" alt="" coords="547,5,618,32"/></map>
+</div>
+</p>
+
+<p><div id="dynsection-16" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-16-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-16-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-16-content" class="dyncontent" style="display:none;">
+<div class="center"><img src="classBareHamiltonian_aea1d4034d8830ad1001cf6e3baa6d1ca_icgraph.png" border="0" usemap="#classBareHamiltonian_aea1d4034d8830ad1001cf6e3baa6d1ca_icgraph" alt=""/></div>
+<map name="classBareHamiltonian_aea1d4034d8830ad1001cf6e3baa6d1ca_icgraph" id="classBareHamiltonian_aea1d4034d8830ad1001cf6e3baa6d1ca_icgraph">
+<area shape="rect" id="node2" href="main2D_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627" title="main" alt="" coords="304,5,355,32"/></map>
 </div>
 </p>
 
@@ -828,13 +867,13 @@ Protected Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>the base ket </dd></dl>
 
-<p>Definition at line <a class="el" href="bare-ham_8cpp_source.html#l00243">243</a> of file <a class="el" href="bare-ham_8cpp_source.html">bare-ham.cpp</a>.</p>
+<p>Definition at line <a class="el" href="bare-ham_8cpp_source.html#l00262">262</a> of file <a class="el" href="bare-ham_8cpp_source.html">bare-ham.cpp</a>.</p>
 
-<p><div id="dynsection-16" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-16-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
-<div id="dynsection-16-summary" class="dynsummary" style="display:block;">
+<p><div id="dynsection-17" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-17-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-17-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-16-content" class="dyncontent" style="display:none;">
+<div id="dynsection-17-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classBareHamiltonian_a57b7a817d006d0927298ce6900559ef6_icgraph.png" border="0" usemap="#classBareHamiltonian_a57b7a817d006d0927298ce6900559ef6_icgraph" alt=""/></div>
 <map name="classBareHamiltonian_a57b7a817d006d0927298ce6900559ef6_icgraph" id="classBareHamiltonian_a57b7a817d006d0927298ce6900559ef6_icgraph">
 <area shape="rect" id="node2" href="classBareHamiltonian.html#a8acdfb1a78cbcddd169a3c326008969f" title="BareHamiltonian::PrintGroundstate\lVector" alt="" coords="261,5,485,46"/></map>
@@ -873,13 +912,13 @@ Protected Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>the base ket </dd></dl>
 
-<p>Definition at line <a class="el" href="bare-ham_8cpp_source.html#l00233">233</a> of file <a class="el" href="bare-ham_8cpp_source.html">bare-ham.cpp</a>.</p>
+<p>Definition at line <a class="el" href="bare-ham_8cpp_source.html#l00252">252</a> of file <a class="el" href="bare-ham_8cpp_source.html">bare-ham.cpp</a>.</p>
 
-<p><div id="dynsection-17" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-17-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
-<div id="dynsection-17-summary" class="dynsummary" style="display:block;">
+<p><div id="dynsection-18" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-18-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-18-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-17-content" class="dyncontent" style="display:none;">
+<div id="dynsection-18-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classBareHamiltonian_a039e51028de430d80a1813e8f2b8360e_icgraph.png" border="0" usemap="#classBareHamiltonian_a039e51028de430d80a1813e8f2b8360e_icgraph" alt=""/></div>
 <map name="classBareHamiltonian_a039e51028de430d80a1813e8f2b8360e_icgraph" id="classBareHamiltonian_a039e51028de430d80a1813e8f2b8360e_icgraph">
 <area shape="rect" id="node2" href="classBareHamiltonian.html#a8acdfb1a78cbcddd169a3c326008969f" title="BareHamiltonian::PrintGroundstate\lVector" alt="" coords="245,5,469,46"/></map>
@@ -911,13 +950,13 @@ Protected Attributes</h2></td></tr>
 <p>Getter for the dimension of the <a class="el" href="classBareHamiltonian.html">BareHamiltonian</a> matrix </p>
 <dl class="section return"><dt>Returns</dt><dd>dimension of the <a class="el" href="classBareHamiltonian.html">BareHamiltonian</a> matrix </dd></dl>
 
-<p>Definition at line <a class="el" href="bare-ham_8cpp_source.html#l00196">196</a> of file <a class="el" href="bare-ham_8cpp_source.html">bare-ham.cpp</a>.</p>
+<p>Definition at line <a class="el" href="bare-ham_8cpp_source.html#l00215">215</a> of file <a class="el" href="bare-ham_8cpp_source.html">bare-ham.cpp</a>.</p>
 
-<p><div id="dynsection-18" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-18-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
-<div id="dynsection-18-summary" class="dynsummary" style="display:block;">
+<p><div id="dynsection-19" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-19-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-19-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-18-content" class="dyncontent" style="display:none;">
+<div id="dynsection-19-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classBareHamiltonian_a79005e481ccd821d8672d2989242df1d_icgraph.png" border="0" usemap="#classBareHamiltonian_a79005e481ccd821d8672d2989242df1d_icgraph" alt=""/></div>
 <map name="classBareHamiltonian_a79005e481ccd821d8672d2989242df1d_icgraph" id="classBareHamiltonian_a79005e481ccd821d8672d2989242df1d_icgraph">
 <area shape="rect" id="node2" href="classSparseHamiltonian.html#aeb4fc3de07712402b7e3279a808e3e95" title="SparseHamiltonian::\lUmatrix" alt="" coords="226,5,366,46"/><area shape="rect" id="node3" href="classSparseHamiltonian2D__CSR.html#a1bc2f7a843679c623635fd49b5483dd6" title="SparseHamiltonian2D\l_CSR::Umatrix" alt="" coords="221,70,371,111"/><area shape="rect" id="node4" href="main_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627" title="main" alt="" coords="271,136,321,163"/></map>
@@ -949,7 +988,7 @@ Protected Attributes</h2></td></tr>
 <p>Getter for the hopping strength </p>
 <dl class="section return"><dt>Returns</dt><dd>the hopping strength </dd></dl>
 
-<p>Definition at line <a class="el" href="bare-ham_8cpp_source.html#l00205">205</a> of file <a class="el" href="bare-ham_8cpp_source.html">bare-ham.cpp</a>.</p>
+<p>Definition at line <a class="el" href="bare-ham_8cpp_source.html#l00224">224</a> of file <a class="el" href="bare-ham_8cpp_source.html">bare-ham.cpp</a>.</p>
 
 </div>
 </div>
@@ -976,7 +1015,7 @@ Protected Attributes</h2></td></tr>
 <p>Getter for the number of lattice sites </p>
 <dl class="section return"><dt>Returns</dt><dd>the number of lattice sites </dd></dl>
 
-<p>Definition at line <a class="el" href="bare-ham_8cpp_source.html#l00169">169</a> of file <a class="el" href="bare-ham_8cpp_source.html">bare-ham.cpp</a>.</p>
+<p>Definition at line <a class="el" href="bare-ham_8cpp_source.html#l00188">188</a> of file <a class="el" href="bare-ham_8cpp_source.html">bare-ham.cpp</a>.</p>
 
 </div>
 </div>
@@ -1003,7 +1042,7 @@ Protected Attributes</h2></td></tr>
 <p>Getter for the number of down electrons </p>
 <dl class="section return"><dt>Returns</dt><dd>the number of down electrons </dd></dl>
 
-<p>Definition at line <a class="el" href="bare-ham_8cpp_source.html#l00187">187</a> of file <a class="el" href="bare-ham_8cpp_source.html">bare-ham.cpp</a>.</p>
+<p>Definition at line <a class="el" href="bare-ham_8cpp_source.html#l00206">206</a> of file <a class="el" href="bare-ham_8cpp_source.html">bare-ham.cpp</a>.</p>
 
 </div>
 </div>
@@ -1030,7 +1069,7 @@ Protected Attributes</h2></td></tr>
 <p>Getter for the number of up electrons </p>
 <dl class="section return"><dt>Returns</dt><dd>the number of up electrons </dd></dl>
 
-<p>Definition at line <a class="el" href="bare-ham_8cpp_source.html#l00178">178</a> of file <a class="el" href="bare-ham_8cpp_source.html">bare-ham.cpp</a>.</p>
+<p>Definition at line <a class="el" href="bare-ham_8cpp_source.html#l00197">197</a> of file <a class="el" href="bare-ham_8cpp_source.html">bare-ham.cpp</a>.</p>
 
 </div>
 </div>
@@ -1057,11 +1096,11 @@ Protected Attributes</h2></td></tr>
 <p>Getter for the onsite interaction strength </p>
 <dl class="section return"><dt>Returns</dt><dd>the onsite interaction strength </dd></dl>
 
-<p>Definition at line <a class="el" href="bare-ham_8cpp_source.html#l00214">214</a> of file <a class="el" href="bare-ham_8cpp_source.html">bare-ham.cpp</a>.</p>
+<p>Definition at line <a class="el" href="bare-ham_8cpp_source.html#l00233">233</a> of file <a class="el" href="bare-ham_8cpp_source.html">bare-ham.cpp</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="ad0cf5454e30f548e8a19e6e041c4238c"></a>
+<a class="anchor" id="a5fcf36f25194dee6dd31626d70955dfd"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -1078,7 +1117,13 @@ Protected Attributes</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="bare-ham_8h.html#ad9e4dd13155f827d121a0b0559473480">myint</a>&#160;</td>
-          <td class="paramname"><em>b</em>&#160;</td>
+          <td class="paramname"><em>b</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>jump</em> = <code>0</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -1088,7 +1133,7 @@ Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1097,101 +1142,41 @@ Protected Attributes</h2></td></tr>
   <table class="params">
     <tr><td class="paramname">a</td><td>the bra to use </td></tr>
     <tr><td class="paramname">b</td><td>the ket to use </td></tr>
+    <tr><td class="paramname">jump</td><td>does nothing, is set by default to zero, please ignore. </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>matrix element of the hopping term between the ket and the bra. You still have to multiply this with the hopping strength J </dd></dl>
 
-<p>Definition at line <a class="el" href="ham2D_8cpp_source.html#l00053">53</a> of file <a class="el" href="ham2D_8cpp_source.html">ham2D.cpp</a>.</p>
+<p>Reimplemented from <a class="el" href="classHamiltonian.html#afa972f88c6d0a06f6537c9b667bd0f36">Hamiltonian</a>.</p>
 
-<p><div id="dynsection-19" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-19-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
-<div id="dynsection-19-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-19-content" class="dyncontent" style="display:none;">
-<div class="center"><img src="classHubHam2D_ad0cf5454e30f548e8a19e6e041c4238c_cgraph.png" border="0" usemap="#classHubHam2D_ad0cf5454e30f548e8a19e6e041c4238c_cgraph" alt=""/></div>
-<map name="classHubHam2D_ad0cf5454e30f548e8a19e6e041c4238c_cgraph" id="classHubHam2D_ad0cf5454e30f548e8a19e6e041c4238c_cgraph">
-<area shape="rect" id="node2" href="classBareHamiltonian.html#a71a6f71bb77ccf7ab241fdfdd46ce9e9" title="BareHamiltonian::CalcSign" alt="" coords="197,5,376,32"/><area shape="rect" id="node3" href="classBareHamiltonian.html#a9393391804a06e0ee4970e21d0b729ff" title="BareHamiltonian::CountBits" alt="" coords="424,5,608,32"/></map>
-</div>
-</p>
+<p>Definition at line <a class="el" href="ham2D_8cpp_source.html#l00054">54</a> of file <a class="el" href="ham2D_8cpp_source.html">ham2D.cpp</a>.</p>
 
 <p><div id="dynsection-20" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-20-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+  <img id="dynsection-20-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
 <div id="dynsection-20-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-20-content" class="dyncontent" style="display:none;">
-<div class="center"><img src="classHubHam2D_ad0cf5454e30f548e8a19e6e041c4238c_icgraph.png" border="0" usemap="#classHubHam2D_ad0cf5454e30f548e8a19e6e041c4238c_icgraph" alt=""/></div>
-<map name="classHubHam2D_ad0cf5454e30f548e8a19e6e041c4238c_icgraph" id="classHubHam2D_ad0cf5454e30f548e8a19e6e041c4238c_icgraph">
-<area shape="rect" id="node2" href="classHubHam2D.html#ad945391b0d2491afab29db870802e7c8" title="HubHam2D::BuildFullHam" alt="" coords="411,5,589,32"/><area shape="rect" id="node4" href="classSparseHamiltonian2D__CSR.html#a0f3ea43d0d27705ddc249e9372506c3e" title="SparseHamiltonian2D\l_CSR::BuildSparseHam" alt="" coords="198,57,362,98"/><area shape="rect" id="node3" href="main2D_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627" title="main" alt="" coords="637,35,688,61"/><area shape="rect" id="node5" href="classSparseHamiltonian2D.html#a705d999fe46f1c32330a7e1074fd234a" title="SparseHamiltonian2D\l::BuildSparseHam" alt="" coords="425,57,575,98"/></map>
+<div class="center"><img src="classHubHam2D_a5fcf36f25194dee6dd31626d70955dfd_cgraph.png" border="0" usemap="#classHubHam2D_a5fcf36f25194dee6dd31626d70955dfd_cgraph" alt=""/></div>
+<map name="classHubHam2D_a5fcf36f25194dee6dd31626d70955dfd_cgraph" id="classHubHam2D_a5fcf36f25194dee6dd31626d70955dfd_cgraph">
+<area shape="rect" id="node2" href="classBareHamiltonian.html#a71a6f71bb77ccf7ab241fdfdd46ce9e9" title="BareHamiltonian::CalcSign" alt="" coords="197,5,376,32"/><area shape="rect" id="node3" href="classBareHamiltonian.html#a9393391804a06e0ee4970e21d0b729ff" title="BareHamiltonian::CountBits" alt="" coords="424,5,608,32"/></map>
 </div>
 </p>
-
-</div>
-</div>
-<a class="anchor" id="afa972f88c6d0a06f6537c9b667bd0f36"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">int Hamiltonian::hopping </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="bare-ham_8h.html#ad9e4dd13155f827d121a0b0559473480">myint</a>&#160;</td>
-          <td class="paramname"><em>a</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="bare-ham_8h.html#ad9e4dd13155f827d121a0b0559473480">myint</a>&#160;</td>
-          <td class="paramname"><em>b</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>jumpsign</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">inherited</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>private method used to see if a hopping between state a and b is possible and with which sign. Only for 1D Hubbard. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">a</td><td>the bra to use </td></tr>
-    <tr><td class="paramname">b</td><td>the ket to use </td></tr>
-    <tr><td class="paramname">jumpsign</td><td>the sign to use when a jump over the periodic boundary occurs </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>matrix element of the hopping term between the ket and the bra. You still have to multiply this with the hopping strength J </dd></dl>
-
-<p>Definition at line <a class="el" href="ham_8cpp_source.html#l00106">106</a> of file <a class="el" href="ham_8cpp_source.html">ham.cpp</a>.</p>
 
 <p><div id="dynsection-21" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-21-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
 <div id="dynsection-21-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-21-content" class="dyncontent" style="display:none;">
-<div class="center"><img src="classHamiltonian_afa972f88c6d0a06f6537c9b667bd0f36_icgraph.png" border="0" usemap="#classHamiltonian_afa972f88c6d0a06f6537c9b667bd0f36_icgraph" alt=""/></div>
-<map name="classHamiltonian_afa972f88c6d0a06f6537c9b667bd0f36_icgraph" id="classHamiltonian_afa972f88c6d0a06f6537c9b667bd0f36_icgraph">
-<area shape="rect" id="node2" href="classHamiltonian.html#a1ca97f5088a0609826b3d39ca99a2c6d" title="Hamiltonian::BuildFullHam" alt="" coords="198,5,375,32"/><area shape="rect" id="node3" href="classSparseHamiltonian.html#a99ea19b2b0ee2f56c39eb44b2353bebb" title="SparseHamiltonian::\lBuildSparseHam" alt="" coords="217,57,357,98"/><area shape="rect" id="node4" href="main_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627" title="main" alt="" coords="424,64,475,91"/></map>
+<div class="center"><img src="classHubHam2D_a5fcf36f25194dee6dd31626d70955dfd_icgraph.png" border="0" usemap="#classHubHam2D_a5fcf36f25194dee6dd31626d70955dfd_icgraph" alt=""/></div>
+<map name="classHubHam2D_a5fcf36f25194dee6dd31626d70955dfd_icgraph" id="classHubHam2D_a5fcf36f25194dee6dd31626d70955dfd_icgraph">
+<area shape="rect" id="node2" href="classHubHam2D.html#ad945391b0d2491afab29db870802e7c8" title="HubHam2D::BuildFullHam" alt="" coords="411,5,589,32"/><area shape="rect" id="node4" href="classSparseHamiltonian2D__CSR.html#a0f3ea43d0d27705ddc249e9372506c3e" title="SparseHamiltonian2D\l_CSR::BuildSparseHam" alt="" coords="198,57,362,98"/><area shape="rect" id="node3" href="main2D_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627" title="main" alt="" coords="637,35,688,61"/><area shape="rect" id="node5" href="classSparseHamiltonian2D.html#a705d999fe46f1c32330a7e1074fd234a" title="SparseHamiltonian2D\l::BuildSparseHam" alt="" coords="425,57,575,98"/></map>
 </div>
 </p>
 
 </div>
 </div>
-<a class="anchor" id="a17ea220ad823c4ce67bbd7a46532f1da"></a>
+<a class="anchor" id="aa8daa208c5952a41c25c6bd2bd3d3647"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -1199,7 +1184,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">double Hamiltonian::LanczosDiagonalize </td>
+          <td class="memname">double BareHamiltonian::LanczosDiagonalize </td>
           <td>(</td>
           <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>m</em> = <code>0</code></td><td>)</td>
@@ -1212,7 +1197,7 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Calculates the lowest eigenvalue of the hamiltonian matrix using the lanczos algorithm. Needs lapack. </p>
+<p>Calculates the lowest eigenvalue of the <a class="el" href="classBareHamiltonian.html">BareHamiltonian</a> matrix using the lanczos algorithm. Needs lapack. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">m</td><td>an optional estimate for the lanczos space size </td></tr>
@@ -1221,18 +1206,16 @@ Protected Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>the lowest eigenvalue </dd></dl>
 
-<p>Reimplemented from <a class="el" href="classBareHamiltonian.html#aa8daa208c5952a41c25c6bd2bd3d3647">BareHamiltonian</a>.</p>
-
-<p>Definition at line <a class="el" href="ham_8cpp_source.html#l00241">241</a> of file <a class="el" href="ham_8cpp_source.html">ham.cpp</a>.</p>
+<p>Definition at line <a class="el" href="bare-ham_8cpp_source.html#l00306">306</a> of file <a class="el" href="bare-ham_8cpp_source.html">bare-ham.cpp</a>.</p>
 
 <p><div id="dynsection-22" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-22-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
 <div id="dynsection-22-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-22-content" class="dyncontent" style="display:none;">
-<div class="center"><img src="classHamiltonian_a17ea220ad823c4ce67bbd7a46532f1da_cgraph.png" border="0" usemap="#classHamiltonian_a17ea220ad823c4ce67bbd7a46532f1da_cgraph" alt=""/></div>
-<map name="classHamiltonian_a17ea220ad823c4ce67bbd7a46532f1da_cgraph" id="classHamiltonian_a17ea220ad823c4ce67bbd7a46532f1da_cgraph">
-<area shape="rect" id="node2" href="bare-ham_8h.html#a2247ca92b3cf0e88e9448ad05240921f" title="ddot_" alt="" coords="314,5,369,32"/><area shape="rect" id="node3" href="bare-ham_8h.html#a9d4e5f6c81fb4bb87223f92b5347daf1" title="dscal_" alt="" coords="311,56,371,83"/><area shape="rect" id="node4" href="classHamiltonian.html#ae31ba4590d7a497aed8ef2cac36abd1c" title="Hamiltonian::mvprod" alt="" coords="270,107,413,133"/><area shape="rect" id="node6" href="bare-ham_8h.html#abb7d6c365abc5d11a16c1c085bca91a4" title="daxpy_" alt="" coords="309,157,373,184"/><area shape="rect" id="node7" href="bare-ham_8h.html#adab72a2a47e9a4dda768424878b4330c" title="dstev_" alt="" coords="311,208,372,235"/><area shape="rect" id="node5" href="bare-ham_8h.html#aad27beb06b23ce25ab9637d76286677f" title="dsymv_" alt="" coords="462,107,530,133"/></map>
+<div class="center"><img src="classBareHamiltonian_aa8daa208c5952a41c25c6bd2bd3d3647_cgraph.png" border="0" usemap="#classBareHamiltonian_aa8daa208c5952a41c25c6bd2bd3d3647_cgraph" alt=""/></div>
+<map name="classBareHamiltonian_aa8daa208c5952a41c25c6bd2bd3d3647_cgraph" id="classBareHamiltonian_aa8daa208c5952a41c25c6bd2bd3d3647_cgraph">
+<area shape="rect" id="node2" href="bare-ham_8h.html#a2247ca92b3cf0e88e9448ad05240921f" title="ddot_" alt="" coords="287,5,342,32"/><area shape="rect" id="node3" href="bare-ham_8h.html#a9d4e5f6c81fb4bb87223f92b5347daf1" title="dscal_" alt="" coords="285,56,345,83"/><area shape="rect" id="node4" href="classBareHamiltonian.html#ab3ac26f412dfe8fe2d2759520b37f089" title="BareHamiltonian::mvprod" alt="" coords="230,107,399,133"/><area shape="rect" id="node5" href="bare-ham_8h.html#abb7d6c365abc5d11a16c1c085bca91a4" title="daxpy_" alt="" coords="283,157,347,184"/><area shape="rect" id="node6" href="bare-ham_8h.html#adab72a2a47e9a4dda768424878b4330c" title="dstev_" alt="" coords="284,208,345,235"/></map>
 </div>
 </p>
 
@@ -1261,7 +1244,7 @@ Protected Attributes</h2></td></tr>
 <p>Calculates the amount of memory needed for the calculation if we use the arpack. It doesn't include the program code and stuff. </p>
 <dl class="section return"><dt>Returns</dt><dd>the amount of memory needed in bytes </dd></dl>
 
-<p>Definition at line <a class="el" href="bare-ham_8cpp_source.html#l00592">592</a> of file <a class="el" href="bare-ham_8cpp_source.html">bare-ham.cpp</a>.</p>
+<p>Definition at line <a class="el" href="bare-ham_8cpp_source.html#l00616">616</a> of file <a class="el" href="bare-ham_8cpp_source.html">bare-ham.cpp</a>.</p>
 
 <p><div id="dynsection-23" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-23-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
@@ -1271,17 +1254,6 @@ Protected Attributes</h2></td></tr>
 <div class="center"><img src="classBareHamiltonian_af5dffe0480ba79da40af76f26e66a30a_cgraph.png" border="0" usemap="#classBareHamiltonian_af5dffe0480ba79da40af76f26e66a30a_cgraph" alt=""/></div>
 <map name="classBareHamiltonian_af5dffe0480ba79da40af76f26e66a30a_cgraph" id="classBareHamiltonian_af5dffe0480ba79da40af76f26e66a30a_cgraph">
 <area shape="rect" id="node2" href="classBareHamiltonian.html#acfb89409533465961fb5b1c53056bbaa" title="BareHamiltonian::CalcDim" alt="" coords="273,12,450,39"/></map>
-</div>
-</p>
-
-<p><div id="dynsection-24" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-24-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
-<div id="dynsection-24-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-24-content" class="dyncontent" style="display:none;">
-<div class="center"><img src="classBareHamiltonian_af5dffe0480ba79da40af76f26e66a30a_icgraph.png" border="0" usemap="#classBareHamiltonian_af5dffe0480ba79da40af76f26e66a30a_icgraph" alt=""/></div>
-<map name="classBareHamiltonian_af5dffe0480ba79da40af76f26e66a30a_icgraph" id="classBareHamiltonian_af5dffe0480ba79da40af76f26e66a30a_icgraph">
-<area shape="rect" id="node2" href="main_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627" title="main" alt="" coords="272,12,323,39"/></map>
 </div>
 </p>
 
@@ -1310,13 +1282,13 @@ Protected Attributes</h2></td></tr>
 <p>Calculates the amount of memory needed for the calculation of all eigenvalues using the exact method. It doesn't include the program code and stuff. </p>
 <dl class="section return"><dt>Returns</dt><dd>the amount of memory needed in bytes </dd></dl>
 
-<p>Definition at line <a class="el" href="bare-ham_8cpp_source.html#l00540">540</a> of file <a class="el" href="bare-ham_8cpp_source.html">bare-ham.cpp</a>.</p>
+<p>Definition at line <a class="el" href="bare-ham_8cpp_source.html#l00564">564</a> of file <a class="el" href="bare-ham_8cpp_source.html">bare-ham.cpp</a>.</p>
 
-<p><div id="dynsection-25" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-25-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
-<div id="dynsection-25-summary" class="dynsummary" style="display:block;">
+<p><div id="dynsection-24" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-24-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
+<div id="dynsection-24-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-25-content" class="dyncontent" style="display:none;">
+<div id="dynsection-24-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classBareHamiltonian_a7a1cd1f60b1bcac5b63395e17ca7618b_cgraph.png" border="0" usemap="#classBareHamiltonian_a7a1cd1f60b1bcac5b63395e17ca7618b_cgraph" alt=""/></div>
 <map name="classBareHamiltonian_a7a1cd1f60b1bcac5b63395e17ca7618b_cgraph" id="classBareHamiltonian_a7a1cd1f60b1bcac5b63395e17ca7618b_cgraph">
 <area shape="rect" id="node2" href="classBareHamiltonian.html#acfb89409533465961fb5b1c53056bbaa" title="BareHamiltonian::CalcDim" alt="" coords="294,5,471,32"/></map>
@@ -1348,13 +1320,13 @@ Protected Attributes</h2></td></tr>
 <p>Calculates the amount of memory needed for the calculation if we use the lanczos method. It doesn't include the program code and stuff. </p>
 <dl class="section return"><dt>Returns</dt><dd>the amount of memory needed in bytes </dd></dl>
 
-<p>Definition at line <a class="el" href="bare-ham_8cpp_source.html#l00566">566</a> of file <a class="el" href="bare-ham_8cpp_source.html">bare-ham.cpp</a>.</p>
+<p>Definition at line <a class="el" href="bare-ham_8cpp_source.html#l00590">590</a> of file <a class="el" href="bare-ham_8cpp_source.html">bare-ham.cpp</a>.</p>
 
-<p><div id="dynsection-26" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-26-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
-<div id="dynsection-26-summary" class="dynsummary" style="display:block;">
+<p><div id="dynsection-25" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-25-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
+<div id="dynsection-25-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-26-content" class="dyncontent" style="display:none;">
+<div id="dynsection-25-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classBareHamiltonian_aa420c3ff1b2ad0e7edb363a9807c6673_cgraph.png" border="0" usemap="#classBareHamiltonian_aa420c3ff1b2ad0e7edb363a9807c6673_cgraph" alt=""/></div>
 <map name="classBareHamiltonian_aa420c3ff1b2ad0e7edb363a9807c6673_cgraph" id="classBareHamiltonian_aa420c3ff1b2ad0e7edb363a9807c6673_cgraph">
 <area shape="rect" id="node2" href="classBareHamiltonian.html#acfb89409533465961fb5b1c53056bbaa" title="BareHamiltonian::CalcDim" alt="" coords="273,12,450,39"/></map>
@@ -1412,29 +1384,18 @@ Protected Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="classBareHamiltonian.html#ab3ac26f412dfe8fe2d2759520b37f089">BareHamiltonian</a>.</p>
 
-<p>Reimplemented in <a class="el" href="classSparseHamiltonian2D__CSR.html#ad355ef212b019050598f547696548eb2">SparseHamiltonian2D_CSR</a>, <a class="el" href="classSparseHamiltonian.html#a20ae577e617040bdcc525711a87b46fb">SparseHamiltonian</a>, and <a class="el" href="classSparseHamiltonian2D.html#a0883f62aa65bd37b285585e565bf0a9d">SparseHamiltonian2D</a>.</p>
+<p>Reimplemented in <a class="el" href="classSparseHamiltonian2D__CSR.html#ad355ef212b019050598f547696548eb2">SparseHamiltonian2D_CSR</a>, and <a class="el" href="classSparseHamiltonian2D.html#a0883f62aa65bd37b285585e565bf0a9d">SparseHamiltonian2D</a>.</p>
 
-<p>Definition at line <a class="el" href="ham_8cpp_source.html#l00347">347</a> of file <a class="el" href="ham_8cpp_source.html">ham.cpp</a>.</p>
+<p>Definition at line <a class="el" href="ham_8cpp_source.html#l00188">188</a> of file <a class="el" href="ham_8cpp_source.html">ham.cpp</a>.</p>
 
-<p><div id="dynsection-27" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-27-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
-<div id="dynsection-27-summary" class="dynsummary" style="display:block;">
+<p><div id="dynsection-26" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-26-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
+<div id="dynsection-26-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-27-content" class="dyncontent" style="display:none;">
+<div id="dynsection-26-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classHamiltonian_ae31ba4590d7a497aed8ef2cac36abd1c_cgraph.png" border="0" usemap="#classHamiltonian_ae31ba4590d7a497aed8ef2cac36abd1c_cgraph" alt=""/></div>
 <map name="classHamiltonian_ae31ba4590d7a497aed8ef2cac36abd1c_cgraph" id="classHamiltonian_ae31ba4590d7a497aed8ef2cac36abd1c_cgraph">
 <area shape="rect" id="node2" href="bare-ham_8h.html#aad27beb06b23ce25ab9637d76286677f" title="dsymv_" alt="" coords="198,5,266,32"/></map>
-</div>
-</p>
-
-<p><div id="dynsection-28" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-28-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
-<div id="dynsection-28-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-28-content" class="dyncontent" style="display:none;">
-<div class="center"><img src="classHamiltonian_ae31ba4590d7a497aed8ef2cac36abd1c_icgraph.png" border="0" usemap="#classHamiltonian_ae31ba4590d7a497aed8ef2cac36abd1c_icgraph" alt=""/></div>
-<map name="classHamiltonian_ae31ba4590d7a497aed8ef2cac36abd1c_icgraph" id="classHamiltonian_ae31ba4590d7a497aed8ef2cac36abd1c_icgraph">
-<area shape="rect" id="node2" href="classHamiltonian.html#a17ea220ad823c4ce67bbd7a46532f1da" title="Hamiltonian::LanczosDiagonalize" alt="" coords="197,5,413,32"/><area shape="rect" id="node3" href="classHamiltonian.html#a5fd02d9ba0eb128cc3435d950d858b60" title="Hamiltonian::arpackDiagonalize" alt="" coords="202,56,409,83"/><area shape="rect" id="node4" href="main_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627" title="main" alt="" coords="461,56,512,83"/></map>
 </div>
 </p>
 
@@ -1463,7 +1424,7 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Prints the full <a class="el" href="classBareHamiltonian.html">BareHamiltonian</a> matrix to stdout </p>
 
-<p>Definition at line <a class="el" href="bare-ham_8cpp_source.html#l00384">384</a> of file <a class="el" href="bare-ham_8cpp_source.html">bare-ham.cpp</a>.</p>
+<p>Definition at line <a class="el" href="bare-ham_8cpp_source.html#l00403">403</a> of file <a class="el" href="bare-ham_8cpp_source.html">bare-ham.cpp</a>.</p>
 
 </div>
 </div>
@@ -1508,13 +1469,13 @@ Protected Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>a string with the binary representation of num </dd></dl>
 
-<p>Definition at line <a class="el" href="bare-ham_8cpp_source.html#l00109">109</a> of file <a class="el" href="bare-ham_8cpp_source.html">bare-ham.cpp</a>.</p>
+<p>Definition at line <a class="el" href="bare-ham_8cpp_source.html#l00119">119</a> of file <a class="el" href="bare-ham_8cpp_source.html">bare-ham.cpp</a>.</p>
 
-<p><div id="dynsection-29" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-29-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
-<div id="dynsection-29-summary" class="dynsummary" style="display:block;">
+<p><div id="dynsection-27" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-27-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-27-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-29-content" class="dyncontent" style="display:none;">
+<div id="dynsection-27-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classBareHamiltonian_ab6dbeacb89818b5eb02f39d1949c797c_icgraph.png" border="0" usemap="#classBareHamiltonian_ab6dbeacb89818b5eb02f39d1949c797c_icgraph" alt=""/></div>
 <map name="classBareHamiltonian_ab6dbeacb89818b5eb02f39d1949c797c_icgraph" id="classBareHamiltonian_ab6dbeacb89818b5eb02f39d1949c797c_icgraph">
 <area shape="rect" id="node2" href="classBareHamiltonian.html#a8acdfb1a78cbcddd169a3c326008969f" title="BareHamiltonian::PrintGroundstate\lVector" alt="" coords="229,5,453,46"/><area shape="rect" id="node3" href="classBareHamiltonian.html#ad0d3f7e4dbf383842356d890ede5e7ce" title="BareHamiltonian::PrintBase" alt="" coords="250,71,433,97"/></map>
@@ -1545,13 +1506,13 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Print the basis set used. </p>
 
-<p>Definition at line <a class="el" href="bare-ham_8cpp_source.html#l00403">403</a> of file <a class="el" href="bare-ham_8cpp_source.html">bare-ham.cpp</a>.</p>
+<p>Definition at line <a class="el" href="bare-ham_8cpp_source.html#l00422">422</a> of file <a class="el" href="bare-ham_8cpp_source.html">bare-ham.cpp</a>.</p>
 
-<p><div id="dynsection-30" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-30-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
-<div id="dynsection-30-summary" class="dynsummary" style="display:block;">
+<p><div id="dynsection-28" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-28-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
+<div id="dynsection-28-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-30-content" class="dyncontent" style="display:none;">
+<div id="dynsection-28-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classBareHamiltonian_ad0d3f7e4dbf383842356d890ede5e7ce_cgraph.png" border="0" usemap="#classBareHamiltonian_ad0d3f7e4dbf383842356d890ede5e7ce_cgraph" alt=""/></div>
 <map name="classBareHamiltonian_ad0d3f7e4dbf383842356d890ede5e7ce_cgraph" id="classBareHamiltonian_ad0d3f7e4dbf383842356d890ede5e7ce_cgraph">
 <area shape="rect" id="node2" href="classBareHamiltonian.html#ab6dbeacb89818b5eb02f39d1949c797c" title="BareHamiltonian::print_bin" alt="" coords="238,5,413,32"/></map>
@@ -1582,18 +1543,113 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Prints the groundstate in function of the basis vectors Only gives meanfull output after running BareHamiltonian::ExactDiagonalizeFull(true) </p>
 
-<p>Definition at line <a class="el" href="bare-ham_8cpp_source.html#l00269">269</a> of file <a class="el" href="bare-ham_8cpp_source.html">bare-ham.cpp</a>.</p>
+<p>Definition at line <a class="el" href="bare-ham_8cpp_source.html#l00288">288</a> of file <a class="el" href="bare-ham_8cpp_source.html">bare-ham.cpp</a>.</p>
 
-<p><div id="dynsection-31" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-31-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
-<div id="dynsection-31-summary" class="dynsummary" style="display:block;">
+<p><div id="dynsection-29" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-29-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
+<div id="dynsection-29-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-31-content" class="dyncontent" style="display:none;">
+<div id="dynsection-29-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classBareHamiltonian_a8acdfb1a78cbcddd169a3c326008969f_cgraph.png" border="0" usemap="#classBareHamiltonian_a8acdfb1a78cbcddd169a3c326008969f_cgraph" alt=""/></div>
 <map name="classBareHamiltonian_a8acdfb1a78cbcddd169a3c326008969f_cgraph" id="classBareHamiltonian_a8acdfb1a78cbcddd169a3c326008969f_cgraph">
 <area shape="rect" id="node2" href="classBareHamiltonian.html#acfb89409533465961fb5b1c53056bbaa" title="BareHamiltonian::CalcDim" alt="" coords="293,5,470,32"/><area shape="rect" id="node3" href="classBareHamiltonian.html#ab6dbeacb89818b5eb02f39d1949c797c" title="BareHamiltonian::print_bin" alt="" coords="294,56,469,83"/><area shape="rect" id="node4" href="classBareHamiltonian.html#a039e51028de430d80a1813e8f2b8360e" title="BareHamiltonian::getBaseUp" alt="" coords="286,107,477,133"/><area shape="rect" id="node5" href="classBareHamiltonian.html#a57b7a817d006d0927298ce6900559ef6" title="BareHamiltonian::getBaseDown" alt="" coords="277,157,485,184"/></map>
 </div>
 </p>
+
+</div>
+</div>
+<a class="anchor" id="ae2b4a7e01118ca9ff8a999fdc5d65f18"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void BareHamiltonian::SaveToFile </td>
+          <td>(</td>
+          <td class="paramtype">const std::string&#160;</td>
+          <td class="paramname"><em>filename</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Save the hamiltonian matrix to a file in the HDF5 format </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">filename</td><td>the name of the file to write to </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="bare-ham_8cpp_source.html#l00700">700</a> of file <a class="el" href="bare-ham_8cpp_source.html">bare-ham.cpp</a>.</p>
+
+<p><div id="dynsection-30" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-30-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-30-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-30-content" class="dyncontent" style="display:none;">
+<div class="center"><img src="classBareHamiltonian_ae2b4a7e01118ca9ff8a999fdc5d65f18_icgraph.png" border="0" usemap="#classBareHamiltonian_ae2b4a7e01118ca9ff8a999fdc5d65f18_icgraph" alt=""/></div>
+<map name="classBareHamiltonian_ae2b4a7e01118ca9ff8a999fdc5d65f18_icgraph" id="classBareHamiltonian_ae2b4a7e01118ca9ff8a999fdc5d65f18_icgraph">
+<area shape="rect" id="node2" href="classBareHamiltonian.html#ad58e05dbe722161b41afeeee1a1ca891" title="BareHamiltonian::arpackDiagonalize" alt="" coords="246,5,479,32"/><area shape="rect" id="node3" href="main2D_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627" title="main" alt="" coords="528,5,579,32"/></map>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="a746b83e666bdce9992a3f055d5d53c44"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void BareHamiltonian::SaveToFile </td>
+          <td>(</td>
+          <td class="paramtype">const std::string&#160;</td>
+          <td class="paramname"><em>filename</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double *&#160;</td>
+          <td class="paramname"><em>data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>dim</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Save a array to a file in the HDF5 format </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">filename</td><td>the name of the file to write to </td></tr>
+    <tr><td class="paramname">data</td><td>a pointer to the array to write to a file </td></tr>
+    <tr><td class="paramname">dim</td><td>the size of the array </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="bare-ham_8cpp_source.html#l00714">714</a> of file <a class="el" href="bare-ham_8cpp_source.html">bare-ham.cpp</a>.</p>
 
 </div>
 </div>
@@ -1626,13 +1682,13 @@ Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="bare-ham_8cpp_source.html#l00223">223</a> of file <a class="el" href="bare-ham_8cpp_source.html">bare-ham.cpp</a>.</p>
+<p>Definition at line <a class="el" href="bare-ham_8cpp_source.html#l00242">242</a> of file <a class="el" href="bare-ham_8cpp_source.html">bare-ham.cpp</a>.</p>
 
-<p><div id="dynsection-32" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-32-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
-<div id="dynsection-32-summary" class="dynsummary" style="display:block;">
+<p><div id="dynsection-31" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-31-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-31-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-32-content" class="dyncontent" style="display:none;">
+<div id="dynsection-31-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classBareHamiltonian_aa30f262b455518c1346f5ffa8f41ccd7_icgraph.png" border="0" usemap="#classBareHamiltonian_aa30f262b455518c1346f5ffa8f41ccd7_icgraph" alt=""/></div>
 <map name="classBareHamiltonian_aa30f262b455518c1346f5ffa8f41ccd7_icgraph" id="classBareHamiltonian_aa30f262b455518c1346f5ffa8f41ccd7_icgraph">
 <area shape="rect" id="node2" href="classMomHamiltonian.html#af71863a9bd620bebd16d6f64d8de7ff4" title="MomHamiltonian::GenerateData" alt="" coords="209,5,418,32"/></map>
@@ -1662,7 +1718,7 @@ Protected Attributes</h2></td></tr>
 
 <p>vector to hold all bases ket's for down electrons </p>
 
-<p>Definition at line <a class="el" href="bare-ham_8h_source.html#l00128">128</a> of file <a class="el" href="bare-ham_8h_source.html">bare-ham.h</a>.</p>
+<p>Definition at line <a class="el" href="bare-ham_8h_source.html#l00134">134</a> of file <a class="el" href="bare-ham_8h_source.html">bare-ham.h</a>.</p>
 
 </div>
 </div>
@@ -1686,7 +1742,7 @@ Protected Attributes</h2></td></tr>
 
 <p>vector to hold all bases ket's for up electrons </p>
 
-<p>Definition at line <a class="el" href="bare-ham_8h_source.html#l00126">126</a> of file <a class="el" href="bare-ham_8h_source.html">bare-ham.h</a>.</p>
+<p>Definition at line <a class="el" href="bare-ham_8h_source.html#l00132">132</a> of file <a class="el" href="bare-ham_8h_source.html">bare-ham.h</a>.</p>
 
 </div>
 </div>
@@ -1734,7 +1790,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Dimension of the <a class="el" href="classBareHamiltonian.html">BareHamiltonian</a> matrix. </p>
 
-<p>Definition at line <a class="el" href="bare-ham_8h_source.html#l00118">118</a> of file <a class="el" href="bare-ham_8h_source.html">bare-ham.h</a>.</p>
+<p>Definition at line <a class="el" href="bare-ham_8h_source.html#l00124">124</a> of file <a class="el" href="bare-ham_8h_source.html">bare-ham.h</a>.</p>
 
 </div>
 </div>
@@ -1758,7 +1814,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Storage for the <a class="el" href="classBareHamiltonian.html">BareHamiltonian</a> matrix. </p>
 
-<p>Definition at line <a class="el" href="bare-ham_8h_source.html#l00116">116</a> of file <a class="el" href="bare-ham_8h_source.html">bare-ham.h</a>.</p>
+<p>Definition at line <a class="el" href="bare-ham_8h_source.html#l00122">122</a> of file <a class="el" href="bare-ham_8h_source.html">bare-ham.h</a>.</p>
 
 </div>
 </div>
@@ -1782,7 +1838,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Hightest bit used. </p>
 
-<p>Definition at line <a class="el" href="bare-ham_8h_source.html#l00121">121</a> of file <a class="el" href="bare-ham_8h_source.html">bare-ham.h</a>.</p>
+<p>Definition at line <a class="el" href="bare-ham_8h_source.html#l00127">127</a> of file <a class="el" href="bare-ham_8h_source.html">bare-ham.h</a>.</p>
 
 </div>
 </div>
@@ -1806,7 +1862,7 @@ Protected Attributes</h2></td></tr>
 
 <p>the location of the highest bit </p>
 
-<p>Definition at line <a class="el" href="bare-ham_8h_source.html#l00123">123</a> of file <a class="el" href="bare-ham_8h_source.html">bare-ham.h</a>.</p>
+<p>Definition at line <a class="el" href="bare-ham_8h_source.html#l00129">129</a> of file <a class="el" href="bare-ham_8h_source.html">bare-ham.h</a>.</p>
 
 </div>
 </div>
@@ -1830,7 +1886,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Hopping strength. </p>
 
-<p>Definition at line <a class="el" href="bare-ham_8h_source.html#l00112">112</a> of file <a class="el" href="bare-ham_8h_source.html">bare-ham.h</a>.</p>
+<p>Definition at line <a class="el" href="bare-ham_8h_source.html#l00118">118</a> of file <a class="el" href="bare-ham_8h_source.html">bare-ham.h</a>.</p>
 
 </div>
 </div>
@@ -1878,7 +1934,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Number of down electrons. </p>
 
-<p>Definition at line <a class="el" href="bare-ham_8h_source.html#l00110">110</a> of file <a class="el" href="bare-ham_8h_source.html">bare-ham.h</a>.</p>
+<p>Definition at line <a class="el" href="bare-ham_8h_source.html#l00116">116</a> of file <a class="el" href="bare-ham_8h_source.html">bare-ham.h</a>.</p>
 
 </div>
 </div>
@@ -1902,7 +1958,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Number of up electrons. </p>
 
-<p>Definition at line <a class="el" href="bare-ham_8h_source.html#l00108">108</a> of file <a class="el" href="bare-ham_8h_source.html">bare-ham.h</a>.</p>
+<p>Definition at line <a class="el" href="bare-ham_8h_source.html#l00114">114</a> of file <a class="el" href="bare-ham_8h_source.html">bare-ham.h</a>.</p>
 
 </div>
 </div>
@@ -1926,7 +1982,7 @@ Protected Attributes</h2></td></tr>
 
 <p>On site interaction strength. </p>
 
-<p>Definition at line <a class="el" href="bare-ham_8h_source.html#l00114">114</a> of file <a class="el" href="bare-ham_8h_source.html">bare-ham.h</a>.</p>
+<p>Definition at line <a class="el" href="bare-ham_8h_source.html#l00120">120</a> of file <a class="el" href="bare-ham_8h_source.html">bare-ham.h</a>.</p>
 
 </div>
 </div>
@@ -1940,7 +1996,7 @@ Protected Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classHubHam2D.html">HubHam2D</a></li>
-    <li class="footer">Generated on Wed Feb 5 2014 17:08:59 for HubbardGPU by
+    <li class="footer">Generated on Fri Feb 7 2014 14:38:54 for HubbardGPU by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
   </ul>

@@ -1,6 +1,6 @@
 var files =
 [
-    [ "bare-ham.cpp", "bare-ham_8cpp.html", null ],
+    [ "bare-ham.cpp", "bare-ham_8cpp.html", "bare-ham_8cpp" ],
     [ "bare-ham.h", "bare-ham_8h.html", "bare-ham_8h" ],
     [ "ham-mom.cpp", "ham-mom_8cpp.html", "ham-mom_8cpp" ],
     [ "ham-mom.h", "ham-mom_8h.html", [
@@ -32,5 +32,9 @@ var files =
     ] ],
     [ "lanczos.cpp", "lanczos_8cpp.html", "lanczos_8cpp" ],
     [ "main.cpp", "main_8cpp.html", "main_8cpp" ],
-    [ "main2D.cpp", "main2D_8cpp.html", "main2D_8cpp" ]
+    [ "main2D.cpp", "main2D_8cpp.html", "main2D_8cpp" ],
+    [ "nonp-ham.cpp", "nonp-ham_8cpp.html", null ],
+    [ "nonp-ham.h", "nonp-ham_8h.html", [
+      [ "NonPeriodicHamiltonian", "classNonPeriodicHamiltonian.html", "classNonPeriodicHamiltonian" ]
+    ] ]
 ];

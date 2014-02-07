@@ -105,7 +105,7 @@ $(document).ready(function(){initNavTree('hamsparse_8h_source.html','');});
 <div class="title">hamsparse.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="hamsparse_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/* Copyright (C) 2012  Ward Poelmans</span></div>
+<a href="hamsparse_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/* Copyright (C) 2012-2014  Ward Poelmans</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"></span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">This file is part of Hubbard-GPU.</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"></span></div>
@@ -126,47 +126,48 @@ $(document).ready(function(){initNavTree('hamsparse_8h_source.html','');});
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#ifndef HAMSPARSE_H</span></div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define HAMSPARSE_H</span></div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="ham_8h.html">ham.h</a>&quot;</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;</div>
-<div class="line"><a name="l00028"></a><span class="lineno"><a class="code" href="classSparseHamiltonian.html">   28</a></span>&#160;<span class="keyword">class </span><a class="code" href="classSparseHamiltonian.html">SparseHamiltonian</a>: <span class="keyword">public</span> <a class="code" href="classHamiltonian.html">Hamiltonian</a></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;{</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        <a class="code" href="classSparseHamiltonian.html#a20922f3d5a57de019d9e057ed105057a">SparseHamiltonian</a>(<span class="keywordtype">int</span> Ns, <span class="keywordtype">int</span> <a class="code" href="classBareHamiltonian.html#a497a2631a48701c6a0aba04f80bc31e5" title="Number of up electrons.">Nu</a>, <span class="keywordtype">int</span> <a class="code" href="classBareHamiltonian.html#a0c910682d208f47539db2e8fa72db13a" title="Number of down electrons.">Nd</a>, <span class="keywordtype">double</span> <a class="code" href="classBareHamiltonian.html#ab36c84b6b581fa85c48f0e070e5483c5" title="Hopping strength.">J</a>, <span class="keywordtype">double</span> <a class="code" href="classBareHamiltonian.html#aeee149d8a40deeaf1c2b18bd7542649d" title="On site interaction strength.">U</a>);</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        <span class="keyword">virtual</span> <a class="code" href="classSparseHamiltonian.html#a7c456ecd6aa2669ba3c24514b9465b65">~SparseHamiltonian</a>();</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classSparseHamiltonian.html#a99ea19b2b0ee2f56c39eb44b2353bebb">BuildSparseHam</a>();</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classSparseHamiltonian.html#a7a5ddcf048f6f38ee73e8fcabf22122f">PrintSparse</a>() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classSparseHamiltonian.html#ab5f77386c10fbbb1970618a142daf192">PrintRawELL</a>() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classSparseHamiltonian.html#a20ae577e617040bdcc525711a87b46fb">mvprod</a>(<span class="keywordtype">double</span> *, <span class="keywordtype">double</span> *, <span class="keywordtype">double</span>) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        <span class="keywordtype">double</span>* <a class="code" href="classSparseHamiltonian.html#aeb4fc3de07712402b7e3279a808e3e95">Umatrix</a>() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;</div>
-<div class="line"><a name="l00047"></a><span class="lineno"><a class="code" href="classSparseHamiltonian.html#a3137ea12f044b0b0dffe49db5b05222e">   47</a></span>&#160;        <span class="keywordtype">double</span> *<a class="code" href="classSparseHamiltonian.html#a3137ea12f044b0b0dffe49db5b05222e" title="The array to hold the data (ELL format) for the up hamiltonian.">Up_data</a>;</div>
-<div class="line"><a name="l00049"></a><span class="lineno"><a class="code" href="classSparseHamiltonian.html#a9de29c5ce417cb15926609010c030442">   49</a></span>&#160;        <span class="keywordtype">double</span> *<a class="code" href="classSparseHamiltonian.html#a9de29c5ce417cb15926609010c030442" title="The array to hold the data (ELL format) for the down hamiltonian.">Down_data</a>;</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;</div>
-<div class="line"><a name="l00052"></a><span class="lineno"><a class="code" href="classSparseHamiltonian.html#a6a4ef08563e7f2a3ec1a488351f3102d">   52</a></span>&#160;        <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> *<a class="code" href="classSparseHamiltonian.html#a6a4ef08563e7f2a3ec1a488351f3102d" title="The array to hold the indices for the up hamiltonian.">Up_ind</a>;</div>
-<div class="line"><a name="l00054"></a><span class="lineno"><a class="code" href="classSparseHamiltonian.html#a5976f3acd763b30b2382b1c678e3d83e">   54</a></span>&#160;        <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> *<a class="code" href="classSparseHamiltonian.html#a5976f3acd763b30b2382b1c678e3d83e" title="The array to hold the indices for the down hamiltonian.">Down_ind</a>;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;</div>
-<div class="line"><a name="l00057"></a><span class="lineno"><a class="code" href="classSparseHamiltonian.html#a88392552a8c443bc3662f21733191668">   57</a></span>&#160;        <span class="keywordtype">int</span> <a class="code" href="classSparseHamiltonian.html#a88392552a8c443bc3662f21733191668" title="Maximum number of non zero elements in a row for the up hamiltonian.">size_Up</a>;</div>
-<div class="line"><a name="l00059"></a><span class="lineno"><a class="code" href="classSparseHamiltonian.html#a129bea5ae1ce004bd231bdfa5a2ae04a">   59</a></span>&#160;        <span class="keywordtype">int</span> <a class="code" href="classSparseHamiltonian.html#a129bea5ae1ce004bd231bdfa5a2ae04a" title="Maximum number of non zero elements in a row for the down hamiltonian.">size_Down</a>;</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;};</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* HAMSPARSE_H */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="comment">/* vim: set ts=8 sw=4 tw=0 expandtab :*/</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> Ham&gt;</div>
+<div class="line"><a name="l00027"></a><span class="lineno"><a class="code" href="classSparseHamiltonian.html">   27</a></span>&#160;<span class="keyword">class </span><a class="code" href="classSparseHamiltonian.html">SparseHamiltonian</a>: <span class="keyword">public</span> Ham</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;{</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        <a class="code" href="classSparseHamiltonian.html#ae3155cf9ffa2b57132897aee92d3dbff">SparseHamiltonian</a>(<span class="keywordtype">int</span> Ns, <span class="keywordtype">int</span> Nu, <span class="keywordtype">int</span> Nd, <span class="keywordtype">double</span> J, <span class="keywordtype">double</span> U);</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        <span class="keyword">virtual</span> <a class="code" href="classSparseHamiltonian.html#a146f2f60953197ca72bf0f3adc7e380b">~SparseHamiltonian</a>();</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classSparseHamiltonian.html#aafca35d9312ccd7b5710a09c97ddbb71">BuildHam</a>();</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classSparseHamiltonian.html#aa82e9b5845d954973942b551907d090c">BuildSparseHam</a>();</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classSparseHamiltonian.html#a42db9352c7ae55f0a09186a649570717">PrintSparse</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classSparseHamiltonian.html#a70e77d92260ba1298d9b30cf0d180b03">PrintRawELL</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classSparseHamiltonian.html#a040b0bd99d853823683d1e72657c9a77">mvprod</a>(<span class="keywordtype">double</span> *, <span class="keywordtype">double</span> *, <span class="keywordtype">double</span>) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        <span class="keywordtype">double</span>* <a class="code" href="classSparseHamiltonian.html#a82a9d792bb7abd90971bd93be26e5948">Umatrix</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;</div>
+<div class="line"><a name="l00048"></a><span class="lineno"><a class="code" href="classSparseHamiltonian.html#a5e212d3376e8c9328e178ee231623e4b">   48</a></span>&#160;        <span class="keywordtype">double</span> *<a class="code" href="classSparseHamiltonian.html#a5e212d3376e8c9328e178ee231623e4b" title="The array to hold the data (ELL format) for the up hamiltonian.">Up_data</a>;</div>
+<div class="line"><a name="l00050"></a><span class="lineno"><a class="code" href="classSparseHamiltonian.html#ad363455d572faa6186780e85bf04442d">   50</a></span>&#160;        <span class="keywordtype">double</span> *<a class="code" href="classSparseHamiltonian.html#ad363455d572faa6186780e85bf04442d" title="The array to hold the data (ELL format) for the down hamiltonian.">Down_data</a>;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;</div>
+<div class="line"><a name="l00053"></a><span class="lineno"><a class="code" href="classSparseHamiltonian.html#ae51888698352f772afae1341b0d3845f">   53</a></span>&#160;        <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> *<a class="code" href="classSparseHamiltonian.html#ae51888698352f772afae1341b0d3845f" title="The array to hold the indices for the up hamiltonian.">Up_ind</a>;</div>
+<div class="line"><a name="l00055"></a><span class="lineno"><a class="code" href="classSparseHamiltonian.html#af05409ca29ffbb4a6eaaae38c52707ef">   55</a></span>&#160;        <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> *<a class="code" href="classSparseHamiltonian.html#af05409ca29ffbb4a6eaaae38c52707ef" title="The array to hold the indices for the down hamiltonian.">Down_ind</a>;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;</div>
+<div class="line"><a name="l00058"></a><span class="lineno"><a class="code" href="classSparseHamiltonian.html#a83cae8b165ec4cec503f4654791d4bde">   58</a></span>&#160;        <span class="keywordtype">int</span> <a class="code" href="classSparseHamiltonian.html#a83cae8b165ec4cec503f4654791d4bde" title="Maximum number of non zero elements in a row for the up hamiltonian.">size_Up</a>;</div>
+<div class="line"><a name="l00060"></a><span class="lineno"><a class="code" href="classSparseHamiltonian.html#adaac69b483daf411e3162c7735f50041">   60</a></span>&#160;        <span class="keywordtype">int</span> <a class="code" href="classSparseHamiltonian.html#adaac69b483daf411e3162c7735f50041" title="Maximum number of non zero elements in a row for the down hamiltonian.">size_Down</a>;</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;};</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* HAMSPARSE_H */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="comment">/* vim: set ts=8 sw=4 tw=0 expandtab :*/</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="hamsparse_8h.html">hamsparse.h</a></li>
-    <li class="footer">Generated on Wed Feb 5 2014 17:08:59 for HubbardGPU by
+    <li class="footer">Generated on Fri Feb 7 2014 14:38:54 for HubbardGPU by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
   </ul>
