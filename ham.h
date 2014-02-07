@@ -36,14 +36,10 @@ class Hamiltonian: public BareHamiltonian
 
 	void BuildFullHam();
 
-        std::vector<double> ExactDiagonalizeFull(bool calc_eigenvectors=false);
-	double LanczosDiagonalize(int m=0);
-	double arpackDiagonalize();
-
         virtual void mvprod(double *x, double *y, double alpha) const;
 
     protected:
-	int hopping(myint a, myint b, int jumpsign) const;
+	virtual int hopping(myint a, myint b, int jumpsign) const;
 };
 
 #endif /* HAM_H */
