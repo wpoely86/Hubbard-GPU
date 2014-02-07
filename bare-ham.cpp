@@ -693,6 +693,10 @@ void BareHamiltonian::Diagonalize(int dim, double *mat, double *eigs, bool calc_
 }
 
 
+/**
+ * Save the hamiltonian matrix to a file in the HDF5 format
+ * @param filename the name of the file to write to
+ */
 void BareHamiltonian::SaveToFile(const std::string filename) const
 {
     if(!ham)
@@ -702,8 +706,10 @@ void BareHamiltonian::SaveToFile(const std::string filename) const
 }
 
 /**
- * Save the ham matrix to a file in the HDF5 format
+ * Save a array to a file in the HDF5 format
  * @param filename the name of the file to write to
+ * @param data a pointer to the array to write to a file
+ * @param dim the size of the array
  */
 void BareHamiltonian::SaveToFile(const std::string filename, double *data, int dim) const
 {
