@@ -47,10 +47,11 @@ HubHam2D::~HubHam2D()
   * possible and with which sign: this is for 2D hubbard.
   * @param a the bra to use
   * @param b the ket to use
+  * @param jump does nothing, is set by default to zero, please ignore.
   * @returns matrix element of the hopping term between the ket and the bra. You still
   * have to multiply this with the hopping strength J
   */
-int HubHam2D::hopping(myint a, myint b) const
+int HubHam2D::hopping(myint a, myint b, int jump) const
 {
     int result(0), sign;
 

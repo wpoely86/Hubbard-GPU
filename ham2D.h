@@ -40,7 +40,7 @@ class HubHam2D : public Hamiltonian
 	void BuildFullHam();
 
     protected:
-	int hopping(myint a, myint b) const;
+	int hopping(myint a, myint b, int jump=0) const;
 
 	//! The length of the 2D grid
         int L;
