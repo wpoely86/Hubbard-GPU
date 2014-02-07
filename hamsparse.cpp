@@ -1,4 +1,4 @@
-/* Copyright (C) 2012  Ward Poelmans
+/* Copyright (C) 2012-2014  Ward Poelmans
 
 This file is part of Hubbard-GPU.
 
@@ -20,6 +20,8 @@ along with Hubbard-GPU.  If not, see <http://www.gnu.org/licenses/>.
 #include <cstdlib>
 #include <cmath>
 #include "hamsparse.h"
+#include "ham.h"
+#include "nonp-ham.h"
 
 /**
  * Constructor of the SparseHamiltonian class
@@ -29,8 +31,9 @@ along with Hubbard-GPU.  If not, see <http://www.gnu.org/licenses/>.
  * @param J The hopping strengh
  * @param U The onsite interaction strength
  */
-SparseHamiltonian::SparseHamiltonian(int L, int Nu, int Nd, double J, double U)
-    : Hamiltonian(L,Nu,Nd,J,U)
+template<class Ham>
+SparseHamiltonian<Ham>::SparseHamiltonian(int L, int Nu, int Nd, double J, double U)
+    : Ham(L,Nu,Nd,J,U)
 {
     Up_data = 0;
     Down_data = 0;
@@ -45,7 +48,8 @@ SparseHamiltonian::SparseHamiltonian(int L, int Nu, int Nd, double J, double U)
 /**
  * Destructor of the SparseHamiltonian class
  */
-SparseHamiltonian::~SparseHamiltonian()
+template<class Ham>
+SparseHamiltonian<Ham>::~SparseHamiltonian()
 {
     if(Up_data)
 	delete [] Up_data;
@@ -60,34 +64,41 @@ SparseHamiltonian::~SparseHamiltonian()
 	delete [] Down_ind;
 }
 
+template<class Ham>
+void SparseHamiltonian<Ham>::BuildHam()
+{
+    BuildSparseHam();
+}
+
 /**
  * Builds and fills the sparse hamiltonian
  */
-void SparseHamiltonian::BuildSparseHam()
+template<class Ham>
+void SparseHamiltonian<Ham>::BuildSparseHam()
 {
-    if( !baseUp.size() || !baseDown.size() )
+    if( !Ham::baseUp.size() || !Ham::baseDown.size() )
     {
 	std::cerr << "Build base before building Hamiltonian" << std::endl;
 	return;
     }
 
-    unsigned int NumUp = baseUp.size();
-    unsigned int NumDown = baseDown.size();
+    unsigned int NumUp = Ham::baseUp.size();
+    unsigned int NumDown = Ham::baseDown.size();
 
     int upjumpsign, downjumpsign;
 
-    if( Nu % 2 == 0)
+    if( Ham::Nu % 2 == 0)
 	upjumpsign = -1;
     else
 	upjumpsign = 1;
 
-    if( Nd % 2 == 0)
+    if( Ham::Nd % 2 == 0)
 	downjumpsign = -1;
     else
 	downjumpsign = 1;
 
-    size_Up = ((L-Nu)>Nu) ? 2*Nu : 2*(L-Nu);
-    size_Down = ((L-Nd)>Nd) ? 2*Nd : 2*(L-Nd);
+    size_Up = ((Ham::L-Ham::Nu)>Ham::Nu) ? 2*Ham::Nu : 2*(Ham::L-Ham::Nu);
+    size_Down = ((Ham::L-Ham::Nd)>Ham::Nd) ? 2*Ham::Nd : 2*(Ham::L-Ham::Nd);
 
     Up_data = new double [NumUp*size_Up];
     Up_ind = new unsigned int [NumUp*size_Up];
@@ -101,11 +112,11 @@ void SparseHamiltonian::BuildSparseHam()
 
 	for(unsigned int b=0;b<NumUp;b++)
 	{
-	    int result = hopping(baseUp[a], baseUp[b],upjumpsign);
+	    int result = Ham::hopping(Ham::baseUp[a], Ham::baseUp[b],upjumpsign);
 
 	    if(result != 0)
 	    {
-		Up_data[a+count*NumUp] = J*result;
+		Up_data[a+count*NumUp] = Ham::J*result;
 		Up_ind[a+count*NumUp] = b;
 		count++;
 	    }
@@ -127,11 +138,11 @@ void SparseHamiltonian::BuildSparseHam()
 
 	for(unsigned int b=0;b<NumDown;b++)
 	{
-	    int result = hopping(baseDown[a], baseDown[b],downjumpsign);
+	    int result = Ham::hopping(Ham::baseDown[a], Ham::baseDown[b],downjumpsign);
 
 	    if(result != 0)
 	    {
-		Down_data[a+count*NumDown] = J*result;
+		Down_data[a+count*NumDown] = Ham::J*result;
 		Down_ind[a+count*NumDown] = b;
 		count++;
 	    }
@@ -151,10 +162,11 @@ void SparseHamiltonian::BuildSparseHam()
 /**
  * Prints the Sparse Hamiltonian
  */
-void SparseHamiltonian::PrintSparse() const
+template<class Ham>
+void SparseHamiltonian<Ham>::PrintSparse() const
 {
-    unsigned int NumUp = baseUp.size();
-    unsigned int NumDown = baseDown.size();
+    unsigned int NumUp = Ham::baseUp.size();
+    unsigned int NumDown = Ham::baseDown.size();
 
     std::cout << "Up:" << std::endl;
 
@@ -190,10 +202,11 @@ void SparseHamiltonian::PrintSparse() const
 /**
  * Prints the Raw ELL array's.
  */
-void SparseHamiltonian::PrintRawELL() const
+template<class Ham>
+void SparseHamiltonian<Ham>::PrintRawELL() const
 {
-    unsigned int NumUp = baseUp.size();
-    unsigned int NumDown = baseDown.size();
+    unsigned int NumUp = Ham::baseUp.size();
+    unsigned int NumDown = Ham::baseDown.size();
 
     std::cout << "Up:" << std::endl;
 
@@ -242,10 +255,11 @@ void SparseHamiltonian::PrintRawELL() const
  * @param y the output vector
  * @param alpha the scaling value
  */
-void SparseHamiltonian::mvprod(double *x, double *y, double alpha) const
+template<class Ham>
+void SparseHamiltonian<Ham>::mvprod(double *x, double *y, double alpha) const
 {
-    int NumUp = baseUp.size();
-    int NumDown = baseDown.size();
+    int NumUp = Ham::baseUp.size();
+    int NumDown = Ham::baseDown.size();
 
     int incx = 1;
 
@@ -255,7 +269,7 @@ void SparseHamiltonian::mvprod(double *x, double *y, double alpha) const
         for(int k=0;k<NumDown;k++)
         {
             // the interaction part
-            y[i*NumDown+k] = alpha*y[i*NumDown+k] + U * CountBits(baseUp[i] & baseDown[k]) * x[i*NumDown+k];
+            y[i*NumDown+k] = alpha*y[i*NumDown+k] + Ham::U * Ham::CountBits(Ham::baseUp[i] & Ham::baseDown[k]) * x[i*NumDown+k];
 
             // the Hop_down part
             for(int l=0;l<size_Down;l++)
@@ -272,20 +286,25 @@ void SparseHamiltonian::mvprod(double *x, double *y, double alpha) const
  * Builds the interaction diagonal
  * @return pointer to interaction vector. You have to free this yourself
  */
-double* SparseHamiltonian::Umatrix() const
+template<class Ham>
+double* SparseHamiltonian<Ham>::Umatrix() const
 {
-    double *Umat = new double[getDim()];
+    double *Umat = new double[Ham::getDim()];
 
-    int NumDown = baseDown.size();
+    int NumDown = Ham::baseDown.size();
 
-    for(int i=0;i<getDim();i++)
+    for(int i=0;i<Ham::getDim();i++)
     {
 	int a = i / NumDown;
 	int b = i % NumDown;
-	Umat[i] = U * CountBits(baseUp[a] & baseDown[b]);
+	Umat[i] = Ham::U * Ham::CountBits(Ham::baseUp[a] & Ham::baseDown[b]);
     }
 
     return Umat;
 }
+
+// Expliciet specify the template class with the possible template parameters
+template class SparseHamiltonian<Hamiltonian>;
+template class SparseHamiltonian<NonPeriodicHamiltonian>;
 
 /* vim: set ts=8 sw=4 tw=0 expandtab :*/

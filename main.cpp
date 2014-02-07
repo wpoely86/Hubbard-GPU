@@ -19,11 +19,13 @@ along with Hubbard-GPU.  If not, see <http://www.gnu.org/licenses/>.
 #include <iostream>
 #include <algorithm>
 #include <memory>
+#include <sstream>
 #include <boost/timer.hpp>
 #include <getopt.h>
 #include "ham.h"
 #include "hamsparse.h"
 #include "ham-mom.h"
+#include "nonp-ham.h"
 
 using namespace std;
 
@@ -38,6 +40,7 @@ int main(int argc, char **argv)
     bool exact = false;
     bool lanczos = false;
     bool momentum = false;
+    bool nonperiodic = false;
 
     struct option long_options[] =
     {
@@ -49,12 +52,13 @@ int main(int argc, char **argv)
         {"exact",  no_argument, 0, 'e'},
         {"lanczos",  no_argument, 0, 'l'},
         {"momentum",  no_argument, 0, 'p'},
+        {"nonperiodic",  no_argument, 0, 'n'},
         {"help",  no_argument, 0, 'h'},
         {0, 0, 0, 0}
     };
 
     int i,j;
-    while( (j = getopt_long (argc, argv, "hu:d:s:U:J:elp", long_options, &i)) != -1)
+    while( (j = getopt_long (argc, argv, "hu:d:s:U:J:elpn", long_options, &i)) != -1)
         switch(j)
         {
             case 'h':
@@ -69,6 +73,7 @@ int main(int argc, char **argv)
                     "    -e  --exact                  Solve with exact diagonalisation\n"
                     "    -l  --lanczos                Solve with Lanczos algorithm\n"
                     "    -p  --momentum               Solve in the momentum basis\n"
+                    "    -n  --nonperiodic            Use non periodic boundary conditions\n"
                     "    -h, --help                   Display this help\n"
                     "\n";
                 return 0;
@@ -94,6 +99,9 @@ int main(int argc, char **argv)
             case 'p':
                 momentum = true;
                 break;
+            case 'n':
+                nonperiodic = true;
+                break;
             case 'e':
                 exact = true;
                 break;
@@ -105,6 +113,12 @@ int main(int argc, char **argv)
 
     boost::timer tijd;
 
+    if(momentum && nonperiodic)
+    {
+        cerr << "Cannot use non periodic boundary conditions in the momentum base" << endl;
+        return 0;
+    }
+
     if(exact)
     {
         tijd.restart();
@@ -113,6 +127,8 @@ int main(int argc, char **argv)
 
         if(momentum)
             ham.reset(new MomHamiltonian(L,Nu,Nd,J,U));
+        else if(nonperiodic)
+            ham.reset(new NonPeriodicHamiltonian(L,Nu,Nd,J,U));
         else
             ham.reset(new Hamiltonian(L,Nu,Nd,J,U));
 
@@ -159,16 +175,21 @@ int main(int argc, char **argv)
     {
         tijd.restart();
 
-        SparseHamiltonian sham(L,Nu,Nd,J,U);
+        std::unique_ptr<BareHamiltonian> sham;
 
-        cout << "Memory needed: " << sham.MemoryNeededArpack()*1.0/1024*1.0/1024 << " MB" << endl;
+        if(nonperiodic)
+            sham.reset(new SparseHamiltonian<NonPeriodicHamiltonian>(L,Nu,Nd,J,U));
+        else
+            sham.reset(new SparseHamiltonian<Hamiltonian>(L,Nu,Nd,J,U));
 
-        sham.BuildBase();
-        sham.BuildSparseHam();
+        cout << "Memory needed: " << sham->MemoryNeededArpack()*1.0/1024*1.0/1024 << " MB" << endl;
 
-        cout << "Dim: " << sham.getDim() << endl;
+        sham->BuildBase();
+        sham->BuildHam();
 
-        double E = sham.arpackDiagonalize();
+        cout << "Dim: " << sham->getDim() << endl;
+
+        double E = sham->arpackDiagonalize();
         cout << "E = " << E << endl;
 
         cout << "Time: " << tijd.elapsed() << " s" << endl;

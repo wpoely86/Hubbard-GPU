@@ -1,4 +1,4 @@
-/* Copyright (C) 2012  Ward Poelmans
+/* Copyright (C) 2012-2014  Ward Poelmans
 
 This file is part of Hubbard-GPU.
 
@@ -19,17 +19,18 @@ along with Hubbard-GPU.  If not, see <http://www.gnu.org/licenses/>.
 #ifndef HAMSPARSE_H
 #define HAMSPARSE_H
 
-#include "ham.h"
-
 /**
  * Store the Hamiltonian for 1D Hubbard in the (sparse) ELL format
  * @author Ward Poelmans <wpoely86@gmail.com>
  */
-class SparseHamiltonian: public Hamiltonian
+template<class Ham>
+class SparseHamiltonian: public Ham
 {
     public:
 	SparseHamiltonian(int Ns, int Nu, int Nd, double J, double U);
 	virtual ~SparseHamiltonian();
+
+        void BuildHam();
 
 	void BuildSparseHam();
 
