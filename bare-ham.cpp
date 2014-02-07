@@ -19,7 +19,17 @@ along with Hubbard-GPU.  If not, see <http://www.gnu.org/licenses/>.
 #include <iostream>
 #include <cstdlib>
 #include <cmath>
+#include <sstream>
+#include <hdf5.h>
 #include "bare-ham.h"
+
+// macro to help check return status of HDF5 functions
+#define HDF5_STATUS_CHECK(status) {                 \
+    if(status < 0)                                  \
+    std::cerr << __FILE__ << ":" << __LINE__ <<     \
+    ": Problem with writing to file. Status code="  \
+    << status << std::endl;                         \
+}
 
 /**
  * Constructor of the BareHamiltonian class
@@ -422,7 +432,7 @@ double BareHamiltonian::arpackDiagonalize()
     int n = dim;
 
     // number of eigenvalues to calculate
-    int nev = 2;
+    int nev = 1;
 
     // reverse communication parameter, must be zero on first iteration
     int ido = 0;
@@ -520,8 +530,13 @@ double BareHamiltonian::arpackDiagonalize()
 
     // use something to store the result before deleting...
     sigma = d[0];
-    std::cout << "0: " << d[0] << std::endl;
-    std::cout << "1: " << d[1] << std::endl;
+
+    if( rvec )
+    {
+        std::stringstream name;
+        name << "results-" << L << "-" << Nu << "-" << Nd << "-" << U << ".h5";
+        SaveToFile(name.str(), z, n*nev);
+    }
 
     delete [] resid;
     delete [] v;
@@ -671,10 +686,91 @@ void BareHamiltonian::Diagonalize(int dim, double *mat, double *eigs, bool calc_
     dsyevd_(&jobz, &uplo, &dim, mat, &dim, eigs, work, &lwork, iwork, &liwork, &info);
 
     if(info != 0)
-	std::cerr << "Calculating eigenvalues failed..." << std::endl;
+        std::cerr << "Calculating eigenvalues failed..." << std::endl;
 
     delete [] work;
     delete [] iwork;
+}
+
+
+void BareHamiltonian::SaveToFile(const std::string filename) const
+{
+    if(!ham)
+        return;
+
+    SaveToFile(filename, ham, dim*dim);
+}
+
+/**
+ * Save the ham matrix to a file in the HDF5 format
+ * @param filename the name of the file to write to
+ */
+void BareHamiltonian::SaveToFile(const std::string filename, double *data, int dim) const
+{
+    hid_t       file_id, dataset_id, dataspace_id, attribute_id;
+    herr_t      status;
+
+    file_id = H5Fcreate(filename.c_str(), H5F_ACC_TRUNC, H5P_DEFAULT, H5P_DEFAULT);
+    HDF5_STATUS_CHECK(file_id);
+
+    hsize_t dimarr = dim;
+
+    dataspace_id = H5Screate_simple(1, &dimarr, NULL);
+
+    dataset_id = H5Dcreate(file_id, "ham", H5T_IEEE_F64LE, dataspace_id, H5P_DEFAULT, H5P_DEFAULT, H5P_DEFAULT);
+
+    status = H5Dwrite(dataset_id, H5T_NATIVE_DOUBLE, H5S_ALL, H5S_ALL, H5P_DEFAULT, data );
+    HDF5_STATUS_CHECK(status);
+
+    status = H5Sclose(dataspace_id);
+    HDF5_STATUS_CHECK(status);
+
+    dataspace_id = H5Screate(H5S_SCALAR);
+
+    attribute_id = H5Acreate (dataset_id, "L", H5T_STD_I32LE, dataspace_id, H5P_DEFAULT, H5P_DEFAULT);
+    status = H5Awrite (attribute_id, H5T_NATIVE_INT, &L );
+    HDF5_STATUS_CHECK(status);
+    status = H5Aclose(attribute_id);
+    HDF5_STATUS_CHECK(status);
+
+    attribute_id = H5Acreate (dataset_id, "Nu", H5T_STD_I32LE, dataspace_id, H5P_DEFAULT, H5P_DEFAULT);
+    status = H5Awrite (attribute_id, H5T_NATIVE_INT, &Nu );
+    HDF5_STATUS_CHECK(status);
+    status = H5Aclose(attribute_id);
+    HDF5_STATUS_CHECK(status);
+
+    attribute_id = H5Acreate (dataset_id, "Nd", H5T_STD_I32LE, dataspace_id, H5P_DEFAULT, H5P_DEFAULT);
+    status = H5Awrite (attribute_id, H5T_NATIVE_INT, &Nd );
+    HDF5_STATUS_CHECK(status);
+    status = H5Aclose(attribute_id);
+    HDF5_STATUS_CHECK(status);
+
+    attribute_id = H5Acreate (dataset_id, "J", H5T_IEEE_F64LE, dataspace_id, H5P_DEFAULT, H5P_DEFAULT);
+    status = H5Awrite (attribute_id, H5T_NATIVE_DOUBLE, &J );
+    HDF5_STATUS_CHECK(status);
+    status = H5Aclose(attribute_id);
+    HDF5_STATUS_CHECK(status);
+
+    attribute_id = H5Acreate (dataset_id, "U", H5T_IEEE_F64LE, dataspace_id, H5P_DEFAULT, H5P_DEFAULT);
+    status = H5Awrite (attribute_id, H5T_NATIVE_DOUBLE, &U );
+    HDF5_STATUS_CHECK(status);
+    status = H5Aclose(attribute_id);
+    HDF5_STATUS_CHECK(status);
+
+    attribute_id = H5Acreate (dataset_id, "dim", H5T_STD_I32LE, dataspace_id, H5P_DEFAULT, H5P_DEFAULT);
+    status = H5Awrite (attribute_id, H5T_NATIVE_INT, &dim );
+    HDF5_STATUS_CHECK(status);
+    status = H5Aclose(attribute_id);
+    HDF5_STATUS_CHECK(status);
+
+    status = H5Sclose(dataspace_id);
+    HDF5_STATUS_CHECK(status);
+
+    status = H5Dclose(dataset_id);
+    HDF5_STATUS_CHECK(status);
+
+    status = H5Fclose(file_id);
+    HDF5_STATUS_CHECK(status);
 }
 
 /* vim: set ts=8 sw=4 tw=0 expandtab :*/

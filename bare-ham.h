@@ -99,10 +99,14 @@ class BareHamiltonian
 
         double MemoryNeededArpack() const;
 
+        virtual void SaveToFile(const std::string filename) const;
+
     protected:
         int CalcSign(int i,int j,myint a) const;
 
         static void Diagonalize(int dim, double *mat, double *eigs, bool calc_eigenvectors);
+
+        void SaveToFile(const std::string filename, double *data, int dim) const;
 
 	//! Number of sites
 	int L;
