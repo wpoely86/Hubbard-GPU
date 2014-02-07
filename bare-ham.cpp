@@ -141,6 +141,15 @@ void BareHamiltonian::BuildBase()
 }
 
 /**
+ * This method is always present and should build
+ * the Hamiltonian, either full or sparse
+ */
+void BareHamiltonian::BuildHam()
+{
+    BuildFullHam();
+}
+
+/**
  * Calculates the sign of the hop between site i and site j on ket a. Make sure
  * that i < j!
  * @param i the first sp

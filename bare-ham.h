@@ -66,6 +66,8 @@ class BareHamiltonian
 
 	virtual void BuildFullHam() = 0;
 
+        virtual void BuildHam();
+
 	int getL() const;
 	int getNu() const;
 	int getNd() const;
