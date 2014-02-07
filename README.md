@@ -23,7 +23,7 @@ and the branch 'PRIMME' used the PRIMME library to find the
 eigenvalues and eigenvectors. You can find PRIMME
 at [http://www.cs.wm.edu/~andreas/software/](http://www.cs.wm.edu/~andreas/software/)
 
-All code is under the [GPLv3](https://www.gnu.org/licenses/gpl.txt).
+All [https://github.com/wpoely86/Hubbard-GPU](code) is under the [GPLv3](https://www.gnu.org/licenses/gpl.txt).
 
 Documentation
 -------------
