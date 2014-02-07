@@ -7,6 +7,7 @@ CPPSRC=ham.cpp\
        hamsparse2D.cpp\
        bare-ham.cpp\
        ham-mom.cpp\
+       nonp-ham.cpp\
 
 CUDASRC=
 
