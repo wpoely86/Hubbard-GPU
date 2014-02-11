@@ -47,8 +47,6 @@ class MomHamiltonian: public BareHamiltonian
 
         void GenerateData(double Ubegin, double Uend, double step, std::string filename);
 
-        void GenerateCurve(double Ubegin, double Uend, double step, std::string filename);
-
     protected:
         double hopping(myint) const;
 
