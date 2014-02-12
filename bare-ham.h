@@ -53,12 +53,12 @@ extern "C" {
 class BareHamiltonian
 {
     public:
-	BareHamiltonian(int Ns, int Nu, int Nd, double J, double U);
+	BareHamiltonian(int L, int Nu, int Nd, double J, double U);
 	virtual ~BareHamiltonian();
 
-	int CalcDim(int Ns, int N) const;
+	static int CalcDim(int L, int N);
 
-	int CountBits(myint bits) const;
+	static int CountBits(myint bits);
 
 	std::string print_bin(myint num,int bitcount=0) const;
 

@@ -81,7 +81,7 @@ BareHamiltonian::~BareHamiltonian()
  * @param N number of up or down electrons
  * @return the dimension of the up or down electron space
  */
-int BareHamiltonian::CalcDim(int L, int N) const
+int BareHamiltonian::CalcDim(int L, int N)
 {
     int result = 1;
 
@@ -104,7 +104,7 @@ int BareHamiltonian::CalcDim(int L, int N) const
  * @param bits the myint of which to count the number of bits set
  * @return the number of bits set
  */
-int BareHamiltonian::CountBits(myint bits) const
+int BareHamiltonian::CountBits(myint bits)
 {
     return __builtin_popcount(bits);
 }
