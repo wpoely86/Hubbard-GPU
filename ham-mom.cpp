@@ -21,6 +21,7 @@ along with Hubbard-GPU.  If not, see <http://www.gnu.org/licenses/>.
 #include <cmath>
 #include <sstream>
 #include <cstring>
+#include <tuple>
 #include <iomanip>
 #include <hdf5.h>
 #include "ham-mom.h"
@@ -70,89 +71,58 @@ void MomHamiltonian::BuildBase()
 	    baseUp.push_back(i);
     }
 
-    int NumDown = CalcDim(L,Nd);
-
-    std::vector< std::pair<int,int> > totalmom(dim);
+    std::vector< std::tuple<int,int,int> > totalmom;
+    totalmom.reserve(dim);
 
     // count momentum of earch state
     for(unsigned int a=0;a<baseUp.size();a++)
         for(unsigned int b=0;b<baseDown.size();b++)
         {
-            int K = 0;
-
-            myint tmp = baseUp[a];
-
-            while(tmp)
+            auto calcK = [] (myint cur)
             {
-                // select rightmost up state in the ket
-                myint ksp = tmp & (~tmp + 1);
-                // set it to zero
-                tmp ^= ksp;
+                int tot = 0;
 
-                K += CountBits(ksp-1);
-            }
+                while(cur)
+                {
+                    // select rightmost up state in the ket
+                    myint ksp = cur & (~cur + 1);
+                    // set it to zero
+                    cur ^= ksp;
 
-            tmp = baseDown[b];
+                    tot += BareHamiltonian::CountBits(ksp-1);
+                }
 
-            while(tmp)
-            {
-                // select rightmost up state in the ket
-                myint ksp = tmp & (~tmp + 1);
-                // set it to zero
-                tmp ^= ksp;
+                return tot;
+            };
 
-                K += CountBits(ksp-1);
-            }
+            int K = calcK(baseUp[a]) + calcK(baseDown[b]);
 
             K = K % L;
 
-            int i = a * NumDown + b;
-
-            totalmom[i] = std::make_pair(i,K);
+            totalmom.push_back(std::make_tuple(a,b,K));
         }
 
-    // sort according to momentum
-    bool swapped = true;
-    unsigned n = totalmom.size();
-
-    while(swapped)
-    {
-        swapped = false;
-
-        for(int i=0;i<(n-1);i++)
-            if( totalmom[i].second > totalmom[i+1].second )
+    std::sort(totalmom.begin(), totalmom.end(),
+            [](const std::tuple<int,int,int> & a, const std::tuple<int,int,int> & b) -> bool
             {
-                swapped = true;
-                auto tmp = totalmom[i];
-                totalmom[i] = totalmom[i+1];
-                totalmom[i+1] = tmp;
-            }
-        n--;
-    }
+            return std::get<2>(a) < std::get<2>(b);
+            });
 
     // a block for each momenta
     mombase.resize(L);
 
-    // store mombase
-    for(int i=0;i<dim;i++)
-    {
-        int b = totalmom[i].first % NumDown;
-        int a = (totalmom[i].first - b)/NumDown;
+    std::for_each(totalmom.begin(), totalmom.end(), [this](std::tuple<int,int,int> elem)
+            {
+            auto tmp = std::make_pair(std::get<0>(elem), std::get<1>(elem));
+            mombase[std::get<2>(elem)].push_back(tmp);
+            } );
 
-        mombase[totalmom[i].second].push_back(std::make_pair(a,b));
-    }
-
-//    int test = 0;
-//
 //    for(unsigned int i=0;i<mombase.size();i++)
 //    {
 //        std::cout << "K = " << i << " (" << mombase[i].size() << ")" << std::endl;
-//        test += mombase[i].size() * mombase[i].size();
 //        for(unsigned int j=0;j<mombase[i].size();j++)
 //            std::cout << j << "\t" << mombase[i][j].first << "\t" << mombase[i][j].second << "\t" << print_bin(baseUp[mombase[i][j].first]) << "\t" << print_bin(baseDown[mombase[i][j].second]) << std::endl;
-//
 //    }
-//    std::cout << "total dim:" << test << std::endl;
 }
 
 /**
