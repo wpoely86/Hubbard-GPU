@@ -28,7 +28,7 @@ template<class T>
 class GPUHamiltonian: public T
 {
     public:
-	GPUHamiltonian(int Ns, int Nu, int Nd, double J, double U);
+	GPUHamiltonian(int L, int Nu, int Nd, double J, double U);
 	GPUHamiltonian(int L, int D, int Nu, int Nd, double J, double U);
 	virtual ~GPUHamiltonian();
 

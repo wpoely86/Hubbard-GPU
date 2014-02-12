@@ -27,7 +27,7 @@ template<class Ham>
 class SparseHamiltonian: public Ham
 {
     public:
-	SparseHamiltonian(int Ns, int Nu, int Nd, double J, double U);
+	SparseHamiltonian(int L, int Nu, int Nd, double J, double U);
 	virtual ~SparseHamiltonian();
 
         void BuildHam();
