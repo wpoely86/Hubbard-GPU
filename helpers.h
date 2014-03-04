@@ -29,7 +29,7 @@
 
 /**
  * Helper class, wrapper around a double array. Has methods to get the number of rows
- * and columns
+ * and columns. A simple matrix class.
  */
 class matrix
 {
@@ -75,6 +75,11 @@ class matrix
         int m;
 };
 
+/**
+ * Stores a full basis in the momentum space.
+ * Stores a list of L KBlock classes, each class holding the
+ * basis of one K block.
+ */
 class MomBasis
 {
     public:
@@ -124,6 +129,12 @@ class MomBasis
         std::vector< std::shared_ptr<class KBlock> > basisblocks;
 };
 
+/**
+ * Stores a single K block basis. Only has a public copy constructor.
+ * The MomBasis class is a friend and can make this classes after building
+ * a full momentum basis. We build these blocks once and refer everywhere to 
+ * those objects then.
+ */
 class KBlock
 {
     friend class MomBasis;
@@ -158,6 +169,10 @@ class KBlock
         std::vector< std::pair<myint, myint> > basis;
 };
 
+/**
+ * Stores a basis in a K block. Has a coefficient matrix that stores
+ * all the basis vector of this subbasis as linear combination in a KBlock basis.
+ */
 class SubBasis
 {
     friend class SpinBasis;
@@ -197,8 +212,6 @@ class SubBasis
 
         const SparseMatrix_CCS& getSparse() const;
 
-        int getSz() const { return (Nu-Nd)/2; }
-
     private:
         //! number of sites
         int L;
@@ -207,13 +220,20 @@ class SubBasis
         //! number of up electrons
         int Nd;
 
+        //!the coefficient of the basis
         std::unique_ptr<class matrix> coeffs;
 
+        //! same as above but sparse. You have to fill it first
         std::unique_ptr<class SparseMatrix_CCS> s_coeffs;
 
+        //! shared pointer to KBlock basis. We all share the pointer.
         std::shared_ptr<class KBlock> basis;
 };
 
+/**
+ * Class to keep track of which (sub)Basis are already created and
+ * keeps track of new ones.
+ */
 class BasisList
 {
     public:
@@ -235,7 +255,8 @@ class BasisList
 
         void Clean(int Sz);
 
-        static const int EMPTY = -1;
+        //! Constant used to keep track of which basis are allocted
+        static const int EMPTY;
 
     private:
         //! number of sites
@@ -247,13 +268,18 @@ class BasisList
 
         int totS;
 
+        //! maximum value of S
         int Smax;
 
-        std::unique_ptr<double []> ind_list;
+        //! Array to keep track of SubBasis exist and which ones not
+        std::vector<int> ind_list;
 
         std::vector<SubBasis> list;
 };
 
+/**
+ * Stores the actual Spinbasis as a linear combination of KBlock basis
+ */
 class SpinBasis
 {
     public:
@@ -279,7 +305,10 @@ class SpinBasis
         //! number of down electrons
         int Nd;
 
+        //! list of all the basis
         std::vector<class SubBasis> basis;
+
+        //! keeps track which K and S belong to a subbasis
         std::vector< std::pair<int,int> > ind;
 };
 

@@ -31,6 +31,9 @@
     << status << std::endl;                         \
 }
 
+// constant used in BasisList
+const int BasisList::EMPTY = -1;
+
 /**
  * @param n_ number of rows
  * @param m_ number of columns
@@ -43,6 +46,9 @@ matrix::matrix(int n_, int m_)
     mat.reset(new double [n*m]);
 }
 
+/**
+ * @param orig matrix to copy
+ */
 matrix::matrix(const matrix &orig)
 {
     n = orig.n;
@@ -51,6 +57,10 @@ matrix::matrix(const matrix &orig)
     std::memcpy(mat.get(), orig.getpointer(), n*m*sizeof(double));
 }
 
+/**
+ * move constructor
+ * @param orig matrix to copy (descrutive)
+ */
 matrix::matrix(matrix &&orig)
 {
     n = orig.n;
@@ -67,6 +77,10 @@ matrix& matrix::operator=(const matrix &orig)
     return *this;
 }
 
+/**
+ * Set all matrix elements equal to a value
+ * @param val the value to use
+ */
 matrix& matrix::operator=(double val)
 {
     for(int i=0;i<n*m;i++)
@@ -75,11 +89,17 @@ matrix& matrix::operator=(double val)
     return *this;
 }
 
+/**
+ * @return number of rows
+ */
 int matrix::getn() const
 {
     return n;
 }
 
+/**
+ * @return number of columns
+ */
 int matrix::getm() const
 {
     return m;
@@ -114,6 +134,11 @@ double* matrix::getpointer() const
     return mat.get();
 }
 
+/**
+ * Matrix-Matrix product of A and B. Store result in this
+ * @param A first matrix
+ * @param B second matrix
+ */
 matrix& matrix::prod(matrix const &A, matrix const &B)
 {
     char trans = 'N';
@@ -128,6 +153,11 @@ matrix& matrix::prod(matrix const &A, matrix const &B)
     return *this;
 }
 
+/**
+ * Do a SVD on this matrix and store right singular values in
+ * this.
+ * @return list of singular values
+ */
 std::unique_ptr<double []> matrix::svd()
 {
     char jobu = 'N';
@@ -158,6 +188,12 @@ void matrix::Print() const
 }
 
 
+/**
+ * @param K the K value
+ * @param L chain length
+ * @param Nu number of up electrons
+ * @param Nd number of down electrons
+ */
 KBlock::KBlock(int K, int L, int Nu, int Nd)
 {
     this->K = K;
@@ -673,12 +709,8 @@ BasisList::BasisList(int L, int Nu, int Nd)
 
     int n = L*totS;
 
-    ind_list.reset(new double [n]);
-
+    ind_list.resize(n, EMPTY);
     list.resize(n);
-
-    for(int i=0;i<n;i++)
-        ind_list[i] = EMPTY;
 }
 
 bool BasisList::Exists(int K, int S, int Sz) const
