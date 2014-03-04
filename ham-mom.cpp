@@ -105,7 +105,7 @@ void MomHamiltonian::BuildBase()
     std::sort(totalmom.begin(), totalmom.end(),
             [](const std::tuple<int,int,int> & a, const std::tuple<int,int,int> & b) -> bool
             {
-            return std::get<2>(a) < std::get<2>(b);
+                return std::get<2>(a) < std::get<2>(b);
             });
 
     // a block for each momenta
@@ -113,8 +113,8 @@ void MomHamiltonian::BuildBase()
 
     std::for_each(totalmom.begin(), totalmom.end(), [this](std::tuple<int,int,int> elem)
             {
-            auto tmp = std::make_pair(std::get<0>(elem), std::get<1>(elem));
-            mombase[std::get<2>(elem)].push_back(tmp);
+                auto tmp = std::make_pair(std::get<0>(elem), std::get<1>(elem));
+                mombase[std::get<2>(elem)].push_back(tmp);
             } );
 
 //    for(unsigned int i=0;i<mombase.size();i++)

@@ -32,6 +32,8 @@ extern "C" {
     void dsymv_(char *uplo, const int *n, const double *alpha, const double *a, const int *lda, const double *x, const int *incx, const double *beta, double *y, const int *incy);
     void daxpy_(int *n,const double *alpha,double *x,int *incx,double *y,int *incy);
     void dstev_( const char* jobz, const int* n, double* d, double* e, double* z, const int* ldz, double* work, int* info );
+    void dgesvd_( char* jobu, char* jobvt, int* m, int* n, double* a, int* lda, double* s, double* u, int* ldu, double* vt, int* ldvt, double* work, int* lwork, int* info );
+    void dgemm_(char *transA,char *transB,const int *m,const int *n,const int *k,double *alpha,double *A,const int *lda,double *B,const int *ldb,double *beta,double *C,const int *ldc);
 
     void dsaupd_(int *ido, char *bmat, int *n, char *which,
             int *nev, double *tol, double *resid, int *ncv,
@@ -60,7 +62,9 @@ class BareHamiltonian
 
 	static int CountBits(myint bits);
 
-	std::string print_bin(myint num,int bitcount=0) const;
+	std::string print_bin(myint num) const;
+
+	static std::string print_bin(myint num,int bitcount);
 
 	virtual void BuildBase();
 

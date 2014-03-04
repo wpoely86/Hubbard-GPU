@@ -20,6 +20,7 @@ along with Hubbard-GPU.  If not, see <http://www.gnu.org/licenses/>.
 #include <cstdlib>
 #include <cmath>
 #include <sstream>
+#include <assert.h>
 #include <hdf5.h>
 #include "bare-ham.h"
 
@@ -57,9 +58,7 @@ BareHamiltonian::BareHamiltonian(int L, int Nu, int Nd, double J, double U)
 
     ham = 0;
 
-    Hb = 1; // highest power of 2 used
-    for(int i=0;i<L;i++)
-	Hb <<= 1;
+    Hb = 1<<L; // highest power of 2 used
     Hbc = CountBits(Hb-1);
 }
 
@@ -116,11 +115,9 @@ int BareHamiltonian::CountBits(myint bits)
  * @param bitcount the number of bits to print (starting from the LSB)
  * @return a string with the binary representation of num
  */
-std::string BareHamiltonian::print_bin(myint num,int bitcount) const
+std::string BareHamiltonian::print_bin(myint num,int bitcount)
 {
     std::string output = "";
-    if(!bitcount)
-        bitcount = Hbc;
     output.reserve(bitcount);
 
     for(int i=bitcount-1;i>=0;i--)
@@ -130,6 +127,17 @@ std::string BareHamiltonian::print_bin(myint num,int bitcount) const
 	    output += "0";
 
     return output;
+}
+
+/**
+ * Print a int in binary form to a string. Prints a much as needed
+ * to represent the current system.
+ * @param num the myint to print in binary form
+ * @return a string with the binary representation of num
+ */
+std::string BareHamiltonian::print_bin(myint num) const
+{
+    return print_bin(num, Hbc);
 }
 
 /**
@@ -271,8 +279,7 @@ myint BareHamiltonian::getBaseDown(unsigned int i) const
  */
 std::vector<double> BareHamiltonian::ExactDiagonalizeFull(bool calc_eigenvectors)
 {
-    if(!ham)
-        throw;
+    assert(ham);
 
     std::vector<double> eigenvalues(dim);
 
@@ -449,7 +456,7 @@ double BareHamiltonian::arpackDiagonalize()
     // the number of columns in v: the number of lanczos vector
     // generated at each iteration, ncv <= n
     // We use the answer to life, the universe and everything, if possible
-    int ncv = 16;
+    int ncv = 42;
 
     if( n < ncv )
         ncv = n;
@@ -484,7 +491,7 @@ double BareHamiltonian::arpackDiagonalize()
 
     // rvec == 0 : calculate only eigenvalue
     // rvec > 0 : calculate eigenvalue and eigenvector
-    int rvec = 0;
+    int rvec = 1;
 
     // how many eigenvectors to calculate: 'A' => nev eigenvectors
     char howmny = 'A';
@@ -536,6 +543,26 @@ double BareHamiltonian::arpackDiagonalize()
         std::stringstream name;
         name << "results-" << L << "-" << Nu << "-" << Nd << "-" << U << ".h5";
         SaveToFile(name.str(), z, n*nev);
+
+/*         int NumDown = CalcDim(L,Nd);
+ *         double max = 0;
+ * 
+ *         for(int i=0;i<dim;i++)
+ *         {
+ *             int b = i % NumDown;
+ *             int a = (i - b)/NumDown;
+ *             if( ! (getBaseUp(a) & getBaseDown(b)) )
+ *                 {
+ * //            if( fabs(z[i]) > 1e-3 )
+ *                 std::cout << z[i] << "\t |" << print_bin(getBaseUp(a)) << " " << print_bin(getBaseDown(b)) << ">\t" << (getBaseUp(a) & getBaseDown(b)) << std::endl;
+ * 
+ *                 if(fabs(z[i]) > max)
+ *                     max = fabs(z[i]);
+ *                 }
+ *         }
+ * 
+ *         std::cout << "max: " << max << std::endl;
+ */
     }
 
     delete [] resid;
@@ -653,8 +680,8 @@ double BareHamiltonian::MemoryNeededArpack() const
  */
 void BareHamiltonian::Diagonalize(int dim, double *mat, double *eigs, bool calc_eigenvectors)
 {
-    if(!mat || !eigs)
-        throw;
+    assert(mat && "mat must be allocated");
+    assert(eigs && "eigs must be allocated");
 
     char jobz;
 
