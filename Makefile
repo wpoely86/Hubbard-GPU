@@ -8,6 +8,9 @@ CPPSRC=ham.cpp\
        bare-ham.cpp\
        ham-mom.cpp\
        nonp-ham.cpp\
+       helpers.cpp\
+       ham-spin.cpp\
+       SparseMatrix_CCS.cpp\
 
 CUDASRC=
 
@@ -18,9 +21,9 @@ EXE=main
 CC=gcc
 CXX=g++
 
-CFLAGS=-g -Wall -O2 -march=native -std=c++11
+CFLAGS=-g -Wall -O2 -march=native -std=c++11 -Wno-sign-compare -fopenmp # -DNDEBUG
 CPPFLAGS=$(CFLAGS)
-LDFLAGS=-g -O2 -Wall -march=native
+LDFLAGS=-g -O2 -Wall -march=native -fopenmp
 NVFLAGS=-g -O2 --ptxas-options=-v -arch=sm_13
 
 INCLUDE=
