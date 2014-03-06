@@ -249,6 +249,11 @@ int KBlock::getL() const
     return L;
 }
 
+/**
+ * Get a basisstate with index
+ * @param index the index of the requested basisstate
+ * @return a pair of spin up and spin down basissstate
+ */
 const std::pair<myint,myint>& KBlock::operator[](int index) const
 {
     assert(index < basis.size());
@@ -264,6 +269,12 @@ void KBlock::Print() const
 }
 
 
+/**
+ * Build a momentum basis for specified system
+ * @param L chain length
+ * @param Nu number of spin ups
+ * @param Nd number of spin downs
+ */
 MomBasis::MomBasis(int L, int Nu, int Nd)
 {
     this->L = L;
@@ -277,6 +288,12 @@ MomBasis::MomBasis(int L, int Nu, int Nd)
     BuildBase();
 }
 
+/**
+ * Get a spin up basisvector in block K with index=index
+ * @param K the K block index
+ * @param index the index within the K block
+ * @return the spin up basisvector
+ */
 myint MomBasis::getUp(int K, int index) const
 {
     assert(K<L);
@@ -284,6 +301,12 @@ myint MomBasis::getUp(int K, int index) const
     return (*basisblocks[K])[index].first;
 }
 
+/**
+ * Get a spin down basisvector in block K with index=index
+ * @param K the K block index
+ * @param index the index within the K block
+ * @return the spin down basisvector
+ */
 myint MomBasis::getDown(int K, int index) const
 {
     assert(K<L);
@@ -291,6 +314,12 @@ myint MomBasis::getDown(int K, int index) const
     return (*basisblocks[K])[index].second;
 }
 
+/**
+ * Find the index of a basisvector for spin up
+ * @param K the K block index
+ * @param ket the basisvector
+ * @return the index of ket
+ */
 int MomBasis::findUp(int K, myint ket) const
 {
     assert(K<L);
@@ -302,6 +331,12 @@ int MomBasis::findUp(int K, myint ket) const
     return -1;
 }
 
+/**
+ * Find the index of a basisvector for spin down
+ * @param K the K block index
+ * @param ket the basisvector
+ * @return the index of ket
+ */
 int MomBasis::findDown(int K, myint ket) const
 {
     assert(K<L);
@@ -318,6 +353,10 @@ int MomBasis::getdim() const
     return dim;
 }
 
+/**
+ * @param K the K block
+ * @return the dimension of K block K
+ */
 int MomBasis::getdimK(int K) const
 {
     assert(K<L);
@@ -557,16 +596,33 @@ void SubBasis::Print() const
     }
 }
 
+/**
+ * @return the dimension of the subspace
+ */
 int SubBasis::getdim() const
 {
-    return coeffs->getm();
+    if(coeffs)
+        return coeffs->getm();
+    else
+        return s_coeffs->gm();
 }
 
+/**
+ * @return the dimension of the parent space in which this subspace is spanned
+ */
 int SubBasis::getspacedim() const
 {
-    return coeffs->getn();
+    if(coeffs)
+        return coeffs->getn();
+    else
+        return s_coeffs->gn();
 }
 
+/**
+ * @parm upket the up ket
+ * @parm downket the down ket
+ * @return the index of the basisvector with these kets
+ */
 int SubBasis::getindex(myint upket, myint downket) const
 {
     for(int i=0;i<basis->getdim();i++)
@@ -577,6 +633,11 @@ int SubBasis::getindex(myint upket, myint downket) const
     return -1;
 }
 
+/**
+ * Do a ladder operator of S^- on a SubBasis and store it
+ * in this SubBasis
+ * @param orig the original SubBasis on which we ladder
+ */
 void SubBasis::Slad_min(SubBasis &orig)
 {
 //    std::cout << "Doing slamin: K=" << orig.basis->getK() << " start Sz=" << (orig.Nu-orig.Nd)/2 << " final Sz=" << (Nu-Nd)/2 << std::endl;
@@ -632,17 +693,7 @@ void SubBasis::Slad_min(SubBasis &orig)
 
 //    s_coeffs->ConvertToMatrix(*coeffs);
 
-    for(int i=0;i<getdim();i++)
-    {
-        double norm;
-        int spacedim = getspacedim();
-        int inc = 1;
-
-        norm = ddot_(&spacedim,&(*coeffs)[i*spacedim],&inc,&(*coeffs)[i*spacedim],&inc);
-        norm = 1.0/sqrt(norm);
-
-        dscal_(&spacedim,&norm,&(*coeffs)[i*spacedim],&inc);
-    }
+    Normalize();
 }
 
 void SubBasis::Get(int index, myint &upket, myint &downket) const
@@ -668,6 +719,9 @@ void SubBasis::SetCoeff(int i, int j, double value)
     (*coeffs)(i,j) = value;
 }
 
+/**
+ * Normalize all basisvectors in this subspace
+ */
 void SubBasis::Normalize()
 {
     for(int i=0;i<getdim();i++)
@@ -677,26 +731,41 @@ void SubBasis::Normalize()
         int inc = 1;
 
         norm = ddot_(&spacedim,&(*coeffs)[i*spacedim],&inc,&(*coeffs)[i*spacedim],&inc);
-        std::cout << "Norm is " << norm << std::endl;
         norm = 1.0/sqrt(norm);
 
         dscal_(&spacedim,&norm,&(*coeffs)[i*spacedim],&inc);
     }
 }
 
+/**
+ * Converts the coefficient matrix to a sparse format
+ * and delete the dense matrix afterwards
+ */
 void SubBasis::ToSparseMatrix()
 {
     s_coeffs.reset(new SparseMatrix_CCS(coeffs->getn(),coeffs->getm()));
 
     s_coeffs->ConvertFromMatrix(*coeffs);
+
+    coeffs.reset(nullptr);
 }
 
+/**
+ * Access operator for the Sparse matrix. First call ToSparseMatrix().
+ * @return the sparse matrix
+ */
 const SparseMatrix_CCS& SubBasis::getSparse() const
 {
     assert(s_coeffs);
     return (*s_coeffs);
 }
 
+/**
+ * Create a BasisList to build a SpinBasis with given numbers
+ * @param L the chain length
+ * @param Nu the number of up spins of the final basis
+ * @param Nd the number of down spins of the final basis
+ */
 BasisList::BasisList(int L, int Nu, int Nd)
 {
     this->L= L;
@@ -713,6 +782,13 @@ BasisList::BasisList(int L, int Nu, int Nd)
     list.resize(n);
 }
 
+/**
+ * Check if a SubBasis with given quantum numbers exists
+ * @param K the K quantun number of the SubBasis
+ * @param S the S quantun number of the SubBasis
+ * @param Sz the Sz quantun number of the SubBasis
+ * @return true or false if it exists
+ */
 bool BasisList::Exists(int K, int S, int Sz) const
 {
     if( K >= L || S > Smax || Sz > S)
@@ -724,6 +800,13 @@ bool BasisList::Exists(int K, int S, int Sz) const
         return false;
 }
 
+/**
+ * Getter for a SubBasis with given quantum numbers exists
+ * @param K the K quantun number of the SubBasis
+ * @param S the S quantun number of the SubBasis
+ * @param Sz the Sz quantun number of the SubBasis
+ * @return the SubBasis object requested
+ */
 SubBasis& BasisList::Get(int K, int S, int Sz)
 {
     assert(Exists(K, S, Sz) && "Get on nonexisting block");
@@ -731,6 +814,15 @@ SubBasis& BasisList::Get(int K, int S, int Sz)
     return list[K*totS + (S*(S+1))/2 + Sz];
 }
 
+/**
+ * Create a SubBasis with quantum numbers K, S and Sz from momentum basis
+ * orig and let it have dimension dim
+ * @param K the K quantun number of the new SubBasis
+ * @param S the S quantun number of the new SubBasis
+ * @param Sz the Sz quantun number of the new SubBasis
+ * @param orig the original momentum basis from which to build the new SubBasis
+ * @param dim the dimension of the SubBasis
+ */
 void BasisList::Create(int K, int S, int Sz, MomBasis &orig, int dim)
 {
     list[K*totS + (S*(S+1))/2 + Sz] = SubBasis(K, orig, dim);
@@ -853,21 +945,30 @@ SpinBasis::SpinBasis(int L,int Nu,int Nd,BasisList &orig)
 
     std::for_each(basis.begin(), basis.end(), [](SubBasis& x) { x.ToSparseMatrix(); });
 
-//    std::for_each(basis.begin(), basis.end(), [](SubBasis& x) { x.Print(); x.getSparse().PrintRaw(); });
-
     orig.MakeEmpty();
 }
 
+/**
+ * Read a SpinBasis from a file
+ * @param filename the name of the file to read
+ */
 SpinBasis::SpinBasis(const char *filename)
 {
     ReadBasis(filename);
 }
 
+/**
+ * @return The number of blocks in the basis
+ */
 int SpinBasis::getnumblocks() const
 {
     return basis.size();
 }
 
+/**
+ * Save the basis to a HDF5 file
+ * @param filename the name of the file
+ */
 void SpinBasis::SaveBasis(const char *filename) const
 {
     hid_t       file_id, group_id, dataset_id, dataspace_id, attribute_id, matspace_id;
@@ -1080,11 +1181,20 @@ void SpinBasis::ReadBasis(const char *filename)
 }
 
 
-std::pair<int,int> SpinBasis::getSK(int index) const
+/**
+ * Return the <K,S> pair belong to block with index index
+ * @param index the index of the block
+ * @return a pair with the quantum numbers K and S
+ */
+std::pair<int,int> SpinBasis::getKS(int index) const
 {
     return ind[index];
 }
 
+/**
+ * @param index the number of the block
+ * @return the SubBasis block with index=index
+ */
 const SubBasis& SpinBasis::getBlock(int index) const
 {
     return basis[index];

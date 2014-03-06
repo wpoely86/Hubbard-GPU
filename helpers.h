@@ -293,7 +293,7 @@ class SpinBasis
 
         void ReadBasis(const char *filename);
 
-        std::pair<int,int> getSK(int index) const;
+        std::pair<int,int> getKS(int index) const;
 
         const SubBasis& getBlock(int index) const;
 

@@ -85,8 +85,8 @@ void SpinHamiltonian::BuildHamWithS(int myS)
 #pragma omp parallel for
     for(int i=0;i<spinbasis->getnumblocks();i++)
     {
-        int K = spinbasis->getSK(i).first;
-        int S = spinbasis->getSK(i).second;
+        int K = spinbasis->getKS(i).first;
+        int S = spinbasis->getKS(i).second;
 
         if(S!=myS)
             continue;
@@ -150,8 +150,6 @@ void SpinHamiltonian::BuildHamWithS(int myS)
             blockmat.push_back(std::move(tmp_blockmat[i]));
 }
 
-
-
 /**
   * Builds the full SpinHamiltonian matrix
   */
@@ -162,8 +160,8 @@ void SpinHamiltonian::BuildFullHam()
 #pragma omp parallel for
     for(int i=0;i<spinbasis->getnumblocks();i++)
     {
-        int K = spinbasis->getSK(i).first;
-        int S = spinbasis->getSK(i).second;
+        int K = spinbasis->getKS(i).first;
+        int S = spinbasis->getKS(i).second;
 
         std::cout << "Building K=" << K << " S=" << S << std::endl;
 
@@ -397,8 +395,8 @@ std::vector< std::tuple<int,int,double> > SpinHamiltonian::ExactSpinDiagonalizeF
 #pragma omp parallel for
     for(int B=0;B<blockmat.size();B++)
     {
-        int K = spinbasis->getSK(B).first;
-        int S = spinbasis->getSK(B).second;
+        int K = spinbasis->getKS(B).first;
+        int S = spinbasis->getKS(B).second;
 
         int offset = 0;
         for(int i=0;i<B;i++)
@@ -445,8 +443,8 @@ std::vector< std::tuple<int,int,double> > SpinHamiltonian::ExactSpinDiagonalize(
 #pragma omp parallel for
     for(int B=0;B<blockmat.size();B++)
     {
-        int K = spinbasis->getSK(B).first;
-        int S = spinbasis->getSK(B).second;
+        int K = spinbasis->getKS(B).first;
+        int S = spinbasis->getKS(B).second;
 
         if( S != myS)
             continue;
@@ -483,8 +481,8 @@ void SpinHamiltonian::PrintBase() const
 {
     for(int i=0;i<spinbasis->getnumblocks();i++)
     {
-        int K = spinbasis->getSK(i).first;
-        int S = spinbasis->getSK(i).second;
+        int K = spinbasis->getKS(i).first;
+        int S = spinbasis->getKS(i).second;
 
         std::cout << "Block K=" << K << " S=" << S << std::endl;
         spinbasis->getBlock(i).Print();
