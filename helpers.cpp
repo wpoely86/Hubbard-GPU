@@ -154,28 +154,35 @@ matrix& matrix::prod(matrix const &A, matrix const &B)
 }
 
 /**
- * Do a SVD on this matrix and store right singular values in
- * this.
+ * Do a SVD on this matrix and store left singular values in
+ * this. Changes the size of the matrix!
  * @return list of singular values
  */
 std::unique_ptr<double []> matrix::svd()
 {
-    char jobu = 'N';
-    char jobvt = 'O';
+    char jobu = 'A';
+    char jobvt = 'N';
 
     int count_sing = std::min(n,m);
 
     std::unique_ptr<double []> sing_vals(new double[count_sing]);
 
-    int lwork = 5*count_sing; // MAX(1,3*MIN(M,N)+MAX(M,N),5*MIN(M,N)).
+    // MAX(1,3*MIN(M,N)+MAX(M,N),5*MIN(M,N)).
+    int lwork = std::max( 3*count_sing + std::max(n,m), 5*count_sing);
     std::unique_ptr<double []> work(new double[lwork]);
+
+    std::unique_ptr<double []> vt(new double[n*n]);
 
     int info;
 
-    dgesvd_(&jobu,&jobvt,&n,&m,mat.get(),&n,sing_vals.get(),0,&n,0,&n,work.get(),&lwork,&info);
+    dgesvd_(&jobu,&jobvt,&n,&m,mat.get(),&n,sing_vals.get(),vt.get(),&n,0,&m,work.get(),&lwork,&info);
 
     if(info)
         std::cerr << "svd failed. info = " << info << std::endl;
+
+    // overwrite the matrix with the right singular vectors
+    m = n;
+    mat = std::move(vt);
 
     return sing_vals;
 }
@@ -714,6 +721,11 @@ double SubBasis::GetCoeff(int i, int j) const
     return (*coeffs)(i,j);
 }
 
+double& SubBasis::GetCoeff(int i, int j)
+{
+    return (*coeffs)(i,j);
+}
+
 void SubBasis::SetCoeff(int i, int j, double value)
 {
     (*coeffs)(i,j) = value;
@@ -841,52 +853,63 @@ void BasisList::Print() const
                 }
 }
 
+/**
+ * Projects the final space out of the rest. We build a matrix
+ * where the rows are the basis vectors of all other subspaces.
+ * Normally, this would be the columns we you can build a projection matrix
+ * P = A A^T but for performance we use the rows (so we can use memcpy).
+ * We then do a SVD on this matrix to find the kernel. The vectors that
+ * span the null space are the basisvectors we where looking for and we copy
+ * them to the destination coeffs matrix with memcpy.
+ * @param K the K number of the block where are looking for
+ * @param S the spin number of the block where are looking for
+ * @param Sz the spin projection number of the block where are looking for
+ * @param K the K number of the block where are looking for
+ * @param orig the orginal momentum basis of the blocks
+ */
 void BasisList::DoProjection(int K, int S, int Sz, MomBasis const &orig)
 {
     int dimK = orig.getdimK(K);
+    int dim = 0;
 
-    std::unique_ptr<matrix> proj_matrix(new matrix(dimK,dimK));
+    for(int pS=S+1;pS<=Smax;pS++)
+        if(Exists(K,pS,Sz))
+            dim += Get(K,pS,Sz).getdim();
 
-    for(int i=0;i<dimK;i++)
-        for(int j=0;j<dimK;j++)
+    assert(dim <= dimK);
+
+    std::unique_ptr<matrix> proj_matrix(new matrix(dimK, dim));
+
+    int s_count = 0;
+    for(int pS=S+1;pS<=Smax;pS++)
+        if(Exists(K,pS,Sz))
         {
-            (*proj_matrix)(i,j) = 0;
+            auto& cur_basis = Get(K,pS,Sz);
 
-            // run over al higher S that need projecting
-            for(int pS=S+1;pS<=Smax;pS++)
-            {
-                if(!Exists(K,pS,Sz))
-                    continue;
+            assert(dimK == cur_basis.getspacedim());
 
-                auto& cur_basis = Get(K,pS,Sz);
+            std::memcpy(&(*proj_matrix)(0,s_count), &(cur_basis.GetCoeff(0,0)), sizeof(double) * cur_basis.getdim() * cur_basis.getspacedim());
 
-                for(int k=0;k<cur_basis.getdim();k++)
-                    (*proj_matrix)(i,j) += cur_basis.GetCoeff(i,k) * cur_basis.GetCoeff(j,k);
-            }
+            s_count += cur_basis.getdim();
         }
 
-
+    // proj_matrix will change size!
     auto sing_vals = proj_matrix->svd();
 
     int sing_vals_start = 0;
-    while( fabs(sing_vals[sing_vals_start]) > 1e-10 )
+    while( fabs(sing_vals[sing_vals_start]) > 1e-10 && sing_vals_start < dim )
         sing_vals_start++;
 
     auto &finalbasis = Get(K,S,Sz);
 
     assert(finalbasis.getdim() == (dimK-sing_vals_start));
+    assert(finalbasis.getspacedim() == dimK);
 
-    for(int i=sing_vals_start;i<dimK;i++)
-    {
-        int start = i-sing_vals_start;
-
-        for(int j=0;j<orig.getdimK(K);j++)
-            finalbasis.SetCoeff(j,start,(*proj_matrix)(i,j));
-    }
+    std::memcpy(&finalbasis.GetCoeff(0,0), &(*proj_matrix)(0,sing_vals_start), sizeof(double) * dimK * finalbasis.getdim());
 }
 
 /**
- * delete all subbasis for Sz and higher
+ * Free the memory of  all SubBasis for Sz and higher
  */
 void BasisList::Clean(int Sz)
 {

@@ -202,6 +202,8 @@ class SubBasis
 
         double GetCoeff(int i, int j) const;
 
+        double& GetCoeff(int i, int j);
+
         void SetCoeff(int i, int j, double value);
 
         int getindex(myint upket, myint downket) const;
