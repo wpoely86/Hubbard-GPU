@@ -624,11 +624,12 @@ void SpinHamiltonian::BuildSpinBase()
         {
             int cur_dim = tmp_basis->getdimK(K);
 
-            std::cout << "At: Sz=" << cur_Sz << " K=" << K << " (" << cur_dim << ")" << std::endl;
-
             for(int cur_S=Smax;cur_S>cur_Sz;cur_S--)
             {
-                std::cout << "S=" << cur_S << std::endl;
+#pragma omp critical
+            {
+                std::cout << "At: Sz=" << cur_Sz << " K=" << K << " (" << cur_dim << ")  => S=" << cur_S << std::endl;
+            }
 
                 if(basis.Exists(K,cur_S,cur_Sz+1))
                 {
@@ -639,7 +640,10 @@ void SpinHamiltonian::BuildSpinBase()
                 }
             }
 
-            std::cout << "Projection to K=" << K << " S=" << cur_Sz << " Sz=" << cur_Sz << std::endl;
+#pragma omp critical
+            {
+                std::cout << "Projection to K=" << K << " S=" << cur_Sz << " Sz=" << cur_Sz << std::endl;
+            }
             basis.Create(K,cur_Sz,cur_Sz,*tmp_basis,cur_dim);
             basis.DoProjection(K, cur_Sz, cur_Sz, *tmp_basis);
         }
