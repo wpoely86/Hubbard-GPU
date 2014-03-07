@@ -651,10 +651,6 @@ void SubBasis::Slad_min(SubBasis &orig)
     matrix transform(getspacedim(),orig.getspacedim());
     transform = 0;
 
-//    SparseMatrix_CCS transform(getspacedim(),orig.getspacedim());
-//
-//    transform.NewCol();
-
     for(int i=0;i<orig.getspacedim();i++)
     {
         myint upket = orig.basis->getUp(i);
@@ -683,22 +679,13 @@ void SubBasis::Slad_min(SubBasis &orig)
             int index = getindex(upket ^ ksp, downket | ksp);
 
             transform(index,i) = sign;
-//            transform.PushToCol(index, sign);
         }
-//        transform.NewCol();
     }
-//    transform.NewCol();
 
     coeffs->prod(transform, *orig.coeffs);
-//    orig.ToSparseMatrix();
-//    s_coeffs->prod(transform, *orig.s_coeffs);
-//
-//    std::cout << "Mats: " << std::endl;
-//    coeffs->Print();
-//    std::cout << std::endl;
-//    std::cout << *s_coeffs << std::endl;
 
-//    s_coeffs->ConvertToMatrix(*coeffs);
+    // free the memory
+    orig = SubBasis();
 
     Normalize();
 }
@@ -893,11 +880,15 @@ void BasisList::DoProjection(int K, int S, int Sz, MomBasis const &orig)
             s_count += cur_basis.getdim();
         }
 
+#pragma omp critical
+    {
+        std::cout << "Doing SVD: K=" << K << " S=" << S << " Sz=" << Sz << std::endl;
+    }
     // proj_matrix will change size!
     auto sing_vals = proj_matrix->svd();
 
     int sing_vals_start = 0;
-    while( fabs(sing_vals[sing_vals_start]) > 1e-10 && sing_vals_start < dim )
+    while(sing_vals_start < dim && fabs(sing_vals[sing_vals_start]) > 1e-10)
         sing_vals_start++;
 
     auto &finalbasis = Get(K,S,Sz);
