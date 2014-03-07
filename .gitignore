@@ -10,3 +10,7 @@ main
 main2D
 libprimme.a
 docs
+*.h5
+*.pdf
+*.py
+*.pyc

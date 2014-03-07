@@ -1,12 +1,21 @@
 var searchData=
 [
   ['_7ebarehamiltonian',['~BareHamiltonian',['../classBareHamiltonian.html#a1cdf31fcb4bdb8fa00ab95e58af3a44c',1,'BareHamiltonian']]],
+  ['_7ebasislist',['~BasisList',['../classBasisList.html#a8cb0dd6aff4380f8356209f6ae327b64',1,'BasisList']]],
   ['_7egpuhamiltonian',['~GPUHamiltonian',['../classGPUHamiltonian.html#acc8d3b1e628ed6d8d3accff2e809e855',1,'GPUHamiltonian']]],
   ['_7ehamiltonian',['~Hamiltonian',['../classHamiltonian.html#a490c32e242dbdbdd8cdf949d8fd9aef6',1,'Hamiltonian']]],
   ['_7ehubham2d',['~HubHam2D',['../classHubHam2D.html#a65cb0fc2ade5fe6dbc090d4ea401441e',1,'HubHam2D']]],
+  ['_7ekblock',['~KBlock',['../classKBlock.html#a1e8b7b656ada9d0481dd80922dcf78a7',1,'KBlock']]],
+  ['_7ematrix',['~matrix',['../classmatrix.html#a1529596105444e938f7c120c9f9c9cad',1,'matrix']]],
+  ['_7emombasis',['~MomBasis',['../classMomBasis.html#a0b4cd0ca01e4b75f6a85437e94df5665',1,'MomBasis']]],
   ['_7emomhamiltonian',['~MomHamiltonian',['../classMomHamiltonian.html#a79673d2ac534414b41d79182427ac0eb',1,'MomHamiltonian']]],
+  ['_7emydeleter',['~MyDeleter',['../classMyDeleter.html#a45161a53e54c62a3945f8c0c38c2d43d',1,'MyDeleter']]],
   ['_7enonperiodichamiltonian',['~NonPeriodicHamiltonian',['../classNonPeriodicHamiltonian.html#a8efe8d49a1ac41c232ec471a168f168b',1,'NonPeriodicHamiltonian']]],
   ['_7esparsehamiltonian',['~SparseHamiltonian',['../classSparseHamiltonian.html#a146f2f60953197ca72bf0f3adc7e380b',1,'SparseHamiltonian']]],
   ['_7esparsehamiltonian2d',['~SparseHamiltonian2D',['../classSparseHamiltonian2D.html#a47d58e4fb5b8a69bb2f2b4f7d63f2755',1,'SparseHamiltonian2D']]],
-  ['_7esparsehamiltonian2d_5fcsr',['~SparseHamiltonian2D_CSR',['../classSparseHamiltonian2D__CSR.html#a80b6c7099c4f298826c32a4d8fb45364',1,'SparseHamiltonian2D_CSR']]]
+  ['_7esparsehamiltonian2d_5fcsr',['~SparseHamiltonian2D_CSR',['../classSparseHamiltonian2D__CSR.html#a80b6c7099c4f298826c32a4d8fb45364',1,'SparseHamiltonian2D_CSR']]],
+  ['_7esparsematrix_5fccs',['~SparseMatrix_CCS',['../classSparseMatrix__CCS.html#a6a588045fa361ca092de1436643cb452',1,'SparseMatrix_CCS']]],
+  ['_7espinbasis',['~SpinBasis',['../classSpinBasis.html#ae1eb7a48169f7440507e9c89af1530c5',1,'SpinBasis']]],
+  ['_7espinhamiltonian',['~SpinHamiltonian',['../classSpinHamiltonian.html#a26610afa22b493f993fad6c6f7c5893d',1,'SpinHamiltonian']]],
+  ['_7esubbasis',['~SubBasis',['../classSubBasis.html#ac2a370a7a89d9ede0488c12596c266b8',1,'SubBasis']]]
 ];

@@ -1,0 +1,6 @@
+<map id="SpinHamiltonian::hopping" name="SpinHamiltonian::hopping">
+<area shape="rect" id="node2" href="$classSpinHamiltonian.html#abf63af376fe1cf7a9dfdab56bea589e6" title="SpinHamiltonian::BuildHam\lWithS" alt="" coords="225,5,407,46"/>
+<area shape="rect" id="node5" href="$classSpinHamiltonian.html#afd92d2716717ad3956561ebb8a861a78" title="SpinHamiltonian::BuildPart\lFullHam" alt="" coords="227,70,405,111"/>
+<area shape="rect" id="node3" href="$classSpinHamiltonian.html#a666b1185b4b63fa64c8b1f9ff142dda8" title="SpinHamiltonian::BuildFullHam" alt="" coords="456,12,659,39"/>
+<area shape="rect" id="node4" href="$classSpinHamiltonian.html#a66481ba69d5c208a2e84dabcd52ed16e" title="SpinHamiltonian::GenerateData" alt="" coords="707,12,914,39"/>
+</map>

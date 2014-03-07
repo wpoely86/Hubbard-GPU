@@ -1,0 +1,11 @@
+<map id="SpinHamiltonian::GenerateData" name="SpinHamiltonian::GenerateData">
+<area shape="rect" id="node2" href="$classBareHamiltonian.html#aa30f262b455518c1346f5ffa8f41ccd7" title="BareHamiltonian::setU" alt="" coords="285,5,440,32"/>
+<area shape="rect" id="node3" href="$classSpinHamiltonian.html#a666b1185b4b63fa64c8b1f9ff142dda8" title="SpinHamiltonian::BuildFullHam" alt="" coords="261,56,464,83"/>
+<area shape="rect" id="node9" href="$classBareHamiltonian.html#af0c4e86609ea0f977bc13b2905472867" title="BareHamiltonian::Diagonalize" alt="" coords="265,108,460,135"/>
+<area shape="rect" id="node4" href="$classSpinHamiltonian.html#abf63af376fe1cf7a9dfdab56bea589e6" title="SpinHamiltonian::BuildHam\lWithS" alt="" coords="513,46,695,87"/>
+<area shape="rect" id="node5" href="$classSpinHamiltonian.html#a75c46bd8cc9d07bd81688a77c8b4ec59" title="SpinHamiltonian::hopping" alt="" coords="983,28,1153,55"/>
+<area shape="rect" id="node7" href="$classSpinHamiltonian.html#a0e425b58a3086dd8aa428f0f31609c0f" title="SpinHamiltonian::interaction" alt="" coords="745,79,930,105"/>
+<area shape="rect" id="node6" href="$classBareHamiltonian.html#a582844dd18eebc1edcee0639993cd164" title="BareHamiltonian::CountBits" alt="" coords="1205,79,1389,105"/>
+<area shape="rect" id="node8" href="$classBareHamiltonian.html#a71a6f71bb77ccf7ab241fdfdd46ce9e9" title="BareHamiltonian::CalcSign" alt="" coords="979,129,1157,156"/>
+<area shape="rect" id="node10" href="$bare-ham_8h.html#ad0cfc41b12c93c0f2aad995d39d5fe42" title="dsyevd_" alt="" coords="569,112,639,139"/>
+</map>

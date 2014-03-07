@@ -1,10 +1,14 @@
 var searchData=
 [
   ['d',['D',['../classHubHam2D.html#a7220e5528edce22224acc37453657b32',1,'HubHam2D']]],
+  ['data',['data',['../classSparseMatrix__CCS.html#ac993ceed0f925856a3aad5a454ccfe4d',1,'SparseMatrix_CCS']]],
   ['daxpy_5f',['daxpy_',['../bare-ham_8h.html#abb7d6c365abc5d11a16c1c085bca91a4',1,'bare-ham.h']]],
   ['ddot_5f',['ddot_',['../bare-ham_8h.html#a2247ca92b3cf0e88e9448ad05240921f',1,'bare-ham.h']]],
+  ['dgemm_5f',['dgemm_',['../bare-ham_8h.html#af54db18f2da5bece5aefe9896c2b8cb7',1,'bare-ham.h']]],
+  ['dgesvd_5f',['dgesvd_',['../bare-ham_8h.html#a3e45f8d4a4bf16793e31a81771f2f69d',1,'bare-ham.h']]],
   ['diagonalize',['Diagonalize',['../classBareHamiltonian.html#af0c4e86609ea0f977bc13b2905472867',1,'BareHamiltonian']]],
-  ['dim',['dim',['../classBareHamiltonian.html#a7e973232b231d17e01d2fefaf4e9a96d',1,'BareHamiltonian']]],
+  ['dim',['dim',['../classBareHamiltonian.html#a7e973232b231d17e01d2fefaf4e9a96d',1,'BareHamiltonian::dim()'],['../classMomBasis.html#ad284f5c2268575948aaa7143d8fe094d',1,'MomBasis::dim()']]],
+  ['doprojection',['DoProjection',['../classBasisList.html#a54ce3d78eba0b444025b0bbea2128aad',1,'BasisList']]],
   ['down_5fcol',['Down_col',['../classSparseHamiltonian2D__CSR.html#a4faf7b9155bbd22f9db713c680fb292d',1,'SparseHamiltonian2D_CSR']]],
   ['down_5fdata',['Down_data',['../classSparseHamiltonian.html#ad363455d572faa6186780e85bf04442d',1,'SparseHamiltonian::Down_data()'],['../classSparseHamiltonian2D.html#ac9aacf74e5771238bf6d503256a9ae2c',1,'SparseHamiltonian2D::Down_data()']]],
   ['down_5fdata_5fcsr',['Down_data_CSR',['../classSparseHamiltonian2D__CSR.html#a51169fbda01a04544e6ccb59a209f87c',1,'SparseHamiltonian2D_CSR']]],

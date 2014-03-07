@@ -78,18 +78,25 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="functions.html"><span>All</span></a></li>
       <li><a href="functions_func.html"><span>Functions</span></a></li>
       <li class="current"><a href="functions_vars.html"><span>Variables</span></a></li>
+      <li><a href="functions_rela.html"><span>Related&#160;Functions</span></a></li>
     </ul>
   </div>
   <div id="navrow4" class="tabs3">
     <ul class="tablist">
       <li><a href="#index_b"><span>b</span></a></li>
+      <li><a href="#index_c"><span>c</span></a></li>
       <li><a href="#index_d"><span>d</span></a></li>
+      <li><a href="#index_e"><span>e</span></a></li>
       <li><a href="#index_h"><span>h</span></a></li>
+      <li><a href="#index_i"><span>i</span></a></li>
       <li><a href="#index_j"><span>j</span></a></li>
+      <li><a href="#index_k"><span>k</span></a></li>
       <li><a href="#index_l"><span>l</span></a></li>
       <li><a href="#index_m"><span>m</span></a></li>
       <li><a href="#index_n"><span>n</span></a></li>
+      <li><a href="#index_r"><span>r</span></a></li>
       <li><a href="#index_s"><span>s</span></a></li>
+      <li><a href="#index_t"><span>t</span></a></li>
       <li><a href="#index_u"><span>u</span></a></li>
     </ul>
   </div>
@@ -113,7 +120,7 @@ $(document).ready(function(){initNavTree('functions_vars.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Macros</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Macros</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -132,8 +139,27 @@ $(document).ready(function(){initNavTree('functions_vars.html','');});
 <li>baseUp
 : <a class="el" href="classBareHamiltonian.html#ad8bd92d0a6ce8bb91992d75d9fe7a9ad">BareHamiltonian</a>
 </li>
+<li>basis
+: <a class="el" href="classSubBasis.html#aa9f184f9fc7e004b2756d35f0b1054c9">SubBasis</a>
+, <a class="el" href="classSpinBasis.html#aa66a5ff448c2931817e6332dfaba41b0">SpinBasis</a>
+, <a class="el" href="classKBlock.html#a254de5381e98eabfcce4f5a19c2b2605">KBlock</a>
+</li>
+<li>basisblocks
+: <a class="el" href="classMomBasis.html#a9372683816ce2ffb66a84e1dcf9f481e">MomBasis</a>
+</li>
 <li>blockmat
 : <a class="el" href="classMomHamiltonian.html#a07f51364183b92255adf2ddcf21a449d">MomHamiltonian</a>
+, <a class="el" href="classSpinHamiltonian.html#a3a0f274c221f5a91ee196ec0e16e7db3">SpinHamiltonian</a>
+</li>
+</ul>
+
+
+<h3><a class="anchor" id="index_c"></a>- c -</h3><ul>
+<li>coeffs
+: <a class="el" href="classSubBasis.html#a9c468fc1f88a4abd2ab8ce00df72a5cc">SubBasis</a>
+</li>
+<li>col
+: <a class="el" href="classSparseMatrix__CCS.html#af1c69db089394912d40f620c0462e457">SparseMatrix_CCS</a>
 </li>
 </ul>
 
@@ -142,8 +168,12 @@ $(document).ready(function(){initNavTree('functions_vars.html','');});
 <li>D
 : <a class="el" href="classHubHam2D.html#a7220e5528edce22224acc37453657b32">HubHam2D</a>
 </li>
+<li>data
+: <a class="el" href="classSparseMatrix__CCS.html#ac993ceed0f925856a3aad5a454ccfe4d">SparseMatrix_CCS</a>
+</li>
 <li>dim
-: <a class="el" href="classBareHamiltonian.html#a7e973232b231d17e01d2fefaf4e9a96d">BareHamiltonian</a>
+: <a class="el" href="classMomBasis.html#ad284f5c2268575948aaa7143d8fe094d">MomBasis</a>
+, <a class="el" href="classBareHamiltonian.html#a7e973232b231d17e01d2fefaf4e9a96d">BareHamiltonian</a>
 </li>
 <li>Down_col
 : <a class="el" href="classSparseHamiltonian2D__CSR.html#a4faf7b9155bbd22f9db713c680fb292d">SparseHamiltonian2D_CSR</a>
@@ -159,14 +189,21 @@ $(document).ready(function(){initNavTree('functions_vars.html','');});
 : <a class="el" href="classGPUHamiltonian.html#aef408a62711f45b502337ce2361013e3">GPUHamiltonian&lt; T &gt;</a>
 </li>
 <li>Down_ind
-: <a class="el" href="classSparseHamiltonian2D.html#ad635cfb409e5a5820ab22070d0db48fc">SparseHamiltonian2D</a>
-, <a class="el" href="classSparseHamiltonian.html#af05409ca29ffbb4a6eaaae38c52707ef">SparseHamiltonian&lt; Ham &gt;</a>
+: <a class="el" href="classSparseHamiltonian.html#af05409ca29ffbb4a6eaaae38c52707ef">SparseHamiltonian&lt; Ham &gt;</a>
+, <a class="el" href="classSparseHamiltonian2D.html#ad635cfb409e5a5820ab22070d0db48fc">SparseHamiltonian2D</a>
 </li>
 <li>Down_ind_gpu
 : <a class="el" href="classGPUHamiltonian.html#a1ad0bfe61a413002964406385e0a83c2">GPUHamiltonian&lt; T &gt;</a>
 </li>
 <li>Down_row
 : <a class="el" href="classSparseHamiltonian2D__CSR.html#adb2fd14d3735a4a3a583d11215937b44">SparseHamiltonian2D_CSR</a>
+</li>
+</ul>
+
+
+<h3><a class="anchor" id="index_e"></a>- e -</h3><ul>
+<li>EMPTY
+: <a class="el" href="classBasisList.html#adf191162a3f43fd73194dd4df1901932">BasisList</a>
 </li>
 </ul>
 
@@ -184,9 +221,27 @@ $(document).ready(function(){initNavTree('functions_vars.html','');});
 </ul>
 
 
+<h3><a class="anchor" id="index_i"></a>- i -</h3><ul>
+<li>ind
+: <a class="el" href="classSpinBasis.html#a01dfe716ba911ee21a36d72f60fc1564">SpinBasis</a>
+</li>
+<li>ind_list
+: <a class="el" href="classBasisList.html#a6c72b0029c8460782d7c7dff4c212dad">BasisList</a>
+</li>
+</ul>
+
+
 <h3><a class="anchor" id="index_j"></a>- j -</h3><ul>
 <li>J
 : <a class="el" href="classBareHamiltonian.html#ab36c84b6b581fa85c48f0e070e5483c5">BareHamiltonian</a>
+</li>
+</ul>
+
+
+<h3><a class="anchor" id="index_k"></a>- k -</h3><ul>
+<li>K
+: <a class="el" href="classKBlock.html#a97c6899bf3eeb774870ed2d2723279a5">KBlock</a>
+, <a class="el" href="classMyDeleter.html#ad7e2fe2d96b4161397da1dffe5d97786">MyDeleter</a>
 </li>
 </ul>
 
@@ -195,11 +250,26 @@ $(document).ready(function(){initNavTree('functions_vars.html','');});
 <li>L
 : <a class="el" href="classBareHamiltonian.html#af379bf26dc3022b5a0b98a7081f2705a">BareHamiltonian</a>
 , <a class="el" href="classHubHam2D.html#aa28a5aff5b4fa6d1d76a02b48a370eab">HubHam2D</a>
+, <a class="el" href="classSpinBasis.html#a0e428d3e41d93a2dcb6d9be0be45a65d">SpinBasis</a>
+, <a class="el" href="classBasisList.html#a5f1f3b7c9b9b7740da0a004ce4f423f3">BasisList</a>
+, <a class="el" href="classSubBasis.html#a3c45e452862a4f06af2cda270630dc45">SubBasis</a>
+, <a class="el" href="classKBlock.html#a7d75cfb5a3bb9e5f2d36e07cb2c0e73e">KBlock</a>
+, <a class="el" href="classMomBasis.html#a5c53cd5d53d8a8c70b1982252a9d8c6a">MomBasis</a>
+</li>
+<li>list
+: <a class="el" href="classBasisList.html#a48ca792a656d4c9b360cd4c07e608f83">BasisList</a>
 </li>
 </ul>
 
 
 <h3><a class="anchor" id="index_m"></a>- m -</h3><ul>
+<li>m
+: <a class="el" href="classmatrix.html#a2264ec52520132e7e9ba70c492ac87d0">matrix</a>
+, <a class="el" href="classSparseMatrix__CCS.html#aa6e00351177527f7fdecdaa8cab8e026">SparseMatrix_CCS</a>
+</li>
+<li>mat
+: <a class="el" href="classmatrix.html#a2a54edb6774a7b5f2284ac1d3b800249">matrix</a>
+</li>
 <li>mombase
 : <a class="el" href="classMomHamiltonian.html#aa2563480fc14b4030c1a66ff857291be">MomHamiltonian</a>
 </li>
@@ -207,16 +277,40 @@ $(document).ready(function(){initNavTree('functions_vars.html','');});
 
 
 <h3><a class="anchor" id="index_n"></a>- n -</h3><ul>
+<li>n
+: <a class="el" href="classmatrix.html#a9c6cbaf9d0d46a0a72649698325d245e">matrix</a>
+, <a class="el" href="classSparseMatrix__CCS.html#a479d7f3be69ad55bef5f91abdaf87309">SparseMatrix_CCS</a>
+</li>
 <li>Nd
-: <a class="el" href="classBareHamiltonian.html#a0c910682d208f47539db2e8fa72db13a">BareHamiltonian</a>
+: <a class="el" href="classMomBasis.html#a20e81f5eb24dc9a911bc4b8d089a39a0">MomBasis</a>
+, <a class="el" href="classSpinBasis.html#a9d900f2bd4c451bd46f718a8288d5536">SpinBasis</a>
+, <a class="el" href="classKBlock.html#ab631f50a8c1cc5f3c661bc6f87e89bc7">KBlock</a>
+, <a class="el" href="classBareHamiltonian.html#a0c910682d208f47539db2e8fa72db13a">BareHamiltonian</a>
+, <a class="el" href="classSubBasis.html#a44b2125c75d973c49b93386553febdff">SubBasis</a>
+, <a class="el" href="classBasisList.html#a1ba04dd9aa3b3febfd53caafdcaed8bc">BasisList</a>
 </li>
 <li>Nu
 : <a class="el" href="classBareHamiltonian.html#a497a2631a48701c6a0aba04f80bc31e5">BareHamiltonian</a>
+, <a class="el" href="classMomBasis.html#aad927b6ad25c67ff7dc2c69453dc3c73">MomBasis</a>
+, <a class="el" href="classSubBasis.html#adf452a6fa589e12dfe014ffc207f0451">SubBasis</a>
+, <a class="el" href="classBasisList.html#ae28098b251b7e57246de5003246c393b">BasisList</a>
+, <a class="el" href="classSpinBasis.html#adda633b30e151be2560a047edc0cd7c4">SpinBasis</a>
+, <a class="el" href="classKBlock.html#ac2b31ef5f9b8ce24804ef752fbad47f0">KBlock</a>
+</li>
+</ul>
+
+
+<h3><a class="anchor" id="index_r"></a>- r -</h3><ul>
+<li>row
+: <a class="el" href="classSparseMatrix__CCS.html#a4f58dc864287c7643bbaa982dd29f4ca">SparseMatrix_CCS</a>
 </li>
 </ul>
 
 
 <h3><a class="anchor" id="index_s"></a>- s -</h3><ul>
+<li>s_coeffs
+: <a class="el" href="classSubBasis.html#a502b9c6f1348a9da2b6f77634bd3d418">SubBasis</a>
+</li>
 <li>size_Down
 : <a class="el" href="classSparseHamiltonian.html#adaac69b483daf411e3162c7735f50041">SparseHamiltonian&lt; Ham &gt;</a>
 , <a class="el" href="classSparseHamiltonian2D.html#a14b950baa5e5e75be807514cb76be20c">SparseHamiltonian2D</a>
@@ -224,6 +318,23 @@ $(document).ready(function(){initNavTree('functions_vars.html','');});
 <li>size_Up
 : <a class="el" href="classSparseHamiltonian.html#a83cae8b165ec4cec503f4654791d4bde">SparseHamiltonian&lt; Ham &gt;</a>
 , <a class="el" href="classSparseHamiltonian2D.html#a81897a41b39bb9d065fdc167d404464a">SparseHamiltonian2D</a>
+</li>
+<li>Smax
+: <a class="el" href="classBasisList.html#abec5117250cf592d5db94395391bf61a">BasisList</a>
+</li>
+<li>spinbasis
+: <a class="el" href="classSpinHamiltonian.html#a017f1f4f90d127c24731318b5dfde4cf">SpinHamiltonian</a>
+</li>
+<li>Sz
+: <a class="el" href="classSpinHamiltonian.html#a4b6d659e3bf7c57441fb1e7112ce6aae">SpinHamiltonian</a>
+, <a class="el" href="classMyDeleter.html#a81b8aca8d385a0a09fba7a84ef4e912f">MyDeleter</a>
+</li>
+</ul>
+
+
+<h3><a class="anchor" id="index_t"></a>- t -</h3><ul>
+<li>totS
+: <a class="el" href="classBasisList.html#af0842382e3a9131751f8187ac95d822c">BasisList</a>
 </li>
 </ul>
 
@@ -264,7 +375,7 @@ $(document).ready(function(){initNavTree('functions_vars.html','');});
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Fri Feb 7 2014 14:38:54 for HubbardGPU by
+    <li class="footer">Generated on Fri Mar 7 2014 14:52:13 for HubbardGPU by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
   </ul>

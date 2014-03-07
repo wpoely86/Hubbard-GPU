@@ -1,4 +1,5 @@
 <map id="dsymv_" name="dsymv_">
 <area shape="rect" id="node2" href="$classMomHamiltonian.html#a45c085901cf18b80b5a5cae99b1d3b12" title="MomHamiltonian::mvprod" alt="" coords="123,5,293,32"/>
-<area shape="rect" id="node3" href="$classHamiltonian.html#ae31ba4590d7a497aed8ef2cac36abd1c" title="Hamiltonian::mvprod" alt="" coords="137,56,279,83"/>
+<area shape="rect" id="node3" href="$classSpinHamiltonian.html#a823de4dbd8aef26b4826c802126b83cd" title="SpinHamiltonian::mvprod" alt="" coords="124,56,292,83"/>
+<area shape="rect" id="node4" href="$classHamiltonian.html#ae31ba4590d7a497aed8ef2cac36abd1c" title="Hamiltonian::mvprod" alt="" coords="137,107,279,133"/>
 </map>

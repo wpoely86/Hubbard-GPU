@@ -93,7 +93,7 @@ $(document).ready(function(){initNavTree('classGPUHamiltonian.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Macros</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Macros</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -130,8 +130,8 @@ $(document).ready(function(){initNavTree('classGPUHamiltonian.html','');});
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a3db11b82a99c73409643dd5bbdd401fd"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGPUHamiltonian.html#a3db11b82a99c73409643dd5bbdd401fd">GPUHamiltonian</a> (int Ns, int Nu, int Nd, double J, double U)</td></tr>
-<tr class="separator:a3db11b82a99c73409643dd5bbdd401fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acde453d5d52ebff5511878efd0bc47f9"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGPUHamiltonian.html#acde453d5d52ebff5511878efd0bc47f9">GPUHamiltonian</a> (int L, int Nu, int Nd, double J, double U)</td></tr>
+<tr class="separator:acde453d5d52ebff5511878efd0bc47f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4d9185f0b6481a3a540662f2de0d9887"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGPUHamiltonian.html#a4d9185f0b6481a3a540662f2de0d9887">GPUHamiltonian</a> (int L, int D, int Nu, int Nd, double J, double U)</td></tr>
 <tr class="separator:a4d9185f0b6481a3a540662f2de0d9887"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acc8d3b1e628ed6d8d3accff2e809e855"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGPUHamiltonian.html#acc8d3b1e628ed6d8d3accff2e809e855">~GPUHamiltonian</a> ()</td></tr>
@@ -174,7 +174,7 @@ class GPUHamiltonian&lt; T &gt;</h3>
 
 <p>Definition at line <a class="el" href="hamgpu_8h_source.html#l00028">28</a> of file <a class="el" href="hamgpu_8h_source.html">hamgpu.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="a3db11b82a99c73409643dd5bbdd401fd"></a>
+<a class="anchor" id="acde453d5d52ebff5511878efd0bc47f9"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -184,7 +184,7 @@ template&lt;class T &gt; </div>
           <td class="memname"><a class="el" href="classGPUHamiltonian.html">GPUHamiltonian</a>&lt; T &gt;::<a class="el" href="classGPUHamiltonian.html">GPUHamiltonian</a> </td>
           <td>(</td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>Ns</em>, </td>
+          <td class="paramname"><em>L</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -637,7 +637,7 @@ template&lt;class T &gt; </div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classGPUHamiltonian.html">GPUHamiltonian</a></li>
-    <li class="footer">Generated on Fri Feb 7 2014 14:38:54 for HubbardGPU by
+    <li class="footer">Generated on Fri Mar 7 2014 14:52:13 for HubbardGPU by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
   </ul>

@@ -6,9 +6,10 @@ var NAVTREE =
       [ "Class Index", "classes.html", null ],
       [ "Class Hierarchy", "hierarchy.html", "hierarchy" ],
       [ "Class Members", "functions.html", [
-        [ "All", "functions.html", null ],
-        [ "Functions", "functions_func.html", null ],
-        [ "Variables", "functions_vars.html", null ]
+        [ "All", "functions.html", "functions_dup" ],
+        [ "Functions", "functions_func.html", "functions_func" ],
+        [ "Variables", "functions_vars.html", null ],
+        [ "Related Functions", "functions_rela.html", null ]
       ] ]
     ] ],
     [ "Files", null, [
@@ -25,8 +26,9 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"annotated.html",
-"classNonPeriodicHamiltonian.html#af0c4e86609ea0f977bc13b2905472867"
+"SparseMatrix__CCS_8cpp.html",
+"classMomHamiltonian.html#a746b83e666bdce9992a3f055d5d53c44",
+"classSpinBasis.html#ae1eb7a48169f7440507e9c89af1530c5"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

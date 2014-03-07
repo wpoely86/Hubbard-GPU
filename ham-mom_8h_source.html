@@ -91,7 +91,7 @@ $(document).ready(function(){initNavTree('ham-mom_8h_source.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Macros</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Macros</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -149,28 +149,26 @@ $(document).ready(function(){initNavTree('ham-mom_8h_source.html','');});
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classMomHamiltonian.html#af71863a9bd620bebd16d6f64d8de7ff4">GenerateData</a>(<span class="keywordtype">double</span> Ubegin, <span class="keywordtype">double</span> Uend, <span class="keywordtype">double</span> step, std::string filename);</div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classMomHamiltonian.html#a8f5cb6bfdad35d4c3a58c4807773464b">GenerateCurve</a>(<span class="keywordtype">double</span> Ubegin, <span class="keywordtype">double</span> Uend, <span class="keywordtype">double</span> step, std::string filename);</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        <span class="keywordtype">double</span> <a class="code" href="classMomHamiltonian.html#a27712aee46dcc78180ee20aa7c40a8ee">hopping</a>(<a class="code" href="bare-ham_8h.html#ad9e4dd13155f827d121a0b0559473480" title="type to store the basis set vectors in">myint</a>) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        <span class="keywordtype">double</span> <a class="code" href="classMomHamiltonian.html#a27712aee46dcc78180ee20aa7c40a8ee">hopping</a>(<a class="code" href="bare-ham_8h.html#ad9e4dd13155f827d121a0b0559473480" title="type to store the basis set vectors in">myint</a>) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        <span class="keywordtype">int</span> <a class="code" href="classMomHamiltonian.html#a6007eb5c918adc93258cabad16a29afd">interaction</a>(<span class="keywordtype">int</span>, <span class="keywordtype">int</span>, <span class="keywordtype">int</span>, <span class="keywordtype">int</span>) <span class="keyword">const</span>;</div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        <span class="keywordtype">int</span> <a class="code" href="classMomHamiltonian.html#a6007eb5c918adc93258cabad16a29afd">interaction</a>(<span class="keywordtype">int</span>, <span class="keywordtype">int</span>, <span class="keywordtype">int</span>, <span class="keywordtype">int</span>) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00055"></a><span class="lineno"><a class="code" href="classMomHamiltonian.html#aa2563480fc14b4030c1a66ff857291be">   55</a></span>&#160;        std::vector&lt; std::vector&lt; std::pair&lt;int,int&gt; &gt; &gt; <a class="code" href="classMomHamiltonian.html#aa2563480fc14b4030c1a66ff857291be">mombase</a>;</div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;</div>
-<div class="line"><a name="l00057"></a><span class="lineno"><a class="code" href="classMomHamiltonian.html#aa2563480fc14b4030c1a66ff857291be">   57</a></span>&#160;        std::vector&lt; std::vector&lt; std::pair&lt;int,int&gt; &gt; &gt; <a class="code" href="classMomHamiltonian.html#aa2563480fc14b4030c1a66ff857291be">mombase</a>;</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;</div>
-<div class="line"><a name="l00059"></a><span class="lineno"><a class="code" href="classMomHamiltonian.html#a07f51364183b92255adf2ddcf21a449d">   59</a></span>&#160;        std::vector&lt; std::unique_ptr&lt;double []&gt; &gt; <a class="code" href="classMomHamiltonian.html#a07f51364183b92255adf2ddcf21a449d">blockmat</a>;</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;};</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* HAM_MOM_H */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="comment">/* vim: set ts=8 sw=4 tw=0 expandtab :*/</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno"><a class="code" href="classMomHamiltonian.html#a07f51364183b92255adf2ddcf21a449d">   57</a></span>&#160;        std::vector&lt; std::unique_ptr&lt;double []&gt; &gt; <a class="code" href="classMomHamiltonian.html#a07f51364183b92255adf2ddcf21a449d">blockmat</a>;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;};</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* HAM_MOM_H */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="comment">/* vim: set ts=8 sw=4 tw=0 expandtab :*/</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="ham-mom_8h.html">ham-mom.h</a></li>
-    <li class="footer">Generated on Fri Feb 7 2014 14:38:54 for HubbardGPU by
+    <li class="footer">Generated on Fri Mar 7 2014 14:52:13 for HubbardGPU by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
   </ul>

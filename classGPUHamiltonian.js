@@ -1,6 +1,6 @@
 var classGPUHamiltonian =
 [
-    [ "GPUHamiltonian", "classGPUHamiltonian.html#a3db11b82a99c73409643dd5bbdd401fd", null ],
+    [ "GPUHamiltonian", "classGPUHamiltonian.html#acde453d5d52ebff5511878efd0bc47f9", null ],
     [ "GPUHamiltonian", "classGPUHamiltonian.html#a4d9185f0b6481a3a540662f2de0d9887", null ],
     [ "~GPUHamiltonian", "classGPUHamiltonian.html#acc8d3b1e628ed6d8d3accff2e809e855", null ],
     [ "GPUHamiltonian", "classGPUHamiltonian.html#a0e8a15c1d69b54339c56537c335c8869", null ],

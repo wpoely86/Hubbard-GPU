@@ -5,8 +5,8 @@
 <area shape="rect" id="node9" href="$classBareHamiltonian.html#aea1d4034d8830ad1001cf6e3baa6d1ca" title="BareHamiltonian::ExactDiagonalizeFull" alt="" coords="105,224,354,251"/>
 <area shape="rect" id="node12" href="$classSparseHamiltonian2D.html#a705d999fe46f1c32330a7e1074fd234a" title="SparseHamiltonian2D\l::BuildSparseHam" alt="" coords="155,158,304,199"/>
 <area shape="rect" id="node14" href="$classBareHamiltonian.html#ad58e05dbe722161b41afeeee1a1ca891" title="BareHamiltonian::arpackDiagonalize" alt="" coords="113,317,346,344"/>
-<area shape="rect" id="node3" href="$classBareHamiltonian.html#acfb89409533465961fb5b1c53056bbaa" title="BareHamiltonian::CalcDim" alt="" coords="646,35,823,61"/>
-<area shape="rect" id="node4" href="$classBareHamiltonian.html#a9393391804a06e0ee4970e21d0b729ff" title="BareHamiltonian::CountBits" alt="" coords="1099,85,1283,112"/>
+<area shape="rect" id="node3" href="$classBareHamiltonian.html#a68c13a76fa9a2bdb8c1945b33227b9b9" title="BareHamiltonian::CalcDim" alt="" coords="646,35,823,61"/>
+<area shape="rect" id="node4" href="$classBareHamiltonian.html#a582844dd18eebc1edcee0639993cd164" title="BareHamiltonian::CountBits" alt="" coords="1099,85,1283,112"/>
 <area shape="rect" id="node6" href="$classHubHam2D.html#a5fcf36f25194dee6dd31626d70955dfd" title="HubHam2D::hopping" alt="" coords="663,136,807,163"/>
 <area shape="rect" id="node7" href="$classBareHamiltonian.html#a71a6f71bb77ccf7ab241fdfdd46ce9e9" title="BareHamiltonian::CalcSign" alt="" coords="872,136,1051,163"/>
 <area shape="rect" id="node10" href="$classBareHamiltonian.html#af0c4e86609ea0f977bc13b2905472867" title="BareHamiltonian::Diagonalize" alt="" coords="403,216,597,243"/>

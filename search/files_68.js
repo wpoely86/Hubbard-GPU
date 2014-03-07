@@ -2,6 +2,8 @@ var searchData=
 [
   ['ham_2dmom_2ecpp',['ham-mom.cpp',['../ham-mom_8cpp.html',1,'']]],
   ['ham_2dmom_2eh',['ham-mom.h',['../ham-mom_8h.html',1,'']]],
+  ['ham_2dspin_2ecpp',['ham-spin.cpp',['../ham-spin_8cpp.html',1,'']]],
+  ['ham_2dspin_2eh',['ham-spin.h',['../ham-spin_8h.html',1,'']]],
   ['ham_2ecpp',['ham.cpp',['../ham_8cpp.html',1,'']]],
   ['ham_2eh',['ham.h',['../ham_8h.html',1,'']]],
   ['ham2d_2ecpp',['ham2D.cpp',['../ham2D_8cpp.html',1,'']]],
@@ -13,5 +15,7 @@ var searchData=
   ['hamsparse2d_2ecpp',['hamsparse2D.cpp',['../hamsparse2D_8cpp.html',1,'']]],
   ['hamsparse2d_2eh',['hamsparse2D.h',['../hamsparse2D_8h.html',1,'']]],
   ['hamsparse2d_5fcsr_2ecpp',['hamsparse2D_CSR.cpp',['../hamsparse2D__CSR_8cpp.html',1,'']]],
-  ['hamsparse2d_5fcsr_2eh',['hamsparse2D_CSR.h',['../hamsparse2D__CSR_8h.html',1,'']]]
+  ['hamsparse2d_5fcsr_2eh',['hamsparse2D_CSR.h',['../hamsparse2D__CSR_8h.html',1,'']]],
+  ['helpers_2ecpp',['helpers.cpp',['../helpers_8cpp.html',1,'']]],
+  ['helpers_2eh',['helpers.h',['../helpers_8h.html',1,'']]]
 ];

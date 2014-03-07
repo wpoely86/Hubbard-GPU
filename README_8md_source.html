@@ -91,7 +91,7 @@ $(document).ready(function(){initNavTree('README_8md.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Macros</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Macros</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -117,7 +117,7 @@ $(document).ready(function(){initNavTree('README_8md.html','');});
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;the latter is <span class="keywordflow">for</span> 2D Hubbard. Everything is split up in several classes</div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;to make reusing code easy:  The <a class="code" href="classHamiltonian.html">Hamiltonian</a> and <a class="code" href="classHubHam2D.html">HubHam2D</a> classes build the</div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;full (dense) <a class="code" href="classHamiltonian.html">Hamiltonian</a> Matrix. <a class="code" href="classSparseHamiltonian.html">SparseHamiltonian</a> stores the Hubbard</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<a class="code" href="classHamiltonian.html">Hamiltonian</a> in parts: an spin up and a spin down part. The matrix</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<a class="code" href="classHamiltonian.html">Hamiltonian</a> in parts: an spin up and a spin down part. The <a class="code" href="classmatrix.html">matrix</a></div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;themselves are storred in the ELL format.  The <a class="code" href="classSparseHamiltonian2D.html">SparseHamiltonian2D</a> does</div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;the same but for 2D Hubbard. However, here we make a detour: we first</div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;store the matrices in the CRS format (the SparseHamiltonian2DCSR class)</div>
@@ -132,17 +132,23 @@ $(document).ready(function(){initNavTree('README_8md.html','');});
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;All [code](https:<span class="comment">//github.com/wpoely86/Hubbard-GPU) is under the [GPLv3](https://www.gnu.org/licenses/gpl.txt).</span></div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;Documentation</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;-------------</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;All code is documented with doxygen. The full docs can be </div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;generate or [read online](http:<span class="comment">//wpoely86.github.io/Hubbard-GPU/).</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;Symmetry</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;--------</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;I&#39;ve added support for momentum symmetry and spin symmetry. The momentum works</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;great but spin symmetry is slow because of the many operations needed to build the</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;hamiltonian. The GPU currently doesn&#39;t make use of any of these symmetries.</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;Documentation</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;-------------</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;All code is documented with doxygen. The full docs can be </div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;generate or [read online](http:<span class="comment">//wpoely86.github.io/Hubbard-GPU/).</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="README_8md.html">README.md</a></li>
-    <li class="footer">Generated on Fri Feb 7 2014 14:38:54 for HubbardGPU by
+    <li class="footer">Generated on Fri Mar 7 2014 14:52:13 for HubbardGPU by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
   </ul>

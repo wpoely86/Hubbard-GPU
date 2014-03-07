@@ -1,6 +1,6 @@
 var classSparseHamiltonian =
 [
-    [ "SparseHamiltonian", "classSparseHamiltonian.html#ae3155cf9ffa2b57132897aee92d3dbff", null ],
+    [ "SparseHamiltonian", "classSparseHamiltonian.html#a760a0c47e64190bb23ceb1924b598434", null ],
     [ "~SparseHamiltonian", "classSparseHamiltonian.html#a146f2f60953197ca72bf0f3adc7e380b", null ],
     [ "BuildHam", "classSparseHamiltonian.html#aafca35d9312ccd7b5710a09c97ddbb71", null ],
     [ "BuildSparseHam", "classSparseHamiltonian.html#aa82e9b5845d954973942b551907d090c", null ],

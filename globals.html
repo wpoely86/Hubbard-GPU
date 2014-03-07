@@ -99,7 +99,7 @@ $(document).ready(function(){initNavTree('globals.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Macros</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Macros</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -118,6 +118,12 @@ $(document).ready(function(){initNavTree('globals.html','');});
 </li>
 <li>ddot_()
 : <a class="el" href="bare-ham_8h.html#a2247ca92b3cf0e88e9448ad05240921f">bare-ham.h</a>
+</li>
+<li>dgemm_()
+: <a class="el" href="bare-ham_8h.html#af54db18f2da5bece5aefe9896c2b8cb7">bare-ham.h</a>
+</li>
+<li>dgesvd_()
+: <a class="el" href="bare-ham_8h.html#a3e45f8d4a4bf16793e31a81771f2f69d">bare-ham.h</a>
 </li>
 <li>dsaupd_()
 : <a class="el" href="bare-ham_8h.html#a3eabc0ee91c768347f7fc904d5048502">bare-ham.h</a>
@@ -145,6 +151,8 @@ $(document).ready(function(){initNavTree('globals.html','');});
 </li>
 <li>HDF5_STATUS_CHECK
 : <a class="el" href="bare-ham_8cpp.html#ac6ec1a7e9b3e245b366f411752a50074">bare-ham.cpp</a>
+, <a class="el" href="helpers_8cpp.html#ac6ec1a7e9b3e245b366f411752a50074">helpers.cpp</a>
+, <a class="el" href="ham-spin_8cpp.html#ac6ec1a7e9b3e245b366f411752a50074">ham-spin.cpp</a>
 , <a class="el" href="ham-mom_8cpp.html#ac6ec1a7e9b3e245b366f411752a50074">ham-mom.cpp</a>
 </li>
 <li>main()
@@ -152,11 +160,17 @@ $(document).ready(function(){initNavTree('globals.html','');});
 , <a class="el" href="main_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627">main.cpp</a>
 , <a class="el" href="main2D_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627">main2D.cpp</a>
 </li>
+<li>MY_ZEROLIMIT
+: <a class="el" href="SparseMatrix__CCS_8cpp.html#a58846cd6639c7215e303117d8633cb1b">SparseMatrix_CCS.cpp</a>
+</li>
 <li>myint
 : <a class="el" href="bare-ham_8h.html#ad9e4dd13155f827d121a0b0559473480">bare-ham.h</a>
 </li>
 <li>NUMTHREADS
 : <a class="el" href="hamgpu_8cu.html#acf854d1717130336e7cb353248c53541">hamgpu.cu</a>
+</li>
+<li>operator&lt;&lt;()
+: <a class="el" href="SparseMatrix__CCS_8cpp.html#a317c1e0119eb694c9554bd2d697b862e">SparseMatrix_CCS.cpp</a>
 </li>
 </ul>
 </div><!-- contents -->
@@ -164,7 +178,7 @@ $(document).ready(function(){initNavTree('globals.html','');});
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Fri Feb 7 2014 14:38:54 for HubbardGPU by
+    <li class="footer">Generated on Fri Mar 7 2014 14:52:13 for HubbardGPU by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
   </ul>
