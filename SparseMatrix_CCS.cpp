@@ -234,7 +234,7 @@ void SparseMatrix_CCS::NewCol()
 
 /**
  * Number of elements in a column
- * @idx the number of the column
+ * @param idx the number of the column
  * @return the number of elements in column idx
  */
 unsigned int SparseMatrix_CCS::NumOfElInCol(unsigned int idx) const

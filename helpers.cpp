@@ -636,8 +636,8 @@ int SubBasis::getspacedim() const
 }
 
 /**
- * @parm upket the up ket
- * @parm downket the down ket
+ * @param upket the up ket
+ * @param downket the down ket
  * @return the index of the basisvector with these kets
  */
 int SubBasis::getindex(myint upket, myint downket) const

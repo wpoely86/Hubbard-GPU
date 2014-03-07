@@ -75,8 +75,7 @@ void SpinHamiltonian::BuildBase()
 }
 
 /**
-  * Builds the SpinHamiltonian matrix blocks for S = myS
-  * @param myS the spin to use
+  * Builds the full SpinHamiltonian matrix
   */
 void SpinHamiltonian::BuildFullHam()
 {
@@ -84,7 +83,8 @@ void SpinHamiltonian::BuildFullHam()
 }
 
 /**
-  * Builds the full SpinHamiltonian matrix
+  * Builds the SpinHamiltonian matrix blocks for S = myS
+  * @param myS the spin to use
   */
 void SpinHamiltonian::BuildHamWithS(int myS)
 {
