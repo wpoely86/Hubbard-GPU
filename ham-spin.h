@@ -62,6 +62,8 @@ class SpinHamiltonian: public BareHamiltonian
 
         void ReadBasis(const char *filename);
 
+        void GenerateData(double Ubegin, double Uend, double step, std::string filename);
+
     protected:
         int Sz;
 

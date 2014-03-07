@@ -673,4 +673,159 @@ void SpinHamiltonian::ReadBasis(const char *filename)
         spinbasis.reset(new SpinBasis(filename));
 }
 
+/**
+ * This methods calculates the eigenvalues for a range of U values. The interval is [Ubegin, Uend]
+ * with a stepsize of step. The resulting data is written to a file in the HDF5 file format.
+ * @param Ubegin the startpoint for U
+ * @param Uend the endpoint for U. We demand Ubegin < Uend
+ * @param step the stepsize to use for U
+ * @param filename the name of the file write to written the eigenvalues to
+ */
+void SpinHamiltonian::GenerateData(double Ubegin, double Uend, double step, std::string filename)
+{
+    hid_t       file_id, group_id, dataset_id, dataspace_id, attribute_id;
+    herr_t      status;
+
+    file_id = H5Fcreate(filename.c_str(), H5F_ACC_TRUNC, H5P_DEFAULT, H5P_DEFAULT);
+    HDF5_STATUS_CHECK(file_id);
+
+    group_id = H5Gcreate(file_id, "run", H5P_DEFAULT, H5P_DEFAULT, H5P_DEFAULT);
+    HDF5_STATUS_CHECK(group_id);
+
+    dataspace_id = H5Screate(H5S_SCALAR);
+
+    attribute_id = H5Acreate (group_id, "L", H5T_STD_I32LE, dataspace_id, H5P_DEFAULT, H5P_DEFAULT);
+    status = H5Awrite (attribute_id, H5T_NATIVE_INT, &L );
+    HDF5_STATUS_CHECK(status);
+    status = H5Aclose(attribute_id);
+    HDF5_STATUS_CHECK(status);
+
+    attribute_id = H5Acreate (group_id, "Nu", H5T_STD_I32LE, dataspace_id, H5P_DEFAULT, H5P_DEFAULT);
+    status = H5Awrite (attribute_id, H5T_NATIVE_INT, &Nu );
+    HDF5_STATUS_CHECK(status);
+    status = H5Aclose(attribute_id);
+    HDF5_STATUS_CHECK(status);
+
+    attribute_id = H5Acreate (group_id, "Nd", H5T_STD_I32LE, dataspace_id, H5P_DEFAULT, H5P_DEFAULT);
+    status = H5Awrite (attribute_id, H5T_NATIVE_INT, &Nd );
+    HDF5_STATUS_CHECK(status);
+    status = H5Aclose(attribute_id);
+    HDF5_STATUS_CHECK(status);
+
+    attribute_id = H5Acreate (group_id, "J", H5T_IEEE_F64LE, dataspace_id, H5P_DEFAULT, H5P_DEFAULT);
+    status = H5Awrite (attribute_id, H5T_NATIVE_DOUBLE, &J );
+    HDF5_STATUS_CHECK(status);
+    status = H5Aclose(attribute_id);
+    HDF5_STATUS_CHECK(status);
+
+    attribute_id = H5Acreate (group_id, "Ubegin", H5T_IEEE_F64LE, dataspace_id, H5P_DEFAULT, H5P_DEFAULT);
+    status = H5Awrite (attribute_id, H5T_NATIVE_DOUBLE, &Ubegin );
+    HDF5_STATUS_CHECK(status);
+    status = H5Aclose(attribute_id);
+    HDF5_STATUS_CHECK(status);
+
+    attribute_id = H5Acreate (group_id, "Uend", H5T_IEEE_F64LE, dataspace_id, H5P_DEFAULT, H5P_DEFAULT);
+    status = H5Awrite (attribute_id, H5T_NATIVE_DOUBLE, &Uend );
+    HDF5_STATUS_CHECK(status);
+    status = H5Aclose(attribute_id);
+    HDF5_STATUS_CHECK(status);
+
+    attribute_id = H5Acreate (group_id, "Ustep", H5T_IEEE_F64LE, dataspace_id, H5P_DEFAULT, H5P_DEFAULT);
+    status = H5Awrite (attribute_id, H5T_NATIVE_DOUBLE, &step );
+    HDF5_STATUS_CHECK(status);
+    status = H5Aclose(attribute_id);
+    HDF5_STATUS_CHECK(status);
+
+    status = H5Sclose(dataspace_id);
+    HDF5_STATUS_CHECK(status);
+
+    status = H5Gclose(group_id);
+    HDF5_STATUS_CHECK(status);
+
+    status = H5Fclose(file_id);
+    HDF5_STATUS_CHECK(status);
+
+    std::vector< std::unique_ptr<double []> > all_eigs;
+    all_eigs.resize(blockmat.size());
+
+    double Ucur = Ubegin;
+
+    while(Ucur <= Uend)
+    {
+        std::cout << "U = " << Ucur << std::endl;
+        setU(Ucur);
+
+        BuildFullHam();
+
+#pragma omp parallel for
+        for(int B=0;B<blockmat.size();B++)
+        {
+            int mydim = blockmat[B]->getn();
+
+            std::unique_ptr<double []> eigs(new double [mydim]);
+
+            Diagonalize(mydim, blockmat[B]->getpointer(), eigs.get(), false);
+
+            all_eigs[B] = std::move(eigs);
+        }
+
+        hid_t U_id;
+        std::stringstream name;
+        name << std::setprecision(5) << std::fixed << "/run/" << Ucur;
+
+        file_id = H5Fopen(filename.c_str(), H5F_ACC_RDWR, H5P_DEFAULT);
+        HDF5_STATUS_CHECK(file_id);
+
+        U_id = H5Gcreate(file_id, name.str().c_str(), H5P_DEFAULT, H5P_DEFAULT, H5P_DEFAULT);
+        HDF5_STATUS_CHECK(U_id);
+
+        for(int B=0;B<all_eigs.size();B++)
+        {
+            int K = spinbasis->getKS(B).first;
+            int S = spinbasis->getKS(B).second;
+
+            int mydim = blockmat[B]->getn();
+
+            hsize_t dimarr = mydim;
+
+            dataspace_id = H5Screate_simple(1, &dimarr, NULL);
+
+            std::stringstream cur_block;
+            cur_block << B;
+            dataset_id = H5Dcreate(U_id, cur_block.str().c_str(), H5T_IEEE_F64LE, dataspace_id, H5P_DEFAULT, H5P_DEFAULT, H5P_DEFAULT);
+
+            status = H5Dwrite(dataset_id, H5T_NATIVE_DOUBLE, H5S_ALL, H5S_ALL, H5P_DEFAULT, all_eigs[B].get() );
+            HDF5_STATUS_CHECK(status);
+
+            status = H5Sclose(dataspace_id);
+            HDF5_STATUS_CHECK(status);
+
+            dataspace_id = H5Screate(H5S_SCALAR);
+
+            attribute_id = H5Acreate (dataset_id, "K", H5T_STD_I32LE, dataspace_id, H5P_DEFAULT, H5P_DEFAULT);
+            status = H5Awrite (attribute_id, H5T_NATIVE_INT, &K );
+            HDF5_STATUS_CHECK(status);
+            status = H5Aclose(attribute_id);
+            HDF5_STATUS_CHECK(status);
+
+            attribute_id = H5Acreate (dataset_id, "S", H5T_STD_I32LE, dataspace_id, H5P_DEFAULT, H5P_DEFAULT);
+            status = H5Awrite (attribute_id, H5T_NATIVE_INT, &S );
+            HDF5_STATUS_CHECK(status);
+            status = H5Aclose(attribute_id);
+            HDF5_STATUS_CHECK(status);
+
+            status = H5Dclose(dataset_id);
+            HDF5_STATUS_CHECK(status);
+        }
+
+        status = H5Gclose(U_id);
+        HDF5_STATUS_CHECK(status);
+
+        status = H5Fclose(file_id);
+        HDF5_STATUS_CHECK(status);
+
+        Ucur += step;
+    }
+}
+
 /* vim: set ts=8 sw=4 tw=0 expandtab :*/
