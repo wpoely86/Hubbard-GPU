@@ -25,6 +25,12 @@ at [http://www.cs.wm.edu/~andreas/software/](http://www.cs.wm.edu/~andreas/softw
 
 All [code](https://github.com/wpoely86/Hubbard-GPU) is under the [GPLv3](https://www.gnu.org/licenses/gpl.txt).
 
+Symmetry
+--------
+I've added support for momentum symmetry and spin symmetry. The momentum works
+great but spin symmetry is slow because of the many operations needed to build the
+hamiltonian. The GPU currently doesn't make use of any of these symmetries.
+
 Documentation
 -------------
 All code is documented with doxygen. The full docs can be 
