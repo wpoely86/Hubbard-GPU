@@ -219,6 +219,88 @@ void SpinHamiltonian::BuildFullHam()
 }
 
 /**
+  * Builds the full SpinHamiltonian matrix but store the U part and J part
+  * sperataly and save it to file after creating.
+  */
+void SpinHamiltonian::BuildPartFullHam()
+{
+    blockmat.resize(0);
+
+#pragma omp parallel for
+    for(int i=0;i<spinbasis->getnumblocks();i++)
+    {
+        int K = spinbasis->getKS(i).first;
+        int S = spinbasis->getKS(i).second;
+
+#pragma omp critical
+        {
+            std::cout << "Building K=" << K << " S=" << S << std::endl;
+        }
+
+        int cur_dim = spinbasis->getBlock(i).getspacedim();
+
+        // calculate all elements for this block first
+        std::unique_ptr<double []> hop(new double[cur_dim]);
+        std::unique_ptr<int []> interact(new int[cur_dim*cur_dim]);
+
+        for(int a=0;a<cur_dim;a++)
+        {
+            auto bra = spinbasis->getBlock(i).Get(a);
+            hop[a] = hopping(bra.first) + hopping(bra.second);
+
+            for(int b=a;b<cur_dim;b++)
+            {
+                auto ket = spinbasis->getBlock(i).Get(b);
+
+                interact[b+a*cur_dim] = interaction(bra.first, bra.second, ket.first, ket.second);
+                interact[a+b*cur_dim] = interact[b+a*cur_dim];
+            }
+        }
+
+        int mydim = spinbasis->getBlock(i).getdim();
+        std::unique_ptr<matrix> Jterm (new matrix (mydim,mydim));
+        std::unique_ptr<matrix> Uterm (new matrix (mydim,mydim));
+
+        auto &sparse = spinbasis->getBlock(i).getSparse();
+
+#pragma omp parallel for schedule(guided)
+        for(int a=0;a<mydim;a++)
+        {
+            for(int b=a;b<mydim;b++)
+            {
+                (*Jterm)(a,b) = 0;
+                (*Uterm)(a,b) = 0;
+
+                for(int k=0;k<sparse.NumOfElInCol(a);k++)
+                    for(int l=0;l<sparse.NumOfElInCol(b);l++)
+                    {
+                        if(sparse.GetElementRowIndexInCol(a,k) == sparse.GetElementRowIndexInCol(b,l) )
+                            (*Jterm)(a,b) += sparse.GetElementInCol(a,k) * sparse.GetElementInCol(b,l) * \
+                                           1 * hop[sparse.GetElementRowIndexInCol(a,k)];
+
+                        (*Uterm)(a,b) += sparse.GetElementInCol(a,k) * sparse.GetElementInCol(b,l) * 1.0/L * \
+                                       interact[sparse.GetElementRowIndexInCol(a,k) + cur_dim * sparse.GetElementRowIndexInCol(b,l)];
+                    }
+
+                (*Jterm)(b,a) = (*Jterm)(a,b);
+                (*Uterm)(b,a) = (*Uterm)(a,b);
+            }
+        }
+
+#pragma omp critical
+        {
+            std::stringstream nameJ;
+            nameJ << "Jterm-" << K << "-" << S << ".h5";
+            SaveToFile(nameJ.str(),Jterm->getpointer(), mydim*mydim);
+
+            std::stringstream nameU;
+            nameU << "Uterm-" << K << "-" << S << ".h5";
+            SaveToFile(nameU.str(),Uterm->getpointer(), mydim*mydim);
+        }
+    }
+}
+
+/**
  *  private method to calculate the interaction between a 2 particle ket and bra
  *  @param a the first base vector of the bra
  *  @param b the second base vector of the bra

@@ -42,6 +42,8 @@ class SpinHamiltonian: public BareHamiltonian
         void BuildBase();
         void BuildFullHam();
 
+        void BuildPartFullHam();
+
         void BuildHamWithS(int myS);
 
         virtual void mvprod(double *x, double *y, double alpha) const;
