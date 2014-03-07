@@ -34,6 +34,8 @@
 class matrix
 {
     public:
+        matrix();
+
         matrix(int n_, int m_);
 
         matrix(const matrix &orig);

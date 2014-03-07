@@ -78,82 +78,15 @@ void SpinHamiltonian::BuildBase()
   * Builds the SpinHamiltonian matrix blocks for S = myS
   * @param myS the spin to use
   */
-void SpinHamiltonian::BuildHamWithS(int myS)
+void SpinHamiltonian::BuildFullHam()
 {
-    std::vector< std::unique_ptr<matrix> > tmp_blockmat(spinbasis->getnumblocks());
-
-#pragma omp parallel for
-    for(int i=0;i<spinbasis->getnumblocks();i++)
-    {
-        int K = spinbasis->getKS(i).first;
-        int S = spinbasis->getKS(i).second;
-
-        if(S!=myS)
-            continue;
-
-        std::cout << "Building K=" << K << " S=" << S << std::endl;
-
-        int cur_dim = spinbasis->getBlock(i).getspacedim();
-
-        // calculate all elements for this block first
-        std::unique_ptr<double []> hop(new double[cur_dim]);
-        std::unique_ptr<int []> interact(new int[cur_dim*cur_dim]);
-
-        for(int a=0;a<cur_dim;a++)
-        {
-            auto bra = spinbasis->getBlock(i).Get(a);
-            hop[a] = hopping(bra.first) + hopping(bra.second);
-
-            for(int b=a;b<cur_dim;b++)
-            {
-                auto ket = spinbasis->getBlock(i).Get(b);
-
-                interact[b+a*cur_dim] = interaction(bra.first, bra.second, ket.first, ket.second);
-                interact[a+b*cur_dim] = interact[b+a*cur_dim];
-            }
-        }
-
-        std::cout << "Filling hamiltonian" << std::endl;
-
-        int mydim = spinbasis->getBlock(i).getdim();
-        std::unique_ptr<matrix> tmp (new matrix (mydim,mydim));
-
-        auto &sparse = spinbasis->getBlock(i).getSparse();
-
-#pragma omp parallel for schedule(guided)
-        for(int a=0;a<mydim;a++)
-        {
-            for(int b=a;b<mydim;b++)
-            {
-                (*tmp)(a,b) = 0;
-
-                for(int k=0;k<sparse.NumOfElInCol(a);k++)
-                    for(int l=0;l<sparse.NumOfElInCol(b);l++)
-                    {
-                        if(sparse.GetElementRowIndexInCol(a,k) == sparse.GetElementRowIndexInCol(b,l) )
-                            (*tmp)(a,b) += sparse.GetElementInCol(a,k) * sparse.GetElementInCol(b,l) * \
-                                           J * hop[sparse.GetElementRowIndexInCol(a,k)];
-
-                        (*tmp)(a,b) += sparse.GetElementInCol(a,k) * sparse.GetElementInCol(b,l) * U/L * \
-                                       interact[sparse.GetElementRowIndexInCol(a,k) + cur_dim * sparse.GetElementRowIndexInCol(b,l)];
-                    }
-
-                (*tmp)(b,a) = (*tmp)(a,b);
-            }
-        }
-
-        tmp_blockmat[i] = std::move(tmp);
-    }
-
-    for(int i=0;i<tmp_blockmat.size();i++)
-        if(tmp_blockmat[i])
-            blockmat.push_back(std::move(tmp_blockmat[i]));
+    BuildHamWithS(-1);
 }
 
 /**
   * Builds the full SpinHamiltonian matrix
   */
-void SpinHamiltonian::BuildFullHam()
+void SpinHamiltonian::BuildHamWithS(int myS)
 {
     blockmat.resize(spinbasis->getnumblocks());
 
@@ -162,6 +95,9 @@ void SpinHamiltonian::BuildFullHam()
     {
         int K = spinbasis->getKS(i).first;
         int S = spinbasis->getKS(i).second;
+
+        if(myS != -1 && S != myS)
+            continue;
 
         std::cout << "Building K=" << K << " S=" << S << std::endl;
 
@@ -444,12 +380,21 @@ void SpinHamiltonian::mvprod(double *x, double *y, double alpha) const
  */
 std::vector<double> SpinHamiltonian::ExactDiagonalizeFull(bool calc_eigenvectors)
 {
-    std::vector<double> eigenvalues(dim);
+    int mydim = 0;
+
+    for(int B=0;B<blockmat.size();B++)
+        if(blockmat[B])
+            mydim += blockmat[B]->getn();
+
+    std::vector<double> eigenvalues(mydim);
 
     int offset = 0;
 
     for(int B=0;B<blockmat.size();B++)
     {
+        if(!blockmat[B])
+            continue;
+
         int dim = blockmat[B]->getn();
 
         Diagonalize(dim, blockmat[B]->getpointer(), &eigenvalues[offset], calc_eigenvectors);
@@ -464,96 +409,45 @@ std::vector<double> SpinHamiltonian::ExactDiagonalizeFull(bool calc_eigenvectors
 
 /**
  * Diagonalize the block diagonal matrix. Needs lapack. Differs from SpinHamiltonian::ExactDiagonalizeFull that
- * is diagonalize block per block and keeps the momentum associated with each eigenvalue.
+ * is diagonalize block per block and keeps the momentum and spin associated with each eigenvalue.
  * @param calc_eigenvectors set to true to calculate the eigenvectors. The hamiltonian
  * matrix is then overwritten by the vectors.
- * @return a vector of pairs. The first member of the pair is the momentum, the second is
- * the eigenvalue. The vector is sorted to the eigenvalues.
+ * @return a vector of tuples. The first member of the pair is the momentum, the second is
+ * the spin and the thirth the actual eigenvalue. The vector is sorted to the eigenvalues.
  */
 std::vector< std::tuple<int,int,double> > SpinHamiltonian::ExactSpinDiagonalizeFull(bool calc_eigenvectors)
 {
-    std::vector< std::tuple<int, int, double> > energy(dim);
-
-#pragma omp parallel for
-    for(int B=0;B<blockmat.size();B++)
-    {
-        int K = spinbasis->getKS(B).first;
-        int S = spinbasis->getKS(B).second;
-
-        int offset = 0;
-        for(int i=0;i<B;i++)
-            offset += blockmat[i]->getn();
-
-        int mydim = blockmat[B]->getn();
-
-        std::unique_ptr<double []> eigs(new double [mydim]);
-
-        Diagonalize(mydim, blockmat[B]->getpointer(), eigs.get(), calc_eigenvectors);
-
-        for(int i=0;i<mydim;i++)
-            energy[i+offset] = std::make_tuple(K,S,eigs[i]);
-    }
-
-    // sort to energy
-    std::sort(energy.begin(), energy.end(),
-            [](const std::tuple<int,int,double> & a, const std::tuple<int,int,double> & b) -> bool
-            {
-            return std::get<2>(a) < std::get<2>(b);
-            });
-
-    return energy;
-}
-
-/**
- * Diagonalize the block diagonal matrix for a certian spin.
- * Needs lapack. Differs from SpinHamiltonian::ExactDiagonalizeFull that
- * is diagonalize block per block and keeps the momentum associated with each eigenvalue.
- * @param myS the S of the blocks to diagonalize
- * @param calc_eigenvectors set to true to calculate the eigenvectors. The hamiltonian
- * matrix is then overwritten by the vectors.
- * @return a vector of pairs. The first member of the pair is the momentum, the second is
- * the eigenvalue. The vector is sorted to the eigenvalues.
- */
-std::vector< std::tuple<int,int,double> > SpinHamiltonian::ExactSpinDiagonalize(int myS, bool calc_eigenvectors)
-{
     std::vector< std::tuple<int, int, double> > energy;
 
-    std::vector< std::unique_ptr<double []> > eigs(L);
-    std::vector<int> eigs_dim(L);
-    int totaldim = 0;
+    std::vector< std::tuple<int,int,class matrix> > eigs (blockmat.size());
 
 #pragma omp parallel for
     for(int B=0;B<blockmat.size();B++)
     {
+        if(!blockmat[B])
+            continue;
+
         int K = spinbasis->getKS(B).first;
         int S = spinbasis->getKS(B).second;
 
-        if( S != myS)
-            continue;
-
         int mydim = blockmat[B]->getn();
 
-        std::unique_ptr<double []> cur_eigs(new double [mydim]);
+        matrix cur_eigs(mydim,1);
 
-        Diagonalize(mydim, blockmat[B]->getpointer(), cur_eigs.get(), calc_eigenvectors);
+        Diagonalize(mydim, blockmat[B]->getpointer(), cur_eigs.getpointer(), calc_eigenvectors);
 
-        eigs[K] = std::move(cur_eigs);
-        eigs_dim[K] = mydim;
-        totaldim += mydim;
+        eigs[B] = std::make_tuple(K, S, std::move(cur_eigs));
     }
 
-    energy.reserve(totaldim);
-
-    for(int K=0;K<L;K++)
-        if(eigs[K])
-            for(int i=0;i<eigs_dim[K];i++)
-                energy.push_back(std::make_tuple(K,myS,eigs[K][i]));
+    for(int i=0;i<eigs.size();i++)
+        for(int j=0;j<std::get<2>(eigs[i]).getn();j++)
+            energy.push_back(std::make_tuple(std::get<0>(eigs[i]), std::get<1>(eigs[i]), std::get<2>(eigs[i])[j]));
 
     // sort to energy
     std::sort(energy.begin(), energy.end(),
             [](const std::tuple<int,int,double> & a, const std::tuple<int,int,double> & b) -> bool
             {
-            return std::get<2>(a) < std::get<2>(b);
+                return std::get<2>(a) < std::get<2>(b);
             });
 
     return energy;

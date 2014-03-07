@@ -35,6 +35,16 @@
 const int BasisList::EMPTY = -1;
 
 /**
+ * Empty matrix constructor. Don't use it
+ * unless you know what you're doing
+ */
+matrix::matrix()
+{
+    this->n = 0;
+    this->m = 0;
+}
+
+/**
  * @param n_ number of rows
  * @param m_ number of columns
  */

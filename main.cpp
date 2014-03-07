@@ -26,6 +26,7 @@ along with Hubbard-GPU.  If not, see <http://www.gnu.org/licenses/>.
 #include "hamsparse.h"
 #include "ham-mom.h"
 #include "nonp-ham.h"
+#include "ham-spin.h"
 
 using namespace std;
 
@@ -36,11 +37,13 @@ int main(int argc, char **argv)
     int Nd = 3; // number of down electrons
     double J = 1.0; // hopping term
     double U = 1.0; // on-site interaction strength
+    int whichS = -1;
 
     bool exact = false;
     bool lanczos = false;
     bool momentum = false;
     bool nonperiodic = false;
+    bool spin = false;
 
     struct option long_options[] =
     {
@@ -53,12 +56,14 @@ int main(int argc, char **argv)
         {"lanczos",  no_argument, 0, 'l'},
         {"momentum",  no_argument, 0, 'p'},
         {"nonperiodic",  no_argument, 0, 'n'},
+        {"symspin",  no_argument, 0, 'z'},
+        {"spin",  required_argument, 0, 'S'},
         {"help",  no_argument, 0, 'h'},
         {0, 0, 0, 0}
     };
 
     int i,j;
-    while( (j = getopt_long (argc, argv, "hu:d:s:U:J:elpn", long_options, &i)) != -1)
+    while( (j = getopt_long (argc, argv, "hu:d:s:U:J:elpnzS:", long_options, &i)) != -1)
         switch(j)
         {
             case 'h':
@@ -74,6 +79,8 @@ int main(int argc, char **argv)
                     "    -l  --lanczos                Solve with Lanczos algorithm\n"
                     "    -p  --momentum               Solve in the momentum basis\n"
                     "    -n  --nonperiodic            Use non periodic boundary conditions\n"
+                    "    -z  --symspin                Use spin symmetry\n"
+                    "    -S  --spin=S                 Limit to spin=S\n"
                     "    -h, --help                   Display this help\n"
                     "\n";
                 return 0;
@@ -102,6 +109,12 @@ int main(int argc, char **argv)
             case 'n':
                 nonperiodic = true;
                 break;
+            case 'z':
+                spin = true;
+                break;
+            case 'S':
+                whichS = atoi(optarg);
+                break;
             case 'e':
                 exact = true;
                 break;
@@ -109,9 +122,14 @@ int main(int argc, char **argv)
 
     cout << "L = " << L << "; Nu = " << Nu << "; Nd = " << Nd << "; J = " << J << "; U = " << U << ";" << endl;
 
-    cout.precision(10);
+    if(whichS!=-1)
+        cout << "Limiting to S=" << whichS << endl;
 
-    boost::timer tijd;
+    if(whichS!=-1 && !spin)
+    {
+        cerr << "Need to use spin symmetry to select a spin!" << endl;
+        return 1;
+    }
 
     if(momentum && nonperiodic)
     {
@@ -119,30 +137,61 @@ int main(int argc, char **argv)
         return 0;
     }
 
+    cout.precision(10);
+
+    boost::timer tijd;
+
+
     if(exact)
     {
         tijd.restart();
 
         std::unique_ptr<BareHamiltonian> ham;
 
-        if(momentum)
+        if(spin)
+            ham.reset(new SpinHamiltonian(L,Nu,Nd,J,U));
+        else if(momentum)
             ham.reset(new MomHamiltonian(L,Nu,Nd,J,U));
         else if(nonperiodic)
             ham.reset(new NonPeriodicHamiltonian(L,Nu,Nd,J,U));
         else
             ham.reset(new Hamiltonian(L,Nu,Nd,J,U));
 
-        cout << "Memory needed: " << ham->MemoryNeededFull()*1.0/1024*1.0/1024 << " MB" << endl;
-
-        ham->BuildBase();
-
-        ham->BuildFullHam();
+        if(!spin)
+        {
+            cout << "Memory needed: " << ham->MemoryNeededFull()*1.0/1024*1.0/1024 << " MB" << endl;
+            cout << "Building base..." << endl;
+            ham->BuildBase();
+            cout << "Building hamiltonian..." << endl;
+            ham->BuildFullHam();
+        }
 
         cout << "Dim: " << ham->getDim() << endl;
 
         double Egroundstate = 0;
 
-        if(momentum)
+        if(spin)
+        {
+            auto hampje = static_cast<SpinHamiltonian *>(ham.get());
+
+            hampje->BuildBase();
+            cout << "Building hamiltonian..." << endl;
+
+            if(whichS!=-1)
+                hampje->BuildHamWithS(whichS);
+            else
+                hampje->BuildFullHam();
+
+            auto E = hampje->ExactSpinDiagonalizeFull(false);
+            Egroundstate = std::get<2>(E[0]);
+
+            cout << "K\tS\tE" << endl;
+            for(auto p : E)
+                cout << std::get<0>(p) << "\t" << std::get<1>(p) << "\t" << std::get<2>(p) << endl;
+
+//            hampje->GenerateData(0,20,0.1,"data-S-6-3-3.h5");
+        }
+        else if(momentum)
         {
             auto E = (static_cast<MomHamiltonian *>(ham.get()))->ExactMomDiagonalizeFull(false);
 
