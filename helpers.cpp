@@ -18,6 +18,7 @@
 
 #include <iostream>
 #include <algorithm>
+#include <cmath>
 #include <sstream>
 #include <assert.h>
 #include <hdf5.h>
@@ -740,7 +741,7 @@ void SubBasis::Normalize()
         int inc = 1;
 
         norm = ddot_(&spacedim,&(*coeffs)[i*spacedim],&inc,&(*coeffs)[i*spacedim],&inc);
-        norm = 1.0/sqrt(norm);
+        norm = 1.0/std::sqrt(norm);
 
         dscal_(&spacedim,&norm,&(*coeffs)[i*spacedim],&inc);
     }
@@ -898,7 +899,7 @@ void BasisList::DoProjection(int K, int S, int Sz, MomBasis const &orig)
     auto sing_vals = proj_matrix->svd();
 
     int sing_vals_start = 0;
-    while(sing_vals_start < dim && fabs(sing_vals[sing_vals_start]) > 1e-10)
+    while(sing_vals_start < dim && std::fabs(sing_vals[sing_vals_start]) > 1e-10)
         sing_vals_start++;
 
     auto &finalbasis = Get(K,S,Sz);
